@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Basics of R | Florida State University Microbiota Workshop 2019</title>
+  <meta name="description" content="FSU Workshop Oct. 2019: Introduction to R and 16S rRNA sequencing data analysis in R." />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Basics of R | Florida State University Microbiota Workshop 2019" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="FSU Workshop Oct. 2019: Introduction to R and 16S rRNA sequencing data analysis in R." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Basics of R | Florida State University Microbiota Workshop 2019" />
+  
+  <meta name="twitter:description" content="FSU Workshop Oct. 2019: Introduction to R and 16S rRNA sequencing data analysis in R." />
+  
+
+<meta name="author" content="Brian Piccolo" />
+
+
+<meta name="date" content="2019-09-15" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="microbial-sequencing-data-analysis.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">FSU 16S Data Analysis in R Workshop 10/2019</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction to Data Analysis of 16S rRNA Sequencing in R</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#types-of-microbiota-data"><i class="fa fa-check"></i><b>1.1</b> Types of microbiota data</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#s-rrna-amplicon-sequencing"><i class="fa fa-check"></i><b>1.1.1</b> 16S rRNA amplicon sequencing</a></li>
+<li class="chapter" data-level="1.1.2" data-path="intro.html"><a href="intro.html#shotgun-metagenomic-sequencing"><i class="fa fa-check"></i><b>1.1.2</b> Shotgun metagenomic sequencing</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#microbial-composition-data-from-sequencing-technologies"><i class="fa fa-check"></i><b>1.2</b> Microbial composition data from sequencing technologies</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#statistical-analysis-of-microbial-composition-data"><i class="fa fa-check"></i><b>1.3</b> Statistical analysis of microbial composition data</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="rbasics.html"><a href="rbasics.html"><i class="fa fa-check"></i><b>2</b> Basics of R</a><ul>
+<li class="chapter" data-level="2.1" data-path="rbasics.html"><a href="rbasics.html#r"><i class="fa fa-check"></i><b>2.1</b> R</a></li>
+<li class="chapter" data-level="2.2" data-path="rbasics.html"><a href="rbasics.html#downloading-r"><i class="fa fa-check"></i><b>2.2</b> Downloading R</a></li>
+<li class="chapter" data-level="2.3" data-path="rbasics.html"><a href="rbasics.html#the-r-console"><i class="fa fa-check"></i><b>2.3</b> The R console</a></li>
+<li class="chapter" data-level="2.4" data-path="rbasics.html"><a href="rbasics.html#the-r-script"><i class="fa fa-check"></i><b>2.4</b> The R script</a></li>
+<li class="chapter" data-level="2.5" data-path="rbasics.html"><a href="rbasics.html#r-packages"><i class="fa fa-check"></i><b>2.5</b> R packages</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="rbasics.html"><a href="rbasics.html#cran"><i class="fa fa-check"></i><b>2.5.1</b> CRAN</a></li>
+<li class="chapter" data-level="2.5.2" data-path="rbasics.html"><a href="rbasics.html#bioconductor"><i class="fa fa-check"></i><b>2.5.2</b> Bioconductor</a></li>
+<li class="chapter" data-level="2.5.3" data-path="rbasics.html"><a href="rbasics.html#github"><i class="fa fa-check"></i><b>2.5.3</b> Github</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="rbasics.html"><a href="rbasics.html#basic-operations-data-types-missing-values-and-functions"><i class="fa fa-check"></i><b>2.6</b> Basic operations, data types, missing values, and functions</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="rbasics.html"><a href="rbasics.html#basic-operations"><i class="fa fa-check"></i><b>2.6.1</b> Basic operations</a></li>
+<li class="chapter" data-level="2.6.2" data-path="rbasics.html"><a href="rbasics.html#data-types"><i class="fa fa-check"></i><b>2.6.2</b> Data types</a></li>
+<li class="chapter" data-level="2.6.3" data-path="rbasics.html"><a href="rbasics.html#data-structure"><i class="fa fa-check"></i><b>2.6.3</b> Data structure</a></li>
+<li class="chapter" data-level="2.6.4" data-path="rbasics.html"><a href="rbasics.html#missing-values"><i class="fa fa-check"></i><b>2.6.4</b> Missing values</a></li>
+<li class="chapter" data-level="2.6.5" data-path="rbasics.html"><a href="rbasics.html#functions"><i class="fa fa-check"></i><b>2.6.5</b> Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="rbasics.html"><a href="rbasics.html#importing-data"><i class="fa fa-check"></i><b>2.7</b> Importing data</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="rbasics.html"><a href="rbasics.html#working-directory"><i class="fa fa-check"></i><b>2.7.1</b> Working directory</a></li>
+<li class="chapter" data-level="2.7.2" data-path="rbasics.html"><a href="rbasics.html#comma-delimited-text-file-csv"><i class="fa fa-check"></i><b>2.7.2</b> Comma delimited text file (csv)</a></li>
+<li class="chapter" data-level="2.7.3" data-path="rbasics.html"><a href="rbasics.html#excel-file"><i class="fa fa-check"></i><b>2.7.3</b> Excel file</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="rbasics.html"><a href="rbasics.html#working-with-your-data"><i class="fa fa-check"></i><b>2.8</b> Working with your data</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="rbasics.html"><a href="rbasics.html#viewing-your-data"><i class="fa fa-check"></i><b>2.8.1</b> Viewing your data</a></li>
+<li class="chapter" data-level="2.8.2" data-path="rbasics.html"><a href="rbasics.html#extracting-elements"><i class="fa fa-check"></i><b>2.8.2</b> Extracting elements</a></li>
+<li class="chapter" data-level="2.8.3" data-path="rbasics.html"><a href="rbasics.html#subsetting"><i class="fa fa-check"></i><b>2.8.3</b> Subsetting</a></li>
+<li class="chapter" data-level="2.8.4" data-path="rbasics.html"><a href="rbasics.html#reshaping-data"><i class="fa fa-check"></i><b>2.8.4</b> Reshaping data</a></li>
+<li class="chapter" data-level="2.8.5" data-path="rbasics.html"><a href="rbasics.html#merging-data"><i class="fa fa-check"></i><b>2.8.5</b> Merging data</a></li>
+<li class="chapter" data-level="2.8.6" data-path="rbasics.html"><a href="rbasics.html#apply-family-of-functions"><i class="fa fa-check"></i><b>2.8.6</b> apply family of functions</a></li>
+<li class="chapter" data-level="2.8.7" data-path="rbasics.html"><a href="rbasics.html#sweep"><i class="fa fa-check"></i><b>2.8.7</b> Sweep</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="rbasics.html"><a href="rbasics.html#stats"><i class="fa fa-check"></i><b>2.9</b> Stats</a><ul>
+<li class="chapter" data-level="2.9.1" data-path="rbasics.html"><a href="rbasics.html#basic-summary-based-stats."><i class="fa fa-check"></i><b>2.9.1</b> Basic summary based stats.</a></li>
+<li class="chapter" data-level="2.9.2" data-path="rbasics.html"><a href="rbasics.html#t-test-and-mann-whitney-u-test"><i class="fa fa-check"></i><b>2.9.2</b> <em>t</em>-test and Mann Whitney U test</a></li>
+<li class="chapter" data-level="2.9.3" data-path="rbasics.html"><a href="rbasics.html#anova"><i class="fa fa-check"></i><b>2.9.3</b> ANOVA</a></li>
+<li class="chapter" data-level="2.9.4" data-path="rbasics.html"><a href="rbasics.html#kruskal-wallis-test"><i class="fa fa-check"></i><b>2.9.4</b> Kruskal-Wallis Test</a></li>
+<li class="chapter" data-level="2.9.5" data-path="rbasics.html"><a href="rbasics.html#post-hoc-tests"><i class="fa fa-check"></i><b>2.9.5</b> Post-hoc Tests</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="microbial-sequencing-data-analysis.html"><a href="microbial-sequencing-data-analysis.html"><i class="fa fa-check"></i><b>3</b> Microbial Sequencing Data Analysis</a></li>
+<li class="chapter" data-level="4" data-path="alpha-diversity.html"><a href="alpha-diversity.html"><i class="fa fa-check"></i><b>4</b> Alpha-Diversity</a></li>
+<li class="chapter" data-level="5" data-path="beta-diversity.html"><a href="beta-diversity.html"><i class="fa fa-check"></i><b>5</b> Beta-Diversity</a></li>
+<li class="chapter" data-level="6" data-path="differential-abundance.html"><a href="differential-abundance.html"><i class="fa fa-check"></i><b>6</b> Differential Abundance</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Florida State University Microbiota Workshop 2019</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="rbasics" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Basics of R</h1>
+<div id="r" class="section level2">
+<h2><span class="header-section-number">2.1</span> R</h2>
+<p>R is an <strong>object-oriented</strong> programming language that was developed for statistical computing and visualization. It is freely available under the <a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU General Public License</a> and has a large and active user community. Figure 2.1 describes the most visited languages comparable to the R user base at <a href="https://stackoverflow.com/">Stack Overflow</a> the largest question and answer programming site. Note the sustained linear growth since 2012.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:SOFdr"></span>
+<img src="plot_tags_time-1-768x768.png" alt="From stackoverflow blog: The Impressive Growth of R. By David Robinson, 10/10/2017." width="80%" />
+<p class="caption">
+Figure 2.1: From stackoverflow blog: <a href="https://stackoverflow.blog/2017/10/10/impressive-growth-r/"><em>The Impressive Growth of R</em></a>. By David Robinson, 10/10/2017.
+</p>
+</div>
+<p>I bolded <strong>object-oriented</strong> because it highlights a major advantage of <strong>reproducibility</strong> in R and other programming-based langauge. Everything that is done in R uses named objects as either <strong>functions</strong> or <strong>data</strong>. Understanding how functions manipulate <strong>data types</strong> and <strong>data structures</strong> is the foundation of working with R. For example, if you want to obtain the mean over a set of numbers, the <code>mean</code> function is used to determine the mean of numbers within a <strong>vector</strong>. These bolded words and phrases may seem abstract at this point, but this chapter will expand these concepts.</p>
+<p>This chapter is dedicated to basic concepts needed to complete this course. Googling your question will more often then not provide an answer to your question, but there are several online tutorials for those interested in a deeper understanding of R. Several of these courses are listed below.</p>
+<ul>
+<li><a href="https://www.datacamp.com/courses/free-introduction-to-r">DataCamp</a></li>
+<li><a href="https://www.coursera.org/specializations/jhu-data-science">Coursera</a></li>
+<li><a href="https://www.statistics.com/landing-page/r-courses/">statistics.com</a></li>
+<li><a href="https://www.codecademy.com/learn/learn-r">codecademy</a></li>
+</ul>
+<p>Many of these excellent courses were not available when I learned R. I extensively used the <a href="https://www.statmethods.net/index.html">Quick-R</a> website by Robert Kabacoff as I learned how to use R. I will be providing links periodically to Quick-R for additional information not covered in this chapter.</p>
+</div>
+<div id="downloading-r" class="section level2">
+<h2><span class="header-section-number">2.2</span> Downloading R</h2>
+<p>First step is to downloading R. R is available at the <a href="https://cran.r-project.org/">The Comprehensive R Archive Network</a> (CRAN) website. Figure 2.2 shows the website and note the links needed for different systems are in a box at the top of the website. The default downloading prompts will result in aquiring 32 and 64 bit version for Windows users. You will likely be running a 64-bit Windows, but please refer <a href="https://support.microsoft.com/en-hk/help/15056/windows-32-64-bit-faq">here</a> if you want to check your Windows version.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:Rwebsite"></span>
+<img src="cran.png" alt="CRAN website" width="80%" />
+<p class="caption">
+Figure 2.2: CRAN website
+</p>
+</div>
+</div>
+<div id="the-r-console" class="section level2">
+<h2><span class="header-section-number">2.3</span> The R console</h2>
+<p>Figure 2.3 shows the R console after opening. Our color scheme differ because I customized my colors, but the information should be very similar. This is the R console and it is where you will type in code or pass code to run, causing R to work.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:Rconsole"></span>
+<img src="rconsole.png" alt="R console" width="80%" />
+<p class="caption">
+Figure 2.3: R console
+</p>
+</div>
+<p>Let’s try some basic operations. Type in 2 + 2, or copy the inline code (R code within the text) below, paste it into your R console, and press enter. Note, since this web-book was written in R, there will typically be an output box after provided code.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="rbasics.html#cb1-1"></a><span class="co"># Operations after hashtag will not be processed by R.  Good way to write notes!</span></span>
+<span id="cb1-2"><a href="rbasics.html#cb1-2"></a><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<p>You should see the output is ‘4’ like the output box above this text. Now let’s make a data object! Cut and paste the code below to make an object that contains the results of 2 + 2</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="rbasics.html#cb3-1"></a><span class="co"># The &#39;&lt;-&#39; is referred to as an assignment operator.  Use this when defining the name of an object.</span></span>
+<span id="cb3-2"><a href="rbasics.html#cb3-2"></a>object1 &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb3-3"><a href="rbasics.html#cb3-3"></a>object1</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<p>The output is 4, which is what the object contains. Try the next line of code to verify that ‘object1’ is the number 4.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="rbasics.html#cb5-1"></a><span class="co"># Output should be 400.</span></span>
+<span id="cb5-2"><a href="rbasics.html#cb5-2"></a>object1 <span class="op">*</span><span class="st"> </span><span class="dv">100</span></span></code></pre></div>
+<pre><code>## [1] 400</code></pre>
+<p>The name of the object can be anything you want as long as it doesn’t start with a number or special characters. It can be as short as a single letter or as long as you want. Recommend making object names as short and succinct as possible. R is also <strong>case sensitive</strong>. Obj2 and obj2 are 2 different objects. Periods (.) and underscores are allowable, but special characters are not. Try to make use of periods or underscores for readability, e.g., Obj1_MEAN.</p>
+<p>You can add more numbers using the <code>c</code> function, for example.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="rbasics.html#cb7-1"></a><span class="co"># the c() function means either combine or concatenate.  </span></span>
+<span id="cb7-2"><a href="rbasics.html#cb7-2"></a>obj2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="fl">6.3</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">-1</span>, <span class="dv">13</span>, <span class="dv">7</span>)</span>
+<span id="cb7-3"><a href="rbasics.html#cb7-3"></a>obj2</span></code></pre></div>
+<pre><code>## [1]  5.0  6.3  3.0  0.0 -1.0 13.0  7.0</code></pre>
+<p>We can now take the mean of obj2 using the <code>mean</code> function. Note, the <code>mean</code> function is a specialized object that performs and action on a data object. We will cover this in more detail.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="rbasics.html#cb9-1"></a><span class="co"># In almost every case, an object will go inside the function&#39;s parantheses.    </span></span>
+<span id="cb9-2"><a href="rbasics.html#cb9-2"></a><span class="kw">mean</span>(obj2)</span></code></pre></div>
+<pre><code>## [1] 4.757143</code></pre>
+</div>
+<div id="the-r-script" class="section level2">
+<h2><span class="header-section-number">2.4</span> The R script</h2>
+<p>So far, we’ve been typing directly into the console. When you close R, you will normally lose everything you’ve done during the session. You can, however, write and save your code on a specialized text file (script). This will allow you to replicate your results every time you open a new R session. There is an intrinsic R script option in your R environment. Click File and then select ‘New Script’. You will see a blank window titled, ‘Untitled - R Editor.’ You can then type R commands in this window. Copy and paste the following code to the R Editor. To run this code, highlight all of the code with your mouse and then press Ctrl+R (hold down control and press the R key on your keyboard). You can also run the script by pressing Ctrl+R line by line.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="rbasics.html#cb11-1"></a>obj3 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">-1</span>, <span class="dv">3</span>, <span class="dv">-10</span>, <span class="dv">-2</span>, <span class="dv">-12</span>, <span class="dv">15</span>, <span class="dv">0</span>)</span>
+<span id="cb11-2"><a href="rbasics.html#cb11-2"></a></span>
+<span id="cb11-3"><a href="rbasics.html#cb11-3"></a><span class="co"># The &lt;= means &#39;less than or equal to&#39;</span></span>
+<span id="cb11-4"><a href="rbasics.html#cb11-4"></a><span class="co"># &gt;= means &#39;greater than or equal to&#39;</span></span>
+<span id="cb11-5"><a href="rbasics.html#cb11-5"></a>obj3 <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span></span></code></pre></div>
+<pre><code>## [1] FALSE  TRUE FALSE  TRUE  TRUE  TRUE FALSE  TRUE</code></pre>
+<p>A very popular modular script editor is <a href="https://www.rstudio.com/">RStudio</a>. RStudio is open-source and free! It nicely packages the R console, script(s), help pages, and graphical outputs in a convenient program (Figure 2.4). Many new users find RStudio extremely helpful. There are other text/script editors, but very few will pass your code directly to the R console like RStudio.</p>
+</div>
+<div id="r-packages" class="section level2">
+<h2><span class="header-section-number">2.5</span> R packages</h2>
+<p>You have been introduced to a couple functions that appear to be pre-loaded in R. Functions are what really drive R and makes it such a flexible tool. Anyone can write a function, and many, many people have. This is how people contribute to the growth of R, by releasing <strong>packages</strong> of R functions that perform specific tasks to their fields. In fact, the <code>mean</code> and <code>c</code> functions we used in 2.3 and 2.4 are contained in a preloaded ‘base’ package. Most of the preloaded packages contain core functions and widely used statistical and plotting functions. We will eventually be loading packages specific to ecology and microbial sequencing data, but let’s first learn how to identify and download packages.</p>
+<p>After you download R, the only packages you have are the core packages. You will have to identify packages you need and download them. The R community has 3 major repositories for R packages:</p>
+<ol style="list-style-type: decimal">
+<li>CRAN</li>
+<li>Bioconductor</li>
+<li>Github</li>
+</ol>
+<p>You only have to install a package once; however, downloaded packages do not automatically load. You will have to load these add-on packages using the <code>library</code> function.</p>
+<p>Additional information about R packages, including installing packages using the R menu, can be viewed <a href="https://www.statmethods.net/interface/packages.html">here</a></p>
+<div id="cran" class="section level3">
+<h3><span class="header-section-number">2.5.1</span> CRAN</h3>
+<p>CRAN is the major repository of R packages. If you refer to their website (linked in 2.2) and select the ‘Package’ link under the <em>Software</em> header, you will see that there are almost 15,000 R packages available. You can view a table of all 15,000 packages, but this seems incredibly cumbersome way to identify a certain package. Fortunately, CRAN has a Task View option in the side-panel under <strong>CRAN</strong>. If you click the ‘Task View’ link you will see a list of topics that may be relevant to your field (Figure 2.6). Find ‘Phylogenetics’ and press that link. In this Task View, there are several options with a very brief description of each function’s functionality. We will actually be using functions from the ape and vegan package. Brief description of both can be found here.</p>
+<p>Most times, you will know exactly which package you need to install, so browsing random packages is not typically done. There are a couple ways to install packages and the easiest way is to use the <code>install.packages</code> function. However, before we actually install a function, let’s talk about <strong>Mirrors</strong>.</p>
+<p><strong>Mirrors</strong> are host locations that house all of the available CRAN packages. A lot of redundancy, but choosing a Mirror site closest to your location will help with bandwith and latency and allows various locations to absorp the overall user traffic. You will be forced to choose a Mirror when you initially download a package. Will only have to do this once during a single session.</p>
+<p>Now, let’s download the vegan package. Choose the closest Mirror location when you’re prompted.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="rbasics.html#cb13-1"></a><span class="co"># The quotations differentiate a &quot;character string&quot; from a data object.</span></span>
+<span id="cb13-2"><a href="rbasics.html#cb13-2"></a><span class="co"># Multiple packages can be downloaded at once, using the c() function.</span></span>
+<span id="cb13-3"><a href="rbasics.html#cb13-3"></a><span class="co">#install.packages(&quot;vegan&quot;)</span></span></code></pre></div>
+</div>
+<div id="bioconductor" class="section level3">
+<h3><span class="header-section-number">2.5.2</span> Bioconductor</h3>
+<p><a href="https://www.bioconductor.org/">Bioconductor</a> provides R packages developed specifically for a wide variety of high-throughput data analysis (e.g., -omics data). Like CRAN, it is open source and free to use.</p>
+<p>It is fairly straight forward to download packages from the Bioconductor website. Each package on Bioconductor has a dedicated website with installation instructions. We will use the <a href="https://bioconductor.org/packages/release/bioc/html/phyloseq.html">phyloseq package</a> as an example (Figure 2.4). The phyloseq package was developed by <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0061217">Paul McMurdie and Susan Holmes</a> and is a very important package for handling microbial sequencing data in R. We will be utilizing this package in subsequent chapters.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:phyloseq"></span>
+<img src="phyloseq.png" alt="phyloseq website at Bioconductor" width="80%" />
+<p class="caption">
+Figure 2.4: phyloseq website at Bioconductor
+</p>
+</div>
+<p>All you have to do is copy and paste the inline code under the <strong>Installation</strong> header into your R console and then press Enter. Simple as that.</p>
+<p>More detailed information can be found at the <a href="https://www.bioconductor.org/install/">Bioconductor website</a>.</p>
+</div>
+<div id="github" class="section level3">
+<h3><span class="header-section-number">2.5.3</span> Github</h3>
+<p><a href="https://github.com/">Github</a> is arguably the most popular hosting site for developing and disseminating coding. In regards to R packages, it serves 2 major functions: 1) Many CRAN and Bioconductor packages provide their underlying code at Github, and 2) packages in early stages of develoment are available at Github prior to release on CRAN or Bioconductor.</p>
+<p>We will not need to download any packages from Github for this course, but it is a valuable resource to consider if you decide to use R in the future. Github always tracks any changes made to files it hosts. So it a great way to track versions of your workflow and greatly helps with transperancy and reproducibility.</p>
+</div>
+</div>
+<div id="basic-operations-data-types-missing-values-and-functions" class="section level2">
+<h2><span class="header-section-number">2.6</span> Basic operations, data types, missing values, and functions</h2>
+<div id="basic-operations" class="section level3">
+<h3><span class="header-section-number">2.6.1</span> Basic operations</h3>
+<p>Although these operators may seem fairly low level, they are extremely important for coding.</p>
+<p>Here is a table containing basic arithmetic operators.</p>
+<table>
+<caption><span id="tab:arithop">Table 2.1: </span>Arithmetic Operators</caption>
+<thead>
+<tr class="header">
+<th align="left">Operator</th>
+<th align="left">Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">+</td>
+<td align="left">addition</td>
+</tr>
+<tr class="even">
+<td align="left">-</td>
+<td align="left">subtract</td>
+</tr>
+<tr class="odd">
+<td align="left">*</td>
+<td align="left">multiply</td>
+</tr>
+<tr class="even">
+<td align="left">/</td>
+<td align="left">division</td>
+</tr>
+<tr class="odd">
+<td align="left">^</td>
+<td align="left">exponential</td>
+</tr>
+</tbody>
+</table>
+<p>Another table containing logical operators. Logical operators will return TRUE or FALSE.</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:logicop">Table 2.2: </span>Logical Operators
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Operator
+</th>
+<th style="text-align:left;">
+Use
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+&lt;
+</td>
+<td style="text-align:left;">
+less than
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+&lt;=
+</td>
+<td style="text-align:left;">
+less than or equal to
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+&gt;
+</td>
+<td style="text-align:left;">
+greater than
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+&gt;=
+</td>
+<td style="text-align:left;">
+greather than or equal to
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+==
+</td>
+<td style="text-align:left;">
+exactly equal to
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+!=
+</td>
+<td style="text-align:left;">
+not equal to
+</td>
+</tr>
+</tbody>
+</table>
+<p>R has some redundancy issues with special characters that can be quite confusing. The assignment operator, <code>&lt;-</code>, was shown in 2.3. Looks very close to the less than logical operators <code>&lt;</code> or <code>&lt;=</code>. You may also ask, why not just use <code>=</code> to designate equal to rather than <code>==</code>. The single equal has multiple functions in R, 1) it is also an assignment operator like <code>&lt;-</code> and 2) it assigns arguments (parameters) in functions. Please see below</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="rbasics.html#cb14-1"></a><span class="co"># These will result in the same output.</span></span>
+<span id="cb14-2"><a href="rbasics.html#cb14-2"></a>arrowAssign &lt;-<span class="st"> </span><span class="dv">100</span><span class="op">/</span><span class="dv">4</span></span>
+<span id="cb14-3"><a href="rbasics.html#cb14-3"></a>equalAssign =<span class="st"> </span><span class="dv">100</span><span class="op">/</span><span class="dv">4</span></span>
+<span id="cb14-4"><a href="rbasics.html#cb14-4"></a><span class="co">## We can check to see if they are equal using &#39;==&#39;</span></span>
+<span id="cb14-5"><a href="rbasics.html#cb14-5"></a>arrowAssign <span class="op">==</span><span class="st"> </span>equalAssign</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+<div id="data-types" class="section level3">
+<h3><span class="header-section-number">2.6.2</span> Data types</h3>
+<p>It is important to understand how R handles different data types. For example, how R handles categorical data that could be character strings (e.g., Obese or Lean), numerical data (e.g., 5, 8, 10567156.2, -400), etc.</p>
+<p>Most of this should be fairly straight forward, but there are some nuances to be aware of.</p>
+<p><strong>numeric</strong>: Can get very technical, but generally any real number including decimals.</p>
+<p><strong>integer</strong>: Will appear if all data are whole numbers. R will automatically determine this designation, primarily when importing data. Operations on numeric and integer data are similar.</p>
+<p><strong>character</strong>: Generally, any non-numeric or non-logical values (programmers call these, “string values”). Default setting for data that R cannot determine as numbers/logic. Can almost force anything to be a character. character values will always be surrounded by quotations.</p>
+<p><strong>factor</strong>: This type of data looks like a character, but is technically a special type of integer. It has a special attribute that assigns integers to a corresponding set of characters. The underlying integer assignment allows R to order the characters in plots, in addition to some other special features. Widely used in R, but can be confusing and lead to some odd outputs if not aware of their presence.</p>
+<p><strong>logic</strong>: Either TRUE or FALSE. Very, very important. Many of the most basic functionality of R is based on logical operators.</p>
+</div>
+<div id="data-structure" class="section level3">
+<h3><span class="header-section-number">2.6.3</span> Data structure</h3>
+<p>R has various ways that it structures similar and different data types. The most basic of which is called a vector.</p>
+<div id="vector" class="section level4">
+<h4><span class="header-section-number">2.6.3.1</span> Vector</h4>
+<p>A vector is a single value or combination of values within a particular data type. You create vectors using the <code>c</code> function, introduced in 2.3. Here are examples of each data type.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="rbasics.html#cb16-1"></a><span class="co"># Example of a vector with a single value</span></span>
+<span id="cb16-2"><a href="rbasics.html#cb16-2"></a>singlevalue_Vector &lt;-<span class="st"> </span><span class="dv">50</span></span>
+<span id="cb16-3"><a href="rbasics.html#cb16-3"></a>singlevalue_Vector</span></code></pre></div>
+<pre><code>## [1] 50</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="rbasics.html#cb18-1"></a><span class="co"># Example of a numeric vector with a combination of values</span></span>
+<span id="cb18-2"><a href="rbasics.html#cb18-2"></a>numeric_Vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.5</span>, <span class="dv">20</span>, <span class="fl">-5348964.165141</span>, <span class="dv">6</span>)</span>
+<span id="cb18-3"><a href="rbasics.html#cb18-3"></a>numeric_Vector</span></code></pre></div>
+<pre><code>## [1]        1.5       20.0 -5348964.2        6.0</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="rbasics.html#cb20-1"></a><span class="co"># Example of a character vector with a combination of values</span></span>
+<span id="cb20-2"><a href="rbasics.html#cb20-2"></a>character_Vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;character string&quot;</span>, <span class="st">&quot;FSU workshop 10-9-2019&quot;</span>, <span class="st">&quot;bdpiccolo@gmail.com&quot;</span>)</span>
+<span id="cb20-3"><a href="rbasics.html#cb20-3"></a>character_Vector</span></code></pre></div>
+<pre><code>## [1] &quot;cat&quot;                    &quot;dog&quot;                   
+## [3] &quot;character string&quot;       &quot;FSU workshop 10-9-2019&quot;
+## [5] &quot;bdpiccolo@gmail.com&quot;</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="rbasics.html#cb22-1"></a><span class="co"># Example of a logical vector with a combination of values</span></span>
+<span id="cb22-2"><a href="rbasics.html#cb22-2"></a>logical_Vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)</span>
+<span id="cb22-3"><a href="rbasics.html#cb22-3"></a>logical_Vector</span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE FALSE FALSE  TRUE FALSE</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="rbasics.html#cb24-1"></a><span class="co"># Example of a logical vector with a combination of values</span></span>
+<span id="cb24-2"><a href="rbasics.html#cb24-2"></a>factor_Vector &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;HighFat&quot;</span>, <span class="st">&quot;Control&quot;</span>, <span class="st">&quot;HighFat&quot;</span>, <span class="st">&quot;Control&quot;</span>, <span class="st">&quot;HighFat&quot;</span>))</span>
+<span id="cb24-3"><a href="rbasics.html#cb24-3"></a>factor_Vector</span></code></pre></div>
+<pre><code>## [1] Control HighFat Control HighFat Control HighFat
+## Levels: Control HighFat</code></pre>
+<p>Note the differences between the character and factor outputs. The characters are surrounded by quotations, but the factors are not. In addition, the factor output has a level attribute that shows the unique characters within the vector.</p>
+</div>
+<div id="matrix" class="section level4">
+<h4><span class="header-section-number">2.6.3.2</span> Matrix</h4>
+<p>A matrix is a 2-dimensional vector. Since vectors can only contain a single data type, a matrix can then only contain a single data type. Here is an example of a matrix.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="rbasics.html#cb26-1"></a><span class="co"># Example of a matrix with 2 rows and 3 columns</span></span>
+<span id="cb26-2"><a href="rbasics.html#cb26-2"></a>matrix_example1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">data =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">3</span>), <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb26-3"><a href="rbasics.html#cb26-3"></a>matrix_example1</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    2    7    7
+## [2,]    5    3    3</code></pre>
+</div>
+<div id="list" class="section level4">
+<h4><span class="header-section-number">2.6.3.3</span> List</h4>
+<p>So far, we’ve only been introduced to data structures that can handle a single data type. Lists are a way that you can package different data types in a single object. We will combine each of the vectors we created in 2.6.3.1.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="rbasics.html#cb28-1"></a><span class="co"># Example of a list with 5 elements</span></span>
+<span id="cb28-2"><a href="rbasics.html#cb28-2"></a>list_example &lt;-<span class="st"> </span><span class="kw">list</span>(singlevalue_Vector, numeric_Vector, character_Vector, logical_Vector, factor_Vector)</span>
+<span id="cb28-3"><a href="rbasics.html#cb28-3"></a>list_example</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 50
+## 
+## [[2]]
+## [1]        1.5       20.0 -5348964.2        6.0
+## 
+## [[3]]
+## [1] &quot;cat&quot;                    &quot;dog&quot;                   
+## [3] &quot;character string&quot;       &quot;FSU workshop 10-9-2019&quot;
+## [5] &quot;bdpiccolo@gmail.com&quot;   
+## 
+## [[4]]
+## [1]  TRUE  TRUE FALSE FALSE  TRUE FALSE
+## 
+## [[5]]
+## [1] Control HighFat Control HighFat Control HighFat
+## Levels: Control HighFat</code></pre>
+<p>Note the double brackets above each element within the list. This designates the position of each element within the list. Each element acts independently of the other elements, which allows a list to hold different data types within a list. There is no limit to the number of elements that you can define.</p>
+</div>
+<div id="data-frame" class="section level4">
+<h4><span class="header-section-number">2.6.3.4</span> Data frame</h4>
+<p>A data frame will look very much like a matrix in your console, but is technically a constrained list. Each element within a data frame must be a vector of equal length. This allows it to have a 2-dimensional shape with different data types. This is the most common data structure you will find when uploading a .csv file. Here is an example of a data frame.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="rbasics.html#cb30-1"></a><span class="co"># Example of a data frame with 3 columns and 4 rows.</span></span>
+<span id="cb30-2"><a href="rbasics.html#cb30-2"></a><span class="co"># First create vectors</span></span>
+<span id="cb30-3"><a href="rbasics.html#cb30-3"></a>num_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">2.234</span>, <span class="dv">0</span>, <span class="dv">34</span>)</span>
+<span id="cb30-4"><a href="rbasics.html#cb30-4"></a>num_vec_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1000</span>, <span class="dv">100</span>, <span class="dv">10</span>, <span class="dv">1</span>)</span>
+<span id="cb30-5"><a href="rbasics.html#cb30-5"></a>char_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;cow&quot;</span>)</span>
+<span id="cb30-6"><a href="rbasics.html#cb30-6"></a><span class="co"># Create data frame</span></span>
+<span id="cb30-7"><a href="rbasics.html#cb30-7"></a>dataframe_example &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Num1 =</span> num_vec, <span class="dt">Num2 =</span> num_vec_<span class="dv">2</span>, <span class="dt">Char1 =</span> char_vec)</span>
+<span id="cb30-8"><a href="rbasics.html#cb30-8"></a>dataframe_example</span></code></pre></div>
+<pre><code>##     Num1 Num2 Char1
+## 1  1.000 1000   cat
+## 2  2.234  100   dog
+## 3  0.000   10 mouse
+## 4 34.000    1   cow</code></pre>
+<p>Note that the column names are labeled in the data frame. It is actually required that column and row names are labeled. You can access these names by using the <code>colnames</code> and <code>rownames</code> function. You can also label the rows and columns of matrices, but it is not required.</p>
+</div>
+</div>
+<div id="missing-values" class="section level3">
+<h3><span class="header-section-number">2.6.4</span> Missing values</h3>
+<p>R handles missing values by replacing the missing value with a <code>NA</code>, no matter the data type. R does not know what to do with missing values because it assumes it could be anything.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="rbasics.html#cb32-1"></a><span class="co"># Example of vectors with NA</span></span>
+<span id="cb32-2"><a href="rbasics.html#cb32-2"></a>num_vec_withNA &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">2.234</span>, <span class="dv">0</span>, <span class="ot">NA</span>, <span class="dv">5</span>)</span>
+<span id="cb32-3"><a href="rbasics.html#cb32-3"></a>num_vec_withNA</span></code></pre></div>
+<pre><code>## [1] 1.000 2.234 0.000    NA 5.000</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="rbasics.html#cb34-1"></a>char_vec_withNA &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;cow&quot;</span>, <span class="ot">NA</span>)</span>
+<span id="cb34-2"><a href="rbasics.html#cb34-2"></a>char_vec_withNA</span></code></pre></div>
+<pre><code>## [1] &quot;cat&quot;   &quot;dog&quot;   &quot;mouse&quot; &quot;cow&quot;   NA</code></pre>
+<p>Sometimes, package authors have accounted for NAs in their coding, but generally, you need to account for <code>NA</code> values in core functions.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="rbasics.html#cb36-1"></a><span class="co"># mean() function will not work with an NA </span></span>
+<span id="cb36-2"><a href="rbasics.html#cb36-2"></a><span class="kw">mean</span>(num_vec_withNA)</span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<p>Note that the output is also NA! That is because R does not know what to do with the missing value, so the function is undefined. Can correct this by using the ‘na.rm’ argument in the <code>mean</code> function.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="rbasics.html#cb38-1"></a><span class="co"># This is not a standard term, so each function will have its own terminology.</span></span>
+<span id="cb38-2"><a href="rbasics.html#cb38-2"></a><span class="kw">mean</span>(num_vec_withNA, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 2.0585</code></pre>
+<p>More information can be found <a href="https://www.statmethods.net/input/missingdata.html">here</a></p>
+</div>
+<div id="functions" class="section level3">
+<h3><span class="header-section-number">2.6.5</span> Functions</h3>
+<p><em>This can be considered a more intermediate to advanced topic. Unfortunately you will come across some user-defined functions in this workshop, so it is good to understand some of the concepts.</em></p>
+<p>Another reason for R’s flexibility is that the user can create functions that can help and/or streamline their analyses. We will need to define our own functions for microbial sequencing analysis, so it will be advantages to go over some key concepts regarding functions.</p>
+<p>There are 4 main components of a function as shown below.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="rbasics.html#cb40-1"></a>Rfunction &lt;-<span class="st">                       </span><span class="co"># Name assignment</span></span>
+<span id="cb40-2"><a href="rbasics.html#cb40-2"></a><span class="st">    </span><span class="cf">function</span>(arg1, arg2) {         <span class="co"># Defining arguments for function inputs</span></span>
+<span id="cb40-3"><a href="rbasics.html#cb40-3"></a>        </span>
+<span id="cb40-4"><a href="rbasics.html#cb40-4"></a>        sum_args &lt;-<span class="st"> </span>arg1 <span class="op">+</span><span class="st"> </span>arg2    <span class="co"># Body of function with coding statements using defined arguments.</span></span>
+<span id="cb40-5"><a href="rbasics.html#cb40-5"></a>        </span>
+<span id="cb40-6"><a href="rbasics.html#cb40-6"></a>        <span class="kw">return</span>(sum_args)           <span class="co"># Return object</span></span>
+<span id="cb40-7"><a href="rbasics.html#cb40-7"></a>        </span>
+<span id="cb40-8"><a href="rbasics.html#cb40-8"></a>    }</span></code></pre></div>
+<div id="name-assignment" class="section level4">
+<h4><span class="header-section-number">2.6.5.1</span> Name assignment</h4>
+<p>This is what you name the function. Make sure it is a unique name. R will mask functions from other packages with the same names. If we named this function ‘mean’ it would mask the <code>mean</code> function from the ‘basic’ package. You can force a function from a specific package by using the coding below. This can be used if a function is masked or if you do not want to load an entire package.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="rbasics.html#cb41-1"></a><span class="co"># You will not be able to import your data unless you set your working directory!</span></span>
+<span id="cb41-2"><a href="rbasics.html#cb41-2"></a>base<span class="op">::</span><span class="kw">mean</span>(num_vec)</span></code></pre></div>
+<p>It is not always necessary to name a function. This would occur in very specific functions that have an argument to use a user-defined function. Think of a situation where you want to identify the median over every column in a data frame (e.g., every genera in microbial sequencing data). There is a function that specifically runs a defined function over columns within a data frame, called <code>sapply</code>. Now let’s say you want to define your own function across these columns, you could set your own defined function, minus the name, within the fucntion argument within <code>sapply</code>. An example will be provided when we discuss loops and loop related functions.</p>
+</div>
+<div id="arguments" class="section level4">
+<h4><span class="header-section-number">2.6.5.2</span> Arguments</h4>
+<p>Think of arguments as objects that will be passed to the coding within the body of the function. They can be made to accept any input or force you to select a defined set of parameters. We will only be working with the former type of arguments. Look how we place an input in the function created above.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="rbasics.html#cb42-1"></a><span class="kw">Rfunction</span>(<span class="dt">arg1 =</span> <span class="dv">10</span>, <span class="dt">arg2 =</span> <span class="dv">50</span>)</span></code></pre></div>
+<p>You don’t have to assign the arguments directly, but R will automatically try to order non-defined arguments. Arguments do not need to be defined in order.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="rbasics.html#cb43-1"></a><span class="co"># Here, R will assign 10 to the first non-defined argument, arg1</span></span>
+<span id="cb43-2"><a href="rbasics.html#cb43-2"></a><span class="kw">Rfunction</span>(<span class="dv">10</span>, <span class="dt">arg2 =</span> <span class="dv">50</span>)</span>
+<span id="cb43-3"><a href="rbasics.html#cb43-3"></a></span>
+<span id="cb43-4"><a href="rbasics.html#cb43-4"></a><span class="co"># Here, R will assign 10 to the first non-defined argument, arg1</span></span>
+<span id="cb43-5"><a href="rbasics.html#cb43-5"></a><span class="kw">Rfunction</span>(<span class="dt">arg2 =</span> <span class="dv">500</span>, <span class="dv">10</span>)</span>
+<span id="cb43-6"><a href="rbasics.html#cb43-6"></a></span>
+<span id="cb43-7"><a href="rbasics.html#cb43-7"></a><span class="co"># Here, R will assign 500 to the first non-defined argument, arg1; </span></span>
+<span id="cb43-8"><a href="rbasics.html#cb43-8"></a><span class="co"># then, R will define 10 to the next non-defined argument, arg2.</span></span>
+<span id="cb43-9"><a href="rbasics.html#cb43-9"></a><span class="kw">Rfunction</span>(<span class="dv">500</span>, <span class="dv">10</span>)</span></code></pre></div>
+</div>
+<div id="body" class="section level4">
+<h4><span class="header-section-number">2.6.5.3</span> Body</h4>
+<p>The body of the function is what give the functionality to a function. It takes the definition of the argument, passes it to the coding in the body, then computes the coding operation. In this case, it takes the arg1 and arg2, sums them, and assigns the summation to an object.</p>
+<p>An interesting aspect of a function is that the body of the function does not interact with the R session. Meaning, that objects that you define in a function will only be remembered within the function and not outside it, so they will not affect your analysis. Objects within your analysis environment will be recognized in the body of a function though!</p>
+<p>Note that the body is nested within curly brackets, <code>{</code> and <code>}</code>. These define the body of the function and allow functions to contain more than a single line of code. You do not need to use curly brackets if you have a single line of code.</p>
+</div>
+<div id="return" class="section level4">
+<h4><span class="header-section-number">2.6.5.4</span> Return</h4>
+<p>This defines the function’s output. Can be a single output or multiple outputs. A list is typically used if there are multiple objects that are being returned. Let’s make another function based on the one above, but use a list to output multiple objects. In this case, we will see that the arguments contain the inputted numbers.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="rbasics.html#cb44-1"></a>Rfunction_list &lt;-<span class="st">                               </span><span class="co"># Name assignment</span></span>
+<span id="cb44-2"><a href="rbasics.html#cb44-2"></a><span class="st">    </span><span class="cf">function</span>(arg1, arg2) {                 <span class="co"># Defining arguments for function inputs</span></span>
+<span id="cb44-3"><a href="rbasics.html#cb44-3"></a>        </span>
+<span id="cb44-4"><a href="rbasics.html#cb44-4"></a>        sum_args &lt;-<span class="st"> </span>arg1 <span class="op">+</span><span class="st"> </span>arg2            <span class="co"># Body of function with coding statements using defined arguments.</span></span>
+<span id="cb44-5"><a href="rbasics.html#cb44-5"></a>        </span>
+<span id="cb44-6"><a href="rbasics.html#cb44-6"></a>        <span class="kw">return</span>(<span class="kw">list</span>(sum_args, arg1, arg2)) <span class="co"># Return object</span></span>
+<span id="cb44-7"><a href="rbasics.html#cb44-7"></a>        </span>
+<span id="cb44-8"><a href="rbasics.html#cb44-8"></a>    }</span></code></pre></div>
+<p>Now let’s see the output.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="rbasics.html#cb45-1"></a><span class="kw">Rfunction_list</span>(<span class="dv">500</span>, <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 501
+## 
+## [[2]]
+## [1] 500
+## 
+## [[3]]
+## [1] 1</code></pre>
+<p>Note that the first element in the list is the summation of 500 and 1, the second element is the input of 500, and the third element is the input of 1. W</p>
+<p>It is good habit to define the output using the <code>return</code> function; however, it is not necessary. If you do not use <code>return</code>, then the last line of code will be the output. A single line function will sometimes be very minimal, for example</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="rbasics.html#cb47-1"></a><span class="co"># Function to determine squared residuals</span></span>
+<span id="cb47-2"><a href="rbasics.html#cb47-2"></a><span class="co"># The first line of code in the body is the last line too!</span></span>
+<span id="cb47-3"><a href="rbasics.html#cb47-3"></a>residualFUN &lt;-<span class="st"> </span><span class="cf">function</span>(x) (x<span class="op">/</span><span class="kw">mean</span>(x))<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb47-4"><a href="rbasics.html#cb47-4"></a></span>
+<span id="cb47-5"><a href="rbasics.html#cb47-5"></a><span class="co"># Create data using the rnorm function</span></span>
+<span id="cb47-6"><a href="rbasics.html#cb47-6"></a>normalDATA &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">20</span>, <span class="dt">mean=</span><span class="dv">100</span>, <span class="dt">sd=</span><span class="dv">10</span>)</span>
+<span id="cb47-7"><a href="rbasics.html#cb47-7"></a></span>
+<span id="cb47-8"><a href="rbasics.html#cb47-8"></a><span class="co"># Output</span></span>
+<span id="cb47-9"><a href="rbasics.html#cb47-9"></a><span class="kw">list</span>(normalDATA, <span class="kw">residualFUN</span>(normalDATA))</span></code></pre></div>
+<pre><code>## [[1]]
+##  [1]  95.49127  95.38667  97.57042  72.07835  91.38935  89.58772  88.42961
+##  [8]  97.15018  90.22550  98.70350  96.80436 100.35794 115.81006 115.17900
+## [15] 101.56804  83.75574 105.38562 105.66022  72.16702 106.66287
+## 
+## [[2]]
+##  [1] 0.9900859 0.9879181 1.0336700 0.5640989 0.9068527 0.8714501 0.8490651
+##  [8] 1.0247851 0.8839020 1.0578173 1.0175023 1.0935762 1.4562572 1.4404301
+## [15] 1.1201075 0.7616838 1.2058915 1.2121840 0.5654877 1.2352989</code></pre>
+<p>The first element of the list is the output of rnorm and the second element in the list is the output of residualFUN function. Look how flexible a list is! It allowed a function to define its second element!</p>
+</div>
+</div>
+</div>
+<div id="importing-data" class="section level2">
+<h2><span class="header-section-number">2.7</span> Importing data</h2>
+<p>R can handle a wide range of file types. For example, we will import a biome file later in this workshop. However, spreadsheet structured data is most commonly imported as a text delimited or csv file. More recent developed packages have have made it easier to import directly from an Excel file. However, we need to understand what a <strong>working directory</strong> is before we can demostrate importing files.</p>
+<div id="working-directory" class="section level3">
+<h3><span class="header-section-number">2.7.1</span> Working directory</h3>
+<p>Quite simply, you have to tell R where to locate the file you want to import. To do this, you have to specify the directory where your files are located at. You can do that by choosing ‘File - Change dir’ and then selecting the directory with your files. Or you can use the <code>setwd</code> function. For example,</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="rbasics.html#cb49-1"></a><span class="co"># You will not be able to import your data unless you set your working directory!</span></span>
+<span id="cb49-2"><a href="rbasics.html#cb49-2"></a><span class="kw">setwd</span>(<span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">users</span><span class="ch">\\</span><span class="st">brian</span><span class="ch">\\</span><span class="st">documents</span><span class="ch">\\</span><span class="st">FSU Workshop</span><span class="ch">\\</span><span class="st">&quot;</span>)</span></code></pre></div>
+</div>
+<div id="comma-delimited-text-file-csv" class="section level3">
+<h3><span class="header-section-number">2.7.2</span> Comma delimited text file (csv)</h3>
+<p>For our purposes, the <code>read.csv</code> function will suffice. There are other functions that can</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="rbasics.html#cb50-1"></a><span class="co"># The head() function will show the first 6 rows of a data frame.</span></span>
+<span id="cb50-2"><a href="rbasics.html#cb50-2"></a>CSVimport &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;CSVexample.csv&quot;</span>)</span>
+<span id="cb50-3"><a href="rbasics.html#cb50-3"></a><span class="kw">head</span>(CSVimport)</span></code></pre></div>
+<pre><code>##   Subject Treatment Gender Age Height     Wt  BMI Glucose
+## 1     579   Control      F  38  63.00  82.27 32.1      99
+## 2     586   Control      F  37  62.00  94.20 37.9     108
+## 3     502   Control      M  62  68.60 112.50 37.1      97
+## 4     508   Control      F  49  64.25 107.70 40.4      86
+## 5     569   Control      F  46  63.80  80.91 29.9     102
+## 6     568   Control      M  47  69.25 127.23 41.0     104</code></pre>
+<p>Use the <code>read.table</code> function to import a space delimited text file (.txt)</p>
+</div>
+<div id="excel-file" class="section level3">
+<h3><span class="header-section-number">2.7.3</span> Excel file</h3>
+<p>There are now several packages that provide functions to import Excel files. We will use the <code>read_xlsx</code> function from the <a href="https://readxl.tidyverse.org/">readxl</a> package. There are many arguments that can be inputted in this function, but we will focus on the first two. The ‘path’ argument defines the file and the ‘sheet’ argument defines the the sheet name to be read. If the ‘sheet’ argument is not defined, then the function will read the first sheet.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="rbasics.html#cb52-1"></a><span class="co"># Need to load the package.</span></span>
+<span id="cb52-2"><a href="rbasics.html#cb52-2"></a><span class="kw">library</span>(readxl)</span>
+<span id="cb52-3"><a href="rbasics.html#cb52-3"></a>XLSXimport &lt;-<span class="st"> </span><span class="kw">read_xlsx</span>(<span class="st">&quot;XLSXexample.xlsx&quot;</span>)</span>
+<span id="cb52-4"><a href="rbasics.html#cb52-4"></a>XLSXimport</span></code></pre></div>
+<pre><code>## # A tibble: 22 x 8
+##    Subject Treatment Gender   Age Height    Wt   BMI Glucose
+##      &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+##  1     579 Control   F         38   63    82.3  32.1      99
+##  2     586 Control   F         37   62    94.2  37.9     108
+##  3     502 Control   M         62   68.6 112.   37.1      97
+##  4     508 Control   F         49   64.2 108.   40.4      86
+##  5     569 Control   F         46   63.8  80.9  29.9     102
+##  6     568 Control   M         47   69.2 127.   41       104
+##  7     556 Control   F         35   60.2  83.3  36       100
+##  8     581 Control   F         49   64.5  92.1  34.6     126
+##  9     577 Control   F         45   63    94.1  36.2      90
+## 10     516 Control   F         25   68    94.7  31.5      87
+## # ... with 12 more rows</code></pre>
+<p>Notice that the difference between this output and the csv output. The Excel output says that it is a tibble. This is a newer data structure based on a family of packages globally referred to as the <a href="https://www.tidyverse.org/">tidyverse</a>. We will not have time to learn the tidyverse syntax, but it is a highly popular package and and area of active development.</p>
+<p>We can coerce the tibble into a regular data frame, similar to the csv import.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="rbasics.html#cb54-1"></a><span class="co"># You can also coerce data types into different data types.</span></span>
+<span id="cb54-2"><a href="rbasics.html#cb54-2"></a>XLSXimport_df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(XLSXimport)</span>
+<span id="cb54-3"><a href="rbasics.html#cb54-3"></a><span class="kw">head</span>(XLSXimport_df)</span></code></pre></div>
+<pre><code>##   Subject Treatment Gender Age Height     Wt  BMI Glucose
+## 1     579   Control      F  38  63.00  82.27 32.1      99
+## 2     586   Control      F  37  62.00  94.20 37.9     108
+## 3     502   Control      M  62  68.60 112.50 37.1      97
+## 4     508   Control      F  49  64.25 107.70 40.4      86
+## 5     569   Control      F  46  63.80  80.91 29.9     102
+## 6     568   Control      M  47  69.25 127.23 41.0     104</code></pre>
+</div>
+</div>
+<div id="working-with-your-data" class="section level2">
+<h2><span class="header-section-number">2.8</span> Working with your data</h2>
+<p>We will now go over some basic data wrangling concepts and perform some basic univariate statistics on our imported data.</p>
+<div id="viewing-your-data" class="section level3">
+<h3><span class="header-section-number">2.8.1</span> Viewing your data</h3>
+<p>Its always a good idea to see what your data looks like after you import it. We used <code>head</code> earlier to see the first 6 rows</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="rbasics.html#cb56-1"></a><span class="co"># You can use the &#39;n&#39; argument to set how many rows are returned.</span></span>
+<span id="cb56-2"><a href="rbasics.html#cb56-2"></a><span class="kw">head</span>(CSVimport)</span></code></pre></div>
+<pre><code>##   Subject Treatment Gender Age Height     Wt  BMI Glucose
+## 1     579   Control      F  38  63.00  82.27 32.1      99
+## 2     586   Control      F  37  62.00  94.20 37.9     108
+## 3     502   Control      M  62  68.60 112.50 37.1      97
+## 4     508   Control      F  49  64.25 107.70 40.4      86
+## 5     569   Control      F  46  63.80  80.91 29.9     102
+## 6     568   Control      M  47  69.25 127.23 41.0     104</code></pre>
+<p>There are columns that have characters and others that have numbers. That would indicate that we have a data frame. We can look at the structure of the object using the <code>str</code> function.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="rbasics.html#cb58-1"></a><span class="co"># You can use the &#39;n&#39; argument to set how many rows are returned.</span></span>
+<span id="cb58-2"><a href="rbasics.html#cb58-2"></a><span class="kw">str</span>(CSVimport)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    22 obs. of  8 variables:
+##  $ Subject  : int  579 586 502 508 569 568 556 581 577 516 ...
+##  $ Treatment: Factor w/ 2 levels &quot;Control&quot;,&quot;Experiment&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ Gender   : Factor w/ 2 levels &quot;F&quot;,&quot;M&quot;: 1 1 2 1 1 2 1 1 1 1 ...
+##  $ Age      : int  38 37 62 49 46 47 35 49 45 25 ...
+##  $ Height   : num  63 62 68.6 64.2 63.8 ...
+##  $ Wt       : num  82.3 94.2 112.5 107.7 80.9 ...
+##  $ BMI      : num  32.1 37.9 37.1 40.4 29.9 41 36 34.6 36.2 31.5 ...
+##  $ Glucose  : int  99 108 97 86 102 104 100 126 90 87 ...</code></pre>
+<p>Note that this return tells us that the object is indeed a data frame. It also shows us that R assigned the columns with strings as factors and also defined the columns with numbers as either integer or numeric.</p>
+</div>
+<div id="extracting-elements" class="section level3">
+<h3><span class="header-section-number">2.8.2</span> Extracting elements</h3>
+<p>Square brackets <code>[</code> and <code>]</code> are the most basic way to extract elements from various data structures. The most basic way is to define the position within a data structure.</p>
+<p>Let’s look at the ‘num_vec’ object from 2.6.3.4. There are 4 elements within the vector, 1, 2.234, 0, and 34. Let’s say we want to extract the 0 from this vector. We can use square brackets to extract this position.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="rbasics.html#cb60-1"></a><span class="co"># Here is the original vector</span></span>
+<span id="cb60-2"><a href="rbasics.html#cb60-2"></a>num_vec</span></code></pre></div>
+<pre><code>## [1]  1.000  2.234  0.000 34.000</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="rbasics.html#cb62-1"></a><span class="co"># 0 is the third element.</span></span>
+<span id="cb62-2"><a href="rbasics.html#cb62-2"></a>num_vec[<span class="dv">3</span>]</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<p>Now let’s say we want to extract the 2nd through the 4th element. We can use <code>:</code> if numbers are sequential.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="rbasics.html#cb64-1"></a><span class="co"># Will work as long as the numbers are sequential and whole numbers</span></span>
+<span id="cb64-2"><a href="rbasics.html#cb64-2"></a>num_vec[<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>]</span></code></pre></div>
+<pre><code>## [1]  2.234  0.000 34.000</code></pre>
+<p>What if we want to extract elements 1 and 3? We can use the <code>c</code> function and define positions out of order.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="rbasics.html#cb66-1"></a><span class="co"># There are multiple ways to do this.</span></span>
+<span id="cb66-2"><a href="rbasics.html#cb66-2"></a>num_vec[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]</span></code></pre></div>
+<pre><code>## [1] 1 0</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="rbasics.html#cb68-1"></a><span class="co"># This would also work, why?</span></span>
+<span id="cb68-2"><a href="rbasics.html#cb68-2"></a>positions &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)</span>
+<span id="cb68-3"><a href="rbasics.html#cb68-3"></a>num_vec[positions]</span>
+<span id="cb68-4"><a href="rbasics.html#cb68-4"></a></span>
+<span id="cb68-5"><a href="rbasics.html#cb68-5"></a><span class="co"># or</span></span>
+<span id="cb68-6"><a href="rbasics.html#cb68-6"></a></span>
+<span id="cb68-7"><a href="rbasics.html#cb68-7"></a>num_vec[<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>)]</span></code></pre></div>
+<p>We can also use logical statements to extract elements.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="rbasics.html#cb69-1"></a><span class="co"># Under the hood, R is keeping the positions that are TRUE.</span></span>
+<span id="cb69-2"><a href="rbasics.html#cb69-2"></a>num_vec[num_vec <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>]</span></code></pre></div>
+<pre><code>## [1]  2.234 34.000</code></pre>
+<p>Let’s look at a list output to see what is going on here.</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="rbasics.html#cb71-1"></a><span class="co"># Under the hood, R is keeping the positions that are TRUE.</span></span>
+<span id="cb71-2"><a href="rbasics.html#cb71-2"></a><span class="kw">list</span>(num_vec, num_vec <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [[1]]
+## [1]  1.000  2.234  0.000 34.000
+## 
+## [[2]]
+## [1] FALSE  TRUE FALSE  TRUE</code></pre>
+<p>The TRUE statements are equivelant to telling R which position to return. You have to be very careful when using positional bracketing.</p>
+<p>Square brackets can also work with 2-dimensional data structures. With matrices and data frames, a comma is added to differentiate rows and columns. Let’s look at the ‘matrix_object’ from 2.6.3.2.</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="rbasics.html#cb73-1"></a><span class="co"># Here is the original matrix</span></span>
+<span id="cb73-2"><a href="rbasics.html#cb73-2"></a>matrix_example1</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    2    7    7
+## [2,]    5    3    3</code></pre>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="rbasics.html#cb75-1"></a><span class="co"># Statements to the right of the comma refer to column position</span></span>
+<span id="cb75-2"><a href="rbasics.html#cb75-2"></a>matrix_example1[,<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    7    7
+## [2,]    3    3</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="rbasics.html#cb77-1"></a><span class="co"># Statements to the left of the comma refer to column position</span></span>
+<span id="cb77-2"><a href="rbasics.html#cb77-2"></a>matrix_example1[<span class="dv">1</span>,]</span></code></pre></div>
+<pre><code>## [1] 2 7 7</code></pre>
+<p>We can designate positions for both columns and rows. Let’s use the data frame from 2.6.3.4</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="rbasics.html#cb79-1"></a><span class="co"># Here is the original matrix</span></span>
+<span id="cb79-2"><a href="rbasics.html#cb79-2"></a>dataframe_example</span></code></pre></div>
+<pre><code>##     Num1 Num2 Char1
+## 1  1.000 1000   cat
+## 2  2.234  100   dog
+## 3  0.000   10 mouse
+## 4 34.000    1   cow</code></pre>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="rbasics.html#cb81-1"></a><span class="co"># can embed functions as shown above.</span></span>
+<span id="cb81-2"><a href="rbasics.html#cb81-2"></a>dataframe_example[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>)]</span></code></pre></div>
+<pre><code>##   Char1  Num1
+## 1   cat 1.000
+## 2   dog 2.234
+## 3 mouse 0.000</code></pre>
+<p>Note, that you can re-order the columns and rows using positional bracketing.</p>
+<p>Double brackets <code>[[</code> and <code>]]</code> are used with lists and data frames and are typically used to extract a single element by position or name. A the dollar sign, <code>$</code>, has the same functionality. For example,</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="rbasics.html#cb83-1"></a><span class="co"># These are all equivalent</span></span>
+<span id="cb83-2"><a href="rbasics.html#cb83-2"></a>dataframe_example[[<span class="dv">2</span>]]</span></code></pre></div>
+<pre><code>## [1] 1000  100   10    1</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="rbasics.html#cb85-1"></a>dataframe_example[[<span class="st">&quot;Num2&quot;</span>]]</span></code></pre></div>
+<pre><code>## [1] 1000  100   10    1</code></pre>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="rbasics.html#cb87-1"></a>dataframe_example<span class="op">$</span>Num2</span></code></pre></div>
+<pre><code>## [1] 1000  100   10    1</code></pre>
+<p>The <code>$</code> will generally only work if the label has no spaces or special characters. Otherwise, use the double brackets with a character string.</p>
+</div>
+<div id="subsetting" class="section level3">
+<h3><span class="header-section-number">2.8.3</span> Subsetting</h3>
+<p>We can see from the <code>str</code> output in 2.8.1 that the ‘Treatment’ column has two factor levels, “Treatment” and “Control”. Let’s say we want to extract the data related to the Control group and make a new object with it.</p>
+<p>We could determine what row positions within the Treatment column contain the string “Control.” Fortunately, this dataset has them nicely ordered, but what if they’re not nicely ordered. Or what if you have 20,000 rows. A better way to do this is to use logical operators.</p>
+<p>Let see what happens when we use <code>==</code> on the ‘Treatment’ column.</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="rbasics.html#cb89-1"></a><span class="co"># &#39;==&#39; will ask if the vector is exact to something.</span></span>
+<span id="cb89-2"><a href="rbasics.html#cb89-2"></a>CSVimport<span class="op">$</span>Treatment <span class="op">==</span><span class="st"> &quot;Control&quot;</span></span></code></pre></div>
+<pre><code>##  [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [12] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<p>It returns a logical vector of equal length to <code>CSVimport$Treatment</code> where <code>TRUE</code> replaces “Control” and <code>FALSE</code> replaces “Treatment”. We can use this with positional bracketing to subset the data.</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="rbasics.html#cb91-1"></a><span class="co"># Data structure, followed by brackets.  </span></span>
+<span id="cb91-2"><a href="rbasics.html#cb91-2"></a><span class="co"># For 2-dim, rows left of comma, columns right of comma.</span></span>
+<span id="cb91-3"><a href="rbasics.html#cb91-3"></a>CSV_ctrl &lt;-<span class="st"> </span>CSVimport[CSVimport<span class="op">$</span>Treatment <span class="op">==</span><span class="st"> &quot;Control&quot;</span>, ]</span>
+<span id="cb91-4"><a href="rbasics.html#cb91-4"></a>CSV_ctrl</span></code></pre></div>
+<pre><code>##    Subject Treatment Gender Age Height     Wt  BMI Glucose
+## 1      579   Control      F  38  63.00  82.27 32.1      99
+## 2      586   Control      F  37  62.00  94.20 37.9     108
+## 3      502   Control      M  62  68.60 112.50 37.1      97
+## 4      508   Control      F  49  64.25 107.70 40.4      86
+## 5      569   Control      F  46  63.80  80.91 29.9     102
+## 6      568   Control      M  47  69.25 127.23 41.0     104
+## 7      556   Control      F  35  60.15  83.32 36.0     100
+## 8      581   Control      F  49  64.50  92.09 34.6     126
+## 9      577   Control      F  45  63.00  94.09 36.2      90
+## 10     516   Control      F  25  68.00  94.68 31.5      87
+## 11     565   Control      F  34  61.50 108.18 44.3      88</code></pre>
+<p>Now, what if we have a vector containing Subject numbers that we want to filter on. Let’s see what happens when we use <code>==</code>.</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="rbasics.html#cb93-1"></a><span class="co"># We can make an object containing the subject IDs first.</span></span>
+<span id="cb93-2"><a href="rbasics.html#cb93-2"></a>ID_filter &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;579&quot;</span>,<span class="st">&quot;586&quot;</span>,<span class="st">&quot;502&quot;</span>,<span class="st">&quot;508&quot;</span>,<span class="st">&quot;569&quot;</span>,<span class="st">&quot;568&quot;</span>,<span class="st">&quot;556&quot;</span>)</span>
+<span id="cb93-3"><a href="rbasics.html#cb93-3"></a>CSVimport<span class="op">$</span>Subject <span class="op">==</span><span class="st"> </span>ID_filter</span></code></pre></div>
+<pre><code>## Warning in CSVimport$Subject == ID_filter: longer object length is not a
+## multiple of shorter object length</code></pre>
+<p>A weird error returns. I will not get into the reason for the error, but there is a more optimal way to do this using the match operator, <code>%in%</code>. The <code>%in%</code> operator will return TRUE if anything on the left matches on the right. Let’s see it in action.</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="rbasics.html#cb95-1"></a><span class="co"># Use &#39;==&#39; if you&#39;re matching on a single element</span></span>
+<span id="cb95-2"><a href="rbasics.html#cb95-2"></a><span class="co"># use &#39;%in% if you&#39;re filtering on more than 1 element.</span></span>
+<span id="cb95-3"><a href="rbasics.html#cb95-3"></a>CSVimport<span class="op">$</span>Subject <span class="op">%in%</span><span class="st"> </span>ID_filter</span></code></pre></div>
+<pre><code>##  [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE
+## [12] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="rbasics.html#cb97-1"></a><span class="co"># Now subset the data</span></span>
+<span id="cb97-2"><a href="rbasics.html#cb97-2"></a>CSV_IDfilter &lt;-<span class="st"> </span>CSVimport[CSVimport<span class="op">$</span>Subject <span class="op">%in%</span><span class="st"> </span>ID_filter, ]</span>
+<span id="cb97-3"><a href="rbasics.html#cb97-3"></a>CSV_IDfilter</span></code></pre></div>
+<pre><code>##   Subject Treatment Gender Age Height     Wt  BMI Glucose
+## 1     579   Control      F  38  63.00  82.27 32.1      99
+## 2     586   Control      F  37  62.00  94.20 37.9     108
+## 3     502   Control      M  62  68.60 112.50 37.1      97
+## 4     508   Control      F  49  64.25 107.70 40.4      86
+## 5     569   Control      F  46  63.80  80.91 29.9     102
+## 6     568   Control      M  47  69.25 127.23 41.0     104
+## 7     556   Control      F  35  60.15  83.32 36.0     100</code></pre>
+<p>Finally, let’s filter ‘Experiment’ subjects that are less than 40 years old. We also only want the ‘Age’, ‘Wt’, ‘BMI’, and ‘Glucose’ columns.</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="rbasics.html#cb99-1"></a><span class="co"># Use &#39;&amp;&#39; to evaluate logical combiners.  There are other specialized logical combiners.</span></span>
+<span id="cb99-2"><a href="rbasics.html#cb99-2"></a>CSV_exp40 &lt;-<span class="st"> </span>CSVimport[CSVimport<span class="op">$</span>Treatment <span class="op">==</span><span class="st"> &quot;Experiment&quot;</span> <span class="op">&amp;</span><span class="st"> </span>CSVimport<span class="op">$</span>Age <span class="op">&lt;</span><span class="st"> </span><span class="dv">40</span>, ]</span>
+<span id="cb99-3"><a href="rbasics.html#cb99-3"></a></span>
+<span id="cb99-4"><a href="rbasics.html#cb99-4"></a><span class="co"># Create vector containing the column names that we want to filter.</span></span>
+<span id="cb99-5"><a href="rbasics.html#cb99-5"></a><span class="co"># Remember, R is case sensitive.</span></span>
+<span id="cb99-6"><a href="rbasics.html#cb99-6"></a>column_filter &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Wt&quot;</span>, <span class="st">&quot;BMI&quot;</span>, <span class="st">&quot;Glucose&quot;</span>)</span>
+<span id="cb99-7"><a href="rbasics.html#cb99-7"></a>CSV_exp40_filter &lt;-<span class="st"> </span>CSV_exp40[ ,<span class="kw">colnames</span>(CSV_exp40) <span class="op">%in%</span><span class="st"> </span>column_filter]</span>
+<span id="cb99-8"><a href="rbasics.html#cb99-8"></a>CSV_exp40_filter</span></code></pre></div>
+<pre><code>##    Age     Wt  BMI Glucose
+## 12  37  95.36 34.2     101
+## 15  18 105.70 36.8      99
+## 17  37  99.80 35.4      97
+## 18  39  86.50 37.8      99
+## 19  29 139.40 43.1     104
+## 22  31 109.82 38.4      99</code></pre>
+<p>There are many other ways to filter and subset your data. There is actually a <code>subset</code> function that does the same things we covered here, but within a function. tidyverse has a more linear approach to filtering, which has become extremely popular. Some workflows are better if you have millions of data points, but this way minimizes the need for add on functions.</p>
+</div>
+<div id="reshaping-data" class="section level3">
+<h3><span class="header-section-number">2.8.4</span> Reshaping data</h3>
+<p><em>This can be considered a more intermediate to advanced topic.</em></p>
+<p>Well, I told myself that I was not going to introduce functions from the <strong>tidyverse</strong>, but the reshaping functions are SO VERY convenient for high-throughput data analysis. Before we get into these functions, let me introduce you to the <code>t</code> (transpose) function first.</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="rbasics.html#cb101-1"></a><span class="co"># Will make a matrix first using the rnorm() function.</span></span>
+<span id="cb101-2"><a href="rbasics.html#cb101-2"></a>randomDATA &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">18</span>, <span class="dt">mean =</span> <span class="dv">10</span>, <span class="dt">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb101-3"><a href="rbasics.html#cb101-3"></a>Matrix_example2 &lt;-<span class="st"> </span><span class="kw">matrix</span>(randomDATA, <span class="dt">ncol=</span><span class="dv">6</span>, <span class="dt">nrow=</span><span class="dv">3</span>)</span>
+<span id="cb101-4"><a href="rbasics.html#cb101-4"></a>Matrix_example2</span></code></pre></div>
+<pre><code>##          [,1]      [,2]      [,3]      [,4]     [,5]     [,6]
+## [1,] 10.62428  7.405025  9.837356 13.272414 10.06177 9.855579
+## [2,] 11.46012 10.778558  8.389647 13.081591 10.89812 7.530821
+## [3,] 10.31414 14.441577 13.687213  8.873099 10.56195 7.169426</code></pre>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="rbasics.html#cb103-1"></a><span class="co"># Transpose</span></span>
+<span id="cb103-2"><a href="rbasics.html#cb103-2"></a><span class="kw">t</span>(Matrix_example2)</span></code></pre></div>
+<pre><code>##           [,1]      [,2]      [,3]
+## [1,] 10.624278 11.460116 10.314143
+## [2,]  7.405025 10.778558 14.441577
+## [3,]  9.837356  8.389647 13.687213
+## [4,] 13.272414 13.081591  8.873099
+## [5,] 10.061773 10.898123 10.561951
+## [6,]  9.855579  7.530821  7.169426</code></pre>
+<p>Now, a couple things to know about the tidyverse. It is a cluster of packages built primarily by <a href="http://hadley.nz/">Hadley Wickham</a>, who is arguably the closest you can get to rock star status in the R programming world. The primary reason for <strong>tidyverse</strong> was to make the coding grammar uniform and linear in structure, as opposed to the nesting structure that R was originally developed in. One way to do this was to use an operator, <code>%&gt;%</code> (referred to as a <strong>pipe</strong>), that forwards a value into the next function or expression. Let me provide an example first:</p>
+<p>Let’s say we want to import our data, subset subjects &lt; 50, and then calculate mean and standard deviation across Control and Experimental groups for all continuous variables. Let’s see how this would like</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="rbasics.html#cb105-1"></a><span class="co"># Remember to load package</span></span>
+<span id="cb105-2"><a href="rbasics.html#cb105-2"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb105-3"><a href="rbasics.html#cb105-3"></a></span>
+<span id="cb105-4"><a href="rbasics.html#cb105-4"></a><span class="co"># Note that this syntax no longer requires quotation marks for characters.</span></span>
+<span id="cb105-5"><a href="rbasics.html#cb105-5"></a>CSVfilter &lt;-<span class="st"> </span><span class="kw">filter</span>(CSVimport, Age <span class="op">&lt;</span><span class="st"> </span><span class="dv">50</span>)</span>
+<span id="cb105-6"><a href="rbasics.html#cb105-6"></a>CSVfilter_byTxt &lt;-<span class="st"> </span><span class="kw">group_by</span>(CSVfilter, Treatment)</span>
+<span id="cb105-7"><a href="rbasics.html#cb105-7"></a><span class="kw">summarise</span>(CSVfilter_byTxt, <span class="dt">Avg_Age =</span> <span class="kw">mean</span>(Age), <span class="dt">sd_Age =</span> <span class="kw">sd</span>(Age))</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 3
+##   Treatment  Avg_Age sd_Age
+##   &lt;fct&gt;        &lt;dbl&gt;  &lt;dbl&gt;
+## 1 Control       40.5   7.95
+## 2 Experiment    37.1   9.16</code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="rbasics.html#cb107-1"></a><span class="kw">summarise</span>(CSVfilter_byTxt, <span class="dt">Avg_Height =</span> <span class="kw">mean</span>(Height), <span class="dt">sd_Height =</span> <span class="kw">sd</span>(Height))</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 3
+##   Treatment  Avg_Height sd_Height
+##   &lt;fct&gt;           &lt;dbl&gt;     &lt;dbl&gt;
+## 1 Control          63.9      2.81
+## 2 Experiment       65.7      2.86</code></pre>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="rbasics.html#cb109-1"></a><span class="kw">summarise</span>(CSVfilter_byTxt, <span class="dt">Avg_Wt =</span> <span class="kw">mean</span>(Wt), <span class="dt">sd_Wt =</span> <span class="kw">sd</span>(Wt))</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 3
+##   Treatment  Avg_Wt sd_Wt
+##   &lt;fct&gt;       &lt;dbl&gt; &lt;dbl&gt;
+## 1 Control      96.5  14.4
+## 2 Experiment  102.   16.1</code></pre>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="rbasics.html#cb111-1"></a><span class="kw">summarise</span>(CSVfilter_byTxt, <span class="dt">Avg_BMI =</span> <span class="kw">mean</span>(BMI), <span class="dt">sd_BMI =</span> <span class="kw">sd</span>(BMI))</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 3
+##   Treatment  Avg_BMI sd_BMI
+##   &lt;fct&gt;        &lt;dbl&gt;  &lt;dbl&gt;
+## 1 Control       36.4   4.59
+## 2 Experiment    36.5   3.34</code></pre>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="rbasics.html#cb113-1"></a><span class="kw">summarise</span>(CSVfilter_byTxt, <span class="dt">Avg_Glucose =</span> <span class="kw">mean</span>(Glucose), <span class="dt">sd_Glucose =</span> <span class="kw">sd</span>(Glucose))</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 3
+##   Treatment  Avg_Glucose sd_Glucose
+##   &lt;fct&gt;            &lt;dbl&gt;      &lt;dbl&gt;
+## 1 Control           99        12.3 
+## 2 Experiment        99.4       4.74</code></pre>
+<p>We did this line by line and take notice that we had to make a couple objects, <code>CSVfilter</code> and <code>CSVfilter_byTxt</code>. Then we had to copy and paste the <code>summarise</code> function for each continuous variable. Lots of potential to make some typing erros here.</p>
+<p>Let’s try it again, but we’ll use the <code>%&gt;%</code> operator to avoid making several objects and we’ll use the <code>gather</code> function to reshape the data into a tall form. This will allow us to use the continuous variable as a grouping variable and make a single value column. Let’s look at an example and piece it together.</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="rbasics.html#cb115-1"></a><span class="co"># Do not have to load the library unless not previously loaded.</span></span>
+<span id="cb115-2"><a href="rbasics.html#cb115-2"></a><span class="co"># library(tidyverse)</span></span>
+<span id="cb115-3"><a href="rbasics.html#cb115-3"></a></span>
+<span id="cb115-4"><a href="rbasics.html#cb115-4"></a><span class="co"># We initially set the object and the pipes will transfer each function to each other.</span></span>
+<span id="cb115-5"><a href="rbasics.html#cb115-5"></a>CSVimport <span class="op">%&gt;%</span></span>
+<span id="cb115-6"><a href="rbasics.html#cb115-6"></a><span class="st">    </span><span class="kw">filter</span>(Age <span class="op">&lt;</span><span class="st"> </span><span class="dv">50</span>) <span class="op">%&gt;%</span></span>
+<span id="cb115-7"><a href="rbasics.html#cb115-7"></a><span class="st">    </span><span class="kw">gather</span>(<span class="dt">key =</span> Variables, <span class="dt">value =</span> Measurement, <span class="op">-</span>(Subject<span class="op">:</span>Gender)) <span class="op">%&gt;%</span></span>
+<span id="cb115-8"><a href="rbasics.html#cb115-8"></a><span class="st">    </span><span class="kw">group_by</span>(Variables, Treatment) <span class="op">%&gt;%</span></span>
+<span id="cb115-9"><a href="rbasics.html#cb115-9"></a><span class="st">    </span><span class="kw">summarise</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(Measurement), <span class="dt">sd =</span> <span class="kw">sd</span>(Measurement))</span></code></pre></div>
+<pre><code>## # A tibble: 10 x 4
+## # Groups:   Variables [5]
+##    Variables Treatment   mean    sd
+##    &lt;chr&gt;     &lt;fct&gt;      &lt;dbl&gt; &lt;dbl&gt;
+##  1 Age       Control     40.5  7.95
+##  2 Age       Experiment  37.1  9.16
+##  3 BMI       Control     36.4  4.59
+##  4 BMI       Experiment  36.5  3.34
+##  5 Glucose   Control     99   12.3 
+##  6 Glucose   Experiment  99.4  4.74
+##  7 Height    Control     63.9  2.81
+##  8 Height    Experiment  65.7  2.86
+##  9 Wt        Control     96.5 14.4 
+## 10 Wt        Experiment 102.  16.1</code></pre>
+<p>Okay, so a lot to take in here. Let’s start at the beginning. Remember, the pipe operator allows data to be transfered to the next function. The pipe operator actually assigns it to the first argument in the function, thus, your object to the left of the pipe should be what is required in the first argument of the function. Let’s look at a very simple use of a pipe.</p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="rbasics.html#cb117-1"></a><span class="co"># Let&#39;s make the same matrix that we did at the beginning of this section (2.9.3)</span></span>
+<span id="cb117-2"><a href="rbasics.html#cb117-2"></a>randomDATA <span class="op">%&gt;%</span></span>
+<span id="cb117-3"><a href="rbasics.html#cb117-3"></a><span class="st">    </span><span class="kw">matrix</span>(<span class="dt">ncol=</span><span class="dv">6</span>, <span class="dt">nrow=</span><span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##          [,1]      [,2]      [,3]      [,4]     [,5]     [,6]
+## [1,] 10.62428  7.405025  9.837356 13.272414 10.06177 9.855579
+## [2,] 11.46012 10.778558  8.389647 13.081591 10.89812 7.530821
+## [3,] 10.31414 14.441577 13.687213  8.873099 10.56195 7.169426</code></pre>
+<p>See how the pipe operator can be used in other ways. Here the pipe deposited the numeric vector into the first argument and we supplied the rest of the arguments to match the prior output.</p>
+<p>Now let’s look talk about <code>gather</code>. <code>gather</code> reshapes your column names and data points into a two new columns. One that we defined as ‘Variables’ and the other as ‘Measurement’. Then, it takes the rest of the data and repeats it evenly along each column name. Now can use the ‘Measurement’ column as a grouping variable. Let’s see the output.</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="rbasics.html#cb119-1"></a><span class="co"># Do not have to load the library unless not previously loaded.</span></span>
+<span id="cb119-2"><a href="rbasics.html#cb119-2"></a><span class="co"># library(tidyverse)</span></span>
+<span id="cb119-3"><a href="rbasics.html#cb119-3"></a></span>
+<span id="cb119-4"><a href="rbasics.html#cb119-4"></a><span class="co"># We initially set the object and the pipes will transfer each function to each other.</span></span>
+<span id="cb119-5"><a href="rbasics.html#cb119-5"></a>CSVimport <span class="op">%&gt;%</span></span>
+<span id="cb119-6"><a href="rbasics.html#cb119-6"></a><span class="st">    </span><span class="kw">filter</span>(Age <span class="op">&lt;</span><span class="st"> </span><span class="dv">50</span>) <span class="op">%&gt;%</span></span>
+<span id="cb119-7"><a href="rbasics.html#cb119-7"></a><span class="st">    </span><span class="kw">gather</span>(<span class="dt">key =</span> Variables, <span class="dt">value =</span> Measurement, <span class="op">-</span>(Subject<span class="op">:</span>Gender)) <span class="op">%&gt;%</span></span>
+<span id="cb119-8"><a href="rbasics.html#cb119-8"></a><span class="st">    </span><span class="kw">head</span>()</span></code></pre></div>
+<pre><code>##   Subject Treatment Gender Variables Measurement
+## 1     579   Control      F       Age          38
+## 2     586   Control      F       Age          37
+## 3     508   Control      F       Age          49
+## 4     569   Control      F       Age          46
+## 5     568   Control      M       Age          47
+## 6     556   Control      F       Age          35</code></pre>
+<p>Next, we group by ‘Variables’ and ‘Treatment’ in the <code>group_by</code> function. Then we define which outputs we want to summarise.</p>
+<p>You may ask, if this is so straight-forward and linear, why do we have to learn all the other more complicated syntax. Well, pipes are good when you have an established workflow and are working with single output; however, it gets just as complicated when you require multiple inputs (e.g., t-test, ANOVA, regression, etc.).</p>
+<p><em>Please note: A new version of a major tidyverse package was released 9/14/2019 which released new functions to replace <code>gather</code> and <code>spread</code>. Still trying to determine if this new version will affect this workflow. This may affect those who have installed tidyverse or tidyr packages after 9/14/2019.</em></p>
+</div>
+<div id="merging-data" class="section level3">
+<h3><span class="header-section-number">2.8.5</span> Merging data</h3>
+<p>Just like with most tasks in R, there are several ways to do things. Let’s look at a couple functions to merge data by rows or columns. We will first split the data by Gender and then re-combine each by rows using the <code>rbind</code> function.</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="rbasics.html#cb121-1"></a><span class="co"># We can use brackets to subset data</span></span>
+<span id="cb121-2"><a href="rbasics.html#cb121-2"></a>CSVmale &lt;-<span class="st"> </span>CSVimport[CSVimport<span class="op">$</span>Gender <span class="op">%in%</span><span class="st"> &quot;M&quot;</span>,]</span>
+<span id="cb121-3"><a href="rbasics.html#cb121-3"></a>CSVfemale &lt;-<span class="st"> </span>CSVimport[CSVimport<span class="op">$</span>Gender <span class="op">%in%</span><span class="st"> &quot;F&quot;</span>,]</span>
+<span id="cb121-4"><a href="rbasics.html#cb121-4"></a></span>
+<span id="cb121-5"><a href="rbasics.html#cb121-5"></a><span class="co"># column labels must match for rbind() to work</span></span>
+<span id="cb121-6"><a href="rbasics.html#cb121-6"></a><span class="kw">rbind</span>(CSVmale, CSVfemale)</span></code></pre></div>
+<pre><code>##    Subject  Treatment Gender Age Height     Wt  BMI Glucose
+## 3      502    Control      M  62 68.600 112.50 37.1      97
+## 6      568    Control      M  47 69.250 127.23 41.0     104
+## 16     576 Experiment      M  53 72.750 102.18 30.5     105
+## 19     548 Experiment      M  29 70.750 139.40 43.1     104
+## 1      579    Control      F  38 63.000  82.27 32.1      99
+## 2      586    Control      F  37 62.000  94.20 37.9     108
+## 4      508    Control      F  49 64.250 107.70 40.4      86
+## 5      569    Control      F  46 63.800  80.91 29.9     102
+## 7      556    Control      F  35 60.150  83.32 36.0     100
+## 8      581    Control      F  49 64.500  92.09 34.6     126
+## 9      577    Control      F  45 63.000  94.09 36.2      90
+## 10     516    Control      F  25 68.000  94.68 31.5      87
+## 11     565    Control      F  34 61.500 108.18 44.3      88
+## 12     598 Experiment      F  37 65.750  95.36 34.2     101
+## 13     515 Experiment      F  49 66.000 109.70 39.1     110
+## 14     535 Experiment      F  41 67.250  99.60 34.1      96
+## 15     510 Experiment      F  18 66.625 105.70 36.8      99
+## 17     550 Experiment      F  37 66.000  99.80 35.4      97
+## 18     507 Experiment      F  39 59.500  86.50 37.8      99
+## 20     517 Experiment      F  44 64.750  92.80 34.7      94
+## 21     506 Experiment      F  46 63.560  81.20 31.1      95
+## 22     530 Experiment      F  31 66.500 109.82 38.4      99</code></pre>
+<p>There will be cases when we use one set of codes to determine P- and FDR-values from comparison tests for individual bacterial taxa, and then separately assess medians and IQRs for the same taxa. For convenience and table output, we will join those outputs.</p>
+<p>The <code>cbind</code> function combines data by columns. This will make data wider. We will add <code>CSVimport</code> to itself as an arbitrary example.</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="rbasics.html#cb123-1"></a><span class="co"># Looks odd, but data in CSVimport object is stored in memory, </span></span>
+<span id="cb123-2"><a href="rbasics.html#cb123-2"></a><span class="co"># so it doesn&#39;t matter how many times you use the object.</span></span>
+<span id="cb123-3"><a href="rbasics.html#cb123-3"></a><span class="kw">head</span>(<span class="kw">cbind</span>(CSVimport, CSVimport))</span></code></pre></div>
+<pre><code>##   Subject Treatment Gender Age Height     Wt  BMI Glucose Subject
+## 1     579   Control      F  38  63.00  82.27 32.1      99     579
+## 2     586   Control      F  37  62.00  94.20 37.9     108     586
+## 3     502   Control      M  62  68.60 112.50 37.1      97     502
+## 4     508   Control      F  49  64.25 107.70 40.4      86     508
+## 5     569   Control      F  46  63.80  80.91 29.9     102     569
+## 6     568   Control      M  47  69.25 127.23 41.0     104     568
+##   Treatment Gender Age Height     Wt  BMI Glucose
+## 1   Control      F  38  63.00  82.27 32.1      99
+## 2   Control      F  37  62.00  94.20 37.9     108
+## 3   Control      M  62  68.60 112.50 37.1      97
+## 4   Control      F  49  64.25 107.70 40.4      86
+## 5   Control      F  46  63.80  80.91 29.9     102
+## 6   Control      M  47  69.25 127.23 41.0     104</code></pre>
+<p>These low level functions are very dangerous, especially <code>cbind</code> if not used correctly. An alternative to <code>cbind</code> is the <code>_join</code> family of functions in the ‘tidyverse’. We will consider a couple of these, <code>inner_join</code> and <code>full_join</code>. The major difference between the two is that <code>inner_join</code> will filter rows that do not match between both data frames and <code>full_join</code> will add <code>NA</code> in rows that do not match. How do these functions know which rows match? Both data frames must have a matching column name that is specified in the function. Let’s see an example.</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="rbasics.html#cb125-1"></a><span class="co"># Can access these functions from tidyverse package, but they&#39;re technically in tidyr package</span></span>
+<span id="cb125-2"><a href="rbasics.html#cb125-2"></a><span class="co"># library (tidyverse)</span></span>
+<span id="cb125-3"><a href="rbasics.html#cb125-3"></a></span>
+<span id="cb125-4"><a href="rbasics.html#cb125-4"></a><span class="co"># Make 2 random data frames.</span></span>
+<span id="cb125-5"><a href="rbasics.html#cb125-5"></a>DF1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">ID =</span> <span class="kw">c</span>(<span class="st">&quot;S1&quot;</span>, <span class="st">&quot;S2&quot;</span>, <span class="st">&quot;S3&quot;</span>, <span class="st">&quot;S4&quot;</span>), <span class="dt">BMI =</span> <span class="kw">c</span>(<span class="fl">34.2</span>, <span class="fl">36.1</span>, <span class="fl">29.6</span>, <span class="fl">33.4</span>), <span class="dt">Wt =</span> <span class="kw">c</span>(<span class="fl">88.5</span>, <span class="fl">94.4</span>, <span class="fl">96.6</span>, <span class="fl">100.0</span>))</span>
+<span id="cb125-6"><a href="rbasics.html#cb125-6"></a>DF1</span></code></pre></div>
+<pre><code>##   ID  BMI    Wt
+## 1 S1 34.2  88.5
+## 2 S2 36.1  94.4
+## 3 S3 29.6  96.6
+## 4 S4 33.4 100.0</code></pre>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="rbasics.html#cb127-1"></a><span class="co"># DF1 and DF2 rows differ.  DF1 includes ID - S4, and DF2 includes ID - S5.</span></span>
+<span id="cb127-2"><a href="rbasics.html#cb127-2"></a>DF2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">ID =</span> <span class="kw">c</span>(<span class="st">&quot;S1&quot;</span>, <span class="st">&quot;S2&quot;</span>, <span class="st">&quot;S3&quot;</span>, <span class="st">&quot;S5&quot;</span>), <span class="dt">VitD =</span> <span class="kw">c</span>(<span class="fl">56.4</span>, <span class="fl">80.3</span>, <span class="fl">49.6</span>, <span class="fl">46.1</span>), <span class="dt">SunHabit =</span> <span class="kw">c</span>(<span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
+<span id="cb127-3"><a href="rbasics.html#cb127-3"></a>DF2</span></code></pre></div>
+<pre><code>##   ID VitD SunHabit
+## 1 S1 56.4      Yes
+## 2 S2 80.3      Yes
+## 3 S3 49.6       No
+## 4 S5 46.1       No</code></pre>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="rbasics.html#cb129-1"></a><span class="co"># inner_join() - should only merge matching rows</span></span>
+<span id="cb129-2"><a href="rbasics.html#cb129-2"></a><span class="co"># the &#39;by&#39; argument tells inner_join() what to match on. It will only read a character input.</span></span>
+<span id="cb129-3"><a href="rbasics.html#cb129-3"></a><span class="kw">inner_join</span>(DF1, DF2, <span class="dt">by=</span><span class="st">&quot;ID&quot;</span>)</span></code></pre></div>
+<pre><code>##   ID  BMI   Wt VitD SunHabit
+## 1 S1 34.2 88.5 56.4      Yes
+## 2 S2 36.1 94.4 80.3      Yes
+## 3 S3 29.6 96.6 49.6       No</code></pre>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="rbasics.html#cb131-1"></a><span class="co"># full_join() - will merge all rows with both ID columns</span></span>
+<span id="cb131-2"><a href="rbasics.html#cb131-2"></a><span class="kw">full_join</span>(DF1, DF2, <span class="dt">by=</span><span class="st">&quot;ID&quot;</span>)</span></code></pre></div>
+<pre><code>##   ID  BMI    Wt VitD SunHabit
+## 1 S1 34.2  88.5 56.4      Yes
+## 2 S2 36.1  94.4 80.3      Yes
+## 3 S3 29.6  96.6 49.6       No
+## 4 S4 33.4 100.0   NA     &lt;NA&gt;
+## 5 S5   NA    NA 46.1       No</code></pre>
+<p>Note the <code>NA</code> values within the rows for “S4” and “S5”.</p>
+</div>
+<div id="apply-family-of-functions" class="section level3">
+<h3><span class="header-section-number">2.8.6</span> apply family of functions</h3>
+<p><em>This is <strong>definitely</strong> an intermediate to advanced topic. But it is unavoidable for high-throughput data analysis. These functions are also what really sets R apart from more traditional statistical software.</em></p>
+<p>Similar to other programming languages, R utilizes loops to repeatedly performs a specific task over a set of defined conditions. Fortunately for us, we won’t have to use the loop system in R! However, R has a another system that can iteratively run a task over vectors and matrices, which is generally executed through the apply family of functions. What really sets the apply functions apart from a loop, is that they were built to have outputs for different purposes. We will only use <code>apply</code>, <code>lapply</code>, and <code>sapply</code>. Let’s start with the core apply function, <code>apply</code>.</p>
+<div id="apply" class="section level4">
+<h4><span class="header-section-number">2.8.6.1</span> <code>apply</code></h4>
+<p>If you look at the help page for <code>apply</code>, the description states: “Returns a vector or array or list of values obtained by applying a function to margins of an array or matrix.” Couple new concepts here. An array is another data structure that stores a single data type in greater than 2 dimensions. We won’t use array’s in this workshop so disregard this concept. A <strong>margin</strong> refers to the dimension in your data structure where 1 indicates rows and 2 indicates columns. Now the description states that <code>apply</code> applies a function to margins of a matrix, thus <code>apply</code> runs a function iteratively across either rows or columns in a matrix and returns the value. Let’s see it in action.</p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="rbasics.html#cb133-1"></a><span class="co"># apply() is under the hood of all other apply related functions</span></span>
+<span id="cb133-2"><a href="rbasics.html#cb133-2"></a></span>
+<span id="cb133-3"><a href="rbasics.html#cb133-3"></a><span class="co"># Extract the continuous data.</span></span>
+<span id="cb133-4"><a href="rbasics.html#cb133-4"></a>CSVapply &lt;-<span class="st"> </span>CSVimport[, <span class="kw">colnames</span>(CSVimport) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Age&quot;</span>,<span class="st">&quot;Height&quot;</span>,<span class="st">&quot;Wt&quot;</span>,<span class="st">&quot;BMI&quot;</span>,<span class="st">&quot;Glucose&quot;</span>)]</span>
+<span id="cb133-5"><a href="rbasics.html#cb133-5"></a></span>
+<span id="cb133-6"><a href="rbasics.html#cb133-6"></a><span class="co"># Determine median for each column</span></span>
+<span id="cb133-7"><a href="rbasics.html#cb133-7"></a><span class="kw">apply</span>(<span class="dt">X =</span> CSVapply, <span class="dt">MARGIN =</span> <span class="dv">2</span>, <span class="dt">FUN =</span> median)</span></code></pre></div>
+<pre><code>##     Age  Height      Wt     BMI Glucose 
+##   40.00   65.25   97.48   36.10   99.00</code></pre>
+<p>At minimum, we need 3 arguments: the matrix, margin, and function. Let’s try another example run across rows where we want to determine the position of the minimum value. Here, the margin will be 1.</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="rbasics.html#cb135-1"></a><span class="co"># Not using arguments names in this example.</span></span>
+<span id="cb135-2"><a href="rbasics.html#cb135-2"></a><span class="kw">apply</span>(CSVapply, <span class="dv">1</span>, which.min)</span></code></pre></div>
+<pre><code>##  [1] 4 1 4 4 4 4 1 4 4 1 1 4 4 4 1 4 4 4 1 4 4 1</code></pre>
+<p>We can also insert a user defined function and use curly brackets to make greatly expand the coding. Let’s say for instance, we wanted to identify outliers at 1 standard deviations from the mean and then delete values that are past this threshold. Not saying this should be done in real life, but as an example here.</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="rbasics.html#cb137-1"></a><span class="co"># Not using arguments names in this example.</span></span>
+<span id="cb137-2"><a href="rbasics.html#cb137-2"></a><span class="kw">apply</span>(CSVapply, <span class="dv">2</span>, <span class="dt">FUN =</span> <span class="cf">function</span>(x) {</span>
+<span id="cb137-3"><a href="rbasics.html#cb137-3"></a></span>
+<span id="cb137-4"><a href="rbasics.html#cb137-4"></a>    <span class="co"># calculate sd</span></span>
+<span id="cb137-5"><a href="rbasics.html#cb137-5"></a>    dataSD &lt;-<span class="st"> </span><span class="kw">sd</span>(x) </span>
+<span id="cb137-6"><a href="rbasics.html#cb137-6"></a>    </span>
+<span id="cb137-7"><a href="rbasics.html#cb137-7"></a>    <span class="co"># calculate mean</span></span>
+<span id="cb137-8"><a href="rbasics.html#cb137-8"></a>    dataMEAN &lt;-<span class="st"> </span><span class="kw">mean</span>(x)</span>
+<span id="cb137-9"><a href="rbasics.html#cb137-9"></a>    </span>
+<span id="cb137-10"><a href="rbasics.html#cb137-10"></a>    <span class="co"># calculate value of mean + sd</span></span>
+<span id="cb137-11"><a href="rbasics.html#cb137-11"></a>    meansd &lt;-<span class="st"> </span>dataMEAN <span class="op">+</span><span class="st"> </span>dataSD</span>
+<span id="cb137-12"><a href="rbasics.html#cb137-12"></a>    </span>
+<span id="cb137-13"><a href="rbasics.html#cb137-13"></a>    <span class="co"># identify absolute values less than mean+sd</span></span>
+<span id="cb137-14"><a href="rbasics.html#cb137-14"></a>    <span class="co"># and change them to NA</span></span>
+<span id="cb137-15"><a href="rbasics.html#cb137-15"></a>    x[<span class="kw">abs</span>(x) <span class="op">&gt;</span><span class="st"> </span>meansd] &lt;-<span class="st"> </span><span class="ot">NA</span></span>
+<span id="cb137-16"><a href="rbasics.html#cb137-16"></a>    </span>
+<span id="cb137-17"><a href="rbasics.html#cb137-17"></a>    <span class="kw">return</span>(x)</span>
+<span id="cb137-18"><a href="rbasics.html#cb137-18"></a>})</span></code></pre></div>
+<pre><code>##       Age Height     Wt  BMI Glucose
+##  [1,]  38 63.000  82.27 32.1      99
+##  [2,]  37 62.000  94.20 37.9     108
+##  [3,]  NA 68.600 112.50 37.1      97
+##  [4,]  49 64.250 107.70   NA      86
+##  [5,]  46 63.800  80.91 29.9     102
+##  [6,]  47     NA     NA   NA     104
+##  [7,]  35 60.150  83.32 36.0     100
+##  [8,]  49 64.500  92.09 34.6      NA
+##  [9,]  45 63.000  94.09 36.2      90
+## [10,]  25 68.000  94.68 31.5      87
+## [11,]  34 61.500 108.18   NA      88
+## [12,]  37 65.750  95.36 34.2     101
+## [13,]  49 66.000 109.70 39.1      NA
+## [14,]  41 67.250  99.60 34.1      96
+## [15,]  18 66.625 105.70 36.8      99
+## [16,]  NA     NA 102.18 30.5     105
+## [17,]  37 66.000  99.80 35.4      97
+## [18,]  39 59.500  86.50 37.8      99
+## [19,]  29     NA     NA   NA     104
+## [20,]  44 64.750  92.80 34.7      94
+## [21,]  46 63.560  81.20 31.1      95
+## [22,]  31 66.500 109.82 38.4      99</code></pre>
+<p>Wow, that is fairly advanced set of R code! Remember, section 2.6.5.1 (Function: Name assignment) alluded to functions without name assignments in a function called <code>sapply</code>. We’re almost there, but the concept still works here with <code>apply</code>.</p>
+<p>Let’s discuss what happened here. <code>apply</code> passes each column, which is a vector, iteratively to the provided function. This was a user-defined function with a single argument, so each object ‘x’ in the body of our function was the iteratively passed data from columns in <code>CSVapply</code>. Each ‘x’ had its mean and standard deviation calculated, then the mean+sd was calculated. Next, we determined which absolute values were greater than mean+sd in ‘x’ and assigned those values as NA. Lastly, we returned x.</p>
+</div>
+<div id="lapply" class="section level4">
+<h4><span class="header-section-number">2.8.6.2</span> <code>lapply</code></h4>
+<p><code>lapply</code> is similar to apply, where is runs a function iteratively, but it has 2 major differences: 1) it is not restricted to a 2- or 3-dimensional data structure. It can use a vector also. 2) it only returns a list, hence the ‘l’ in lapply. The list <code>lapply</code> produces will always have the same number of elements as its corresponding input. For example, a 10 element vector provide to <code>lapply</code> will produce a list with 10 elements. Be mindful when using a matrix, because, remember a matrix is technically a 2-dimensional vector. Therefore, <code>lapply</code> will produce a list for every value in a matrix. <code>lapply</code> does not require a margin and will never apply a function over rows. Why is that? 1) <code>lapply</code> treats matrices as a vector, and <code>lapply</code> treats data frames as a list. Since each column in a data frame is technically an element in a list, then <code>lapply</code> considers data frames as a list and will pass each element to a function. Let’s see an example of each.</p>
+<p>Using lapply with a vector. We will pass each numerical value to a function that calculates the tetration of a value (a value to the power of its own value).</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="rbasics.html#cb139-1"></a><span class="co"># Can use the same names for arguments across functions.  No harm.</span></span>
+<span id="cb139-2"><a href="rbasics.html#cb139-2"></a><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="cf">function</span>(x) x<span class="op">^</span>x)</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] 4
+## 
+## [[3]]
+## [1] 27
+## 
+## [[4]]
+## [1] 256
+## 
+## [[5]]
+## [1] 3125</code></pre>
+<p>Using <code>lapply</code> with a matrix. We will make a small 2x2 matrix and then calculate the min value, with the expectation that we can run <code>lapply</code> across each column. We will see that this is impossible.</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="rbasics.html#cb141-1"></a><span class="co"># Create matrix, note that R will automatically compute the right number of columns if only nrow is inputed.</span></span>
+<span id="cb141-2"><a href="rbasics.html#cb141-2"></a>Matrix_example3 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">14</span>), <span class="dt">nrow=</span><span class="dv">2</span>)</span>
+<span id="cb141-3"><a href="rbasics.html#cb141-3"></a></span>
+<span id="cb141-4"><a href="rbasics.html#cb141-4"></a><span class="kw">lapply</span>(<span class="dt">X =</span> Matrix_example3, <span class="dt">FUN =</span> min)</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 3
+## 
+## [[2]]
+## [1] 6
+## 
+## [[3]]
+## [1] 8
+## 
+## [[4]]
+## [1] 14</code></pre>
+<p>Using <code>lapply</code> with a data frame. We will calculate the number of unique values within each column (element within a list!).</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="rbasics.html#cb143-1"></a><span class="co"># If each of your outputs are equal in length, coerce output into a data frame with as.data.frame().</span></span>
+<span id="cb143-2"><a href="rbasics.html#cb143-2"></a><span class="kw">lapply</span>(CSVimport, <span class="cf">function</span>(x) <span class="kw">length</span>(<span class="kw">unique</span>(x)))</span></code></pre></div>
+<pre><code>## $Subject
+## [1] 22
+## 
+## $Treatment
+## [1] 2
+## 
+## $Gender
+## [1] 2
+## 
+## $Age
+## [1] 17
+## 
+## $Height
+## [1] 20
+## 
+## $Wt
+## [1] 22
+## 
+## $BMI
+## [1] 22
+## 
+## $Glucose
+## [1] 17</code></pre>
+</div>
+<div id="sapply" class="section level4">
+<h4><span class="header-section-number">2.8.6.3</span> sapply</h4>
+<p><code>sapply</code> is exactly like <code>lapply</code> except it returns a vector. Since a matrix is also a vector, <code>sapply</code> will return a matrix if the single output is a vector of values. Let’s repeat the <code>lapply</code> tetration with <code>sapply</code>.</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="rbasics.html#cb145-1"></a><span class="co"># sapply is really extracting a single stat.</span></span>
+<span id="cb145-2"><a href="rbasics.html#cb145-2"></a><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="cf">function</span>(x) x<span class="op">^</span>x)</span></code></pre></div>
+<pre><code>## [1]    1    4   27  256 3125</code></pre>
+<p><code>sapply</code> returns a nice compact vector compared to the list output from <code>lapply</code>. Let’s look at an example where we use <code>sapply</code> to produce the range of numerical values.will provide a matrix output.</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="rbasics.html#cb147-1"></a><span class="co"># range() does not work on character or factors.  We need to extract the numeric data.</span></span>
+<span id="cb147-2"><a href="rbasics.html#cb147-2"></a>CSVapply &lt;-<span class="st"> </span>CSVimport[, <span class="kw">colnames</span>(CSVimport) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Age&quot;</span>,<span class="st">&quot;Height&quot;</span>,<span class="st">&quot;Wt&quot;</span>,<span class="st">&quot;BMI&quot;</span>,<span class="st">&quot;Glucose&quot;</span>)]</span>
+<span id="cb147-3"><a href="rbasics.html#cb147-3"></a></span>
+<span id="cb147-4"><a href="rbasics.html#cb147-4"></a><span class="kw">sapply</span>(CSVapply, range)</span></code></pre></div>
+<pre><code>##      Age Height     Wt  BMI Glucose
+## [1,]  18  59.50  80.91 29.9      86
+## [2,]  62  72.75 139.40 44.3     126</code></pre>
+<p>The apply functions can become extremely powerful when combined with user-defined functions. They have various outputs to fit various needs, flexible, and can almost replace loops.</p>
+</div>
+</div>
+<div id="sweep" class="section level3">
+<h3><span class="header-section-number">2.8.7</span> Sweep</h3>
+<p>R has a little secret behind the scenes when it deals with vectors of different lengths. It recycles the shorter vector to match the the larger one. Let’s look at a very simplistic example.</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="rbasics.html#cb149-1"></a><span class="co"># The arithmetic operators are actually functions!</span></span>
+<span id="cb149-2"><a href="rbasics.html#cb149-2"></a>A &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></span>
+<span id="cb149-3"><a href="rbasics.html#cb149-3"></a>A <span class="op">*</span><span class="st"> </span><span class="dv">10</span></span></code></pre></div>
+<pre><code>##  [1]  10  20  30  40  50  60  70  80  90 100</code></pre>
+<p>Behind the scenes, R recycles the 10 value, which is technically a vector with a single element, into a a ten element vector to match <code>A</code>. Let’s say we want to extract the even numbers out of <code>A</code>. We could use the repeat function, <code>rep</code> with TRUE and FALSE logical operators. Remember, use you can use TRUE in the element positions to capture those elements. So we’s want a TRUE in each even position. We could do the following code.</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="rbasics.html#cb151-1"></a><span class="co"># There are other repeat options in rep().  Check the help page!</span></span>
+<span id="cb151-2"><a href="rbasics.html#cb151-2"></a>Logice_extract &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>), <span class="dt">times=</span><span class="dv">5</span>)</span>
+<span id="cb151-3"><a href="rbasics.html#cb151-3"></a>Logice_extract</span></code></pre></div>
+<pre><code>##  [1] FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE</code></pre>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="rbasics.html#cb153-1"></a>A[Logice_extract]</span></code></pre></div>
+<pre><code>## [1]  2  4  6  8 10</code></pre>
+<p>We see that <code>rep</code> built the vector equal to the length of <code>A</code> and all of the even numbers were extracted. However, there is a easier way to do this using recycling.</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="rbasics.html#cb155-1"></a><span class="co"># Logical operators are fundamental part of R</span></span>
+<span id="cb155-2"><a href="rbasics.html#cb155-2"></a>A[<span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</span></code></pre></div>
+<pre><code>## [1]  2  4  6  8 10</code></pre>
+<p>Here, the <code>FALSE</code> and <code>TRUE</code> combination is repeated automatically by R to match the length of <code>A</code>. Remember, R is very logical and will recycle vectors with odd numbers, resulting in mismatched outcomes if you’re not careful.</p>
+<p>Now let’s look at the <code>sweep</code> function. This is a nice function that will take a data frame and apply a specific operation across margins with an equal lengthed vector. Think of transforming data into proportions. Proportional transformation divides each value in a variable by the sum of all variables within a sample. Let’s see an example!</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="rbasics.html#cb157-1"></a><span class="co"># We need to extract the numeric data.</span></span>
+<span id="cb157-2"><a href="rbasics.html#cb157-2"></a>CSVprop &lt;-<span class="st"> </span>CSVimport[, <span class="kw">colnames</span>(CSVimport) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Age&quot;</span>,<span class="st">&quot;Height&quot;</span>,<span class="st">&quot;Wt&quot;</span>,<span class="st">&quot;BMI&quot;</span>,<span class="st">&quot;Glucose&quot;</span>)]</span>
+<span id="cb157-3"><a href="rbasics.html#cb157-3"></a></span>
+<span id="cb157-4"><a href="rbasics.html#cb157-4"></a><span class="co"># Calculate the sum of each sample with the rowSums() function.</span></span>
+<span id="cb157-5"><a href="rbasics.html#cb157-5"></a>SampleSums &lt;-<span class="st"> </span><span class="kw">rowSums</span>(CSVprop)</span>
+<span id="cb157-6"><a href="rbasics.html#cb157-6"></a></span>
+<span id="cb157-7"><a href="rbasics.html#cb157-7"></a><span class="co"># We want to divide, &quot;/&quot;, the CSVprop across each row</span></span>
+<span id="cb157-8"><a href="rbasics.html#cb157-8"></a>CSVprop_sweep &lt;-<span class="st"> </span><span class="kw">sweep</span>(CSVprop, <span class="dv">1</span>, SampleSums, <span class="st">&quot;/&quot;</span>)</span>
+<span id="cb157-9"><a href="rbasics.html#cb157-9"></a></span>
+<span id="cb157-10"><a href="rbasics.html#cb157-10"></a><span class="co"># Round to the nearest thousands</span></span>
+<span id="cb157-11"><a href="rbasics.html#cb157-11"></a><span class="kw">round</span>(CSVprop_sweep, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##      Age Height    Wt   BMI Glucose
+## 1  0.121  0.200 0.262 0.102   0.315
+## 2  0.109  0.183 0.278 0.112   0.318
+## 3  0.164  0.182 0.298 0.098   0.257
+## 4  0.141  0.185 0.310 0.116   0.248
+## 5  0.143  0.198 0.251 0.093   0.316
+## 6  0.121  0.178 0.328 0.106   0.268
+## 7  0.111  0.191 0.265 0.114   0.318
+## 8  0.134  0.176 0.251 0.094   0.344
+## 9  0.137  0.192 0.287 0.110   0.274
+## 10 0.082  0.222 0.309 0.103   0.284
+## 11 0.101  0.183 0.322 0.132   0.262
+## 12 0.111  0.197 0.286 0.103   0.303
+## 13 0.131  0.177 0.293 0.105   0.294
+## 14 0.121  0.199 0.295 0.101   0.284
+## 15 0.055  0.204 0.324 0.113   0.304
+## 16 0.146  0.200 0.281 0.084   0.289
+## 17 0.110  0.197 0.298 0.106   0.289
+## 18 0.121  0.185 0.269 0.117   0.308
+## 19 0.075  0.183 0.361 0.112   0.269
+## 20 0.133  0.196 0.281 0.105   0.285
+## 21 0.145  0.201 0.256 0.098   0.300
+## 22 0.090  0.193 0.319 0.111   0.287</code></pre>
+<p>In this arbitrary example, the rows should sum to 1. Let’s go over what we did. The first argument in <code>sweep</code> contains the data frame or matrix. The ‘1’ specifies the margin, 1 for rows and 2 for columns, just like in <code>apply</code>. The third argument is the vector that will be applied along the rows in this case. The last argument specifices the function that will be applied. We can verify that all samples sum to 1 now.</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="rbasics.html#cb159-1"></a><span class="co"># Multiply CSVprop_sweep by 100 to get percentages.</span></span>
+<span id="cb159-2"><a href="rbasics.html#cb159-2"></a><span class="kw">rowSums</span>(CSVprop_sweep)</span></code></pre></div>
+<pre><code>##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</code></pre>
+</div>
+</div>
+<div id="stats" class="section level2">
+<h2><span class="header-section-number">2.9</span> Stats</h2>
+<div id="basic-summary-based-stats." class="section level3">
+<h3><span class="header-section-number">2.9.1</span> Basic summary based stats.</h3>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="rbasics.html#cb161-1"></a><span class="co"># Mean</span></span>
+<span id="cb161-2"><a href="rbasics.html#cb161-2"></a><span class="kw">mean</span>(CSVimport<span class="op">$</span>BMI)</span></code></pre></div>
+<pre><code>## [1] 36.19091</code></pre>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="rbasics.html#cb163-1"></a><span class="co"># Median</span></span>
+<span id="cb163-2"><a href="rbasics.html#cb163-2"></a><span class="kw">median</span>(CSVimport<span class="op">$</span>BMI)</span></code></pre></div>
+<pre><code>## [1] 36.1</code></pre>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="rbasics.html#cb165-1"></a><span class="co"># Standard deviation</span></span>
+<span id="cb165-2"><a href="rbasics.html#cb165-2"></a><span class="kw">sd</span>(CSVimport<span class="op">$</span>BMI)</span></code></pre></div>
+<pre><code>## [1] 3.932515</code></pre>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="rbasics.html#cb167-1"></a><span class="co"># Range</span></span>
+<span id="cb167-2"><a href="rbasics.html#cb167-2"></a><span class="kw">range</span>(CSVimport<span class="op">$</span>BMI)</span></code></pre></div>
+<pre><code>## [1] 29.9 44.3</code></pre>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="rbasics.html#cb169-1"></a><span class="co"># Standard error</span></span>
+<span id="cb169-2"><a href="rbasics.html#cb169-2"></a><span class="co"># Actually, no SEM function in the core packages.  Let&#39;s make one!</span></span>
+<span id="cb169-3"><a href="rbasics.html#cb169-3"></a>SEM &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">sd</span>(x)<span class="op">/</span><span class="kw">sqrt</span>(<span class="kw">length</span>(x))</span>
+<span id="cb169-4"><a href="rbasics.html#cb169-4"></a></span>
+<span id="cb169-5"><a href="rbasics.html#cb169-5"></a><span class="co"># SEM function</span></span>
+<span id="cb169-6"><a href="rbasics.html#cb169-6"></a><span class="kw">SEM</span>(CSVimport<span class="op">$</span>BMI)</span></code></pre></div>
+<pre><code>## [1] 0.838415</code></pre>
+</div>
+<div id="t-test-and-mann-whitney-u-test" class="section level3">
+<h3><span class="header-section-number">2.9.2</span> <em>t</em>-test and Mann Whitney U test</h3>
+<p>The functions are going to get a little more complicated with comparative tasks, like <code>t.test</code> and <code>wilcox.test</code> (functions for <em>t</em>-test and Mann Whitney U test, respectively). They need to be able to determine which data is being compared and what the comparison groups are. This also applies for ANOVA and regression based function as well. We will look at a couple ways to provide this information, but be aware that not all user defined functions follow these examples. It is entirely up to the author of the function to define their arguments.</p>
+<p>Both of these function need to be flexible to handle the various ways that a <em>t</em>-test and/or Mann Whitney U test can be deployed, e.g., one-sample or two-sample tests. Let’s look at the help page (Figure 2.5). You can access the help page as follows</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="rbasics.html#cb171-1"></a><span class="co"># Use the &#39;?&#39; followed by the function name to bring up the help page.</span></span>
+<span id="cb171-2"><a href="rbasics.html#cb171-2"></a><span class="co"># Googling the function name will normally work too.</span></span>
+<span id="cb171-3"><a href="rbasics.html#cb171-3"></a>?t.test</span></code></pre></div>
+
+<div class="figure" style="text-align: center"><span id="fig:ttesthelp"></span>
+<img src="ttesthelp.png" alt="t-test help page from the ‘stats’ package." width="80%" />
+<p class="caption">
+Figure 2.5: <em>t</em>-test help page from the ‘stats’ package.
+</p>
+</div>
+<p>The help page shows every arguments that can be supplied to the <code>t.test</code> under the <strong>Usage</strong> and <strong>Arguments</strong> headers. The <strong>Usage</strong> section shows 3 different default settings for the <code>t.test</code> function, while the <strong>Arguments</strong> section provides the details of each each argument. The first example of <code>t.test</code> (first example under <strong>Usage</strong>) shows us that <code>t.test</code> can be run with only a numeric vector. Let’s try it and see what happens.</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="rbasics.html#cb172-1"></a><span class="co"># This is a one-sample t-test</span></span>
+<span id="cb172-2"><a href="rbasics.html#cb172-2"></a><span class="kw">t.test</span>(CSVimport<span class="op">$</span>BMI)</span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  CSVimport$BMI
+## t = 43.166, df = 21, p-value &lt; 2.2e-16
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  34.44733 37.93449
+## sample estimates:
+## mean of x 
+##  36.19091</code></pre>
+<p>This is a one-sample <em>t</em>-test. We need a two-sample <em>t</em>-test, and this can be done using the other two examples. Let’s try the “Default S3 method” first. And don’t worry about what “Default S3 method” means, just understand there are two syntaxes that will do the same job. Now, this syntax requires an ‘x’ and ‘y’ argument that will contain the respective data for each group. We need to subset these data before so we can input them into these arguments.</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="rbasics.html#cb174-1"></a><span class="co"># Little more coding required for this example.</span></span>
+<span id="cb174-2"><a href="rbasics.html#cb174-2"></a></span>
+<span id="cb174-3"><a href="rbasics.html#cb174-3"></a><span class="co"># Extract Control BMI data</span></span>
+<span id="cb174-4"><a href="rbasics.html#cb174-4"></a>CtrlBMI &lt;-<span class="st"> </span>CSVimport[CSVimport<span class="op">$</span>Treatment <span class="op">==</span><span class="st"> &quot;Control&quot;</span>, <span class="st">&quot;BMI&quot;</span>]</span>
+<span id="cb174-5"><a href="rbasics.html#cb174-5"></a><span class="co"># Extract Experimental BMI data</span></span>
+<span id="cb174-6"><a href="rbasics.html#cb174-6"></a>ExpBMI &lt;-<span class="st"> </span>CSVimport[CSVimport<span class="op">$</span>Treatment <span class="op">==</span><span class="st"> &quot;Experiment&quot;</span>, <span class="st">&quot;BMI&quot;</span>]</span>
+<span id="cb174-7"><a href="rbasics.html#cb174-7"></a></span>
+<span id="cb174-8"><a href="rbasics.html#cb174-8"></a><span class="kw">t.test</span>(<span class="dt">x =</span> CtrlBMI, <span class="dt">y =</span> ExpBMI)</span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  CtrlBMI and ExpBMI
+## t = 0.30759, df = 19.382, p-value = 0.7617
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -3.055784  4.110330
+## sample estimates:
+## mean of x mean of y 
+##  36.45455  35.92727</code></pre>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="rbasics.html#cb176-1"></a><span class="co"># Don&#39;t have to set objects first, this is equivalent: </span></span>
+<span id="cb176-2"><a href="rbasics.html#cb176-2"></a><span class="co"># Minus the hashtags, as not to duplicate output in the chapter.</span></span>
+<span id="cb176-3"><a href="rbasics.html#cb176-3"></a><span class="co"># t.test(</span></span>
+<span id="cb176-4"><a href="rbasics.html#cb176-4"></a>    <span class="co"># x = CSVimport[CSVimport$Treatment == &quot;Control&quot;, &quot;BMI&quot;], </span></span>
+<span id="cb176-5"><a href="rbasics.html#cb176-5"></a>    <span class="co"># y = CSVimport[CSVimport$Treatment == &quot;Experiment&quot;, &quot;BMI&quot;]</span></span>
+<span id="cb176-6"><a href="rbasics.html#cb176-6"></a><span class="co"># )</span></span></code></pre></div>
+<p>The other way <code>t.test</code> can calculate these results is by using the <em>formula</em> notation. This syntax does not require you to subset your data and intuitively matches the mathematical formula. Example below:</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="rbasics.html#cb177-1"></a><span class="co"># Data must be in a matrix or data frame for the formula syntax to work</span></span>
+<span id="cb177-2"><a href="rbasics.html#cb177-2"></a><span class="kw">t.test</span>(<span class="dt">formula =</span> BMI <span class="op">~</span><span class="st"> </span>Treatment, <span class="dt">data =</span> CSVimport)</span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  BMI by Treatment
+## t = 0.30759, df = 19.382, p-value = 0.7617
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -3.055784  4.110330
+## sample estimates:
+##    mean in group Control mean in group Experiment 
+##                 36.45455                 35.92727</code></pre>
+<p>Exactly the same. Note that you must supply the object name of your matrix/data frame and use the <code>~</code> (tilde) to distinguish the numeric vector and a factor with 2 levels. I will always try to use the formula syntax if available because it uses less coding, its straight forward, and it allows a redundant workflow if you’re doing hundreds of tests (e.g., microbial sequencing data!). In addition, and probably more importantly, this is the preferred syntax for regression based functions (including ANOVA’s). So it is important to understand.</p>
+<p>The <code>wilcox.test</code> function for Mann Whitney U tests follows the same syntax as <code>t.test</code>. The help pages for both contain all of what we covered here, plus more. In addition the help pages have examples that you can use as models if your model is not working.</p>
+</div>
+<div id="anova" class="section level3">
+<h3><span class="header-section-number">2.9.3</span> ANOVA</h3>
+<p>There are several ways to conduct an ANOVA in R. ViThe most direct way is to use the <code>aov</code> function. Virtually all ANOVA functions from the base package require the ‘formula’ syntax to differentiate the Y variable from the X variables (i.e., the classification and covariate variables). Lets look at <code>aov</code> below:</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="rbasics.html#cb179-1"></a><span class="co"># Just like above, data is required to be in a data frame.  See the help page, ?aov</span></span>
+<span id="cb179-2"><a href="rbasics.html#cb179-2"></a><span class="kw">aov</span>(<span class="dt">formula =</span> BMI <span class="op">~</span><span class="st"> </span>Treatment <span class="op">+</span><span class="st"> </span>Gender, <span class="dt">data =</span> CSVimport)</span></code></pre></div>
+<pre><code>## Call:
+##    aov(formula = BMI ~ Treatment + Gender, data = CSVimport)
+## 
+## Terms:
+##                 Treatment    Gender Residuals
+## Sum of Squares    1.52909  14.70124 308.52785
+## Deg. of Freedom         1         1        19
+## 
+## Residual standard error: 4.029678
+## Estimated effects may be unbalanced</code></pre>
+<p>Notice that we have a 2-way ANOVA, with main effects of Treatment and Gender regressed against BMI. You separate the exploratory variables with a <code>+</code> within the formula. Interactions are denoted with a <code>:</code>. An example of this is upcoming. Also note that the output is very minimal, only displaying the sum of squares and degrees of freedom. To get a regular ANOVA output, you need to wrap the output in the <code>summary</code> function.</p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="rbasics.html#cb181-1"></a><span class="co"># You can also make the output of aov() into an object, </span></span>
+<span id="cb181-2"><a href="rbasics.html#cb181-2"></a><span class="co"># and then call the summary() function on the object</span></span>
+<span id="cb181-3"><a href="rbasics.html#cb181-3"></a><span class="kw">summary</span>(<span class="kw">aov</span>(<span class="dt">formula =</span> BMI <span class="op">~</span><span class="st"> </span>Treatment <span class="op">+</span><span class="st"> </span>Gender, <span class="dt">data =</span> CSVimport))</span></code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Treatment    1   1.53   1.529   0.094  0.762
+## Gender       1  14.70  14.701   0.905  0.353
+## Residuals   19 308.53  16.238</code></pre>
+<p>Now we see the main effects, degrees of freedom, sum of squares, mean squares, F-value and P-values for the ANOVA. Let’s see an interaction.
+tice that we have a 2-way ANOVA, with main effects of Treatment and Gender regressed against BMI. You separate the exploratory variables with a <code>+</code> within the formula. Interactions are denoted with a <code>:</code>. An example of this is upcoming. Also note that the output is very minimal, only displaying the sum of squares and degrees of freedom. To get a regular ANOVA output, you need to wrap the output in the <code>summary</code> function.</p>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="rbasics.html#cb183-1"></a><span class="co"># Add another : for a three way interaction, if model necessitates</span></span>
+<span id="cb183-2"><a href="rbasics.html#cb183-2"></a><span class="kw">summary</span>(<span class="kw">aov</span>(<span class="dt">formula =</span> BMI <span class="op">~</span><span class="st"> </span>Treatment <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Treatment<span class="op">:</span>Gender, <span class="dt">data =</span> CSVimport))</span></code></pre></div>
+<pre><code>##                  Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Treatment         1   1.53   1.529   0.090  0.767
+## Gender            1  14.70  14.701   0.868  0.364
+## Treatment:Gender  1   3.63   3.627   0.214  0.649
+## Residuals        18 304.90  16.939</code></pre>
+<p>You could see how this could get tedious if you have more than a couple main effects, plus several interactions. Fortunately, R has a shortcut with <code>*</code>. As this is in a formula, it does not result in a multiplication operation.</p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="rbasics.html#cb185-1"></a><span class="co"># Do not have to identify the &#39;formula&#39; argument name to correctly run the function.</span></span>
+<span id="cb185-2"><a href="rbasics.html#cb185-2"></a><span class="kw">summary</span>(<span class="kw">aov</span>(BMI <span class="op">~</span><span class="st"> </span>Treatment<span class="op">*</span>Gender, <span class="dt">data =</span> CSVimport))</span></code></pre></div>
+<pre><code>##                  Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Treatment         1   1.53   1.529   0.090  0.767
+## Gender            1  14.70  14.701   0.868  0.364
+## Treatment:Gender  1   3.63   3.627   0.214  0.649
+## Residuals        18 304.90  16.939</code></pre>
+<p>Let’s look at another way to run an ANOVA. You may recall from your stats class that an ANOVA is really an extension of a linear model. Therefore, you can first fit a linear model with the <code>lm</code> function, using the exact same formula syntax in <code>aov</code>. Then use the <code>anova</code> function. Why the extra step? Well, there may be other uses for the linear model that might not be related to the ANOVA; however, we will not cover that here.</p>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="rbasics.html#cb187-1"></a><span class="co"># Look at the lm help page for more info regarding linear models in R</span></span>
+<span id="cb187-2"><a href="rbasics.html#cb187-2"></a>linearMOD &lt;-<span class="st"> </span><span class="kw">lm</span>(BMI <span class="op">~</span><span class="st"> </span>Treatment<span class="op">*</span>Gender, <span class="dt">data =</span> CSVimport)</span>
+<span id="cb187-3"><a href="rbasics.html#cb187-3"></a></span>
+<span id="cb187-4"><a href="rbasics.html#cb187-4"></a><span class="co"># Do not need to use summary() function with this workflow.</span></span>
+<span id="cb187-5"><a href="rbasics.html#cb187-5"></a><span class="kw">anova</span>(linearMOD)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: BMI
+##                  Df  Sum Sq Mean Sq F value Pr(&gt;F)
+## Treatment         1   1.529  1.5291  0.0903 0.7673
+## Gender            1  14.701 14.7012  0.8679 0.3639
+## Treatment:Gender  1   3.627  3.6273  0.2141 0.6491
+## Residuals        18 304.901 16.9389</code></pre>
+<p>If you Google ANOVA analysis in R, you may come across some articles describing discordant results between either SAS or SPSS and R. This is for 2 reasons, 1) Each software calculates their underlying contrast structure slightly different, and 2) R defaults to sum of squares type I, vs sum or squares type III in SAS and SPSS. It does NOT mean that any of the results provided by these tools are incorrect by any means. It is up to us as users of these tools to understand the underlying principles and use them accordingly. Unfortunately, the ANOVA functions in the core packages do not provide alternative ways to calculate sum of squares. However, a mechanism does exist using the car package.</p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="rbasics.html#cb189-1"></a><span class="co"># Install the package if needed and load the library</span></span>
+<span id="cb189-2"><a href="rbasics.html#cb189-2"></a><span class="co"># install.packages(&quot;car&quot;)</span></span>
+<span id="cb189-3"><a href="rbasics.html#cb189-3"></a><span class="kw">library</span>(car)</span></code></pre></div>
+<pre><code>## Loading required package: carData</code></pre>
+<pre><code>## 
+## Attaching package: &#39;car&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     some</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     recode</code></pre>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="rbasics.html#cb194-1"></a><span class="co"># Need to update the contrasts for type III sum of squares</span></span>
+<span id="cb194-2"><a href="rbasics.html#cb194-2"></a><span class="kw">options</span>(<span class="dt">contrasts =</span> <span class="kw">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))</span>
+<span id="cb194-3"><a href="rbasics.html#cb194-3"></a></span>
+<span id="cb194-4"><a href="rbasics.html#cb194-4"></a><span class="co"># Now we can use the lm model from above in Anova in the car package and specify the sum of squares type</span></span>
+<span id="cb194-5"><a href="rbasics.html#cb194-5"></a><span class="co"># Note that this ANOVA function has a capital &#39;A&#39;.</span></span>
+<span id="cb194-6"><a href="rbasics.html#cb194-6"></a><span class="kw">Anova</span>(linearMOD, <span class="dt">type=</span><span class="st">&quot;III&quot;</span>)</span></code></pre></div>
+<pre><code>## Anova Table (Type III tests)
+## 
+## Response: BMI
+##                   Sum Sq Df  F value    Pr(&gt;F)    
+## (Intercept)      11584.9  1 683.9240 8.999e-16 ***
+## Treatment            0.1  1   0.0055    0.9415    
+## Gender              16.5  1   0.9721    0.3372    
+## Treatment:Gender     3.6  1   0.2141    0.6491    
+## Residuals          304.9 18                       
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="rbasics.html#cb196-1"></a><span class="co"># Set contrasts back to original setting.</span></span>
+<span id="cb196-2"><a href="rbasics.html#cb196-2"></a><span class="kw">options</span>(<span class="dt">contrasts =</span> <span class="kw">c</span>(<span class="st">&quot;contr.treatment&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))</span></code></pre></div>
+<p>This output should match the default SAS output. The debate regarding which sum of squares is beyond this workshop and I will refer you to this PDF from <a href="http://www.utstat.toronto.edu/reid/sta442f/2009/typeSS.pdf">Nancy Reid</a>.</p>
+</div>
+<div id="kruskal-wallis-test" class="section level3">
+<h3><span class="header-section-number">2.9.4</span> Kruskal-Wallis Test</h3>
+<p>The Kruskal-Wallis test is the non-parametric equivlant to a 1-way anova. Same syntax used for <code>kruskal.test</code> and <code>aov</code>.</p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="rbasics.html#cb197-1"></a><span class="co"># Do not need summary() function for kruskal.test().</span></span>
+<span id="cb197-2"><a href="rbasics.html#cb197-2"></a><span class="kw">kruskal.test</span>(BMI <span class="op">~</span><span class="st"> </span>Treatment, <span class="dt">data =</span> CSVimport)</span></code></pre></div>
+<pre><code>## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  BMI by Treatment
+## Kruskal-Wallis chi-squared = 0.13043, df = 1, p-value = 0.718</code></pre>
+</div>
+<div id="post-hoc-tests" class="section level3">
+<h3><span class="header-section-number">2.9.5</span> Post-hoc Tests</h3>
+<p>The <code>TukeyHSD</code> function is available without an add-on package and requires the output from the <code>aov</code> function.</p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="rbasics.html#cb199-1"></a><span class="co"># We will fit the ANOVA first and set it into an object.</span></span>
+<span id="cb199-2"><a href="rbasics.html#cb199-2"></a>TXTanova &lt;-<span class="st"> </span><span class="kw">aov</span>(<span class="dt">formula =</span> BMI <span class="op">~</span><span class="st"> </span>Treatment <span class="op">+</span><span class="st"> </span>Gender, <span class="dt">data =</span> CSVimport)</span>
+<span id="cb199-3"><a href="rbasics.html#cb199-3"></a></span>
+<span id="cb199-4"><a href="rbasics.html#cb199-4"></a><span class="co"># Note the capital &#39;T&#39; in the TukeyHSD() function.</span></span>
+<span id="cb199-5"><a href="rbasics.html#cb199-5"></a><span class="kw">TukeyHSD</span>(TXTanova, <span class="st">&quot;Treatment&quot;</span>)</span></code></pre></div>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = BMI ~ Treatment + Gender, data = CSVimport)
+## 
+## $Treatment
+##                          diff       lwr      upr     p adj
+## Experiment-Control -0.5272727 -4.123633 3.069088 0.7622845</code></pre>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="microbial-sequencing-data-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-FSU-Workshop.pdf", "bookdown-FSU-Workshop.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
