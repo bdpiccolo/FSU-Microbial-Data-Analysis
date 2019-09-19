@@ -13,7 +13,7 @@ R is an __object-oriented__ programming language that was developed for statisti
 
 I bolded __object-oriented__ because it highlights a major advantage of __reproducibility__ in R and other programming-based langauge.  Everything that is done in R uses named objects as either __functions__ or __data__.  Understanding how functions manipulate __data types__ and __data structures__ is the foundation of working with R.  For example, if you want to obtain the mean over a set of numbers, the `mean` function is used to determine the mean of numbers within a __vector__.  These bolded words and phrases may seem abstract at this point, but this chapter will expand these concepts.
 
-This chapter is dedicated to basic concepts needed to complete this course.  Googling your question will more often then not provide an answer to your question, but there are several online tutorials for those interested in a deeper understanding of R.  Several of these courses are listed below.
+This chapter is dedicated to basic concepts needed to complete this course.  Googling your question will more often than not provide an answer to your question, but there are several online tutorials for those interested in a deeper understanding of R.  Several of these courses are listed below.
 
 - [DataCamp](https://www.datacamp.com/courses/free-introduction-to-r)
 - [Coursera](https://www.coursera.org/specializations/jhu-data-science)
@@ -461,7 +461,7 @@ More information can be found [here](https://www.statmethods.net/input/missingda
 
 ### Functions
 
-_This can be considered a more intermediate to advanced topic.  Unfortunately you will come across some user-defined functions in this workshop, so it is good to understand some of the concepts._
+_This can be considered a more intermediate to advanced topic.  You will come across some user-defined functions in this workshop, so it is good to understand some of the concepts._
 
 Another reason for R's flexibility is that the user can create functions that can help and/or streamline their analyses.  We will need to define our own functions for microbial sequencing analysis, so it will be advantages to go over some key concepts regarding functions.
 
@@ -576,14 +576,14 @@ list(normalDATA, residualFUN(normalDATA))
 
 ```
 ## [[1]]
-##  [1]  95.49127  95.38667  97.57042  72.07835  91.38935  89.58772  88.42961
-##  [8]  97.15018  90.22550  98.70350  96.80436 100.35794 115.81006 115.17900
-## [15] 101.56804  83.75574 105.38562 105.66022  72.16702 106.66287
+##  [1]  92.37514  95.92941  96.00827  95.61768 107.10486  90.41717  87.29642
+##  [8]  87.49584  96.59541 101.28829  86.55709 109.39325 102.91839  95.64197
+## [15] 104.32695  92.47921  92.87841 102.60314  98.44410 100.15962
 ## 
 ## [[2]]
-##  [1] 0.9900859 0.9879181 1.0336700 0.5640989 0.9068527 0.8714501 0.8490651
-##  [8] 1.0247851 0.8839020 1.0578173 1.0175023 1.0935762 1.4562572 1.4404301
-## [15] 1.1201075 0.7616838 1.2058915 1.2121840 0.5654877 1.2352989
+##  [1] 0.9111085 0.9825698 0.9841859 0.9761944 1.2248368 0.8728945 0.8136783
+##  [8] 0.8174001 0.9962605 1.0954142 0.7999544 1.2777355 1.1309564 0.9766905
+## [15] 1.1621253 0.9131625 0.9210632 1.1240386 1.0347592 1.0711374
 ```
 
 The first element of the list is the output of rnorm and the second element in the list is the output of residualFUN function.  Look how flexible a list is! It allowed a function to define its second element!
@@ -1022,7 +1022,7 @@ There are many other ways to filter and subset your data.  There is actually a `
 
 ### Reshaping data
 
-_This can be considered a more intermediate to advanced topic._
+<p class="alert alert-info">This can be considered a more intermediate to advanced topic.</p>
 
 Well, I told myself that I was not going to introduce functions from the __tidyverse__, but the reshaping functions are SO VERY convenient for high-throughput data analysis.  Before we get into these functions, let me introduce you to the `t` (transpose) function first.  
 
@@ -1035,10 +1035,10 @@ Matrix_example2
 ```
 
 ```
-##          [,1]      [,2]      [,3]      [,4]     [,5]     [,6]
-## [1,] 10.62428  7.405025  9.837356 13.272414 10.06177 9.855579
-## [2,] 11.46012 10.778558  8.389647 13.081591 10.89812 7.530821
-## [3,] 10.31414 14.441577 13.687213  8.873099 10.56195 7.169426
+##           [,1]      [,2]     [,3]     [,4]      [,5]      [,6]
+## [1,]  7.773096 12.273325 11.13885 10.10186  9.349558  8.192193
+## [2,] 14.218296 11.114960 13.72156 11.15117 11.562190  9.955560
+## [3,]  6.833486  7.703311 11.77362 12.35612 11.185806 10.314718
 ```
 
 ```r
@@ -1047,13 +1047,13 @@ t(Matrix_example2)
 ```
 
 ```
-##           [,1]      [,2]      [,3]
-## [1,] 10.624278 11.460116 10.314143
-## [2,]  7.405025 10.778558 14.441577
-## [3,]  9.837356  8.389647 13.687213
-## [4,] 13.272414 13.081591  8.873099
-## [5,] 10.061773 10.898123 10.561951
-## [6,]  9.855579  7.530821  7.169426
+##           [,1]     [,2]      [,3]
+## [1,]  7.773096 14.21830  6.833486
+## [2,] 12.273325 11.11496  7.703311
+## [3,] 11.138851 13.72156 11.773624
+## [4,] 10.101863 11.15117 12.356115
+## [5,]  9.349558 11.56219 11.185806
+## [6,]  8.192193  9.95556 10.314718
 ```
 
 Now, a couple things to know about the tidyverse.  It is a cluster of packages built primarily by [Hadley Wickham](http://hadley.nz/), who is arguably the closest you can get to rock star status in the R programming world.  The primary reason for __tidyverse__ was to make the coding grammar uniform and linear in structure, as opposed to the nesting structure that R was originally developed in.  One way to do this was to use an operator, `%>%` (referred to as a __pipe__), that forwards a value into the next function or expression.  Let me provide an example first:
@@ -1064,7 +1064,17 @@ Let's say we want to import our data, subset subjects < 50, and then calculate m
 ```r
 # Remember to load package
 library(tidyverse)
+```
 
+```
+## Warning: package 'ggplot2' was built under R version 3.6.1
+```
+
+```
+## Warning: package 'readr' was built under R version 3.6.1
+```
+
+```r
 # Note that this syntax no longer requires quotation marks for characters.
 CSVfilter <- filter(CSVimport, Age < 50)
 CSVfilter_byTxt <- group_by(CSVfilter, Treatment)
@@ -1171,10 +1181,10 @@ randomDATA %>%
 ```
 
 ```
-##          [,1]      [,2]      [,3]      [,4]     [,5]     [,6]
-## [1,] 10.62428  7.405025  9.837356 13.272414 10.06177 9.855579
-## [2,] 11.46012 10.778558  8.389647 13.081591 10.89812 7.530821
-## [3,] 10.31414 14.441577 13.687213  8.873099 10.56195 7.169426
+##           [,1]      [,2]     [,3]     [,4]      [,5]      [,6]
+## [1,]  7.773096 12.273325 11.13885 10.10186  9.349558  8.192193
+## [2,] 14.218296 11.114960 13.72156 11.15117 11.562190  9.955560
+## [3,]  6.833486  7.703311 11.77362 12.35612 11.185806 10.314718
 ```
 
 See how the pipe operator can be used in other ways.  Here the pipe deposited the numeric vector into the first argument and we supplied the rest of the arguments to match the prior output.
@@ -1207,7 +1217,7 @@ Next, we group by 'Variables' and 'Treatment' in the `group_by` function.  Then 
 
 You may ask, if this is so straight-forward and linear, why do we have to learn all the other more complicated syntax.  Well, pipes are good when you have an established workflow and are working with single output; however, it gets just as complicated when you require multiple inputs (e.g., t-test, ANOVA, regression, etc.).  
 
-_Please note: A new version of a major tidyverse package was released 9/14/2019 which released new functions to replace `gather` and `spread`. Still trying to determine if this new version will affect this workflow.  This may affect those who have installed tidyverse or tidyr packages after 9/14/2019._
+<p class="alert alert-warning">A new version of a major tidyverse package was released 9/14/2019 which released new functions to replace `gather` and `spread`. Still trying to determine if this new version will affect this workflow.  This may affect those who have installed tidyverse or tidyr packages after 9/14/2019.</p>
 
 ### Merging data
 
@@ -1342,8 +1352,7 @@ Note the `NA` values within the rows for "S4" and "S5".
 
 ### apply family of functions
 
-_This is __definitely__ an intermediate to advanced topic.  But it is unavoidable for high-throughput data analysis.  These functions are also what really sets R apart from more traditional statistical software._
-
+<p class="alert alert-info">This is __definitely__ an intermediate to advanced topic.  But it is unavoidable for high-throughput data analysis.  These functions are also what really sets R apart from more traditional statistical software.</p>
 
 Similar to other programming languages, R utilizes loops to repeatedly performs a specific task over a set of defined conditions. Fortunately for us, we won't have to use the loop system in R!  However, R has a another system that can iteratively run a task over vectors and matrices, which is generally executed through the apply family of functions.  What really sets the apply functions apart from a loop, is that they were built to have outputs for different purposes.  We will only use `apply`, `lapply`, and `sapply`.  Let's start with the core apply function, `apply`. 
 

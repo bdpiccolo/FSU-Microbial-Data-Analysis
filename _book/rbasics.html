@@ -10,7 +10,7 @@
 
   <meta property="og:title" content="Chapter 2 Basics of R | Florida State University Microbiota Workshop 2019" />
   <meta property="og:type" content="book" />
-  
+  <meta property="og:url" content="https://bdpiccolo.github.io/FSU-Microbial-Data-Analysis" />
   
   <meta property="og:description" content="FSU Workshop Oct. 2019: Introduction to R and 16S rRNA sequencing data analysis in R." />
   
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="intro.html"/>
-<link rel="next" href="microbial-sequencing-data-analysis.html"/>
+<link rel="next" href="microbial-sequencing-data.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -152,10 +152,27 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.9.5" data-path="rbasics.html"><a href="rbasics.html#post-hoc-tests"><i class="fa fa-check"></i><b>2.9.5</b> Post-hoc Tests</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="microbial-sequencing-data-analysis.html"><a href="microbial-sequencing-data-analysis.html"><i class="fa fa-check"></i><b>3</b> Microbial Sequencing Data Analysis</a></li>
-<li class="chapter" data-level="4" data-path="alpha-diversity.html"><a href="alpha-diversity.html"><i class="fa fa-check"></i><b>4</b> Alpha-Diversity</a></li>
-<li class="chapter" data-level="5" data-path="beta-diversity.html"><a href="beta-diversity.html"><i class="fa fa-check"></i><b>5</b> Beta-Diversity</a></li>
-<li class="chapter" data-level="6" data-path="differential-abundance.html"><a href="differential-abundance.html"><i class="fa fa-check"></i><b>6</b> Differential Abundance</a></li>
+<li class="chapter" data-level="3" data-path="microbial-sequencing-data.html"><a href="microbial-sequencing-data.html"><i class="fa fa-check"></i><b>3</b> Microbial Sequencing Data</a><ul>
+<li class="chapter" data-level="3.1" data-path="intro.html"><a href="intro.html#structure"><i class="fa fa-check"></i><b>3.1</b> Structure</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="microbial-sequencing-data.html"><a href="microbial-sequencing-data.html#count-data"><i class="fa fa-check"></i><b>3.1.1</b> Count data</a></li>
+<li class="chapter" data-level="3.1.2" data-path="microbial-sequencing-data.html"><a href="microbial-sequencing-data.html#taxonomy-data"><i class="fa fa-check"></i><b>3.1.2</b> Taxonomy data</a></li>
+<li class="chapter" data-level="3.1.3" data-path="microbial-sequencing-data.html"><a href="microbial-sequencing-data.html#sample-meta-data"><i class="fa fa-check"></i><b>3.1.3</b> Sample Meta data</a></li>
+<li class="chapter" data-level="3.1.4" data-path="microbial-sequencing-data.html"><a href="microbial-sequencing-data.html#phylogenic-tree"><i class="fa fa-check"></i><b>3.1.4</b> Phylogenic tree</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="microbial-sequencing-data.html"><a href="microbial-sequencing-data.html#files"><i class="fa fa-check"></i><b>3.2</b> Files</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="microbial-sequencing-data.html"><a href="microbial-sequencing-data.html#spreadsheets"><i class="fa fa-check"></i><b>3.2.1</b> Spreadsheets</a></li>
+<li class="chapter" data-level="3.2.2" data-path="microbial-sequencing-data.html"><a href="microbial-sequencing-data.html#biome"><i class="fa fa-check"></i><b>3.2.2</b> Biome</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="microbial-sequencing-data.html"><a href="microbial-sequencing-data.html#diversity"><i class="fa fa-check"></i><b>3.3</b> Diversity</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="microbial-sequencing-data.html"><a href="microbial-sequencing-data.html#alpha-diversity"><i class="fa fa-check"></i><b>3.3.1</b> Alpha-Diversity</a></li>
+<li class="chapter" data-level="3.3.2" data-path="microbial-sequencing-data.html"><a href="microbial-sequencing-data.html#beta-diversity"><i class="fa fa-check"></i><b>3.3.2</b> Beta-diversity</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="microbial-sequencing-data.html"><a href="microbial-sequencing-data.html#compositional-data"><i class="fa fa-check"></i><b>3.4</b> Compositional Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html"><i class="fa fa-check"></i><b>4</b> Importing and Pre-Processing</a></li>
+<li class="chapter" data-level="5" data-path="alpha-diversity-1.html"><a href="alpha-diversity-1.html"><i class="fa fa-check"></i><b>5</b> Alpha-Diversity</a></li>
+<li class="chapter" data-level="6" data-path="beta-diversity-1.html"><a href="beta-diversity-1.html"><i class="fa fa-check"></i><b>6</b> Beta-Diversity</a></li>
+<li class="chapter" data-level="7" data-path="differential-abundance.html"><a href="differential-abundance.html"><i class="fa fa-check"></i><b>7</b> Differential Abundance</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -301,34 +318,60 @@ Figure 2.4: phyloseq website at Bioconductor
 <h3><span class="header-section-number">2.6.1</span> Basic operations</h3>
 <p>Although these operators may seem fairly low level, they are extremely important for coding.</p>
 <p>Here is a table containing basic arithmetic operators.</p>
-<table>
-<caption><span id="tab:arithop">Table 2.1: </span>Arithmetic Operators</caption>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:arithop">Table 2.1: </span>Arithmetic Operators
+</caption>
 <thead>
-<tr class="header">
-<th align="left">Operator</th>
-<th align="left">Use</th>
+<tr>
+<th style="text-align:left;">
+Operator
+</th>
+<th style="text-align:left;">
+Use
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">+</td>
-<td align="left">addition</td>
+<tr>
+<td style="text-align:left;">
++
+</td>
+<td style="text-align:left;">
+addition
+</td>
 </tr>
-<tr class="even">
-<td align="left">-</td>
-<td align="left">subtract</td>
+<tr>
+<td style="text-align:left;">
+-
+</td>
+<td style="text-align:left;">
+subtract
+</td>
 </tr>
-<tr class="odd">
-<td align="left">*</td>
-<td align="left">multiply</td>
+<tr>
+<td style="text-align:left;">
+*
+</td>
+<td style="text-align:left;">
+multiply
+</td>
 </tr>
-<tr class="even">
-<td align="left">/</td>
-<td align="left">division</td>
+<tr>
+<td style="text-align:left;">
+/
+</td>
+<td style="text-align:left;">
+division
+</td>
 </tr>
-<tr class="odd">
-<td align="left">^</td>
-<td align="left">exponential</td>
+<tr>
+<td style="text-align:left;">
+^
+</td>
+<td style="text-align:left;">
+exponential
+</td>
 </tr>
 </tbody>
 </table>
@@ -595,14 +638,14 @@ normalDATA &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span cla
 <span class="co"># Output</span>
 <span class="kw">list</span>(normalDATA, <span class="kw">residualFUN</span>(normalDATA))</code></pre></div>
 <pre><code>## [[1]]
-##  [1]  92.37514  95.92941  96.00827  95.61768 107.10486  90.41717  87.29642
-##  [8]  87.49584  96.59541 101.28829  86.55709 109.39325 102.91839  95.64197
-## [15] 104.32695  92.47921  92.87841 102.60314  98.44410 100.15962
+##  [1] 114.73567 101.05284  94.53416 111.83121 103.46507  96.78746 100.16791
+##  [8]  86.67607  92.39195  97.08631 103.50097  88.52036 100.97125  99.89820
+## [15]  96.09808  98.45703 103.05854  93.00326  91.59276 111.01071
 ## 
 ## [[2]]
-##  [1] 0.9111085 0.9825698 0.9841859 0.9761944 1.2248368 0.8728945 0.8136783
-##  [8] 0.8174001 0.9962605 1.0954142 0.7999544 1.2777355 1.1309564 0.9766905
-## [15] 1.1621253 0.9131625 0.9210632 1.1240386 1.0347592 1.0711374</code></pre>
+##  [1] 1.3366139 1.0368266 0.9073745 1.2697994 1.0869174 0.9511462 1.0187469
+##  [8] 0.7627944 0.8667171 0.9570290 1.0876719 0.7956012 1.0351529 1.0132682
+## [15] 0.9376451 0.9842434 1.0783929 0.8782243 0.8517877 1.2512348</code></pre>
 <p>The first element of the list is the output of rnorm and the second element in the list is the output of residualFUN function. Look how flexible a list is! It allowed a function to define its second element!</p>
 </div>
 </div>
@@ -849,26 +892,25 @@ This can be considered a more intermediate to advanced topic.
 randomDATA &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">18</span>, <span class="dt">mean =</span> <span class="dv">10</span>, <span class="dt">sd =</span> <span class="dv">2</span>)
 Matrix_example2 &lt;-<span class="st"> </span><span class="kw">matrix</span>(randomDATA, <span class="dt">ncol=</span><span class="dv">6</span>, <span class="dt">nrow=</span><span class="dv">3</span>)
 Matrix_example2</code></pre></div>
-<pre><code>##           [,1]      [,2]     [,3]     [,4]      [,5]      [,6]
-## [1,]  7.773096 12.273325 11.13885 10.10186  9.349558  8.192193
-## [2,] 14.218296 11.114960 13.72156 11.15117 11.562190  9.955560
-## [3,]  6.833486  7.703311 11.77362 12.35612 11.185806 10.314718</code></pre>
+<pre><code>##           [,1]      [,2]      [,3]      [,4]      [,5]      [,6]
+## [1,] 12.190414  8.824796  7.288718 13.594936 13.543976 10.812070
+## [2,]  9.492112 11.950407  7.030964  8.083209  9.351397  8.400993
+## [3,]  9.919283  9.721615 10.616558 12.014115  6.661476 11.322437</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Transpose</span>
 <span class="kw">t</span>(Matrix_example2)</code></pre></div>
-<pre><code>##           [,1]     [,2]      [,3]
-## [1,]  7.773096 14.21830  6.833486
-## [2,] 12.273325 11.11496  7.703311
-## [3,] 11.138851 13.72156 11.773624
-## [4,] 10.101863 11.15117 12.356115
-## [5,]  9.349558 11.56219 11.185806
-## [6,]  8.192193  9.95556 10.314718</code></pre>
+<pre><code>##           [,1]      [,2]      [,3]
+## [1,] 12.190414  9.492112  9.919283
+## [2,]  8.824796 11.950407  9.721615
+## [3,]  7.288718  7.030964 10.616558
+## [4,] 13.594936  8.083209 12.014115
+## [5,] 13.543976  9.351397  6.661476
+## [6,] 10.812070  8.400993 11.322437</code></pre>
 <p>Now, a couple things to know about the tidyverse. It is a cluster of packages built primarily by <a href="http://hadley.nz/">Hadley Wickham</a>, who is arguably the closest you can get to rock star status in the R programming world. The primary reason for <strong>tidyverse</strong> was to make the coding grammar uniform and linear in structure, as opposed to the nesting structure that R was originally developed in. One way to do this was to use an operator, <code>%&gt;%</code> (referred to as a <strong>pipe</strong>), that forwards a value into the next function or expression. Let me provide an example first:</p>
 <p>Let’s say we want to import our data, subset subjects &lt; 50, and then calculate mean and standard deviation across Control and Experimental groups for all continuous variables. Let’s see how this would like</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Remember to load package</span>
-<span class="kw">library</span>(tidyverse)</code></pre></div>
-<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 3.6.1</code></pre>
-<pre><code>## Warning: package &#39;readr&#39; was built under R version 3.6.1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Note that this syntax no longer requires quotation marks for characters.</span>
+<span class="kw">library</span>(tidyverse)
+
+<span class="co"># Note that this syntax no longer requires quotation marks for characters.</span>
 CSVfilter &lt;-<span class="st"> </span><span class="kw">filter</span>(CSVimport, Age <span class="op">&lt;</span><span class="st"> </span><span class="dv">50</span>)
 CSVfilter_byTxt &lt;-<span class="st"> </span><span class="kw">group_by</span>(CSVfilter, Treatment)
 <span class="kw">summarise</span>(CSVfilter_byTxt, <span class="dt">Avg_Age =</span> <span class="kw">mean</span>(Age), <span class="dt">sd_Age =</span> <span class="kw">sd</span>(Age))</code></pre></div>
@@ -930,10 +972,10 @@ CSVimport <span class="op">%&gt;%</span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Let&#39;s make the same matrix that we did at the beginning of this section (2.9.3)</span>
 randomDATA <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">matrix</span>(<span class="dt">ncol=</span><span class="dv">6</span>, <span class="dt">nrow=</span><span class="dv">3</span>)</code></pre></div>
-<pre><code>##           [,1]      [,2]     [,3]     [,4]      [,5]      [,6]
-## [1,]  7.773096 12.273325 11.13885 10.10186  9.349558  8.192193
-## [2,] 14.218296 11.114960 13.72156 11.15117 11.562190  9.955560
-## [3,]  6.833486  7.703311 11.77362 12.35612 11.185806 10.314718</code></pre>
+<pre><code>##           [,1]      [,2]      [,3]      [,4]      [,5]      [,6]
+## [1,] 12.190414  8.824796  7.288718 13.594936 13.543976 10.812070
+## [2,]  9.492112 11.950407  7.030964  8.083209  9.351397  8.400993
+## [3,]  9.919283  9.721615 10.616558 12.014115  6.661476 11.322437</code></pre>
 <p>See how the pipe operator can be used in other ways. Here the pipe deposited the numeric vector into the first argument and we supplied the rest of the arguments to match the prior output.</p>
 <p>Now let’s look talk about <code>gather</code>. <code>gather</code> reshapes your column names and data points into a two new columns. One that we defined as ‘Variables’ and the other as ‘Measurement’. Then, it takes the rest of the data and repeats it evenly along each column name. Now can use the ‘Measurement’ column as a grouping variable. Let’s see the output.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Do not have to load the library unless not previously loaded.</span>
@@ -1403,17 +1445,9 @@ linearMOD &lt;-<span class="st"> </span><span class="kw">lm</span>(BMI <span cla
 <p>If you Google ANOVA analysis in R, you may come across some articles describing discordant results between either SAS or SPSS and R. This is for 2 reasons, 1) Each software calculates their underlying contrast structure slightly different, and 2) R defaults to sum of squares type I, vs sum or squares type III in SAS and SPSS. It does NOT mean that any of the results provided by these tools are incorrect by any means. It is up to us as users of these tools to understand the underlying principles and use them accordingly. Unfortunately, the ANOVA functions in the core packages do not provide alternative ways to calculate sum of squares. However, a mechanism does exist using the car package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Install the package if needed and load the library</span>
 <span class="co"># install.packages(&quot;car&quot;)</span>
-<span class="kw">library</span>(car)</code></pre></div>
-<pre><code>## Loading required package: carData</code></pre>
-<pre><code>## 
-## Attaching package: &#39;car&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:purrr&#39;:
-## 
-##     some</code></pre>
-<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
-## 
-##     recode</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Need to update the contrasts for type III sum of squares</span>
+<span class="kw">library</span>(car)
+
+<span class="co"># Need to update the contrasts for type III sum of squares</span>
 <span class="kw">options</span>(<span class="dt">contrasts =</span> <span class="kw">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))
 
 <span class="co"># Now we can use the lm model from above in Anova in the car package and specify the sum of squares type</span>
@@ -1471,7 +1505,7 @@ TXTanova &lt;-<span class="st"> </span><span class="kw">aov</span>(<span class="
         </div>
       </div>
 <a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="microbial-sequencing-data-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="microbial-sequencing-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -1484,20 +1518,10 @@ TXTanova &lt;-<span class="st"> </span><span class="kw">aov</span>(<span class="
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"google": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
-},
+"sharing": null,
 "fontsettings": {
-"theme": "white",
-"family": "sans",
+"theme": "sepla",
+"family": "serif",
 "size": 2
 },
 "edit": {
@@ -1508,10 +1532,12 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown-FSU-Workshop.pdf", "bookdown-FSU-Workshop.epub"],
+"download": null,
 "toc": {
-"collapse": "subsection"
-}
+"collapse": "section",
+"scroll_highlight": true
+},
+"search": true
 });
 });
 </script>

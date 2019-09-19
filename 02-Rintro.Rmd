@@ -12,7 +12,7 @@ knitr::include_graphics("plot_tags_time-1-768x768.png")
 
 I bolded __object-oriented__ because it highlights a major advantage of __reproducibility__ in R and other programming-based langauge.  Everything that is done in R uses named objects as either __functions__ or __data__.  Understanding how functions manipulate __data types__ and __data structures__ is the foundation of working with R.  For example, if you want to obtain the mean over a set of numbers, the `mean` function is used to determine the mean of numbers within a __vector__.  These bolded words and phrases may seem abstract at this point, but this chapter will expand these concepts.
 
-This chapter is dedicated to basic concepts needed to complete this course.  Googling your question will more often then not provide an answer to your question, but there are several online tutorials for those interested in a deeper understanding of R.  Several of these courses are listed below.
+This chapter is dedicated to basic concepts needed to complete this course.  Googling your question will more often than not provide an answer to your question, but there are several online tutorials for those interested in a deeper understanding of R.  Several of these courses are listed below.
 
 - [DataCamp](https://www.datacamp.com/courses/free-introduction-to-r)
 - [Coursera](https://www.coursera.org/specializations/jhu-data-science)
@@ -299,7 +299,7 @@ More information can be found [here](https://www.statmethods.net/input/missingda
 
 ### Functions
 
-_This can be considered a more intermediate to advanced topic.  Unfortunately you will come across some user-defined functions in this workshop, so it is good to understand some of the concepts._
+_This can be considered a more intermediate to advanced topic.  You will come across some user-defined functions in this workshop, so it is good to understand some of the concepts._
 
 Another reason for R's flexibility is that the user can create functions that can help and/or streamline their analyses.  We will need to define our own functions for microbial sequencing analysis, so it will be advantages to go over some key concepts regarding functions.
 
@@ -609,7 +609,7 @@ There are many other ways to filter and subset your data.  There is actually a `
 
 ### Reshaping data
 
-_This can be considered a more intermediate to advanced topic._
+<p class="alert alert-info">This can be considered a more intermediate to advanced topic.</p>
 
 Well, I told myself that I was not going to introduce functions from the __tidyverse__, but the reshaping functions are SO VERY convenient for high-throughput data analysis.  Before we get into these functions, let me introduce you to the `t` (transpose) function first.  
 
@@ -684,7 +684,7 @@ Next, we group by 'Variables' and 'Treatment' in the `group_by` function.  Then 
 
 You may ask, if this is so straight-forward and linear, why do we have to learn all the other more complicated syntax.  Well, pipes are good when you have an established workflow and are working with single output; however, it gets just as complicated when you require multiple inputs (e.g., t-test, ANOVA, regression, etc.).  
 
-_Please note: A new version of a major tidyverse package was released 9/14/2019 which released new functions to replace `gather` and `spread`. Still trying to determine if this new version will affect this workflow.  This may affect those who have installed tidyverse or tidyr packages after 9/14/2019._
+<p class="alert alert-warning">A new version of a major tidyverse package was released 9/14/2019 which released new functions to replace `gather` and `spread`. Still trying to determine if this new version will affect this workflow.  This may affect those who have installed tidyverse or tidyr packages after 9/14/2019.</p>
 
 ### Merging data
 
@@ -735,8 +735,7 @@ Note the `NA` values within the rows for "S4" and "S5".
 
 ### apply family of functions
 
-_This is __definitely__ an intermediate to advanced topic.  But it is unavoidable for high-throughput data analysis.  These functions are also what really sets R apart from more traditional statistical software._
-
+<p class="alert alert-info">This is __definitely__ an intermediate to advanced topic.  But it is unavoidable for high-throughput data analysis.  These functions are also what really sets R apart from more traditional statistical software.</p>
 
 Similar to other programming languages, R utilizes loops to repeatedly performs a specific task over a set of defined conditions. Fortunately for us, we won't have to use the loop system in R!  However, R has a another system that can iteratively run a task over vectors and matrices, which is generally executed through the apply family of functions.  What really sets the apply functions apart from a loop, is that they were built to have outputs for different purposes.  We will only use `apply`, `lapply`, and `sapply`.  Let's start with the core apply function, `apply`. 
 

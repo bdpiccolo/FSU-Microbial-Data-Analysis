@@ -1,6 +1,6 @@
 # Introduction {#intro}
 
-## Types of microbiota data
+## Types of microbiota data 
 
 Next-generation sequencing has greatly increased our ability to survey the gut microbiota over the past 10-15 years. The most widely used technologies to assess microbial community data are 16S rRNA amplicon sequencing and shotgun metagenomics sequencing.  Both have been globaly referred to as "metagenomics", but we will make sure to differentiate the technologies.
 
@@ -14,15 +14,13 @@ The advantage of 16S rRNA sequencing is that it is fairly inexpensive, routinely
 
 2. It does not provide any information regarding genetic potential or bacterial functions.
 
-16S rRNA sequencing sometimes gets a bad wrap because of these limitations, but there good reasons to use this technology.  Again, its much less expensive than shotgun metagenomics and is still very sensitive at what it can read. It is a good option if you have many samples, a limited budget, and if you just want to identify whether there is an alteration in the composition of the microbiota.  
+16S rRNA sequencing sometimes gets a bad rap because of these limitations, but there good reasons to use this technology.  Again, its much less expensive than shotgun metagenomics and is still very sensitive at what it can read. It is a good option if you have many samples, a limited budget, and if you just want to identify whether there is an alteration in the composition of the microbiota.  
 
 ### Shotgun metagenomic sequencing
 
 Sequences all microbial genomic DNA.  Provides species level compositional data and bacterial genetic data.  The compositional data is exactly similar to 16S rRNA data, but superior because it gives species level depth.  However, it is much more expensive on a per sample basis and requires significantly greater computational power to process.  
-  
-You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
 
-## Microbial composition data from sequencing technologies
+## Microbial composition data from sequencing technologies {#structure}
 
 The overall structure of 16S rRNA and shotgun metagenomic sequencing data are similar. Lets quickly describe how the data is aquired to understand why this is.  Note, this workshop is set up for statistical analysis, so we will keep this section at a very, very basic level.
 

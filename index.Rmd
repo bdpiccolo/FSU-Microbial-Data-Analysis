@@ -1,10 +1,10 @@
 --- 
 title: "Florida State University Microbiota Workshop 2019"
 author: "Brian Piccolo"
+url: 'https\://bdpiccolo.github.io/FSU-Microbial-Data-Analysis'
+github-rep: 'https\://github.com/bdpiccolo/FSU-Microbial-Data-Analysis'
 date: "`r Sys.Date()`"
 documentclass: book
-bibliography: [book.bib]
-biblio-style: apalike
 link-citations: yes
 description: "FSU Workshop Oct. 2019: Introduction to R and 16S rRNA sequencing data analysis in R."
 ---

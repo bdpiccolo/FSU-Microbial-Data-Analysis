@@ -1,5 +1,5 @@
-book_filename: "bookdown-FSU-Workshop"
-chapter_name: "Chapter "
-repo: https://github.com/bdpiccolo/FSU-Microbial-Data-Analysis
-output_dir: docs
-new_session: yes
+book_filename: "bookdown-demo"
+language:
+  ui:
+    chapter_name: "Chapter "
+delete_merged_file: true
