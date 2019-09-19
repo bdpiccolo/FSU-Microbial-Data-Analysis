@@ -6,11 +6,11 @@ github-rep: 'https\://github.com/bdpiccolo/FSU-Microbial-Data-Analysis'
 date: "`r Sys.Date()`"
 documentclass: book
 link-citations: yes
-description: "FSU Workshop Oct. 2019: Introduction to R and 16S rRNA sequencing data analysis in R."
+description: "FSU Workshop Oct. 2019: Introduction to R and microbial sequencing data analysis in R."
 ---
 
 
-# Introduction to Data Analysis of 16S rRNA Sequencing in R {-}
+# Introduction to Data Analysis of Microbial Sequencing in R {-}
 
 
 
