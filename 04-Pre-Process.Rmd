@@ -1,3 +1,646 @@
 # Importing and Pre-Processing
 
-__UNDER CONSTRUCTION__
+This chapter will focus on the importing microbial sequencing data in R, setting up a phyloseq object, and preparing the data for statistical analysis.  
+
+## Importing Data into R
+
+As detailed in Chapter \@ref(microbefiles), you may receive your sequencing data as a biom file or in a text-delimited/spreadsheet format.  Let's detail how each can be imported into R
+
+### Biom file {#biomimport}
+
+If you recall from Chapter \@ref(biomfile), this file format will contain the count data and taxonomy data in a single file.  We will use the `read_biom` function from the biomformat package.  The [biomformat package is located at Bioconductor](https://www.bioconductor.org/packages/release/bioc/html/biomformat.html) and can be installed using the following code
+
+```{r biomformatdownload}
+# Remove hashtags prior to running in your console.
+ 
+# if (!requireNamespace("BiocManager", quietly = TRUE))
+    # install.packages("BiocManager")
+
+# BiocManager::install("biomformat")
+```
+
+We will use the 'UCDT2DM16S.biom' file for this example.  Make sure to set your working directory to the directory containing your biom file.
+
+Let's load the package and use the `read_biom` function to import into Remove
+
+```{r biomimport}
+# You will not be able to import your biom file unless you tell R where to look
+# Remove hashtag from this code and add your directory 
+# setwd("C:\\Users\\name\\documents\\FSUworkshop\\")
+
+# Place all of your loaded libraries at the top of your script
+library(biomformat)
+
+Biom <- read_biom(".\\Data\\UCDT2DM16S.biom")
+Biom
+```
+
+The output gives us a little bit of information; the most important of which is the number of rows and columns.  This is the dimension of the count table.  Rows are taxa and columns are samples.  Thus, we have >55,000 taxa and 56 samples.
+
+We need to extract the count and taxonomy tables and place them in their own objects. Both the count and taxonomy tables are in a format we cannot use.  We will use the `biom_data` and `observation_metadata` function to extract the count and taxonomy data, respectively.  Then, we will need to convert it to a matrix using the `as.matrix` function.  We will use the `%>%` pipe operator to link functions when available.
+
+```{r biomextract}
+# Load the tidyverse package if not already loaded
+# library(tidyverse)
+
+## Extract OTU table and convert to a matrix
+CountMatrix <- biom_data(Biom) %>% as.matrix()
+
+## Extract taxonomy data and convert to a matrix
+TaxaMatrix <- observation_metadata(Biom) %>% as.matrix()
+```
+
+Let's use the `head` function to see the first 6 rows of the taxonomy data
+
+```{r headbiom}
+# The tails() function does the opposite of the head() function
+head(TaxaMatrix)
+```
+
+In this case, the column names ("taxonomy1", "taxanomy2", etc.) could be updated to reflect the taxonomy level.  Note the prefixes of each character within the columns.  In these data, this references the taxonomy level.  These prefixes may not always appear and they can be removed if absolutely necessary.  Let's just update the column names so we know which taxonomy level belongs to which column.
+
+```{r updatecolumn}
+# We will make an object with the taxonomy levels incase we need to use it later
+TaxaLevels <- c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
+
+# Overwrite column names
+colnames(TaxaMatrix) <- TaxaLevels
+
+# Look at data again
+head(TaxaMatrix)
+```
+
+### Excel {#excelimport}
+
+A little more straight-foward then Biom files, but can be variable depending on how the data is presented in the spreadsheet.  It is important to only have the first row in the spreadsheet as column headers with no empty cells as shown in Figure 3.1 (Chapter \@ref(chapt3structure)).  
+
+We will use the example where the taxonomy data is combined with the count data.  The same data is found in the biom and Excel files, so we will overwrite the biom objects.
+
+```{r importexcelcounts}
+# Load the readxl package if necessary.
+# library(readxl)
+# Need to specify data type if numbers and characters are mixed. See help page for read_excel().
+Excel <- read_xlsx(".\\Data\\UCDT2DM16SExcel.xlsx",
+	col_types=c(rep("text", 8), rep("numeric", 55))) %>% as.data.frame()
+
+# The OTU column are the row names in the biom file.  Will set to be similar with other workflow
+rownames(Excel) <- Excel$OTU
+
+# Remove OTU column
+Excel$OTU <- NULL
+
+# Make new object with taxonomy column labels if necessary.
+# We will use the Taxonomy object we made earlier to subset the taxonomy data
+TaxaData <- Excel[, colnames(Excel) %in% TaxaLevels]
+
+# Convert to a matrix
+TaxaMatrix <- TaxaData %>% as.matrix()
+
+# Use '!()' to reverse logical statements
+CountData <- Excel[, !(colnames(Excel) %in% TaxaLevels)]
+CountMatrix <- CountData %>% as.matrix()
+
+# Let's look at new TaxaMatrix object
+head(TaxaMatrix)
+```
+
+### Metadata {#importmetadata}
+
+We will assume the metadata will be in Excel format.  You will need to ensure that your sample IDs exactly match the IDs on your count file.  For those using a Biome file, you would have supplied the sample labels within your informatics pipeline (e.g., QIIME) to generate these labels.  It is advised to use this file to ensure matching labels.
+
+```{r metadataupload}
+# Load the readxl package if necessary.
+# library(readxl)
+
+# Import Excel file and coerce to data frame
+Metadata <- read_xlsx(".\\Data\\UCDT2DMmetadata.xlsx") %>% as.data.frame()
+
+# Set row names with column that matches the labels in your count data
+# In this case, it is the column labeled "SampleID".
+# This is required to create a phyloseq object.
+rownames(Metadata) <- Metadata$SampleID
+
+# Look at data
+head(Metadata)
+```
+
+How can we ensure the names match between the count and metadata file?  We can extract and compare the column names from the `CountMatrix` object and the vector named "SampleID" from the `Metadata` object.  The `==` logical operator will match in order, so we need to ensure that both are in order.  
+
+```{r matchids}
+# Extract column names
+CountNames <- colnames(CountData)
+
+# Extract 'SampleID' file.  The label, "SampleID", was the name I provided, but yours may be different.
+MetaIDs <- Metadata$SampleID
+
+# Sort both
+CountNameSort <- sort(CountNames)
+MetaIDsSort <- sort(MetaIDs)
+
+CountNameSort == MetaIDsSort
+```
+
+Note that the output using `==` is a long vector of logical responses.  You could imagine having a long vector of many TRUE and not knowing if a FALSE is nested somewhere in between.  There is a handy function that I use to determine if all elements within a vector are the same.  It is the `setequal` function.  `setequal` require 2 arguments, the first is the vector, and the second is the comparison vector.  If the 2 vectors are exactly the same, then it will return a TRUE.  If there is any difference, it will return a FALSE.  You may refer to chapter \@ref(structure) to refresh yourself with the concept of recycling if this function does not seem intuitive.
+
+```{r matchnamessetequal}
+# Make object of logical output
+NameCompLogical <- CountNameSort == MetaIDsSort
+
+# Use TRUE as comparison vector (TRUE is recycled!) in the setequal() function.
+setequal(NameCompLogical, TRUE)
+```
+
+We get a TRUE returned, so our data is now reconciled.  
+
+<p class="alert alert-warning">The following section describes the steps needed to identify samples that are missing in your metadata file. This is not necessary to finish the workflow and can be skipped.</p>
+
+What would you do if they do not match?  We will look at an example where your metadata is missing samples relative to your count data.  This is more likely to occur if you are using a Biom file and not using the metadata file used in your informatics pipeline.  Thus, an example will be provided that demonstrates steps to identify the missing samples.  
+
+```{r mismatch}
+# Make arbitrary sample ID vector with missing data.  The first 5 elements will be removed.
+MetaIDsSort_missing <- MetaIDsSort[-(1:5)]
+
+# The %in% operator will match any two vectors.  Combine with !() to identify elements that mismatch.
+# We want to know which names from the count data do not have a match in the SampleID column
+CountNameSort[!(CountNameSort %in% MetaIDsSort_missing)]
+```
+
+This provides an output of the labels from the count data that are not found within the sample metadata.  From here, you will need to investigate your metadata file to determine where the discrepancy is.
+
+## phyloseq object
+
+A phyloseq object is a convenient way to package all of the data into a single object that facilites common tasks required for microbial community data.  The benefit of this is you can apply a single function to the phyloseq object, which will alter all files within it simultaneously.  Let's say, for example, you want to analyze your data at the phylum level.  The phyloseq package has a single function that will sum all of your counts to the phylum taxonomy and adjust the taxonomy file accordingly.  Now imagine having to do this without all of the files packaged together.  
+
+### Setting up a phyloseq object
+
+I realize it seems a little burdensome to split all of your data out and then package them back together in a new format.  However, once you get it packaged into a single object, then things become much easier.  The 3 objects we've created must match or the `phyloseq` function will reject them.  The `phyloseq` function uses row and column names to match each data object.  They do not have to be in order, but each data set must have an exact pair in the comparative object.  The following objects should match each other:
+
+1. Count data row names ->  Taxa data row names.
+
+2. Count data column names -> Sample metadata row names
+
+We are using the Excel import, so the files should match since the we set the row names of the `Excel` object and then split the taxonomic and count data into their own objects.  The second match was done above in \@ref(importmetadata).  Still, the first match will be shown for the sake of completeness.
+
+```{r counttaxamatch}
+# Extract row names from count data
+Count_taxauniqueID <- rownames(CountData)
+
+# Extract row names from taxa data
+Taxa_taxauniqueID <- rownames(CountData)
+
+# Sort both
+Count_taxauniqueIDSort <- sort(Count_taxauniqueID)
+Taxa_taxauniqueIDSort <- sort(Taxa_taxauniqueID)
+
+# Make object of logical output using ==
+CountTaxaCompLogical <- Count_taxauniqueIDSort == Taxa_taxauniqueIDSort
+
+# Use TRUE as comparison vector (TRUE is recycled!) in the setequal() function.
+setequal(CountTaxaCompLogical, TRUE)
+```
+
+We can now create the phyloseq object now that row and column names match.  
+
+```{r phyloseqcreate}
+# phyloseq requires the data be in a specific class before creating 'phyloseq' object.
+
+library(phyloseq)
+
+# Convert OTU data into phyloseq otu_table class
+otuTABLE <- otu_table(CountMatrix, taxa_are_rows = TRUE)
+
+# Convert taxa data into phyloseq taxonomyTable class
+taxTABLE <- tax_table(TaxaMatrix)
+
+# Convert Sample Metadata data frame into phyloseq sample_data class
+sampleDATA <- sample_data(Metadata)
+
+# Create phyloseq object
+phylo_obj <- phyloseq(otuTABLE, taxTABLE, sampleDATA)
+phylo_obj
+```
+
+Lets discuss the `phylo_obj` output.  Very compact with 3 rows and 3 columns of information.  The rows provide information relating to the OTU data (what we've been referring to as "count" data), Sample Data (our experimental metadata), and the Taxonomy data.  The first column of the output describes the helper functions to extract the data, the second column is the row descriptor, and the last column provides the stats for each row.
+
+Note that we will now use the term, "OTU table", to refer to the sequencing data because the count data will be modified with transformed/normalized etc.
+
+### Extracting data
+
+phyloseq objects are built in a special coding system called S4.  It is slightly different then standard R, but I have found it cumbersome to extract data from these objects. So we will try to avoid the extractor functions provided in the phyloseq output when necessary.  Fortunately, the 'microbiome' package has functions that make this extraction very easy.
+
+```{r microbiomeextractors}
+# load library
+library(microbiome)
+
+# Extract OTU table from 
+OTUdata <- abundances(phylo_obj)
+
+# Will show an abbreviated output
+head(OTUdata[,1:15])
+
+# Extract Sample Metadata
+SampleData <- meta(phylo_obj)
+
+head(SampleData)
+
+# microbiome package does not have an extractor function for taxonomy data
+# Will provide coding to extract here
+TAXAData <- as.data.frame(tax_table(phylo_obj)@.Data)
+
+head(TAXAData)
+```
+
+Why do we have so many objects with the same information?  So far, it has been redundant, but the value of knowing the extractor functions will become clear in the following sections.  In addition, several differential analyses will not work with a phyloseq object and requires the data to be extracted. 
+
+### Subsetting 
+
+The `prune_samples` function will subset samples based on a logical expression that matches the number of samples within the phyloseq object.  The function will automatically determine if your expression fits within the Sample Metadata or OTU Table.  Let's go through a few examples.  Pay attention to the sample number in the phyloseq output.
+
+#### Metadata
+
+Rats in the UCD-T2DM study were collected in 2014 and in 2016.  We're worried about a potential batch effect. Thus, we wish to remove 2014 samples and only examine 2016 samples.  We can extract the metadata and define a logical statement to keep the rats sampled in 2016.  
+
+```{r metayearsubset}
+# We extracted the metadata in the above chapter.
+CollectionYear <- SampleData$Collection
+
+# Make the logical statement using the %in% (match) operator
+CollectionYearLogic <- CollectionYear %in% "Y16"
+CollectionYearLogic
+
+# Use the prune_samples() function
+# First argument is the logical statement, the second is the phyloseq object
+phylo_obj2016 <- prune_samples(CollectionYearLogic, phylo_obj)
+
+# This coding 2 lines below works as well, minus the hashtag.  Why?
+# The curly brackets help contain the statement.
+# prune_samples({meta(phylo_obj)$Collection %in% "Y16"}, phylo_obj)
+
+# The 'pruned' phyloseq object
+phylo_obj2016
+```
+
+While the lean Sprague Dawley rats were used to compare metabolic differences between the diabetic animals, they may not be appropriate control animal for the microbiota study due to genetic influence on the composition of the gut microbiota. We need to remove this group from our 2016 object.
+ 
+We have a problem though.  We cannot use the `SampleData` object derived from our initial phyloseq object, `phylo_obj`.  `phylo_obj` has more samples then `phylo_obj2016`.  We need to make sure to extract the Sample Metadata from the appropriate phyloseq object.
+
+```{r metalsdsubset}
+# Extract the metadata from phylo_obj2016
+Group2016 <- meta(phylo_obj2016)$GroupAbbrev
+
+# Make the logical statement using the != (does not equal) operator
+Group2016Logic <- Group2016 != "LSD"
+
+# Use the prune_samples() function
+# First argument is the logical statement, the second is the phyloseq object
+phylo_obj2016_noLSD <- prune_samples(Group2016Logic, phylo_obj2016)
+
+# The 'pruned' phyloseq object
+phylo_obj2016_noLSD
+```
+
+`prune_sample` will also match the row names in the Sample Metadata.  We can use the `sample_names` function to select a batch of samples and filter on these selections.
+
+```{r namesubset}
+# Extract sample names from the phyloseq object
+phyloSampNames <- sample_names(phylo_obj2016)
+
+# Use the first 20 samples
+phyloSampNames20 <- phyloSampNames[1:20]
+
+# First argument is the names vector, the second is the phyloseq object
+phylo_obj20 <- prune_samples(phyloSampNames20, phylo_obj2016)
+
+# The 'pruned' phyloseq object
+phylo_obj20
+```
+
+Beware, once you subset a phyloseq object, there is no going back.  Thus, it is important to make a new object.
+
+#### Sample depth
+
+We can also subset samples based on the characteristics of the OTU table.  An important example of this is when we check sample depths.  As mentioned in Chapter \@ref(structure), it is important to have enough sequencing depth to ensure adequate coverage of the microbial community.  Some suggest [1000 reads are adequate to see differences in large populations](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-5-210).  Some have suggested 5000-10,000 reads are more than enough for 16S.  I typically look at the depths and see if any are well of the distribution of other samples and only remove samples if way off.  Fortunately, the sample set we're using does not have any samples that were inadequately sequenced, but let's look at how we would can identify sample depths per sample, followed by a removal.
+
+The `prune_samples` function will also work in this case.  Why?  It is because we're determining the sample depths for each sample.  Thus, any logical vector that is the length of the number of samples will cause `prune_samples` to filter the phyloseq object.  Doesn't matter if you derive it from the Sample Metadata or OTU table.
+
+```{r depthsubset}
+# The sample_sums() function will calculate sample depths from your phyloseq object
+phyloSampDepth <- sample_sums(phylo_obj)
+phyloSampDepth
+
+# What is our total sample depth?
+sum(phyloSampDepth)
+
+# Let's filter depths < 40,000.  ***DO NOT USE THIS AS A CUTOFF GUIDE - FOR PURPOSE OF EXAMPLE ONLY***
+# We want to keep samples that have sequence depths greater than 30000
+Depth40K <- phyloSampDepth > 40000
+
+# Use the prune_samples() function
+# First argument is the logical statement, the second is the phyloseq object
+phylo40K <- prune_samples(Depth40K, phylo_obj)
+
+# The 'pruned' phyloseq object
+phylo40K
+```
+
+We are not covering rarefaction in this workshop, but it is a good idea to know about it.  It addresses whether you have more taxa in a sample due to your sampling depth.  You may come across a rarefraction curve when dealing with microbial sequencing data because it helps determine whether a sample is sequenced deep enough.  It is computationally expensive because you have to rarify your samples to various depth and measure how many taxa are remaining.  So the curves generally have a steep rise at low depths and plateau at higher depths.  If you have a sample with a low depth, but it would be okay if its curve fits in the plateau regions of samples with larger sample depths.  If it doesn't fit, then the sample may not be sequenced deep enough.
+  
+#### Taxonomy {#taxafilter}
+
+There are several ways to subset your data based on the taxonomy table using the `prune_taxa` function.  Most common are by name or by the counts assigned to each taxa.  `prune_taxa` works similar to `prune_samples` in that it will take a logical statement or a vector of names.  The length of the logical vector must be equal to the number of taxa in the phyloseq object, and the vector of names should match with the row names of the taxonomy table.  Let's try some examples of `prune_taxa`.
+
+We have >50,000 taxa in the UCD-T2DM and we're worried that we sequenced too deeply.  Many of these taxa could be spurious, especially if there are only a few reads across all samples.  Thus, we want to filter any taxa that doesn't sum to 50 reads.  
+
+```{r taxadepthsubset}
+# The taxa_sums() function will calculate sample depths across taxa 
+phyloTaxaDepth <- taxa_sums(phylo_obj)
+
+# We want to keep samples that have sequence depths greater than 50
+TaxaDepth50 <- phyloTaxaDepth > 50
+
+# Use the prune_samples() function
+# First argument is the logical statement, the second is the phyloseq object
+phyloTaxa50 <- prune_taxa(TaxaDepth50, phylo_obj)
+
+# The 'pruned' phyloseq object
+phyloTaxa50
+```
+
+Woah!! We lost 99.95% of our OTUs!  This actually may be appropriate.  As you see, there will be other ways to filter low abundant taxa.
+
+Let's look at an example of how we can use `prune_taxa` with a vector of names.  We will use an example were extract the row names from the taxonomy table and use those names to filter the phyloseq object. 
+
+```{r taxanamesubset}
+# Extract row names from the taxonomy table
+phyloTaxaNames <- taxa_names(phylo_obj2016)
+
+# Use the first 20 samples
+phyloTaxaNames20 <- phyloTaxaNames[1:20]
+
+# View names, note that they are a unique identifier and not bacterial names
+phyloTaxaNames20
+
+# First argument is the names vector, the second is the phyloseq object
+phyloTaxa20 <- prune_taxa(phyloTaxaNames20, phylo_obj2016)
+
+# The 'pruned' phyloseq object
+phyloTaxa20
+```
+
+### Aggregating
+
+I have referred to microbial sequencing data as multi-level data due to the fact that you can analyze data at different phylogenetic levels.  We are not working with a phylogenetic tree in this workshop, but we have all of the taxonomic information to aggregate lower level taxa into their parent taxa level. This is done using the `tax_glom` function on a phyloseq object. It works by providing the column name in the taxonomic table that you'd like to aggregate to.  This is why we updated these labels to reflect the taxonomy levels in section \@ref(biomimport), to make them more consistent with aggregation scheme. You can access the column names in the taxonomy table using the `rank_names` function.
+
+Many early investigations relating the microbiota to obesity identified an increased ratio of Firmicutes to Bacteroidetes in obese mice relative to their lean counterparts.  This is at the phylum level, so the most broad phylogenetic level of bacteria.  Let's aggregate the phyloseq object to the phylum level.
+
+```{r taxglom}
+# Aggregate the phyloseq object to Phylum level. 
+# First argument is the phyloseq object and second argument is the level to aggregate to
+# Will take 5-10 seconds to process because of the large amount of taxa
+phylo_Phylum <- tax_glom(phylo_obj, "Phylum")
+
+# The 'aggregated' phyloseq object
+phylo_Phylum
+```
+
+The output doesn't reflect which taxonomic level we've aggregated to, but it does show that there are now only 13 taxa. Let's first look at the taxonomy table.
+
+```{r taxglomOTU}
+# Using the tax_table() function from the phyloseq package. 
+tax_table(phylo_Phylum)
+```
+
+Note that Class through Species are `NA` values because we've aggregated to the Phylum level.  Similar to the 'prune_' functions, there is no going back after you use `tax_glom`.  Make sure you create a new phyloseq object.
+
+Now lets say we want to extract Firmicutes and Bacteroidetes data so we can eventually compute a ratio.  Let's try it!
+
+```{r firmbact}
+# Manually extract taxonomy table and coerce it into a data frame
+PhylumTaxaTable <- tax_table(phylo_Phylum)@.Data %>% as.data.frame()
+
+# Extract the OTU table using the abundances() function and coerce into data frame
+# Need to be data frame to add unique identifier column for joining
+PhylumOTUTable <- abundances(phylo_Phylum) %>% data.frame
+
+# Extract the sample metadata using the meta() function
+PhylumSampleTable <- meta(phylo_Phylum)
+
+# the row names are the unique OTU identifier
+# Make it into a column so we can use to join both data frames 
+PhylumTaxaTable$OTU <- rownames(PhylumTaxaTable)
+PhylumOTUTable$OTU <- rownames(PhylumOTUTable)
+
+# Join data frames
+Phylum_TaxaOTU <- full_join(PhylumTaxaTable, PhylumOTUTable, by="OTU")
+
+# Make Phylum column as rownames
+rownames(Phylum_TaxaOTU) <- Phylum_TaxaOTU$Phylum
+
+# Remove all taxonomy columns using !()
+Phylum_OTUdf <- Phylum_TaxaOTU[, !(colnames(Phylum_TaxaOTU) %in% colnames(PhylumTaxaTable))]
+
+# Transpose data and add sample data
+# the t() function coerces a data frame to a matrix, so you have to convert back.
+tPhylum_OTUdf <- t(Phylum_OTUdf) %>% as.data.frame
+
+# Remember, the count data column names had to match the sample data row names.
+# Make a new column with a column name that mirrors the one in the metadata data frame
+# You will need to make a similar column in the metadata if not done already.
+tPhylum_OTUdf$SampleID <- rownames(tPhylum_OTUdf)
+
+# Join data frames
+Phylum_DF <- full_join(PhylumSampleTable, tPhylum_OTUdf, by="SampleID")
+
+# View final object
+head(Phylum_DF)
+```
+
+We now have the data formatted in a way were we have all the necessary information to complete our analysis in the regular R environment (i.e., not phyloseq environment).  
+
+## Pre-processing
+
+Pre-processing is arguably the most important step in your data analysis pipeline.  We have already been exposed to some pre-processing examples in the last section - filtering low abundant reads and identifying samples with low read counts.  These concepts will be detailed with more precision in this chapter, and we will cover how to perform a few normalizations procedures.  One of which is commonly used to remove low abundant taxa. So it may feel we are jumping back and forth between sections, but the order is important.  Some normalizations (e.g., proportions) are sensitive to differences in taxa, so we want to make that we've removed non-informative and potentially spurious taxa prior to normalization.
+
+### Low abundance taxa {#lowabundtaxa}
+
+In section \@ref(taxafilter) we filtered low abundant taxa based on whether the sum of a taxa across all samples met a total count threshold.  That is actually a very crude way to eliminate low abundant taxa.  What if you had a taxa that had 5-10 counts consistently in 1 group but not in the other groups.  You may lose this information with that filtering method.  Another approach is to identify a minimum detection limit within a sample and then identify a whether a certain percentage of your samples meet that criteria. The phyloseq package has a function that does this, `filter_taxa`, but honestly, the `core` function from the microbiome package is much more straight-foward.  We will examine the latter.
+
+The `core` function requires 3 arguments.  The first is the phyloseq object, the second defines the 'detection' limit, and the third defines the 'prevalence' (i.e., proportion) that meets the defined limit.  
+
+Let's say we want to remove the LSD rat group and assess the microbiota on only UCD-T2DM rats.  We now have 4 groups and want to ensure we can detect a taxa that is only abundant in a single group.  That would be 25% of the samples, if the samples were evenly balanced.  As there is still inter-individual variability between rats, we decide to settle on a certain taxa having counts in at least 20% of the total sample.  Now, what should we define as the count limit?  There is evidence that [large effect sizes can be detected at sequences as low as 10 reads](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-5-210).  Thus, we will set our mimimum limit at 10 reads.  
+
+```{r core}
+# The function will fail if your criteria is too strong.
+phyobj_d10p25 <- core(phylo_obj, detection = 10, prevalence = 0.25)
+
+# View object
+phyobj_d10p25
+```
+
+If you recall, the earlier filter resulted in 2333 taxa, but this filtering procedure resulted in 400 taxa.  Both are a considerable drop from the original total of over 55,000.  How much data did we actually lose?  We can calculate it using the `sample_sums` function!
+
+```{r depthcomp}
+# Sum the sample sums will give us the sum of all reads
+Original_DepthSize <- sum(sample_sums(phylo_obj))
+
+# Filtered summed sample depths
+d10p25_DepthSize <- sum(sample_sums(phyobj_d10p25))
+
+100 * (d10p25_DepthSize/Original_DepthSize)
+```
+
+Reducing the taxa total by > 99% only resulted in 25% data loss.  This is a pretty glaring example of over-sequencing, but in general, microbial sequencing data tends to be skewed to low abundant taxa. 
+
+### Proportional Abundance
+
+Proportional abundance, also sometimes referred to relative abundance, can applied to a phyloseq object.  Both phyloseq and microbiome packages contain functions that can transform the OTU table. The `transform_sample_counts` function from phyloseq provides a 'function' argument where you can provide a single-argument function or create your own function to pass to the phyloseq object.  So it is very flexible.  The `microbiome::transform` function has several transformations coded into it, including the transformation to proportional abundances.  Please note the 'microbiome::' prefix to the `transform` function.  Transform is a common used function name, so the 'microbiome::" prefix denotes that this `transform` is specifically from the microbiome package. I advise using it in every use of `transform`.  
+
+Now that we have filtered our data, let's calculate the proportional abundances of our taxa.
+
+```{r transformRA}
+# Two arguments required, the phyloseq object and the transformation
+# Please see the help page for the full list of transformations: ?microbiome::transform
+phyobj_d10p25_prop <- microbiome::transform(phyobj_d10p25, "compositional")
+
+# View a subset of the data
+head(abundances(phyobj_d10p25_prop)[,1:10])
+
+# Do the taxa sum to 1?
+sample_sums(phyobj_d10p25_prop)
+```
+
+Perhaps we want to determine the median class proportional abundance?  Let's do it!
+
+```{r phylummedRA}
+# Use tax_glom() function
+phyobj_PA_Class <- tax_glom(phyobj_d10p25_prop, "Class")
+
+# Extract data
+phyobj_PA_Class_OTU <- abundances(phyobj_PA_Class)
+
+# Use apply to determine median for each row
+# Multiply by 100 to get percentage and round for readability.
+phyobj_PA_Class_OTUmedian <- round(apply(phyobj_PA_Class_OTU, 1, median) * 100, 2)
+
+# Extract taxonomy table
+phyobj_PA_ClassTaxa <- tax_table(phyobj_PA_Class)@.Data %>% as.data.frame()
+
+# Check to make sure row names of taxa table matches phyobj_PA_Class_OTUmedian names
+setequal(names(phyobj_PA_Class_OTUmedian) == rownames(phyobj_PA_ClassTaxa), TRUE)
+
+# If TRUE, add phyobj_PA_Class_OTUmedian to taxa table
+phyobj_PA_ClassTaxa$Median <- phyobj_PA_Class_OTUmedian
+
+# Keep necessary colums
+phyobj_PA_ClassTaxa_DF <- phyobj_PA_ClassTaxa[,colnames(phyobj_PA_ClassTaxa) %in% c("Phylum", "Class", "Median")]
+
+# View based on phylum order
+phyobj_PA_ClassTaxa_DF[order(phyobj_PA_ClassTaxa_DF$Phylum),]
+```
+
+Only 4 classes have a median proportional abundance greater than 1%.  This is fairly common in rodent and human studies.  At least 80-90% of taxa are within the Firmicutes and Bacteroidetes phyla.
+
+It is also common to filter taxa based on proportional abundances.  Many times, a minimum average or median proportion must be met.  Say, 1% on a scale of 0-100% (equivalent to 0.01 on a 0 to 1 scale).  We will use the `prune_taxa` function to do this
+
+```{r PAfilter}
+# Transform counts to proportional abundances.
+phylo_obj_PA <- microbiome::transform(phylo_obj, "compositional")
+
+# Determine mean proportional abundances by taxa.
+phylo_obj_PA_taxamean <- rowMeans(abundances(phylo_obj_PA))
+
+# Use logical statement in prune_taxa()Using prune_taxa() function.
+phyobj_PA_p01 <- prune_taxa(phylo_obj_PA_taxamean > 0.01, phylo_obj_PA)
+
+# View phyloseq object
+phyobj_PA_p01
+```
+
+14 taxa!  I guess we only want to see the most abundant taxa.  How much data was lost?
+
+```{r PAdepthcomp}
+# Filtered summed sample depths
+PA_p01_DepthSize <- sum(sample_sums(phyobj_PA_p01))
+
+100 * (PA_p01_DepthSize/Original_DepthSize)
+```
+
+In this case, we lost the majority of our data.  Likely due to the fact that the proportional abundances are spread across 55,000 taxa.  Still, it shows how a single filtering criteria may not be advantageous.  
+
+### Zeros {#zeroimput}
+
+This is arguably the most difficult aspect of microbial sequence analysis.  The zeros in the sequencing data do not necessarily mean that the bacteria is not present, it could also mean the sampling depth was not adequate.  Thus, treatment of zeros can sometimes depend on how the zero is viewed.  If there are all zeros for a particular taxa in 1 diet group and non-zero counts in another, then it may be good evidence that that particular taxa is not in the former diet group.  However, a few zeros in a taxa with random low counts may be a result of low sampling depth.  As there are so many zeros and many normalization methods require imputations to work, all zeros are generally considered equally.  
+
+Many normalization methods apply logarithmic treatments, which makes it necessary to add a non-negative value to zeros.  The easiest way is to shift the entire count table by a defined positive number.  Typically this is with the number 1. The `microbiome::tranform` function can apply this to your OTU table
+
+```{r shift1}
+# The function will fail if your criteria is too strong.
+phyobj_d10p25_shift <- microbiome::transform(phyobj_d10p25, transform="shift", shift=1)
+
+# Compare abbreviated taxa
+data.frame(Original=abundances(phyobj_d10p25)[1,1:15], Shifted=abundances(phyobj_d10p25_shift)[1,1:15])
+```
+
+Note that all counts increased by 1. This actually has a profound effect on the data.  The low abundant counts are affected much greater than the higher counts, and our data is skewed to low abundant counts!  
+
+Another [proposed](https://www.nrcresearchpress.com/doi/full/10.1139/cjm-2015-0821#.XYun6y5Kj9Q) approach, within a compositional framework, is a Bayesian-multiplicative treatment.  In depth details of the method can be found [here](https://journals.sagepub.com/doi/abs/10.1177/1471082X14535524), but it essentially replaces the zero with an estimate of the likelhood of the 0 being an artifact relative to the remainder of the data.  The estimate is not a count, so this procedure is not useful for statistical tools that only handle counts.  
+
+In order to perform this zero-imputation method, we will need to use the `cmultRepl` function from the zCompositions package. The first argument of `cmultRepl` takes your data, then we will input "CZM" (count zero multiplicative) in the 'method' argument, and "p-counts" (pseudo-counts) in the 'output' argument. We have to do a bit of data wrangling to get the treated data back into the phyloseq object.  
+
+```{r bmz, message=FALSE, warning=FALSE}
+# Load library
+library(zCompositions)
+
+# Extract OTU table
+d10p25_OTU <- abundances(phyobj_d10p25)
+
+# Taxa needs be rows and samples need to be columns
+d10p25_OTU_BMz <- cmultRepl(d10p25_OTU, method="CZM", output="p-counts")
+
+# Make duplicate phyloseq object with new name
+phyobj_d10p25_BMz <- phyobj_d10p25
+
+# Replace OTU table data with zero imputed data
+otu_table(phyobj_d10p25_BMz) <- otu_table(d10p25_OTU_BMz, taxa_are_rows = TRUE)
+
+# View abbreviated data
+head(abundances(phyobj_d10p25_BMz)[,1:15])
+```
+
+Be careful with the phyloseq objects that have had zero treatments and/or transformations.  Some of the functionalities may give incorrect or incosistent results, e.g., `tax_glom`.  It is best to subset or aggregate prior to these treatments.  If these treatments are required to make a subset/aggregation decision, then I advise making 2 separate phyloseq objects as we did in the above example.  
+
+### Centered log ratios
+
+A centered-log ratio (CLR) transformation has been suggested to render compositional data compatible with standard multivariate techniques.  However, the individual counts become ratios between all parts of the sample, so the interpretion is now altered.
+
+We will use the `clr` function from the rgr package to carry out this function.  We will use the same coding workflow as in Section \@ref(zeroimput).  The CLR transformation requires a counts or proportions values > 0.  Therefore, we will use the `phyobj_d10p25_BMz` object in the analysis.
+
+```{r clr, message=FALSE, warning=FALSE}
+# Load library
+library(rgr)
+
+# Extract OTU table from the zero imputed phyloseq object.
+BMz_OTU <- abundances(phyobj_d10p25_BMz)
+
+# Taxa needs be rows and samples need to be columns
+BMz_clr_OTU <- clr(BMz_OTU, ifwarn=FALSE)
+
+# Make duplicate phyloseq object with new name
+phyobj_BMz_clr <- phyobj_d10p25_BMz
+
+# Replace OTU table data with zero imputed data
+otu_table(phyobj_BMz_clr) <- otu_table(BMz_clr_OTU, taxa_are_rows = TRUE)
+
+# View abbreviated data
+head(abundances(phyobj_BMz_clr)[,1:15])
+```
+
+We now have positive and negative values due to the centering of the data.  We will use this transformation in Chapter 6 when looking at beta-diversity.
+
+## Conclusion
+
+We have been using the phyloseq object as a way to package all of the data associated with microbial sequencing in a convenient wrapper.  It allows for a single object to be manipulated when filtering and aggregating, but you'll realize in subsequent chapters that it can be claustrophic in certain data pipelines.  For example, you may not want to package your data into a phyloseq object if you're going to use the compositional approach to visualizing and analyzing (e.g., zero replacement and CLR transformation).  However, maybe you want to run your analysis at Family level before the compositional approach.  Packaging into a phyloseq package and pre-processing your data prior to the compositional approach would then be helpful.  
+
+
+ 
+

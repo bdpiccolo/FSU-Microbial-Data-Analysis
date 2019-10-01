@@ -18,7 +18,7 @@ The advantage of 16S rRNA sequencing is that it is fairly inexpensive, routinely
 
 ### Shotgun metagenomic sequencing
 
-Sequences all microbial genomic DNA.  Provides species level compositional data and bacterial genetic data.  The compositional data is exactly similar to 16S rRNA data, but superior because it gives species level depth.  However, it is much more expensive on a per sample basis and requires significantly greater computational power to process.  
+Sequences all microbial genomic DNA.  Provides species level compositional data and bacterial genetic data.  The compositional data is exactly similar to 16S rRNA data, but superior because it gives species level resolution.  However, it is much more expensive on a per sample basis and requires significantly greater computational power to process.  
 
 ## Microbial composition data from sequencing technologies {#structure}
 
@@ -30,7 +30,7 @@ In both cases, you end up with raw sequences that have to be mapped to reference
 
 There are some considerations you should consider when working with next-generation microbial sequencing data.  
 
-1. It is essential to reach a minimum sampling depth.
+1. It is essential to reach a minimum sampling depth (i.e., total number of sequence counts in a sample to ensure adequate coverage of all taxa).
 
 2. It is semi-quantitative data, i.e., counts of sequencing reads are not actually measuring a single bacteria.  Data is commonly referred to as "relative abundance."
 

@@ -7,7 +7,7 @@ R is an __object-oriented__ programming language that was developed for statisti
 (ref:SOFdr) From stackoverflow blog: [_The Impressive Growth of R_](https://stackoverflow.blog/2017/10/10/impressive-growth-r/). By David Robinson, 10/10/2017.
 
 ```{r SOFdr, fig.cap='(ref:SOFdr)', out.width='80%', fig.asp=.75, fig.align='center', echo=FALSE}
-knitr::include_graphics("plot_tags_time-1-768x768.png")
+knitr::include_graphics("./images/plot_tags_time-1-768x768.png")
 ```
 
 I bolded __object-oriented__ because it highlights a major advantage of __reproducibility__ in R and other programming-based langauge.  Everything that is done in R uses named objects as either __functions__ or __data__.  Understanding how functions manipulate __data types__ and __data structures__ is the foundation of working with R.  For example, if you want to obtain the mean over a set of numbers, the `mean` function is used to determine the mean of numbers within a __vector__.  These bolded words and phrases may seem abstract at this point, but this chapter will expand these concepts.
@@ -28,7 +28,7 @@ First step is to downloading R.  R is available at the [The Comprehensive R Arch
 (ref:Rwebsite) CRAN website
 
 ```{r Rwebsite, fig.cap='(ref:Rwebsite)', out.width='80%', fig.asp=.75, fig.align='center', echo=FALSE}
-knitr::include_graphics("cran.png")
+knitr::include_graphics("./images/cran.png")
 ```
 
 ## The R console
@@ -38,7 +38,7 @@ Figure 2.3 shows the R console after opening.  Our color scheme differ because I
 (ref:Rconsole) R console
 
 ```{r Rconsole, fig.cap='(ref:Rconsole)', out.width='80%', fig.asp=.75, fig.align='center', echo=FALSE}
-knitr::include_graphics("Rconsole.png")
+knitr::include_graphics("./images/Rconsole.png")
 ```
 
 Let's try some basic operations.  Type in 2 + 2, or copy the inline code (R code within the text) below, paste it into your R console, and press enter.  Note, since this web-book was written in R, there will typically be an output box after provided code.
@@ -134,7 +134,7 @@ It is fairly straight forward to download packages from the Bioconductor website
 (ref:phyloseq) phyloseq website at Bioconductor
 
 ```{r phyloseq, fig.cap='(ref:phyloseq)', out.width='80%', fig.asp=.75, fig.align='center', echo=FALSE}
-knitr::include_graphics("phyloseq.png")
+knitr::include_graphics("./images/phyloseq.png")
 ```
 
 All you have to do is copy and paste the inline code under the __Installation__ header into your R console and then press Enter.  Simple as that.
@@ -182,7 +182,7 @@ equalAssign = 100/4
 arrowAssign == equalAssign
 ```
 
-### Data types
+### Data types {#datatypes}
 
 It is important to understand how R handles different data types.  For example, how R handles categorical data that could be character strings (e.g., Obese or Lean), numerical data (e.g., 5, 8, 10567156.2, -400), etc.
 
@@ -192,7 +192,7 @@ __numeric__: Can get very technical, but generally any real number including dec
 
 __integer__: Will appear if all data are whole numbers.  R will automatically determine this designation, primarily when importing data.  Operations on numeric and integer data are similar.  
 
-__character__: Generally, any non-numeric or non-logical values (programmers call these, "string values").  Default setting for data that R cannot determine as numbers/logic.  Can almost force anything to be a character.  character values will always be surrounded by quotations.
+__character__: Generally, any non-numeric or non-logical values (programmers call these, "string values").  Default setting for data that R cannot determine as numbers/logic.  Can almost force anything to be a character.  Character values will always be surrounded by quotations.
 
 __factor__: This type of data looks like a character, but is technically a special type of integer.  It has a special attribute that assigns integers to a corresponding set of characters.  The underlying integer assignment allows R to order the characters in plots, in addition to some other special features.  Widely used in R, but can be confusing and lead to some odd outputs if not aware of their presence.
 
@@ -414,8 +414,11 @@ setwd("C:\\users\\brian\\documents\\FSU Workshop\\")
 For our purposes, the `read.csv` function will suffice. There are other functions that can 
 
 ```{r csvexample}
+# Data is in a subfolder, so can use '.\\Dir\\' to reach.
+# The '.' denotes the working directory
+CSVimport <- read.csv(".\\Data\\CSVexample.csv")
+
 # The head() function will show the first 6 rows of a data frame.
-CSVimport <- read.csv("CSVexample.csv")
 head(CSVimport)
 ```
 
@@ -428,7 +431,9 @@ There are now several packages that provide functions to import Excel files.  We
 ```{r readxl, message=FALSE, warning=FALSE}
 # Need to load the package.
 library(readxl)
-XLSXimport <- read_xlsx("XLSXexample.xlsx")
+
+# Import Excel file from subfolder
+XLSXimport <- read_xlsx(".\\Data\\XLSXexample.xlsx")
 XLSXimport
 ```
 
@@ -439,6 +444,8 @@ We can coerce the tibble into a regular data frame, similar to the csv import.
 ```{r xlsxcoerce, message=FALSE, warning=FALSE}
 # You can also coerce data types into different data types.
 XLSXimport_df <- as.data.frame(XLSXimport)
+
+# View abbreviated data
 head(XLSXimport_df)
 ```
 
@@ -607,7 +614,7 @@ CSV_exp40_filter
 
 There are many other ways to filter and subset your data.  There is actually a `subset` function that does the same things we covered here, but within a function. tidyverse has a more linear approach to filtering, which has become extremely popular.  Some workflows are better if you have millions of data points, but this way minimizes the need for add on functions.
 
-### Reshaping data
+### Reshaping data {#reshaping}
 
 <p class="alert alert-info">This can be considered a more intermediate to advanced topic.</p>
 
@@ -733,7 +740,7 @@ full_join(DF1, DF2, by="ID")
 
 Note the `NA` values within the rows for "S4" and "S5".
 
-### apply family of functions
+### apply family of functions {#applyfunctions}
 
 <p class="alert alert-info">This is __definitely__ an intermediate to advanced topic.  But it is unavoidable for high-throughput data analysis.  These functions are also what really sets R apart from more traditional statistical software.</p>
 
@@ -834,7 +841,7 @@ sapply(CSVapply, range)
 
 The apply functions can become extremely powerful when combined with user-defined functions.  They have various outputs to fit various needs, flexible, and can almost replace loops.
 
-### Sweep
+### Sweep {#sweep}
 
 R has a little secret behind the scenes when it deals with vectors of different lengths.  It recycles the shorter vector to match the the larger one.  Let's look at a very simplistic example.
 
@@ -911,7 +918,7 @@ SEM <- function(x) sd(x)/sqrt(length(x))
 SEM(CSVimport$BMI)
 ```
 
-### _t_-test and Mann Whitney U test
+### _t_-test and Mann Whitney U test {#ttestexamp}
 
 The functions are going to get a little more complicated with comparative tasks, like `t.test` and `wilcox.test` (functions for _t_-test and Mann Whitney U test, respectively).  They need to be able to determine which data is being compared and what the comparison groups are.  This also applies for ANOVA and regression based function as well.  We will look at a couple ways to provide this information, but be aware that not all user defined functions follow these examples.  It is entirely up to the author of the function to define their arguments.
 
@@ -926,7 +933,7 @@ Both of these function need to be flexible to handle the various ways that a _t_
 (ref:ttesthelp) _t_-test help page from the 'stats' package.
 
 ```{r ttesthelp, fig.cap='(ref:ttesthelp)', out.width='80%', fig.asp=.75, fig.align='center', echo=FALSE}
-knitr::include_graphics("ttesthelp.png")
+knitr::include_graphics("./images/ttesthelp.png")
 ```
 
 The help page shows every arguments that can be supplied to the `t.test` under the __Usage__ and __Arguments__ headers.  The __Usage__ section shows 3 different default settings for the `t.test` function, while the __Arguments__ section provides the details of each each argument.  The first example of `t.test` (first example under __Usage__) shows us that `t.test` can be run with only a numeric vector.  Let's try it and see what happens.
@@ -1038,7 +1045,7 @@ The Kruskal-Wallis test is the non-parametric equivlant to a 1-way anova.  Same 
 kruskal.test(BMI ~ Treatment, data = CSVimport)
 ```
 
-### Post-hoc Tests
+### Post-hoc tests
 
 The `TukeyHSD` function is available without an add-on package and requires the output from the `aov` function.
 

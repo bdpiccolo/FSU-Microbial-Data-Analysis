@@ -1,3 +1,185 @@
 # Alpha-Diversity
 
-__UNDER CONSTRUCTION__
+We went over the concept of alpha-diversity in Chapter \@ref(adivconcept) and now we get to actually estimate these indices in R.  Fortunately, producing these indices is straight forward using the phyloseq environment.  We will explore the functions that calculate various alpha-diversity indices and how to analyze them by groups.  If you recall, some of the richness measurements adjust for the number of taxa found as singletons and doubletons.  Therefore, some would argue that using filtered data is not appropriate, but I tend to believe it is a balance between removing spurious taxa in 16S data while maintaining true low abundant taxa.  Your filtering criteria should not be so strong to remove ALL low abundant taxa.  That would defeat the purpose of maximizing your sampling depth to discover true low abundant taxa.  Some of these functions will give a warning if they sense strong filters.
+
+## phyloseq package
+
+Let's use the `estimate_richness` function to calculate alpha-diversity indices in the UCD-T2DM Rat data.  We will use the phyloseq object that we pre-processed in Chapter \@ref(lowabundtaxa).
+
+### estimate_richness()
+
+```{r phyloadiv}
+# You can specify specific indices to calculate by using the 'measures' argument, see help page, ?estimate_richness
+UCDrats_Adiv <- estimate_richness(phyobj_d10p25)
+
+# View object
+head(UCDrats_Adiv)
+```
+
+The output provides all indices that we covered, "Observed", "Chao1", "ACE", and "Shannon", plus a few extras.  It is not attached to the phyloseq object, so we will need to extract the Sample Metadata and attach it to these data.  This will be demonstrated soon.
+
+## microbiome package
+
+There are several functions in the microbiome that measure alpha-diversity.  They are named based on what is measured, e.g., dominance, richness, rarity, etc. 
+
+### richness()
+
+Returns 'observed' and 'chao1' estimates.  The chao1 estimate varies slightly from the `estimate_richness` version.  The former is calculated based on [Chao (Scand J Stat, 1984)](https://www.jstor.org/stable/4615964?seq=1#page_scan_tab_contents), while the latter uses the `estimateR` function from the vegan package.  Details can be found at the help page, `?vegan::estimateR`. 
+
+```{r richness}
+# You can specify specific index/indices to calculate by using the 'index' argument
+UCDrats_Adiv_rich <- richness(phyobj_d10p25)
+
+# View abbreviated object
+head(UCDrats_Adiv_rich)
+```
+
+### dominance()
+
+Returns 7 estimates of dominance. Note, that the Simpson's index from `dominance` is in a different unit then the Simpson's index from `estimate_richness`, but they are the same.  We will demonstrate this by plotting both. 
+
+```{r dominance}
+# You can specify specific index/indices to calculate by using the 'index' argument
+UCDrats_Adiv_dom <- dominance(phyobj_d10p25)
+
+# View abbreviated object
+head(UCDrats_Adiv_dom)
+
+# Comparing Simpson's index from estimate_richness() output
+plot(UCDrats_Adiv$Simpson, UCDrats_Adiv_dom$simpson, xlab="estimate_richness()", ylab="dominance()")
+```
+
+It is a perfect linear relationship.
+
+### evenness()
+
+Returns 5 estimates of evenness.  Note, there are several variants to the Simpson's index. `evenness` returns Simpson's evenness, which is different than Simpson's dominance from `estimate_richness` and `dominance`. 
+
+```{r evenness}
+# You can specify specific index/indices to calculate by using the 'index' argument
+UCDrats_Adiv_even <- evenness(phyobj_d10p25)
+
+# View abbreviated object
+head(UCDrats_Adiv_even)
+```
+
+### rarity()
+
+Returns 4 estimates of rarity.  
+
+```{r rarity}
+# You can specify specific index/indices to calculate by using the 'index' argument
+UCDrats_Adiv_rar <- rarity(phyobj_d10p25)
+
+# View abbreviated object
+head(UCDrats_Adiv_rar)
+```
+
+## Data analysis
+
+Now that we know how to estimate a wide range of alpha-diversity measurements, we now want to know whether the indices are altered by our experimental treatments.  We will continue to work with the UCD-T2DM rat dataset.  Remember, there are 5 groups, but also 2 collection periods.  We will use a 1-way ANOVA for the rat groups and block by collection year.
+
+We will cover how to measure a single measurement first, and then go through the workflow of assessing all indices at the same time.  
+
+Let's see if there is a difference in Chao1.  First, we need to combine the diversity measurements with our Sample Metadata.  
+
+```{r adivanalysiscombine}
+# Extract Sample Metadata
+UCDrats_MetaData <- meta(phyobj_d10p25)
+
+# Make matching columns for both Alpha-diversity and metadata data frames using the row names
+# Sample Metadata already has matching column, but will need to create if not in data frame.
+UCDrats_Adiv$SampleID <- rownames(UCDrats_Adiv)
+
+# Join alpha-diversity and metadata
+UCDrats_Adiv_DF <- full_join(UCDrats_MetaData, UCDrats_Adiv)
+```
+
+Now, let's plot Chao1 by group.  We can quickly do this with the boxplot() function using the formula notation described in Chapter \@ref(ttestexamp).  It is a base plotting function, so probably not publication quality.  We just want to visually see if there are difference in the distribution of samples by group.
+
+```{r adivanalysisboxplot}
+# Boxplot by Groups
+UCDrats_MetaData <- boxplot(Chao1 ~ GroupAbbrev, data=UCDrats_Adiv_DF)
+
+# Boxplot by collection year
+UCDrats_MetaData <- boxplot(Chao1 ~ Collection, data=UCDrats_Adiv_DF)
+```
+
+Looks like the pre-diabetics (PD) and recent-diabetics (RD) rats may have higher diversity compared to the rats with more advanced diabetes (D3M and D6M).  Also appears that rats collected in 2016 may have higher diversity compared to those collected in 2014.  Let's see if these differences are statistically significant.
+
+```{r adivanalysisANOVA}
+# Assess ANOVA on Chao1
+Chao1ANOVA <- aov(Chao1 ~ GroupAbbrev + Collection, data=UCDrats_Adiv_DF)
+
+# View ANOVA table
+summary(Chao1ANOVA)
+```
+
+Both 'GroupAbbev' and 'Collection' effects are significant.  Now, which groups differ from each other.
+
+```{r adivanalysisTukey}
+# Using the tukey HSD test.
+TukeyHSD(Chao1ANOVA, "GroupAbbrev")
+```
+
+Looks like the Chao1 index in RD rats is greater than in both the D3M and D6M rats, while the Chao1 index in PD is higher than D3M and approaches significance relative to D6M.  
+
+This is not a stats course, so we cannot go over every statistical approach that R offers.  However, these indices can be treated like any other data.  For example you could correlate it to other continuous data, e.g., blood glucose, dietary intake data, etc.
+
+Now, let's say we wanted to analyze the rest.  We could copy and paste this workflow, and then change Chao1 to Shannon in every object.  But, that may lead to errors that we may not notice.  For example, you may think you have an output for the Shannon index, but oops, you still have Chao1 in your formula.  It would be much better if R did it all of the heavy work for us.  Let's see how this can be done. 
+
+<p class="alert alert-info">This next example includes immediate and advance coding.  Examples of this workflow were shown in Chapters \@ref(reshaping) and \@ref(applyfunctions).</p>
+
+```{r adivmultianalysis}
+# Start with the combined data frame, UCDrats_Adiv_DF, and rearrange it into a tall format.
+UCDrats_Adiv_DF_Tall <- UCDrats_Adiv_DF %>% gather(AlphaDiv, value, -(SampleID:Collection))
+
+# Calculate means and sd
+AdivMeans <- UCDrats_Adiv_DF_Tall %>%
+	group_by(AlphaDiv, GroupAbbrev, Collection) %>%
+	summarise(MEAN = mean(value))
+
+# Make new column combining effect columns, and then arrange to wide format
+AdivMeans <- AdivMeans %>% 
+	as.data.frame() %>%
+	mutate(GroupYear = paste(GroupAbbrev, Collection, sep="_")) %>%
+	dplyr::select(-GroupAbbrev, -Collection) %>%
+	spread(GroupYear, MEAN)
+
+# Extract the string labels of all indices
+AdivIndices <- unique(UCDrats_Adiv_DF_Tall$AlphaDiv)
+
+# Use sapply() to get p-values from the ANOVAs
+AdivANOVA_P <- sapply(AdivIndices, function(x) {
+	# Subset by Alpha diversity index
+	DAT <- UCDrats_Adiv_DF_Tall[UCDrats_Adiv_DF_Tall$AlphaDiv %in% x,]
+	# Use subsetted data in ANOVA
+	AOV <- aov(value ~ GroupAbbrev + Collection, data=DAT)
+	# Extract p-value
+	AOV_P <- round(summary(AOV)[[1]][1:2,"Pr(>F)"], 5)
+	# Name vector elements if > 2 effects.  
+	# The order should follow the order in which they were coded into the ANOVA.
+	names(AOV_P) <- c("GroupAbbrev", "Collection")
+	# return final object
+	AOV_P
+})
+
+# Transpose AdivANOVA_P and coerce to data frame
+tAdivANOVA_P <- t(AdivANOVA_P) %>% as.data.frame()
+
+# Calculate FDR (really should apply across all tests, not by effect...)
+tAdivANOVA_P$GroupAbbrev_FDR <- p.adjust(tAdivANOVA_P$GroupAbbrev, method="fdr")
+tAdivANOVA_P$Collection_FDR <- p.adjust(tAdivANOVA_P$Collection, method="fdr")
+
+# Add AlphaDiv column with row names to match AdivMeans object
+tAdivANOVA_P$AlphaDiv <- rownames(tAdivANOVA_P)
+
+# Join tAdivANOVA_P and AdivMeans
+AdivMeansAOVresults <- full_join(AdivMeans, tAdivANOVA_P, by="AlphaDiv")
+
+# View results
+AdivMeansAOVresults
+```
+
+Now we have means, P-values, and FDR for all indices.  Note, the "se.ACE" and "se.Chao1" can be removed as they are standard error calculations of ACE and Chao1 indices.  
+

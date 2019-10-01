@@ -1,3 +1,470 @@
 # Differential Abundance
 
-__UNDER CONSTRUCTION__
+The next step in assessing differences in microbial sequencing data is to determine which taxa differ between experimental groups.  Be warned, this area is still under active research and debate.  I would not be surprised if some of the approaches covered in this chapter will fall out of favor after several years. 
+
+Similar to beta-diversity, results can be variable depending on the normalization and statistical approach.  Some approaches are also more conservative than others.  Recently, I've adopted a "survival analysis" approach and identify taxa that intersect among several different approaches.  
+
+I would argue that the phyloseq environment makes alpha- and beta-diversity assessment fairly straight-forward in R.  Unfortunately, differential abundance analysis occurs entirely outside of the phyloseq environment.  There are also different packages that we'll introduce in this chapter that require modification of the the data.  Some are directly related to RNA-seq analysis and build an object similar to the phyloseq object, but these new objects are typically unrelated to microbial data.  We will navigate these approaches with care, but in depth detail of these methods are beyond the scope of this class. 
+
+<p class="alert alert-info">Unfortunately, there is no way to avoid immediate and advance coding in this chapter.  Some of the statistical approaches require running a single test on all taxa, so we will have to use functions that can loop similar code (e.g., the apply family of functions). Other approaches have methods embedded in functions that do not rely on loops, but have additional steps and complex functions.  Please refer to Chapter \@ref(rbasics) to help with some of these concepts.  Links to additional help will be provided throughout.</p>
+
+## Rank analysis
+
+Early studies of microbial sequencing data used non-parametric rank-order statistics for group comparisons, e.g., Mann-Whitney U Test and Kruskal-Wallis 1-way analysis of variance by rank. This approach was adopted due to the fact that count data and proportional abundances are rarely normally distributed.  However, some have criticized this approach due to the fact that the underlying data is compositional and should be handled by compositional data analysis approaches.  Furthermore, the high abundance of zeros in low abundant taxa inflate the number of ties in the rank and limit the power to detect differences in low abundant taxa.  
+
+Still, it is widely used by many investigators and can be more conservative then other methods we'll cover.  We will use the Mann-Whitney U test to determine which taxa differ between LSD and pre-diabetic (PD) UCD-T2DM rats under various normalizations.  Since this is 16S rRNA data and we have poor resolution at Species level, we will evaluate group differences at Genus level for the ease of interpretation.
+
+```{r mannwhit, results="hide", warning=FALSE}
+# Aggregate to Genus level
+phyobj_d10p25_G <- tax_glom(phyobj_d10p25, "Genus")
+
+# Subset phyloseq object
+phyloG_LSDPD <- prune_samples(meta(phyobj_d10p25_G)$GroupAbbrev %in% c("LSD", "PD"), phyobj_d10p25_G)
+
+# Extract Sample Meta Data and make new ID column with rownames
+LSDPD_Gmeta <- meta(phyloG_LSDPD) %>% as.data.frame()
+LSDPD_Gmeta$SampleID <- rownames(LSDPD_Gmeta)
+
+# Exract OTU table 
+LSDPD_Gcounts <- abundances(phyloG_LSDPD)
+
+# Need to join with meta data, so samples need to be rows.
+# transpose data and make new ID column with rownames
+tLSDPD_Gcounts <- t(LSDPD_Gcounts) %>% as.data.frame()
+tLSDPD_Gcounts$SampleID <- rownames(tLSDPD_Gcounts)
+
+# Join count and meta data
+LSDPD_Gcountmeta <- full_join(LSDPD_Gmeta, tLSDPD_Gcounts, by="SampleID")
+
+# Reshape data to tall format 
+# The '-' prefix denotes columns that should not have data reshaped into the new Taxa column
+LSDPD_G_tall <- LSDPD_Gcountmeta %>% gather(Taxa, counts, -SampleID, -Rat, -GroupAbbrev, -Collection)
+
+# Identify the unique taxa now listed in the "Taxa" column
+LSDPD_G_uniqueOTU <- unique(LSDPD_G_tall$Taxa)
+
+# Use sapply() to loop the Mann-Whitney U test across all unique taxa
+LSDPD_MW_P <- sapply(LSDPD_G_uniqueOTU, function(x) {
+	# Subset data within function
+	DAT <- LSDPD_G_tall[LSDPD_G_tall$Taxa %in% x,]
+	
+	# Run Mann Whitney U on subsetted data
+	MWU <- wilcox.test(counts ~ GroupAbbrev, data=DAT)
+	
+	# Extract P.value and return
+	MWU$p.value
+})
+
+# Make new data frame containing taxa identifier, p value, and FDR.
+LSDPD_MW_P_df <- data.frame(Taxa=names(LSDPD_MW_P), P=round(LSDPD_MW_P, 5), FDR=round(p.adjust(LSDPD_MW_P, "fdr"), 5))
+
+# Exract Taxa table, no extractor function, so need to manually extract.
+LSDPD_Gtaxa <- tax_table(phyloG_LSDPD)@.Data %>% as.data.frame()
+
+# Make Taxa column of row names for unique identifier, to join with p value data frame
+LSDPD_Gtaxa$Taxa <- rownames(LSDPD_Gtaxa)
+
+# Join P value and taxa data frames
+LSDPD_MW_results <- full_join(LSDPD_Gtaxa, LSDPD_MW_P_df, by="Taxa")
+
+# Subset significant results
+LSDPD_MW_Sigresults <- LSDPD_MW_results[LSDPD_MW_results$FDR < 0.05,]
+
+# Dispaly with trimmed columns
+LSDPD_MW_Sigresults[,c("Phylum", "Family", "Genus", "FDR")]
+```
+
+```{r mannwhittable, echo=FALSE}
+knitr::kable(LSDPD_MW_Sigresults[,c("Phylum", "Family", "Genus", "FDR")],booktabs = TRUE, row.names=FALSE) %>% kableExtra::kable_styling(full_width = FALSE)
+```
+
+Almost 20 genera are altered between the LSD and PD rats.  However, we do not have any information regarding the dispersion of the data.  Let's calculate the median and IQR since we used a non-parametric method. 
+
+```{r mannwhitmedian, warning=FALSE}
+# Can calculate this from LSDPD_G_tall object using tidyverse
+# Note the use of the pipe, %>%, the function sequence will terminate after the last pipe.
+LSDPD_G_MEDIAN <- LSDPD_G_tall %>%
+
+	# Define columns to get groups.  
+	# In our case, we want medians by Taxa and GroupAbbrev
+	group_by(Taxa, GroupAbbrev) %>%
+	
+	# Summarize defines the functions that we want to group by
+	# Use the column name in which you want the function to run on
+	summarise(MEDIAN = median(counts), IQR = IQR(counts)) 
+
+# View object 
+LSDPD_G_MEDIAN	
+```
+
+We could stop here, but it would be better to organize the Mann-Whitney results with the median/IQR data.  With a bit of data wrangling, we can do it.
+
+```{r mannwhitcombine, warning=FALSE, results="hide"}
+# Will use tidyverse workflow to do this.
+LSDPD_G_MEDIAN_wide <- LSDPD_G_MEDIAN %>% 
+
+	# Use gather() to combine MEDIAN and IQR columns into a single column
+	gather(STATS, value, -Taxa, -GroupAbbrev) %>%
+	
+	# Use mutate() to make new columns that combines GroupAbbrev and STATS
+	mutate(GroupStat = paste(GroupAbbrev, STATS, sep="_")) %>%
+	
+	# Use dplyr::select() to remove GroupAbbrev and STATS columns
+	dplyr::select(-GroupAbbrev, -STATS) %>% 
+	
+	# Use spread() to distribute value by GroupStat
+	spread(GroupStat, value) 
+
+# Join with LSDPD_MW_results
+LSDPD_MW_Final <- full_join(LSDPD_MW_results, LSDPD_G_MEDIAN_wide, by="Taxa")
+
+# Display significant taxa with trimmed columns
+LSDPD_MW_Final[LSDPD_MW_Final$FDR < 0.05, c("Genus", "FDR","LSD_MEDIAN","LSD_IQR","PD_MEDIAN","PD_IQR")]
+```
+
+```{r mannwhitcombinetable, echo=FALSE}
+knitr::kable(LSDPD_MW_Final[LSDPD_MW_Final$FDR < 0.05, c("Genus", "FDR","LSD_MEDIAN","LSD_IQR","PD_MEDIAN","PD_IQR")],booktabs = TRUE, row.names=FALSE) %>% kableExtra::kable_styling(full_width = FALSE)
+```
+
+The table only shows the relevant columns for the sake of brevity in the web-book.  There are several genera that are only identified by "g__"; these are undefined genera that likely were defined only at a higher taxonomy level.  You will see the full taxonomy if you do not filter columns in `LSDPD_MW_Final`.  Major results from this analysis suggest that LSD rats have lower abundances of _Lactobacillus_ and greater abundances of _Akkermansia_ relative to UCD-T2DM rats that have yet to develop diabetes.
+
+Let's follow the same workflow, but with proportional abundances.  We can start after we've extracted out of the phyloseq object.
+
+```{r MWUprop, results="hide", warning=FALSE, results="hide"}
+# Convert counts to relative abundance with sweep() function
+# Samples must add to 1, so sum by column and sweep sums by columns
+LSDPD_Gprop <- sweep(LSDPD_Gcounts, 2, colSums(LSDPD_Gcounts), "/")
+
+# Need to join with meta data, so samples need to be rows.
+# transpose data and make new ID column with rownames
+tLSDPD_Gprop <- t(LSDPD_Gprop) %>% as.data.frame()
+tLSDPD_Gprop$SampleID <- rownames(tLSDPD_Gprop)
+
+# Join count and meta data
+LSDPD_Gpropmeta <- full_join(LSDPD_Gmeta, tLSDPD_Gprop, by="SampleID")
+
+# Reshape data to tall format 
+# The '-' prefix denotes columns that should not have data reshaped into the new Taxa column
+LSDPD_Gprop_tall <- LSDPD_Gpropmeta %>% gather(Taxa, prop, -SampleID, -Rat, -GroupAbbrev, -Collection)
+
+# Turn to percentages for rounding and easier interpretation
+LSDPD_Gprop_tall$prop <- round(LSDPD_Gprop_tall$prop * 100, 3)
+
+# Identify the unique taxa now listed in the "Taxa" column
+LSDPD_G_uniqueOTU <- unique(LSDPD_Gprop_tall$Taxa)
+
+# Use sapply() to loop the Mann-Whitney U test across all unique taxa
+LSDPD_propMW_P <- sapply(LSDPD_G_uniqueOTU, function(x) {
+	# Subset data within function
+	DAT <- LSDPD_Gprop_tall[LSDPD_Gprop_tall$Taxa %in% x,]
+	
+	# Run Mann Whitney U on subsetted data
+	MWU <- wilcox.test(prop ~ GroupAbbrev, data=DAT)
+	
+	# Extract P.value and return
+	MWU$p.value
+})
+
+# Make new data frame containing taxa identifier, p value, and FDR.
+LSDPD_propMW_P_df <- data.frame(Taxa=names(LSDPD_propMW_P), P=round(LSDPD_propMW_P, 5), FDR=round(p.adjust(LSDPD_propMW_P, "fdr"), 5))
+
+# Join P value and taxa data frames
+# Taxa table extracted from phyloseq object in coding above
+LSDPD_propMW_results <- full_join(LSDPD_Gtaxa, LSDPD_propMW_P_df, by="Taxa")
+
+# Can calculate this from LSDPD_Gprop_tall object using tidyverse
+# Note the use of the pipe, %>%, the function sequence will terminate after the last pipe.
+LSDPD_Gprop_MEDIANwide <- LSDPD_Gprop_tall %>%
+
+	# Define columns to get groups.  
+	# In our case, we want medians by Taxa and GroupAbbrev
+	group_by(Taxa, GroupAbbrev) %>%
+	
+	# Summarize defines the functions that we want to group by
+	# Use the column name in which you want the function to run on
+	summarise(MEDIAN = median(prop), IQR = IQR(prop)) %>%
+
+	# We can continue this pipe sequence
+	# Use gather() to combine MEDIAN and IQR columns into a single column
+	gather(STATS, value, -Taxa, -GroupAbbrev) %>%
+	
+	# Use mutate() to make new columns that combines GroupAbbrev and STATS
+	mutate(GroupStat = paste(GroupAbbrev, STATS, sep="_")) %>%
+	
+	# Use dplyr::select() to remove GroupAbbrev and STATS columns
+	dplyr::select(-GroupAbbrev, -STATS) %>% 
+	
+	# Use spread() to distribute value by GroupStat
+	spread(GroupStat, value) 
+
+# Join with LSDPD_MW_results
+LSDPD_propMW_Final <- full_join(LSDPD_propMW_results, LSDPD_Gprop_MEDIANwide, by="Taxa")
+
+# Display significant taxa with trimmed columns
+LSDPD_propMW_Final[LSDPD_propMW_Final$FDR < 0.05, c("Genus", "FDR","LSD_MEDIAN","LSD_IQR","PD_MEDIAN","PD_IQR")]
+```
+
+```{r MWUproptable, echo=FALSE}
+knitr::kable(LSDPD_propMW_Final[LSDPD_propMW_Final$FDR < 0.05, c("Genus", "FDR","LSD_MEDIAN","LSD_IQR","PD_MEDIAN","PD_IQR")],booktabs = TRUE, row.names=FALSE) %>% kableExtra::kable_styling(full_width = FALSE)
+```
+
+Good agreement with Mann-Whitney U between count and proportional data.  `r sum(LSDPD_propMW_Final[LSDPD_propMW_Final$FDR < 0.05, "Taxa"] %in% LSDPD_MW_Final[LSDPD_MW_Final$FDR < 0.05, "Taxa"])` taxa were significant between both results.  Lets try this workflow one more time, but with CLR normalized data, also referred to as ANCOM ( __A__ nalysis of __Co__ mposition of __M__ icrobes).
+
+```{r MWUclr, results="hide", warning=FALSE}
+# load libraries if necessary
+# library(zCompositions)
+# library(rgr)
+
+# Impute zeros with Bayesian-multiplicative treatment
+LSDPD_Gcounts_BMz <- cmultRepl(LSDPD_Gcounts, method="CZM", output="p-counts")
+
+# Taxa needs be rows and samples need to be columns
+LSDPD_G_BMz_clr <- clr(LSDPD_Gcounts_BMz, ifwarn=FALSE)
+
+# Need to join with meta data, so samples need to be rows.
+# transpose data and make new ID column with rownames
+tLSDPD_Gclr <- t(LSDPD_G_BMz_clr) %>% as.data.frame()
+tLSDPD_Gclr$SampleID <- rownames(tLSDPD_Gclr)
+
+# Join count and meta data
+LSDPD_Gclrmeta <- full_join(LSDPD_Gmeta, tLSDPD_Gclr, by="SampleID")
+
+# Reshape data to tall format 
+# The '-' prefix denotes columns that should not have data reshaped into the new Taxa column
+LSDPD_Gclr_tall <- LSDPD_Gclrmeta %>% gather(Taxa, clr, -SampleID, -Rat, -GroupAbbrev, -Collection)
+
+# Identify the unique taxa now listed in the "Taxa" column
+LSDPD_G_uniqueOTU <- unique(LSDPD_Gclr_tall$Taxa)
+
+# Use sapply() to loop the Mann-Whitney U test across all unique taxa
+LSDPD_clrMW_P <- sapply(LSDPD_G_uniqueOTU, function(x) {
+	# Subset data within function
+	DAT <- LSDPD_Gclr_tall[LSDPD_Gclr_tall$Taxa %in% x,]
+	
+	# Run Mann Whitney U on subsetted data
+	MWU <- wilcox.test(clr ~ GroupAbbrev, data=DAT)
+	
+	# Extract P.value and return
+	MWU$p.value
+})
+
+# Make new data frame containing taxa identifier, p value, and FDR.
+LSDPD_clrMW_P_DF <- data.frame(Taxa=names(LSDPD_clrMW_P), P=round(LSDPD_clrMW_P, 5), FDR=round(p.adjust(LSDPD_clrMW_P, "fdr"), 5))
+
+# Join P value and taxa data frames
+# Taxa table extracted from phyloseq object in coding above
+LSDPD_clrMW_results <- full_join(LSDPD_Gtaxa, LSDPD_clrMW_P_DF, by="Taxa")
+
+# Can calculate this from LSDPD_Gclr_tall object using tidyverse
+# Note the use of the pipe, %>%, the function sequence will terminate after the last pipe.
+LSDPD_Gclr_MEDIANwide <- LSDPD_Gclr_tall %>%
+
+	# Define columns to get groups.  
+	# In our case, we want medians by Taxa and GroupAbbrev
+	group_by(Taxa, GroupAbbrev) %>%
+	
+	# Summarize defines the functions that we want to group by
+	# Use the column name in which you want the function to run on
+	summarise(MEDIAN = median(clr), IQR = IQR(clr)) %>%
+
+	# We can continue this pipe sequence
+	# Use gather() to combine MEDIAN and IQR columns into a single column
+	gather(STATS, value, -Taxa, -GroupAbbrev) %>%
+	
+	# Use mutate() to make new columns that combines GroupAbbrev and STATS
+	mutate(GroupStat = paste(GroupAbbrev, STATS, sep="_")) %>%
+	
+	# Use dplyr::select() to remove GroupAbbrev and STATS columns
+	dplyr::select(-GroupAbbrev, -STATS) %>% 
+	
+	# Use spread() to distribute value by GroupStat
+	spread(GroupStat, value) 
+
+# Join with LSDPD_MW_results
+LSDPD_clrMW_Final <- full_join(LSDPD_clrMW_results, LSDPD_Gclr_MEDIANwide, by="Taxa")
+
+# Display significant taxa with trimmed columns
+LSDPD_clrMW_Final[LSDPD_clrMW_Final$FDR < 0.05, c("Genus", "FDR","LSD_MEDIAN","LSD_IQR","PD_MEDIAN","PD_IQR")]
+```
+
+```{r MWUclrtable, echo=FALSE}
+knitr::kable(LSDPD_clrMW_Final[LSDPD_clrMW_Final$FDR < 0.05, c("Genus", "FDR","LSD_MEDIAN","LSD_IQR","PD_MEDIAN","PD_IQR")],booktabs = TRUE, row.names=FALSE) %>% kableExtra::kable_styling(full_width = FALSE)
+```
+
+Again, excellent agreement between the raw count data and CLR normalized data when using the Mann-Whitney U test. However, the CLR normalization is difficult to interpret in a table.  Remember, each measurement in a CLR normalization is a log ratio between the measurement and the mean taxa.  
+
+## DESeq2
+
+DESeq2 is a Bioconductor based R package that was developed for [RNA-seq count data analysis](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8) that uses a Negative Binomial Wald Test to compare dichtonomous outcomes.  This workflow has been [championed by the authors of phyloseq](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531) and they have demonstrated how to [transfer a phyloseq object into a DESeq2 object for differential abundance testing](http://joey711.github.io/phyloseq-extensions/DESeq2.html).  
+
+Unlike the non-parametric tests, DESeq2 can integrate covariates into the fitted model it uses.  So that is a big plus, especially for those working with human clinical samples.  I will refer you to the [DESeq2 references manual](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#how-can-i-include-a-continuous-covariate-in-the-design-formula) for those needing this functionality.
+
+As DESeq2 requires dichtonomous outcomes, we will use the LSD vs PD data from above.
+
+```{r DESeq2workflow, warning=FALSE, results="hide", message=FALSE}
+# load library
+library(DESeq2)
+
+# phyloseq authors made a function that does all of the heavy lifting to get a phyloseq object into a DESeqDataSet object.
+# Must be in DESeqDataSet for DESeq2 to work
+# The phyloseq_to_deseq2() requires you to identify the column in the Sample Metadata that is to be compared.
+LSDPD_G_deseq2 = phyloseq_to_deseq2(phyloG_LSDPD, ~ GroupAbbrev)
+
+# Run the Wald test as implemented in DESeq2
+LSDPD_G_deseq2Wald = DESeq(LSDPD_G_deseq2, test="Wald", fitType="parametric")
+
+# The results() function creates a DESeq2 table of the results that we can coerce into a data frame
+LSDPD_G_deseq2Waldres = results(LSDPD_G_deseq2Wald, cooksCutoff = FALSE) %>% as.data.frame()
+
+# Make a Taxa column to match the column we made in the taxa table data frame
+LSDPD_G_deseq2Waldres$Taxa <- rownames(LSDPD_G_deseq2Waldres)
+
+# Join DESeq2 results and taxa data frames
+# Taxa table extracted from phyloseq object in coding above
+LSDPD_DESeq2_results <- full_join(LSDPD_Gtaxa, LSDPD_G_deseq2Waldres, by="Taxa")
+
+# View abbreviated table
+LSDPD_DESeq2_results[LSDPD_DESeq2_results$padj < 0.05,c("Genus","baseMean","log2FoldChange","padj")]
+```
+
+```{r DESeq2table, echo=FALSE}
+knitr::kable(LSDPD_DESeq2_results[LSDPD_DESeq2_results$padj < 0.05,c("Genus","baseMean","log2FoldChange","padj")],booktabs = TRUE, row.names=FALSE) %>% kableExtra::kable_styling(full_width = FALSE)
+```
+
+Again, this is an abbreviated output to maintain the formating in the webbook.  The DESeq2 output provides a baseMean and log2FoldChange columns that require a little explaining because they are not as straight-forward as they seem.  The results for these columns are actually normalized baseMeans and log2foldchanges, so they will not sync with similar calculations on the raw count.  There are instances were the direction of the log2 fold change has been reversed between DESeq2's log fold change calculations and the log2 fold change using raw count data.  Typically this will only occur in low abundant taxa.  
+
+Overall, `r sum(LSDPD_DESeq2_results[LSDPD_DESeq2_results$padj < 0.05,"Taxa"] %in% LSDPD_MW_results[LSDPD_MW_results$FDR < 0.05,"Taxa"])` of the taxa match between this analysis and the Mann-Whitney U test on raw counts.  So, actually fairly close.  Surprisingly more conservative.  My experience with DESeq2 is that it tends to be much more liberal.
+
+## metagenomeSeq
+
+metagenomeSeq is another Bioconductor based R package, but it was developed specifically for 16S rRNA sequencing data.  It can also be extended to shotgun metagenomics sequencing as the properties of 16S and shotgun metagonomics are similar.  metagenomeSeq uses a cumulative sum scaling approach to normalize its data followed by either a Zero-inflated Log-Normal or Gaussian mixture model.  Further details of the statistical approach is detailed [here](https://www.nature.com/articles/nmeth.2658).  
+
+Like DESeq2, metagenomeSeq allows for the addition of covariates, so it is more amendable to clinical studies as opposed to the non-parametric approach. Still, metagenomeSeq is sensitive to low abundant taxa.  In fact, the authors recommend [restricting the analysis to those with a minimum number of positive samples (page 15 of metagenomeSeq's manual)](https://bioconductor.org/packages/release/bioc/vignettes/metagenomeSeq/inst/doc/metagenomeSeq.pdf).  Most metagenomeSeq tutorials cover pairwise comparisons, but comparisons of > 2 groups can be conducted.  However, it uses a workflow from another Bioconductor package, [limma](https://bioconductor.org/packages/release/bioc/html/limma.html).  I will refer you [metagenomeSeq's manual for further information](https://bioconductor.org/packages/release/bioc/vignettes/metagenomeSeq/inst/doc/metagenomeSeq.pdf).
+
+Let's use metagenomeSeq to see which taxa are differential regulated between LSD and PD rats.  Like phyloseq and DESeq2, metagenomeSeq requires its own object that packages all of the data together.  For this workflow, we need the count, Sample Metadata, and taxonomy data.  While phyloseq has a convenience function, `phyloseq_to_metagenomeSeq`, that will transition a phyloseq object to a metagenomeSeq object, it currently has a [bug](https://github.com/joey711/phyloseq/issues/1118) that will not allow us to use it with our current phyloseq object.  Therefore, we will create it manually.
+
+```{r metagenomeSeqlibrary, results="hide", warning=FALSE, message=FALSE}
+# Load library
+library(metagenomeSeq)
+```
+
+```{r metagenomeSeqworkflow, results="hide"}
+# We will start with the data already extracted from the phyloseq object
+# Need to convert Sample Metadata and Taxonomy data into objects required for metagenomeSeq
+LSDPD_G_MGSmeta = AnnotatedDataFrame(LSDPD_Gmeta)
+LSDPD_G_MGStaxa = AnnotatedDataFrame(LSDPD_Gtaxa)
+
+# Create metagenomeSeq object with count data, metadata, and taxonomy data
+LSDPD_G_MGobj = newMRexperiment(LSDPD_Gcounts, phenoData=LSDPD_G_MGSmeta,featureData=LSDPD_G_MGStaxa)
+
+## Zero-inflated Log-Normal mixture model
+# Normalize data with cumulative sum scaling
+LSDPD_G_MGobj <- cumNorm(LSDPD_G_MGobj, p = cumNormStatFast(obj=LSDPD_G_MGobj))
+
+# Designate model.  Only need to set the right side of the tilde (~). 
+# Setting 1 prior to the variables sets the slope.
+# Needs metadata from metagenomeSeq object. pData() is extractor function for metagenomeSeq object
+LSDPD_G_MGobj_mod <- model.matrix(~1 + GroupAbbrev, data = pData(LSDPD_G_MGobj))
+
+# Run the zero-inflated log-normal model.
+LSDPD_G_MGobj_res = fitFeatureModel(LSDPD_G_MGobj, LSDPD_G_MGobj_mod)
+
+# Extract results
+LSDPD_G_MGobj_resDF <- MRcoefs(LSDPD_G_MGobj_res, number=nrow(LSDPD_G_MGobj))
+
+# Set column to bind with taxonomy data
+LSDPD_G_MGobj_resDF$Taxa <- rownames(LSDPD_G_MGobj_resDF)
+
+# Coerce Taxa column in taxonomy data to match labels in metagenomeSeq output table.
+LSDPD_Gtaxa$Taxa <- gsub("X", "", make.names(LSDPD_Gtaxa$Taxa))
+
+# Join taxomony data and metagenomeSeq output
+LSDPD_G_MGobj_Final <- inner_join(LSDPD_Gtaxa, LSDPD_G_MGobj_resDF, by="Taxa")
+
+# Remove taxa that did not compute
+LSDPD_G_MGobj_Final_noNA <- LSDPD_G_MGobj_Final[!(LSDPD_G_MGobj_Final$pvalues %in% NA),]
+
+# View abbreviated table
+LSDPD_G_MGobj_Final_noNA[LSDPD_G_MGobj_Final_noNA$adjPvalues < 0.05,c("Genus","logFC", "adjPvalues")]
+```
+
+```{r metagenomeSeqtable, echo=FALSE}
+knitr::kable(LSDPD_G_MGobj_Final_noNA[LSDPD_G_MGobj_Final_noNA$adjPvalues < 0.05,c("Genus","logFC", "adjPvalues")],booktabs = TRUE, row.names=FALSE) %>% kableExtra::kable_styling(full_width = FALSE)
+```
+
+Much different output.  Only `r sum(LSDPD_G_MGobj_Final_noNA$adjPvalues < 0.05)` taxa were found to be differential altered between LSD and pre-diabetic UCD-T2DM rats.  _Lactobacillus_ and _Akkermansia_ are also no longer statistically significant.  Let's look at the raw counts.
+
+```{r LactoAkkerrawcounts}
+# Have to identify by unique numerical ID (OTU); Lactobacillus: 1107027 and and Akkermansia: 363731
+# Arrange by GroupAbbrev
+LSDPD_Gcountmeta[,c("GroupAbbrev", "1107027", "363731")] %>% arrange(GroupAbbrev)
+```
+
+Looks pretty clear that these raw counts differ by group.  Let's see the normalized counts that metagenomeSeq used in it's model.
+
+```{r LactoAkkerMGSnormcounts}
+# Extract counts
+LSDPD_G_MGnormcounts <- MRcounts(LSDPD_G_MGobj, norm = T)
+
+# transpose and coerce into data frame
+tLSDPD_G_MGnormcounts <- t(LSDPD_G_MGnormcounts) %>% as.data.frame()
+
+# Make SampleID column to join with Sample Metadata
+tLSDPD_G_MGnormcounts$SampleID <- rownames(tLSDPD_G_MGnormcounts)
+
+# Join with Sample Metadata
+tLSDPD_G_MGnormcountsmeta <- inner_join(LSDPD_Gmeta, tLSDPD_G_MGnormcounts, by="SampleID")
+
+# View with arrangement by GroupAbbrev
+tLSDPD_G_MGnormcountsmeta[,c("GroupAbbrev", "1107027", "363731")] %>% arrange(GroupAbbrev)
+```
+
+Still visually looks like there could be differences between LSD and PD groups in these two taxa.  I do not have an explanation as to why metagenomeSeq did not find _Lactobacillus_ significant.  _Akkermansia_ was not computed, likely due to the high abundance of zeros in the PD group.  This really highlights why there is still so much work being done in this area, i.e., differential abundance analysis.  
+
+## ALDEx2
+
+ALDEx stands for ["__A__ NOVA- __L__ ike __D__ ifferential  __Ex__ pression Analysis"](https://bioconductor.org/packages/release/bioc/html/ALDEx2.html).  It uses a [Dirichlet-multinomial model to infer abundances from counts data and then calculates sample variation using standard statistical tools](https://bioconductor.org/packages/release/bioc/html/ALDEx2.html).  Unlike most of the methods we have looked at, ALDEx2 takes into consideration the compositional nature of the microbial sequencing count data.  My understanding of ALDEx2 is that it handles the zero counts in a unique way.  Essentially it estimates many possible imputations for zeros and then tests each of these permutations for significance, and then takes the average value for each significance test as the final determination.  So, very similar to the CLR-Mann Whitney U example, but instead of doing this a single time, it runs the test many times with different combinations of the zero-imputations. 
+
+As the CLR transformation is supposed to tranform the data into an Euclidean space, more traditional statistical approaches, e.g., _t_-test, Mann Whitney U test, Kruskal Wallis test, and general linear models can be conducted with this approach.  Therefore, covariates can be included as well.
+
+Let's look at ALDEx2 approach in our data.
+
+```{r ALDEx2library, results="hide", warning=FALSE, message=FALSE}
+# Load library
+library(ALDEx2)
+
+# Calculate Monte Carlo samples of the Dirichlet distribution for each sample.
+# Each calculation uses CLR transformation
+LSDPD_GaldexMCcalc <- aldex.clr(LSDPD_Gcounts, LSDPD_Gmeta$GroupAbbrev, mc.samples=130, denom="all", verbose=FALSE)
+
+# Assess t-test among all Monte Carlo samples and then make Taxa column to merge with Taxonomy table
+LSDPD_Galdex_ttest <- aldex.ttest(LSDPD_GaldexMCcalc, LSDPD_Gmeta$GroupAbbrev, paired.test=FALSE)
+LSDPD_Galdex_ttest$Taxa <- rownames(LSDPD_Galdex_ttest)
+
+# Merge with taxonomy table
+LSDPD_Galdex_Final <- full_join(LSDPD_Gtaxa, LSDPD_Galdex_ttest, by="Taxa")
+
+# Assess effect sizes for all Monte Carlo samples and then make Taxa column to merge with Taxonomy table
+LSDPD_Galdex_esize <- aldex.effect(LSDPD_GaldexMCcalc, LSDPD_Gmeta$GroupAbbrev, verbose=FALSE)
+LSDPD_Galdex_esize$Taxa <- rownames(LSDPD_Galdex_esize)
+
+# Merge with LSDPD_Galdex_Final object
+LSDPD_Galdex_Final <- full_join(LSDPD_Galdex_Final, LSDPD_Galdex_esize, by="Taxa")
+
+# View abbreviated table. "BH" refers to Benjamini and Hochberg FDR correction.
+LSDPD_Galdex_Final[LSDPD_Galdex_Final$we.eBH < 0.05,c("Genus", "we.eBH", "effect")]
+```
+
+```{r ALDEx2table, echo=FALSE}
+knitr::kable(LSDPD_Galdex_Final[LSDPD_Galdex_Final$we.eBH < 0.05,c("Genus", "we.eBH", "effect")],booktabs = TRUE, row.names=FALSE) %>% kableExtra::kable_styling(full_width = FALSE)
+```
+
+Overall, `r sum(LSDPD_Galdex_Final[LSDPD_Galdex_Final$we.eBH < 0.05,"Taxa"] %in% LSDPD_MW_results[LSDPD_MW_results$FDR < 0.05,"Taxa"])` taxa were significant in the ALDEx2 workflow and Mann-Whitney U test on non-normalized data.  So, still consistent results from all tests except metagenomeSeq (although the authors of ALDEx2 would probably suggest that the compositional nature of the data make all other approaches inadmissible).  The authors of ALDEx2 suggest that differences with an absolute effect size > 1 have stronger evidence for true differences.  Based on this criteria, only 7 genera are significant. _Lactobacillus_ just misses the cutoff while _Akkermansia_ is highly significant.  
+
+## Conclusion
+
+As you can see, there are many ways to determine differential abundances.  There are several other approaches that we did not cover, e.g., [LEfSe](https://galaxyproject.org/learn/visualization/custom/lefse/), [Balances](https://msystems.asm.org/content/3/4/e00053-18), etc.  As I stated in the intro to this chapter, this field is still under constant evolution and results between each method may differ based on the underlying statistical principles, normalizations, and multiple comparison corrections.  Our example showed fairly consistent results among most approaches; however, this is not always the case.  
+
+
+
+

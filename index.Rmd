@@ -5,6 +5,8 @@ url: 'https\://bdpiccolo.github.io/FSU-Microbial-Data-Analysis'
 github-rep: 'https\://github.com/bdpiccolo/FSU-Microbial-Data-Analysis'
 date: "`r Sys.Date()`"
 documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
 link-citations: yes
 description: "FSU Workshop Oct. 2019: Introduction to R and microbial sequencing data analysis in R."
 ---
