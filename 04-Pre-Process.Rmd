@@ -4,7 +4,7 @@ This chapter will focus on the importing microbial sequencing data in R, setting
 
 ## Importing Data into R
 
-As detailed in Chapter \@ref(microbefiles), you may receive your sequencing data as a biom file or in a text-delimited/spreadsheet format.  Data files used in this chapter and the following chapters are available [here](https://github.com/bdpiccolo/FSU-Microbial-Data-Analysis/tree/master/Data).  The following files will be requires:
+As detailed in Chapter \@ref(microbefiles), you may receive your sequencing data as a biom file or in a text-delimited/spreadsheet format.  Data files used in this chapter and the following chapters are available [here](https://github.com/bdpiccolo/FSU-Microbial-Data-Analysis/tree/master/Data).  The following files will be required:
 
 1) UCDT2DM16S.biom
 
