@@ -5,33 +5,33 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Importing and Pre-Processing | Florida State University Microbiota Workshop 2019</title>
-  <meta name="description" content="FSU Workshop Oct. 2019: Introduction to R and 16S rRNA sequencing data analysis in R." />
+  <meta name="description" content="FSU Workshop Oct. 2019: Introduction to R and microbial sequencing data analysis in R." />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Importing and Pre-Processing | Florida State University Microbiota Workshop 2019" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://bdpiccolo.github.io/FSU-Microbial-Data-Analysis" />
   
-  <meta property="og:description" content="FSU Workshop Oct. 2019: Introduction to R and 16S rRNA sequencing data analysis in R." />
+  <meta property="og:description" content="FSU Workshop Oct. 2019: Introduction to R and microbial sequencing data analysis in R." />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 4 Importing and Pre-Processing | Florida State University Microbiota Workshop 2019" />
   
-  <meta name="twitter:description" content="FSU Workshop Oct. 2019: Introduction to R and 16S rRNA sequencing data analysis in R." />
+  <meta name="twitter:description" content="FSU Workshop Oct. 2019: Introduction to R and microbial sequencing data analysis in R." />
   
 
 <meta name="author" content="Brian Piccolo" />
 
 
-<meta name="date" content="2019-09-19" />
+<meta name="date" content="2019-10-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="microbial-sequencing-data.html"/>
+<link rel="prev" href="chapt3intro.html"/>
 <link rel="next" href="alpha-diversity.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -104,7 +104,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">FSU 16S Data Analysis in R Workshop 10/2019</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction to Data Analysis of 16S rRNA Sequencing in R</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction to Data Analysis of Microbial Sequencing in R</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#types-of-microbiota-data"><i class="fa fa-check"></i><b>1.1</b> Types of microbiota data</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#s-rrna-amplicon-sequencing"><i class="fa fa-check"></i><b>1.1.1</b> 16S rRNA amplicon sequencing</a></li>
@@ -125,7 +125,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2.6" data-path="rbasics.html"><a href="rbasics.html#basic-operations-data-types-missing-values-and-functions"><i class="fa fa-check"></i><b>2.6</b> Basic operations, data types, missing values, and functions</a><ul>
 <li class="chapter" data-level="2.6.1" data-path="rbasics.html"><a href="rbasics.html#basic-operations"><i class="fa fa-check"></i><b>2.6.1</b> Basic operations</a></li>
-<li class="chapter" data-level="2.6.2" data-path="rbasics.html"><a href="rbasics.html#data-types"><i class="fa fa-check"></i><b>2.6.2</b> Data types</a></li>
+<li class="chapter" data-level="2.6.2" data-path="rbasics.html"><a href="rbasics.html#datatypes"><i class="fa fa-check"></i><b>2.6.2</b> Data types</a></li>
 <li class="chapter" data-level="2.6.3" data-path="rbasics.html"><a href="rbasics.html#data-structure"><i class="fa fa-check"></i><b>2.6.3</b> Data structure</a></li>
 <li class="chapter" data-level="2.6.4" data-path="rbasics.html"><a href="rbasics.html#missing-values"><i class="fa fa-check"></i><b>2.6.4</b> Missing values</a></li>
 <li class="chapter" data-level="2.6.5" data-path="rbasics.html"><a href="rbasics.html#functions"><i class="fa fa-check"></i><b>2.6.5</b> Functions</a></li>
@@ -139,24 +139,108 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.8.1" data-path="rbasics.html"><a href="rbasics.html#viewing-your-data"><i class="fa fa-check"></i><b>2.8.1</b> Viewing your data</a></li>
 <li class="chapter" data-level="2.8.2" data-path="rbasics.html"><a href="rbasics.html#extracting-elements"><i class="fa fa-check"></i><b>2.8.2</b> Extracting elements</a></li>
 <li class="chapter" data-level="2.8.3" data-path="rbasics.html"><a href="rbasics.html#subsetting"><i class="fa fa-check"></i><b>2.8.3</b> Subsetting</a></li>
-<li class="chapter" data-level="2.8.4" data-path="rbasics.html"><a href="rbasics.html#reshaping-data"><i class="fa fa-check"></i><b>2.8.4</b> Reshaping data</a></li>
+<li class="chapter" data-level="2.8.4" data-path="rbasics.html"><a href="rbasics.html#reshaping"><i class="fa fa-check"></i><b>2.8.4</b> Reshaping data</a></li>
 <li class="chapter" data-level="2.8.5" data-path="rbasics.html"><a href="rbasics.html#merging-data"><i class="fa fa-check"></i><b>2.8.5</b> Merging data</a></li>
-<li class="chapter" data-level="2.8.6" data-path="rbasics.html"><a href="rbasics.html#apply-family-of-functions"><i class="fa fa-check"></i><b>2.8.6</b> apply family of functions</a></li>
+<li class="chapter" data-level="2.8.6" data-path="rbasics.html"><a href="rbasics.html#applyfunctions"><i class="fa fa-check"></i><b>2.8.6</b> apply family of functions</a></li>
 <li class="chapter" data-level="2.8.7" data-path="rbasics.html"><a href="rbasics.html#sweep"><i class="fa fa-check"></i><b>2.8.7</b> Sweep</a></li>
 </ul></li>
 <li class="chapter" data-level="2.9" data-path="rbasics.html"><a href="rbasics.html#stats"><i class="fa fa-check"></i><b>2.9</b> Stats</a><ul>
 <li class="chapter" data-level="2.9.1" data-path="rbasics.html"><a href="rbasics.html#basic-summary-based-stats."><i class="fa fa-check"></i><b>2.9.1</b> Basic summary based stats.</a></li>
-<li class="chapter" data-level="2.9.2" data-path="rbasics.html"><a href="rbasics.html#t-test-and-mann-whitney-u-test"><i class="fa fa-check"></i><b>2.9.2</b> <em>t</em>-test and Mann Whitney U test</a></li>
+<li class="chapter" data-level="2.9.2" data-path="rbasics.html"><a href="rbasics.html#ttestexamp"><i class="fa fa-check"></i><b>2.9.2</b> <em>t</em>-test and Mann Whitney U test</a></li>
 <li class="chapter" data-level="2.9.3" data-path="rbasics.html"><a href="rbasics.html#anova"><i class="fa fa-check"></i><b>2.9.3</b> ANOVA</a></li>
 <li class="chapter" data-level="2.9.4" data-path="rbasics.html"><a href="rbasics.html#kruskal-wallis-test"><i class="fa fa-check"></i><b>2.9.4</b> Kruskal-Wallis Test</a></li>
-<li class="chapter" data-level="2.9.5" data-path="rbasics.html"><a href="rbasics.html#post-hoc-tests"><i class="fa fa-check"></i><b>2.9.5</b> Post-hoc Tests</a></li>
+<li class="chapter" data-level="2.9.5" data-path="rbasics.html"><a href="rbasics.html#post-hoc-tests"><i class="fa fa-check"></i><b>2.9.5</b> Post-hoc tests</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="microbial-sequencing-data.html"><a href="microbial-sequencing-data.html"><i class="fa fa-check"></i><b>3</b> Microbial Sequencing Data</a></li>
-<li class="chapter" data-level="4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html"><i class="fa fa-check"></i><b>4</b> Importing and Pre-Processing</a></li>
-<li class="chapter" data-level="5" data-path="alpha-diversity.html"><a href="alpha-diversity.html"><i class="fa fa-check"></i><b>5</b> Alpha-Diversity</a></li>
-<li class="chapter" data-level="6" data-path="beta-diversity.html"><a href="beta-diversity.html"><i class="fa fa-check"></i><b>6</b> Beta-Diversity</a></li>
-<li class="chapter" data-level="7" data-path="differential-abundance.html"><a href="differential-abundance.html"><i class="fa fa-check"></i><b>7</b> Differential Abundance</a></li>
+<li class="chapter" data-level="3" data-path="chapt3intro.html"><a href="chapt3intro.html"><i class="fa fa-check"></i><b>3</b> Microbial Sequencing Data</a><ul>
+<li class="chapter" data-level="3.1" data-path="chapt3intro.html"><a href="chapt3intro.html#chapt3structure"><i class="fa fa-check"></i><b>3.1</b> Structure</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="chapt3intro.html"><a href="chapt3intro.html#count-data"><i class="fa fa-check"></i><b>3.1.1</b> Count data</a></li>
+<li class="chapter" data-level="3.1.2" data-path="chapt3intro.html"><a href="chapt3intro.html#taxonomy-data"><i class="fa fa-check"></i><b>3.1.2</b> Taxonomy data</a></li>
+<li class="chapter" data-level="3.1.3" data-path="chapt3intro.html"><a href="chapt3intro.html#sample-metadata"><i class="fa fa-check"></i><b>3.1.3</b> Sample Metadata</a></li>
+<li class="chapter" data-level="3.1.4" data-path="chapt3intro.html"><a href="chapt3intro.html#phylogenetic-tree"><i class="fa fa-check"></i><b>3.1.4</b> Phylogenetic tree</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="chapt3intro.html"><a href="chapt3intro.html#microbefiles"><i class="fa fa-check"></i><b>3.2</b> Files</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="chapt3intro.html"><a href="chapt3intro.html#spreadsheets"><i class="fa fa-check"></i><b>3.2.1</b> Spreadsheets</a></li>
+<li class="chapter" data-level="3.2.2" data-path="chapt3intro.html"><a href="chapt3intro.html#biomfile"><i class="fa fa-check"></i><b>3.2.2</b> Biome</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="chapt3intro.html"><a href="chapt3intro.html#diversity"><i class="fa fa-check"></i><b>3.3</b> Diversity</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="chapt3intro.html"><a href="chapt3intro.html#adivconcept"><i class="fa fa-check"></i><b>3.3.1</b> Alpha-diversity</a></li>
+<li class="chapter" data-level="3.3.2" data-path="chapt3intro.html"><a href="chapt3intro.html#betadivconcept"><i class="fa fa-check"></i><b>3.3.2</b> Beta-diversity</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="chapt3intro.html"><a href="chapt3intro.html#challenges"><i class="fa fa-check"></i><b>3.4</b> Challenges</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="chapt3intro.html"><a href="chapt3intro.html#compdata"><i class="fa fa-check"></i><b>3.4.1</b> Compositional data</a></li>
+<li class="chapter" data-level="3.4.2" data-path="chapt3intro.html"><a href="chapt3intro.html#zero-inflation"><i class="fa fa-check"></i><b>3.4.2</b> Zero inflation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="chapt3intro.html"><a href="chapt3intro.html#normalization"><i class="fa fa-check"></i><b>3.5</b> Normalization</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="chapt3intro.html"><a href="chapt3intro.html#rarefying"><i class="fa fa-check"></i><b>3.5.1</b> Rarefying</a></li>
+<li class="chapter" data-level="3.5.2" data-path="chapt3intro.html"><a href="chapt3intro.html#logUQ"><i class="fa fa-check"></i><b>3.5.2</b> Log upper quartile</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="chapt3intro.html"><a href="chapt3intro.html#r-packages-1"><i class="fa fa-check"></i><b>3.6</b> R packages</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="chapt3intro.html"><a href="chapt3intro.html#vegan"><i class="fa fa-check"></i><b>3.6.1</b> vegan</a></li>
+<li class="chapter" data-level="3.6.2" data-path="chapt3intro.html"><a href="chapt3intro.html#phyloseq"><i class="fa fa-check"></i><b>3.6.2</b> phyloseq</a></li>
+<li class="chapter" data-level="3.6.3" data-path="chapt3intro.html"><a href="chapt3intro.html#microbiome"><i class="fa fa-check"></i><b>3.6.3</b> microbiome</a></li>
+<li class="chapter" data-level="3.6.4" data-path="chapt3intro.html"><a href="chapt3intro.html#ape"><i class="fa fa-check"></i><b>3.6.4</b> ape</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="chapt3intro.html"><a href="chapt3intro.html#additional-resources"><i class="fa fa-check"></i><b>3.7</b> Additional resources</a></li>
+<li class="chapter" data-level="3.8" data-path="chapt3intro.html"><a href="chapt3intro.html#final-thoughts"><i class="fa fa-check"></i><b>3.8</b> Final thoughts</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html"><i class="fa fa-check"></i><b>4</b> Importing and Pre-Processing</a><ul>
+<li class="chapter" data-level="4.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#importing-data-into-r"><i class="fa fa-check"></i><b>4.1</b> Importing Data into R</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#biomimport"><i class="fa fa-check"></i><b>4.1.1</b> Biom file</a></li>
+<li class="chapter" data-level="4.1.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#excelimport"><i class="fa fa-check"></i><b>4.1.2</b> Excel</a></li>
+<li class="chapter" data-level="4.1.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#importmetadata"><i class="fa fa-check"></i><b>4.1.3</b> Metadata</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#phyloseq-object"><i class="fa fa-check"></i><b>4.2</b> phyloseq object</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#setting-up-a-phyloseq-object"><i class="fa fa-check"></i><b>4.2.1</b> Setting up a phyloseq object</a></li>
+<li class="chapter" data-level="4.2.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#extracting-data"><i class="fa fa-check"></i><b>4.2.2</b> Extracting data</a></li>
+<li class="chapter" data-level="4.2.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#subsetting-1"><i class="fa fa-check"></i><b>4.2.3</b> Subsetting</a></li>
+<li class="chapter" data-level="4.2.4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#aggregating"><i class="fa fa-check"></i><b>4.2.4</b> Aggregating</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#pre-processing"><i class="fa fa-check"></i><b>4.3</b> Pre-processing</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#lowabundtaxa"><i class="fa fa-check"></i><b>4.3.1</b> Low abundance taxa</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#proportional-abundance"><i class="fa fa-check"></i><b>4.3.2</b> Proportional Abundance</a></li>
+<li class="chapter" data-level="4.3.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#zeroimput"><i class="fa fa-check"></i><b>4.3.3</b> Zeros</a></li>
+<li class="chapter" data-level="4.3.4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#centered-log-ratios"><i class="fa fa-check"></i><b>4.3.4</b> Centered log ratios</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#conclusion"><i class="fa fa-check"></i><b>4.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="alpha-diversity.html"><a href="alpha-diversity.html"><i class="fa fa-check"></i><b>5</b> Alpha-Diversity</a><ul>
+<li class="chapter" data-level="5.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#phyloseq-package"><i class="fa fa-check"></i><b>5.1</b> phyloseq package</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#estimate_richness"><i class="fa fa-check"></i><b>5.1.1</b> estimate_richness()</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="alpha-diversity.html"><a href="alpha-diversity.html#microbiome-package"><i class="fa fa-check"></i><b>5.2</b> microbiome package</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#richness"><i class="fa fa-check"></i><b>5.2.1</b> richness()</a></li>
+<li class="chapter" data-level="5.2.2" data-path="alpha-diversity.html"><a href="alpha-diversity.html#dominance"><i class="fa fa-check"></i><b>5.2.2</b> dominance()</a></li>
+<li class="chapter" data-level="5.2.3" data-path="alpha-diversity.html"><a href="alpha-diversity.html#evenness"><i class="fa fa-check"></i><b>5.2.3</b> evenness()</a></li>
+<li class="chapter" data-level="5.2.4" data-path="alpha-diversity.html"><a href="alpha-diversity.html#rarity"><i class="fa fa-check"></i><b>5.2.4</b> rarity()</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="alpha-diversity.html"><a href="alpha-diversity.html#data-analysis"><i class="fa fa-check"></i><b>5.3</b> Data analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="beta-diversity.html"><a href="beta-diversity.html"><i class="fa fa-check"></i><b>6</b> Beta-Diversity</a><ul>
+<li class="chapter" data-level="6.1" data-path="beta-diversity.html"><a href="beta-diversity.html#calculating-beta-diversity-in-r"><i class="fa fa-check"></i><b>6.1</b> Calculating beta-diversity in R</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="beta-diversity.html"><a href="beta-diversity.html#identifying-your-beta-diversity-indices"><i class="fa fa-check"></i><b>6.1.1</b> Identifying your beta diversity indices</a></li>
+<li class="chapter" data-level="6.1.2" data-path="beta-diversity.html"><a href="beta-diversity.html#phyloseq-1"><i class="fa fa-check"></i><b>6.1.2</b> phyloseq</a></li>
+<li class="chapter" data-level="6.1.3" data-path="beta-diversity.html"><a href="beta-diversity.html#vegan-1"><i class="fa fa-check"></i><b>6.1.3</b> vegan</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="beta-diversity.html"><a href="beta-diversity.html#ordinations-1"><i class="fa fa-check"></i><b>6.2</b> Ordinations</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="beta-diversity.html"><a href="beta-diversity.html#phyloseq-2"><i class="fa fa-check"></i><b>6.2.1</b> phyloseq</a></li>
+<li class="chapter" data-level="6.2.2" data-path="beta-diversity.html"><a href="beta-diversity.html#vegan-2"><i class="fa fa-check"></i><b>6.2.2</b> vegan</a></li>
+<li class="chapter" data-level="6.2.3" data-path="beta-diversity.html"><a href="beta-diversity.html#apecalculation"><i class="fa fa-check"></i><b>6.2.3</b> ape</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="beta-diversity.html"><a href="beta-diversity.html#visualizing-ordinations"><i class="fa fa-check"></i><b>6.3</b> Visualizing ordinations</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="beta-diversity.html"><a href="beta-diversity.html#phyloordination"><i class="fa fa-check"></i><b>6.3.1</b> phyloseq</a></li>
+<li class="chapter" data-level="6.3.2" data-path="beta-diversity.html"><a href="beta-diversity.html#baseRordinations"><i class="fa fa-check"></i><b>6.3.2</b> Base R</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="beta-diversity.html"><a href="beta-diversity.html#permanova"><i class="fa fa-check"></i><b>6.4</b> PERMANOVA</a></li>
+<li class="chapter" data-level="6.5" data-path="beta-diversity.html"><a href="beta-diversity.html#conclusion-1"><i class="fa fa-check"></i><b>6.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="differential-abundance.html"><a href="differential-abundance.html"><i class="fa fa-check"></i><b>7</b> Differential Abundance</a><ul>
+<li class="chapter" data-level="7.1" data-path="differential-abundance.html"><a href="differential-abundance.html#rank-analysis"><i class="fa fa-check"></i><b>7.1</b> Rank analysis</a></li>
+<li class="chapter" data-level="7.2" data-path="differential-abundance.html"><a href="differential-abundance.html#deseq2"><i class="fa fa-check"></i><b>7.2</b> DESeq2</a></li>
+<li class="chapter" data-level="7.3" data-path="differential-abundance.html"><a href="differential-abundance.html#metagenomeseq"><i class="fa fa-check"></i><b>7.3</b> metagenomeSeq</a></li>
+<li class="chapter" data-level="7.4" data-path="differential-abundance.html"><a href="differential-abundance.html#aldex2"><i class="fa fa-check"></i><b>7.4</b> ALDEx2</a></li>
+<li class="chapter" data-level="7.5" data-path="differential-abundance.html"><a href="differential-abundance.html#conclusion-2"><i class="fa fa-check"></i><b>7.5</b> Conclusion</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -179,15 +263,875 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="importing-and-pre-processing" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Importing and Pre-Processing</h1>
-<p><strong>UNDER CONSTRUCTION</strong></p>
+<p>This chapter will focus on the importing microbial sequencing data in R, setting up a phyloseq object, and preparing the data for statistical analysis.</p>
+<div id="importing-data-into-r" class="section level2">
+<h2><span class="header-section-number">4.1</span> Importing Data into R</h2>
+<p>As detailed in Chapter <a href="chapt3intro.html#microbefiles">3.2</a>, you may receive your sequencing data as a biom file or in a text-delimited/spreadsheet format. Let’s detail how each can be imported into R</p>
+<div id="biomimport" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> Biom file</h3>
+<p>If you recall from Chapter <a href="chapt3intro.html#biomfile">3.2.2</a>, this file format will contain the count data and taxonomy data in a single file. We will use the <code>read_biom</code> function from the biomformat package. The <a href="https://www.bioconductor.org/packages/release/bioc/html/biomformat.html">biomformat package is located at Bioconductor</a> and can be installed using the following code</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Remove hashtags prior to running in your console.</span>
+ 
+<span class="co"># if (!requireNamespace(&quot;BiocManager&quot;, quietly = TRUE))</span>
+    <span class="co"># install.packages(&quot;BiocManager&quot;)</span>
 
+<span class="co"># BiocManager::install(&quot;biomformat&quot;)</span></code></pre></div>
+<p>We will use the ‘UCDT2DM16S.biom’ file for this example. Make sure to set your working directory to the directory containing your biom file.</p>
+<p>Let’s load the package and use the <code>read_biom</code> function to import into Remove</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># You will not be able to import your biom file unless you tell R where to look</span>
+<span class="co"># Remove hashtag from this code and add your directory </span>
+<span class="co"># setwd(&quot;C:\\Users\\name\\documents\\FSUworkshop\\&quot;)</span>
+
+<span class="co"># Place all of your loaded libraries at the top of your script</span>
+<span class="kw">library</span>(biomformat)
+
+Biom &lt;-<span class="st"> </span><span class="kw">read_biom</span>(<span class="st">&quot;.</span><span class="ch">\\</span><span class="st">Data</span><span class="ch">\\</span><span class="st">UCDT2DM16S.biom&quot;</span>)
+Biom</code></pre></div>
+<pre><code>## biom object. 
+## type: OTU table 
+## matrix_type: dense 
+## 50539 rows and 55 columns</code></pre>
+<p>The output gives us a little bit of information; the most important of which is the number of rows and columns. This is the dimension of the count table. Rows are taxa and columns are samples. Thus, we have &gt;55,000 taxa and 56 samples.</p>
+<p>We need to extract the count and taxonomy tables and place them in their own objects. Both the count and taxonomy tables are in a format we cannot use. We will use the <code>biom_data</code> and <code>observation_metadata</code> function to extract the count and taxonomy data, respectively. Then, we will need to convert it to a matrix using the <code>as.matrix</code> function. We will use the <code>%&gt;%</code> pipe operator to link functions when available.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the tidyverse package if not already loaded</span>
+<span class="co"># library(tidyverse)</span>
+
+## Extract OTU table and convert to a matrix
+CountMatrix &lt;-<span class="st"> </span><span class="kw">biom_data</span>(Biom) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.matrix</span>()
+
+## Extract taxonomy data and convert to a matrix
+TaxaMatrix &lt;-<span class="st"> </span><span class="kw">observation_metadata</span>(Biom) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.matrix</span>()</code></pre></div>
+<p>Let’s use the <code>head</code> function to see the first 6 rows of the taxonomy data</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The tails() function does the opposite of the head() function</span>
+<span class="kw">head</span>(TaxaMatrix)</code></pre></div>
+<pre><code>##         taxonomy1     taxonomy2            taxonomy3            
+## 366623  &quot;k__Bacteria&quot; &quot;p__Firmicutes&quot;      &quot;c__Clostridia&quot;      
+## 182771  &quot;k__Bacteria&quot; &quot;p__Verrucomicrobia&quot; &quot;c__Verrucomicrobiae&quot;
+## 1800048 &quot;k__Bacteria&quot; &quot;p__Bacteroidetes&quot;   &quot;c__Bacteroidia&quot;     
+## 276629  &quot;k__Bacteria&quot; &quot;p__Bacteroidetes&quot;   &quot;c__Bacteroidia&quot;     
+## 206494  &quot;k__Bacteria&quot; &quot;p__Firmicutes&quot;      &quot;c__Clostridia&quot;      
+## 22466   &quot;k__Bacteria&quot; &quot;p__Bacteroidetes&quot;   &quot;c__Bacteroidia&quot;     
+##         taxonomy4               taxonomy5               
+## 366623  &quot;o__Clostridiales&quot;      &quot;f__Lachnospiraceae&quot;    
+## 182771  &quot;o__Verrucomicrobiales&quot; &quot;f__Verrucomicrobiaceae&quot;
+## 1800048 &quot;o__Bacteroidales&quot;      &quot;f__Porphyromonadaceae&quot; 
+## 276629  &quot;o__Bacteroidales&quot;      &quot;f__S24-7&quot;              
+## 206494  &quot;o__Clostridiales&quot;      &quot;f__Lachnospiraceae&quot;    
+## 22466   &quot;o__Bacteroidales&quot;      &quot;f__Prevotellaceae&quot;     
+##         taxonomy6            taxonomy7       
+## 366623  &quot;g__Coprococcus&quot;     &quot;s__&quot;           
+## 182771  &quot;g__Akkermansia&quot;     &quot;s__muciniphila&quot;
+## 1800048 &quot;g__Parabacteroides&quot; &quot;s__&quot;           
+## 276629  &quot;g__&quot;                &quot;s__&quot;           
+## 206494  &quot;g__&quot;                &quot;s__&quot;           
+## 22466   &quot;g__Prevotella&quot;      &quot;s__&quot;</code></pre>
+<p>In this case, the column names (“taxonomy1”, “taxanomy2”, etc.) could be updated to reflect the taxonomy level. Note the prefixes of each character within the columns. In these data, this references the taxonomy level. These prefixes may not always appear and they can be removed if absolutely necessary. Let’s just update the column names so we know which taxonomy level belongs to which column.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We will make an object with the taxonomy levels incase we need to use it later</span>
+TaxaLevels &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Kingdom&quot;</span>, <span class="st">&quot;Phylum&quot;</span>, <span class="st">&quot;Class&quot;</span>, <span class="st">&quot;Order&quot;</span>, <span class="st">&quot;Family&quot;</span>, <span class="st">&quot;Genus&quot;</span>, <span class="st">&quot;Species&quot;</span>)
+
+<span class="co"># Overwrite column names</span>
+<span class="kw">colnames</span>(TaxaMatrix) &lt;-<span class="st"> </span>TaxaLevels
+
+<span class="co"># Look at data again</span>
+<span class="kw">head</span>(TaxaMatrix)</code></pre></div>
+<pre><code>##         Kingdom       Phylum               Class                
+## 366623  &quot;k__Bacteria&quot; &quot;p__Firmicutes&quot;      &quot;c__Clostridia&quot;      
+## 182771  &quot;k__Bacteria&quot; &quot;p__Verrucomicrobia&quot; &quot;c__Verrucomicrobiae&quot;
+## 1800048 &quot;k__Bacteria&quot; &quot;p__Bacteroidetes&quot;   &quot;c__Bacteroidia&quot;     
+## 276629  &quot;k__Bacteria&quot; &quot;p__Bacteroidetes&quot;   &quot;c__Bacteroidia&quot;     
+## 206494  &quot;k__Bacteria&quot; &quot;p__Firmicutes&quot;      &quot;c__Clostridia&quot;      
+## 22466   &quot;k__Bacteria&quot; &quot;p__Bacteroidetes&quot;   &quot;c__Bacteroidia&quot;     
+##         Order                   Family                  
+## 366623  &quot;o__Clostridiales&quot;      &quot;f__Lachnospiraceae&quot;    
+## 182771  &quot;o__Verrucomicrobiales&quot; &quot;f__Verrucomicrobiaceae&quot;
+## 1800048 &quot;o__Bacteroidales&quot;      &quot;f__Porphyromonadaceae&quot; 
+## 276629  &quot;o__Bacteroidales&quot;      &quot;f__S24-7&quot;              
+## 206494  &quot;o__Clostridiales&quot;      &quot;f__Lachnospiraceae&quot;    
+## 22466   &quot;o__Bacteroidales&quot;      &quot;f__Prevotellaceae&quot;     
+##         Genus                Species         
+## 366623  &quot;g__Coprococcus&quot;     &quot;s__&quot;           
+## 182771  &quot;g__Akkermansia&quot;     &quot;s__muciniphila&quot;
+## 1800048 &quot;g__Parabacteroides&quot; &quot;s__&quot;           
+## 276629  &quot;g__&quot;                &quot;s__&quot;           
+## 206494  &quot;g__&quot;                &quot;s__&quot;           
+## 22466   &quot;g__Prevotella&quot;      &quot;s__&quot;</code></pre>
+</div>
+<div id="excelimport" class="section level3">
+<h3><span class="header-section-number">4.1.2</span> Excel</h3>
+<p>A little more straight-foward then Biom files, but can be variable depending on how the data is presented in the spreadsheet. It is important to only have the first row in the spreadsheet as column headers with no empty cells as shown in Figure 3.1 (Chapter <a href="chapt3intro.html#chapt3structure">3.1</a>).</p>
+<p>We will use the example where the taxonomy data is combined with the count data. The same data is found in the biom and Excel files, so we will overwrite the biom objects.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the readxl package if necessary.</span>
+<span class="co"># library(readxl)</span>
+<span class="co"># Need to specify data type if numbers and characters are mixed. See help page for read_excel().</span>
+Excel &lt;-<span class="st"> </span><span class="kw">read_xlsx</span>(<span class="st">&quot;.</span><span class="ch">\\</span><span class="st">Data</span><span class="ch">\\</span><span class="st">UCDT2DM16SExcel.xlsx&quot;</span>,
+    <span class="dt">col_types=</span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;text&quot;</span>, <span class="dv">8</span>), <span class="kw">rep</span>(<span class="st">&quot;numeric&quot;</span>, <span class="dv">55</span>))) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()
+
+<span class="co"># The OTU column are the row names in the biom file.  Will set to be similar with other workflow</span>
+<span class="kw">rownames</span>(Excel) &lt;-<span class="st"> </span>Excel<span class="op">$</span>OTU
+
+<span class="co"># Remove OTU column</span>
+Excel<span class="op">$</span>OTU &lt;-<span class="st"> </span><span class="ot">NULL</span>
+
+<span class="co"># Make new object with taxonomy column labels if necessary.</span>
+<span class="co"># We will use the Taxonomy object we made earlier to subset the taxonomy data</span>
+TaxaData &lt;-<span class="st"> </span>Excel[, <span class="kw">colnames</span>(Excel) <span class="op">%in%</span><span class="st"> </span>TaxaLevels]
+
+<span class="co"># Convert to a matrix</span>
+TaxaMatrix &lt;-<span class="st"> </span>TaxaData <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.matrix</span>()
+
+<span class="co"># Use &#39;!()&#39; to reverse logical statements</span>
+CountData &lt;-<span class="st"> </span>Excel[, <span class="op">!</span>(<span class="kw">colnames</span>(Excel) <span class="op">%in%</span><span class="st"> </span>TaxaLevels)]
+CountMatrix &lt;-<span class="st"> </span>CountData <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.matrix</span>()
+
+<span class="co"># Let&#39;s look at new TaxaMatrix object</span>
+<span class="kw">head</span>(TaxaMatrix)</code></pre></div>
+<pre><code>##         Kingdom       Phylum               Class                
+## 366623  &quot;k__Bacteria&quot; &quot;p__Firmicutes&quot;      &quot;c__Clostridia&quot;      
+## 182771  &quot;k__Bacteria&quot; &quot;p__Verrucomicrobia&quot; &quot;c__Verrucomicrobiae&quot;
+## 1800048 &quot;k__Bacteria&quot; &quot;p__Bacteroidetes&quot;   &quot;c__Bacteroidia&quot;     
+## 276629  &quot;k__Bacteria&quot; &quot;p__Bacteroidetes&quot;   &quot;c__Bacteroidia&quot;     
+## 206494  &quot;k__Bacteria&quot; &quot;p__Firmicutes&quot;      &quot;c__Clostridia&quot;      
+## 22466   &quot;k__Bacteria&quot; &quot;p__Bacteroidetes&quot;   &quot;c__Bacteroidia&quot;     
+##         Order                   Family                  
+## 366623  &quot;o__Clostridiales&quot;      &quot;f__Lachnospiraceae&quot;    
+## 182771  &quot;o__Verrucomicrobiales&quot; &quot;f__Verrucomicrobiaceae&quot;
+## 1800048 &quot;o__Bacteroidales&quot;      &quot;f__Porphyromonadaceae&quot; 
+## 276629  &quot;o__Bacteroidales&quot;      &quot;f__S24-7&quot;              
+## 206494  &quot;o__Clostridiales&quot;      &quot;f__Lachnospiraceae&quot;    
+## 22466   &quot;o__Bacteroidales&quot;      &quot;f__Prevotellaceae&quot;     
+##         Genus                Species         
+## 366623  &quot;g__Coprococcus&quot;     &quot;s__&quot;           
+## 182771  &quot;g__Akkermansia&quot;     &quot;s__muciniphila&quot;
+## 1800048 &quot;g__Parabacteroides&quot; &quot;s__&quot;           
+## 276629  &quot;g__&quot;                &quot;s__&quot;           
+## 206494  &quot;g__&quot;                &quot;s__&quot;           
+## 22466   &quot;g__Prevotella&quot;      &quot;s__&quot;</code></pre>
+</div>
+<div id="importmetadata" class="section level3">
+<h3><span class="header-section-number">4.1.3</span> Metadata</h3>
+<p>We will assume the metadata will be in Excel format. You will need to ensure that your sample IDs exactly match the IDs on your count file. For those using a Biome file, you would have supplied the sample labels within your informatics pipeline (e.g., QIIME) to generate these labels. It is advised to use this file to ensure matching labels.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the readxl package if necessary.</span>
+<span class="co"># library(readxl)</span>
+
+<span class="co"># Import Excel file and coerce to data frame</span>
+Metadata &lt;-<span class="st"> </span><span class="kw">read_xlsx</span>(<span class="st">&quot;.</span><span class="ch">\\</span><span class="st">Data</span><span class="ch">\\</span><span class="st">UCDT2DMmetadata.xlsx&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()
+
+<span class="co"># Set row names with column that matches the labels in your count data</span>
+<span class="co"># In this case, it is the column labeled &quot;SampleID&quot;.</span>
+<span class="co"># This is required to create a phyloseq object.</span>
+<span class="kw">rownames</span>(Metadata) &lt;-<span class="st"> </span>Metadata<span class="op">$</span>SampleID
+
+<span class="co"># Look at data</span>
+<span class="kw">head</span>(Metadata)</code></pre></div>
+<pre><code>##          SampleID   Rat GroupAbbrev Collection
+## BP.H1138 BP.H1138 H1138         LSD        Y16
+## BP.H1145 BP.H1145 H1145         LSD        Y16
+## BP.H1147 BP.H1147 H1147         LSD        Y16
+## BP.H1156 BP.H1156 H1156         LSD        Y16
+## BP.H1157 BP.H1157 H1157         LSD        Y16
+## BP.H1166 BP.H1166 H1166         LSD        Y16</code></pre>
+<p>How can we ensure the names match between the count and metadata file? We can extract and compare the column names from the <code>CountMatrix</code> object and the vector named “SampleID” from the <code>Metadata</code> object. The <code>==</code> logical operator will match in order, so we need to ensure that both are in order.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Extract column names</span>
+CountNames &lt;-<span class="st"> </span><span class="kw">colnames</span>(CountData)
+
+<span class="co"># Extract &#39;SampleID&#39; file.  The label, &quot;SampleID&quot;, was the name I provided, but yours may be different.</span>
+MetaIDs &lt;-<span class="st"> </span>Metadata<span class="op">$</span>SampleID
+
+<span class="co"># Sort both</span>
+CountNameSort &lt;-<span class="st"> </span><span class="kw">sort</span>(CountNames)
+MetaIDsSort &lt;-<span class="st"> </span><span class="kw">sort</span>(MetaIDs)
+
+CountNameSort <span class="op">==</span><span class="st"> </span>MetaIDsSort</code></pre></div>
+<pre><code>##  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+## [15] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+## [29] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+## [43] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</code></pre>
+<p>Note that the output using <code>==</code> is a long vector of logical responses. You could imagine having a long vector of many TRUE and not knowing if a FALSE is nested somewhere in between. There is a handy function that I use to determine if all elements within a vector are the same. It is the <code>setequal</code> function. <code>setequal</code> require 2 arguments, the first is the vector, and the second is the comparison vector. If the 2 vectors are exactly the same, then it will return a TRUE. If there is any difference, it will return a FALSE. You may refer to chapter <a href="intro.html#structure">1.2</a> to refresh yourself with the concept of recycling if this function does not seem intuitive.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make object of logical output</span>
+NameCompLogical &lt;-<span class="st"> </span>CountNameSort <span class="op">==</span><span class="st"> </span>MetaIDsSort
+
+<span class="co"># Use TRUE as comparison vector (TRUE is recycled!) in the setequal() function.</span>
+<span class="kw">setequal</span>(NameCompLogical, <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>We get a TRUE returned, so our data is now reconciled.</p>
+<p class="alert alert-warning">
+The following section describes the steps needed to identify samples that are missing in your metadata file. This is not necessary to finish the workflow and can be skipped.
+</p>
+<p>What would you do if they do not match? We will look at an example where your metadata is missing samples relative to your count data. This is more likely to occur if you are using a Biom file and not using the metadata file used in your informatics pipeline. Thus, an example will be provided that demonstrates steps to identify the missing samples.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make arbitrary sample ID vector with missing data.  The first 5 elements will be removed.</span>
+MetaIDsSort_missing &lt;-<span class="st"> </span>MetaIDsSort[<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)]
+
+<span class="co"># The %in% operator will match any two vectors.  Combine with !() to identify elements that mismatch.</span>
+<span class="co"># We want to know which names from the count data do not have a match in the SampleID column</span>
+CountNameSort[<span class="op">!</span>(CountNameSort <span class="op">%in%</span><span class="st"> </span>MetaIDsSort_missing)]</code></pre></div>
+<pre><code>## [1] &quot;BP.H1138&quot; &quot;BP.H1145&quot; &quot;BP.H1147&quot; &quot;BP.H1156&quot; &quot;BP.H1157&quot;</code></pre>
+<p>This provides an output of the labels from the count data that are not found within the sample metadata. From here, you will need to investigate your metadata file to determine where the discrepancy is.</p>
+</div>
+</div>
+<div id="phyloseq-object" class="section level2">
+<h2><span class="header-section-number">4.2</span> phyloseq object</h2>
+<p>A phyloseq object is a convenient way to package all of the data into a single object that facilites common tasks required for microbial community data. The benefit of this is you can apply a single function to the phyloseq object, which will alter all files within it simultaneously. Let’s say, for example, you want to analyze your data at the phylum level. The phyloseq package has a single function that will sum all of your counts to the phylum taxonomy and adjust the taxonomy file accordingly. Now imagine having to do this without all of the files packaged together.</p>
+<div id="setting-up-a-phyloseq-object" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Setting up a phyloseq object</h3>
+<p>I realize it seems a little burdensome to split all of your data out and then package them back together in a new format. However, once you get it packaged into a single object, then things become much easier. The 3 objects we’ve created must match or the <code>phyloseq</code> function will reject them. The <code>phyloseq</code> function uses row and column names to match each data object. They do not have to be in order, but each data set must have an exact pair in the comparative object. The following objects should match each other:</p>
+<ol style="list-style-type: decimal">
+<li><p>Count data row names -&gt; Taxa data row names.</p></li>
+<li><p>Count data column names -&gt; Sample metadata row names</p></li>
+</ol>
+<p>We are using the Excel import, so the files should match since the we set the row names of the <code>Excel</code> object and then split the taxonomic and count data into their own objects. The second match was done above in <a href="importing-and-pre-processing.html#importmetadata">4.1.3</a>. Still, the first match will be shown for the sake of completeness.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Extract row names from count data</span>
+Count_taxauniqueID &lt;-<span class="st"> </span><span class="kw">rownames</span>(CountData)
+
+<span class="co"># Extract row names from taxa data</span>
+Taxa_taxauniqueID &lt;-<span class="st"> </span><span class="kw">rownames</span>(CountData)
+
+<span class="co"># Sort both</span>
+Count_taxauniqueIDSort &lt;-<span class="st"> </span><span class="kw">sort</span>(Count_taxauniqueID)
+Taxa_taxauniqueIDSort &lt;-<span class="st"> </span><span class="kw">sort</span>(Taxa_taxauniqueID)
+
+<span class="co"># Make object of logical output using ==</span>
+CountTaxaCompLogical &lt;-<span class="st"> </span>Count_taxauniqueIDSort <span class="op">==</span><span class="st"> </span>Taxa_taxauniqueIDSort
+
+<span class="co"># Use TRUE as comparison vector (TRUE is recycled!) in the setequal() function.</span>
+<span class="kw">setequal</span>(CountTaxaCompLogical, <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>We can now create the phyloseq object now that row and column names match.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># phyloseq requires the data be in a specific class before creating &#39;phyloseq&#39; object.</span>
+
+<span class="kw">library</span>(phyloseq)
+
+<span class="co"># Convert OTU data into phyloseq otu_table class</span>
+otuTABLE &lt;-<span class="st"> </span><span class="kw">otu_table</span>(CountMatrix, <span class="dt">taxa_are_rows =</span> <span class="ot">TRUE</span>)
+
+<span class="co"># Convert taxa data into phyloseq taxonomyTable class</span>
+taxTABLE &lt;-<span class="st"> </span><span class="kw">tax_table</span>(TaxaMatrix)
+
+<span class="co"># Convert Sample Metadata data frame into phyloseq sample_data class</span>
+sampleDATA &lt;-<span class="st"> </span><span class="kw">sample_data</span>(Metadata)
+
+<span class="co"># Create phyloseq object</span>
+phylo_obj &lt;-<span class="st"> </span><span class="kw">phyloseq</span>(otuTABLE, taxTABLE, sampleDATA)
+phylo_obj</code></pre></div>
+<pre><code>## phyloseq-class experiment-level object
+## otu_table()   OTU Table:         [ 50539 taxa and 55 samples ]
+## sample_data() Sample Data:       [ 55 samples by 4 sample variables ]
+## tax_table()   Taxonomy Table:    [ 50539 taxa by 7 taxonomic ranks ]</code></pre>
+<p>Lets discuss the <code>phylo_obj</code> output. Very compact with 3 rows and 3 columns of information. The rows provide information relating to the OTU data (what we’ve been referring to as “count” data), Sample Data (our experimental metadata), and the Taxonomy data. The first column of the output describes the helper functions to extract the data, the second column is the row descriptor, and the last column provides the stats for each row.</p>
+<p>Note that we will now use the term, “OTU table”, to refer to the sequencing data because the count data will be modified with transformed/normalized etc.</p>
+</div>
+<div id="extracting-data" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Extracting data</h3>
+<p>phyloseq objects are built in a special coding system called S4. It is slightly different then standard R, but I have found it cumbersome to extract data from these objects. So we will try to avoid the extractor functions provided in the phyloseq output when necessary. Fortunately, the ‘microbiome’ package has functions that make this extraction very easy.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load library</span>
+<span class="kw">library</span>(microbiome)</code></pre></div>
+<pre><code>## 
+## microbiome R package (microbiome.github.com)
+##     
+## 
+## 
+##  Copyright (C) 2011-2019 Leo Lahti, 
+##     Sudarshan Shetty et al. &lt;microbiome.github.io&gt;</code></pre>
+<pre><code>## 
+## Attaching package: &#39;microbiome&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
+## 
+##     alpha</code></pre>
+<pre><code>## The following object is masked from &#39;package:base&#39;:
+## 
+##     transform</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Extract OTU table from </span>
+OTUdata &lt;-<span class="st"> </span><span class="kw">abundances</span>(phylo_obj)
+
+<span class="co"># Will show an abbreviated output</span>
+<span class="kw">head</span>(OTUdata[,<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>])</code></pre></div>
+<pre><code>##         BP.K2491 BP.H931 BP.H933 BP.H1147 BP.H1157 BP.K2503 BP.P8163
+## 366623         1       1       1        0        0        0        0
+## 182771         0       0       0        1        1        3        0
+## 1800048        0       0       0        0        0        0        2
+## 276629         0       0       0        5        0        0        0
+## 206494         0       0       0        0        0        0        0
+## 22466          1       0       4        0        0        0        0
+##         BP.H1166 BP.P7611 BP.P7609 BP.H937 BP.P7589 BP.P9227 BP.P9257
+## 366623         0        0        0       0        0        0        0
+## 182771         0        0        0       0        0        0        0
+## 1800048        2        3        2       1        5        2        1
+## 276629         0        0        0       0        2        1        0
+## 206494         0        0        0       0        0        0        0
+## 22466          3        0        0       1        1        0        0
+##         BP.P9259
+## 366623         0
+## 182771         0
+## 1800048        2
+## 276629         1
+## 206494         0
+## 22466          0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Extract Sample Metadata</span>
+SampleData &lt;-<span class="st"> </span><span class="kw">meta</span>(phylo_obj)
+
+<span class="kw">head</span>(SampleData)</code></pre></div>
+<pre><code>##          SampleID   Rat GroupAbbrev Collection
+## BP.K2491 BP.K2491 K2491         D6M        Y14
+## BP.H931   BP.H931  H931         LSD        Y14
+## BP.H933   BP.H933  H933         LSD        Y14
+## BP.H1147 BP.H1147 H1147         LSD        Y16
+## BP.H1157 BP.H1157 H1157         LSD        Y16
+## BP.K2503 BP.K2503 K2503         D6M        Y14</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># microbiome package does not have an extractor function for taxonomy data</span>
+<span class="co"># Will provide coding to extract here</span>
+TAXAData &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">tax_table</span>(phylo_obj)<span class="op">@</span>.Data)
+
+<span class="kw">head</span>(TAXAData)</code></pre></div>
+<pre><code>##             Kingdom             Phylum               Class
+## 366623  k__Bacteria      p__Firmicutes       c__Clostridia
+## 182771  k__Bacteria p__Verrucomicrobia c__Verrucomicrobiae
+## 1800048 k__Bacteria   p__Bacteroidetes      c__Bacteroidia
+## 276629  k__Bacteria   p__Bacteroidetes      c__Bacteroidia
+## 206494  k__Bacteria      p__Firmicutes       c__Clostridia
+## 22466   k__Bacteria   p__Bacteroidetes      c__Bacteroidia
+##                         Order                 Family              Genus
+## 366623       o__Clostridiales     f__Lachnospiraceae     g__Coprococcus
+## 182771  o__Verrucomicrobiales f__Verrucomicrobiaceae     g__Akkermansia
+## 1800048      o__Bacteroidales  f__Porphyromonadaceae g__Parabacteroides
+## 276629       o__Bacteroidales               f__S24-7                g__
+## 206494       o__Clostridiales     f__Lachnospiraceae                g__
+## 22466        o__Bacteroidales      f__Prevotellaceae      g__Prevotella
+##                Species
+## 366623             s__
+## 182771  s__muciniphila
+## 1800048            s__
+## 276629             s__
+## 206494             s__
+## 22466              s__</code></pre>
+<p>Why do we have so many objects with the same information? So far, it has been redundant, but the value of knowing the extractor functions will become clear in the following sections. In addition, several differential analyses will not work with a phyloseq object and requires the data to be extracted.</p>
+</div>
+<div id="subsetting-1" class="section level3">
+<h3><span class="header-section-number">4.2.3</span> Subsetting</h3>
+<p>The <code>prune_samples</code> function will subset samples based on a logical expression that matches the number of samples within the phyloseq object. The function will automatically determine if your expression fits within the Sample Metadata or OTU Table. Let’s go through a few examples. Pay attention to the sample number in the phyloseq output.</p>
+<div id="metadata" class="section level4">
+<h4><span class="header-section-number">4.2.3.1</span> Metadata</h4>
+<p>Rats in the UCD-T2DM study were collected in 2014 and in 2016. We’re worried about a potential batch effect. Thus, we wish to remove 2014 samples and only examine 2016 samples. We can extract the metadata and define a logical statement to keep the rats sampled in 2016.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We extracted the metadata in the above chapter.</span>
+CollectionYear &lt;-<span class="st"> </span>SampleData<span class="op">$</span>Collection
+
+<span class="co"># Make the logical statement using the %in% (match) operator</span>
+CollectionYearLogic &lt;-<span class="st"> </span>CollectionYear <span class="op">%in%</span><span class="st"> &quot;Y16&quot;</span>
+CollectionYearLogic</code></pre></div>
+<pre><code>##  [1] FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE
+## [12] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE FALSE
+## [23]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE FALSE  TRUE
+## [34] FALSE  TRUE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE
+## [45] FALSE FALSE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use the prune_samples() function</span>
+<span class="co"># First argument is the logical statement, the second is the phyloseq object</span>
+phylo_obj2016 &lt;-<span class="st"> </span><span class="kw">prune_samples</span>(CollectionYearLogic, phylo_obj)
+
+<span class="co"># This coding 2 lines below works as well, minus the hashtag.  Why?</span>
+<span class="co"># The curly brackets help contain the statement.</span>
+<span class="co"># prune_samples({meta(phylo_obj)$Collection %in% &quot;Y16&quot;}, phylo_obj)</span>
+
+<span class="co"># The &#39;pruned&#39; phyloseq object</span>
+phylo_obj2016</code></pre></div>
+<pre><code>## phyloseq-class experiment-level object
+## otu_table()   OTU Table:         [ 50539 taxa and 33 samples ]
+## sample_data() Sample Data:       [ 33 samples by 4 sample variables ]
+## tax_table()   Taxonomy Table:    [ 50539 taxa by 7 taxonomic ranks ]</code></pre>
+<p>While the lean Sprague Dawley rats were used to compare metabolic differences between the diabetic animals, they may not be appropriate control animal for the microbiota study due to genetic influence on the composition of the gut microbiota. We need to remove this group from our 2016 object.</p>
+<p>We have a problem though. We cannot use the <code>SampleData</code> object derived from our initial phyloseq object, <code>phylo_obj</code>. <code>phylo_obj</code> has more samples then <code>phylo_obj2016</code>. We need to make sure to extract the Sample Metadata from the appropriate phyloseq object.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Extract the metadata from phylo_obj2016</span>
+Group2016 &lt;-<span class="st"> </span><span class="kw">meta</span>(phylo_obj2016)<span class="op">$</span>GroupAbbrev
+
+<span class="co"># Make the logical statement using the != (does not equal) operator</span>
+Group2016Logic &lt;-<span class="st"> </span>Group2016 <span class="op">!=</span><span class="st"> &quot;LSD&quot;</span>
+
+<span class="co"># Use the prune_samples() function</span>
+<span class="co"># First argument is the logical statement, the second is the phyloseq object</span>
+phylo_obj2016_noLSD &lt;-<span class="st"> </span><span class="kw">prune_samples</span>(Group2016Logic, phylo_obj2016)
+
+<span class="co"># The &#39;pruned&#39; phyloseq object</span>
+phylo_obj2016_noLSD</code></pre></div>
+<pre><code>## phyloseq-class experiment-level object
+## otu_table()   OTU Table:         [ 50539 taxa and 26 samples ]
+## sample_data() Sample Data:       [ 26 samples by 4 sample variables ]
+## tax_table()   Taxonomy Table:    [ 50539 taxa by 7 taxonomic ranks ]</code></pre>
+<p><code>prune_sample</code> will also match the row names in the Sample Metadata. We can use the <code>sample_names</code> function to select a batch of samples and filter on these selections.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Extract sample names from the phyloseq object</span>
+phyloSampNames &lt;-<span class="st"> </span><span class="kw">sample_names</span>(phylo_obj2016)
+
+<span class="co"># Use the first 20 samples</span>
+phyloSampNames20 &lt;-<span class="st"> </span>phyloSampNames[<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>]
+
+<span class="co"># First argument is the names vector, the second is the phyloseq object</span>
+phylo_obj20 &lt;-<span class="st"> </span><span class="kw">prune_samples</span>(phyloSampNames20, phylo_obj2016)
+
+<span class="co"># The &#39;pruned&#39; phyloseq object</span>
+phylo_obj20</code></pre></div>
+<pre><code>## phyloseq-class experiment-level object
+## otu_table()   OTU Table:         [ 50539 taxa and 20 samples ]
+## sample_data() Sample Data:       [ 20 samples by 4 sample variables ]
+## tax_table()   Taxonomy Table:    [ 50539 taxa by 7 taxonomic ranks ]</code></pre>
+<p>Beware, once you subset a phyloseq object, there is no going back. Thus, it is important to make a new object.</p>
+</div>
+<div id="sample-depth" class="section level4">
+<h4><span class="header-section-number">4.2.3.2</span> Sample depth</h4>
+<p>We can also subset samples based on the characteristics of the OTU table. An important example of this is when we check sample depths. As mentioned in Chapter <a href="intro.html#structure">1.2</a>, it is important to have enough sequencing depth to ensure adequate coverage of the microbial community. Some suggest <a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-5-210">1000 reads are adequate to see differences in large populations</a>. Some have suggested 5000-10,000 reads are more than enough for 16S. I typically look at the depths and see if any are well of the distribution of other samples and only remove samples if way off. Fortunately, the sample set we’re using does not have any samples that were inadequately sequenced, but let’s look at how we would can identify sample depths per sample, followed by a removal.</p>
+<p>The <code>prune_samples</code> function will also work in this case. Why? It is because we’re determining the sample depths for each sample. Thus, any logical vector that is the length of the number of samples will cause <code>prune_samples</code> to filter the phyloseq object. Doesn’t matter if you derive it from the Sample Metadata or OTU table.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The sample_sums() function will calculate sample depths from your phyloseq object</span>
+phyloSampDepth &lt;-<span class="st"> </span><span class="kw">sample_sums</span>(phylo_obj)
+phyloSampDepth</code></pre></div>
+<pre><code>## BP.K2491  BP.H931  BP.H933 BP.H1147 BP.H1157 BP.K2503 BP.P8163 BP.H1166 
+##    57866    38803    49944    45749    48164    57676    33797    56259 
+## BP.P7611 BP.P7609  BP.H937 BP.P7589 BP.P9227 BP.P9257 BP.P9259 BP.P9255 
+##    49353    43076    34969    68237    44791    41221    47160    55334 
+## BP.P9395 BP.P9303 BP.P8113 BP.P9295 BP.P9335 BP.P8287 BP.P9393 BP.P9223 
+##    43180    51844    46863    49847    46007    45662    36846    46585 
+## BP.P9263 BP.P9291 BP.H1156 BP.P9375 BP.K4153  BP.H935 BP.P9285 BP.P7603 
+##    39094    24610    54457    39072    51542    33684    55471    42933 
+## BP.P9387 BP.P7563 BP.H1167  BP.H939 BP.P7573 BP.P9261 BP.P9327 BP.K2513 
+##    40971    39258    51734    42184    43707    49496    34724    45519 
+## BP.P8153 BP.P8117 BP.P9251 BP.P9329 BP.P7561 BP.P7949 BP.P9225 BP.P9323 
+##    40491    53924    58912    41702    40078    46910    46410    49909 
+## BP.P8259 BP.K4206 BP.H1145 BP.H1138 BP.P9243 BP.K4164 BP.P9253 
+##    45304    54215    43794    39588    39867    48852    38109</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># What is our total sample depth?</span>
+<span class="kw">sum</span>(phyloSampDepth)</code></pre></div>
+<pre><code>## [1] 2515754</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Let&#39;s filter depths &lt; 40,000.  ***DO NOT USE THIS AS A CUTOFF GUIDE - FOR PURPOSE OF EXAMPLE ONLY***</span>
+<span class="co"># We want to keep samples that have sequence depths greater than 30000</span>
+Depth40K &lt;-<span class="st"> </span>phyloSampDepth <span class="op">&gt;</span><span class="st"> </span><span class="dv">40000</span>
+
+<span class="co"># Use the prune_samples() function</span>
+<span class="co"># First argument is the logical statement, the second is the phyloseq object</span>
+phylo40K &lt;-<span class="st"> </span><span class="kw">prune_samples</span>(Depth40K, phylo_obj)
+
+<span class="co"># The &#39;pruned&#39; phyloseq object</span>
+phylo40K</code></pre></div>
+<pre><code>## phyloseq-class experiment-level object
+## otu_table()   OTU Table:         [ 50539 taxa and 42 samples ]
+## sample_data() Sample Data:       [ 42 samples by 4 sample variables ]
+## tax_table()   Taxonomy Table:    [ 50539 taxa by 7 taxonomic ranks ]</code></pre>
+<p>We are not covering rarefaction in this workshop, but it is a good idea to know about it. It addresses whether you have more taxa in a sample due to your sampling depth. You may come across a rarefraction curve when dealing with microbial sequencing data because it helps determine whether a sample is sequenced deep enough. It is computationally expensive because you have to rarify your samples to various depth and measure how many taxa are remaining. So the curves generally have a steep rise at low depths and plateau at higher depths. If you have a sample with a low depth, but it would be okay if its curve fits in the plateau regions of samples with larger sample depths. If it doesn’t fit, then the sample may not be sequenced deep enough.</p>
+</div>
+<div id="taxafilter" class="section level4">
+<h4><span class="header-section-number">4.2.3.3</span> Taxonomy</h4>
+<p>There are several ways to subset your data based on the taxonomy table using the <code>prune_taxa</code> function. Most common are by name or by the counts assigned to each taxa. <code>prune_taxa</code> works similar to <code>prune_samples</code> in that it will take a logical statement or a vector of names. The length of the logical vector must be equal to the number of taxa in the phyloseq object, and the vector of names should match with the row names of the taxonomy table. Let’s try some examples of <code>prune_taxa</code>.</p>
+<p>We have &gt;50,000 taxa in the UCD-T2DM and we’re worried that we sequenced too deeply. Many of these taxa could be spurious, especially if there are only a few reads across all samples. Thus, we want to filter any taxa that doesn’t sum to 50 reads.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The taxa_sums() function will calculate sample depths across taxa </span>
+phyloTaxaDepth &lt;-<span class="st"> </span><span class="kw">taxa_sums</span>(phylo_obj)
+
+<span class="co"># We want to keep samples that have sequence depths greater than 50</span>
+TaxaDepth50 &lt;-<span class="st"> </span>phyloTaxaDepth <span class="op">&gt;</span><span class="st"> </span><span class="dv">50</span>
+
+<span class="co"># Use the prune_samples() function</span>
+<span class="co"># First argument is the logical statement, the second is the phyloseq object</span>
+phyloTaxa50 &lt;-<span class="st"> </span><span class="kw">prune_taxa</span>(TaxaDepth50, phylo_obj)
+
+<span class="co"># The &#39;pruned&#39; phyloseq object</span>
+phyloTaxa50</code></pre></div>
+<pre><code>## phyloseq-class experiment-level object
+## otu_table()   OTU Table:         [ 2333 taxa and 55 samples ]
+## sample_data() Sample Data:       [ 55 samples by 4 sample variables ]
+## tax_table()   Taxonomy Table:    [ 2333 taxa by 7 taxonomic ranks ]</code></pre>
+<p>Woah!! We lost 99.95% of our OTUs! This actually may be appropriate. As you see, there will be other ways to filter low abundant taxa.</p>
+<p>Let’s look at an example of how we can use <code>prune_taxa</code> with a vector of names. We will use an example were extract the row names from the taxonomy table and use those names to filter the phyloseq object.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Extract row names from the taxonomy table</span>
+phyloTaxaNames &lt;-<span class="st"> </span><span class="kw">taxa_names</span>(phylo_obj2016)
+
+<span class="co"># Use the first 20 samples</span>
+phyloTaxaNames20 &lt;-<span class="st"> </span>phyloTaxaNames[<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>]
+
+<span class="co"># View names, note that they are a unique identifier and not bacterial names</span>
+phyloTaxaNames20</code></pre></div>
+<pre><code>##  [1] &quot;366623&quot;  &quot;182771&quot;  &quot;1800048&quot; &quot;276629&quot;  &quot;206494&quot;  &quot;22466&quot;   &quot;276195&quot; 
+##  [8] &quot;276622&quot;  &quot;130468&quot;  &quot;296165&quot;  &quot;189110&quot;  &quot;193591&quot;  &quot;782984&quot;  &quot;262104&quot; 
+## [15] &quot;522433&quot;  &quot;3943182&quot; &quot;949863&quot;  &quot;306528&quot;  &quot;48899&quot;   &quot;4474844&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First argument is the names vector, the second is the phyloseq object</span>
+phyloTaxa20 &lt;-<span class="st"> </span><span class="kw">prune_taxa</span>(phyloTaxaNames20, phylo_obj2016)
+
+<span class="co"># The &#39;pruned&#39; phyloseq object</span>
+phyloTaxa20</code></pre></div>
+<pre><code>## phyloseq-class experiment-level object
+## otu_table()   OTU Table:         [ 20 taxa and 33 samples ]
+## sample_data() Sample Data:       [ 33 samples by 4 sample variables ]
+## tax_table()   Taxonomy Table:    [ 20 taxa by 7 taxonomic ranks ]</code></pre>
+</div>
+</div>
+<div id="aggregating" class="section level3">
+<h3><span class="header-section-number">4.2.4</span> Aggregating</h3>
+<p>I have referred to microbial sequencing data as multi-level data due to the fact that you can analyze data at different phylogenetic levels. We are not working with a phylogenetic tree in this workshop, but we have all of the taxonomic information to aggregate lower level taxa into their parent taxa level. This is done using the <code>tax_glom</code> function on a phyloseq object. It works by providing the column name in the taxonomic table that you’d like to aggregate to. This is why we updated these labels to reflect the taxonomy levels in section <a href="importing-and-pre-processing.html#biomimport">4.1.1</a>, to make them more consistent with aggregation scheme. You can access the column names in the taxonomy table using the <code>rank_names</code> function.</p>
+<p>Many early investigations relating the microbiota to obesity identified an increased ratio of Firmicutes to Bacteroidetes in obese mice relative to their lean counterparts. This is at the phylum level, so the most broad phylogenetic level of bacteria. Let’s aggregate the phyloseq object to the phylum level.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Aggregate the phyloseq object to Phylum level. </span>
+<span class="co"># First argument is the phyloseq object and second argument is the level to aggregate to</span>
+<span class="co"># Will take 5-10 seconds to process because of the large amount of taxa</span>
+phylo_Phylum &lt;-<span class="st"> </span><span class="kw">tax_glom</span>(phylo_obj, <span class="st">&quot;Phylum&quot;</span>)
+
+<span class="co"># The &#39;aggregated&#39; phyloseq object</span>
+phylo_Phylum</code></pre></div>
+<pre><code>## phyloseq-class experiment-level object
+## otu_table()   OTU Table:         [ 13 taxa and 55 samples ]
+## sample_data() Sample Data:       [ 55 samples by 4 sample variables ]
+## tax_table()   Taxonomy Table:    [ 13 taxa by 7 taxonomic ranks ]</code></pre>
+<p>The output doesn’t reflect which taxonomic level we’ve aggregated to, but it does show that there are now only 13 taxa. Let’s first look at the taxonomy table.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Using the tax_table() function from the phyloseq package. </span>
+<span class="kw">tax_table</span>(phylo_Phylum)</code></pre></div>
+<pre><code>## Taxonomy Table:     [13 taxa by 7 taxonomic ranks]:
+##         Kingdom       Phylum               Class Order Family Genus
+## 1108599 &quot;k__Bacteria&quot; &quot;p__Proteobacteria&quot;  NA    NA    NA     NA   
+## 1107027 &quot;k__Bacteria&quot; &quot;p__Firmicutes&quot;      NA    NA    NA     NA   
+## 277626  &quot;k__Bacteria&quot; &quot;p__Bacteroidetes&quot;   NA    NA    NA     NA   
+## 581048  &quot;k__Bacteria&quot; &quot;p__Elusimicrobia&quot;   NA    NA    NA     NA   
+## 828676  &quot;k__Bacteria&quot; &quot;p__Fusobacteria&quot;    NA    NA    NA     NA   
+## 2136916 &quot;k__Bacteria&quot; &quot;p__Lentisphaerae&quot;   NA    NA    NA     NA   
+## 4432841 &quot;k__Bacteria&quot; &quot;p__Tenericutes&quot;     NA    NA    NA     NA   
+## 997439  &quot;k__Bacteria&quot; &quot;p__Actinobacteria&quot;  NA    NA    NA     NA   
+## 381666  &quot;k__Bacteria&quot; &quot;p__Cyanobacteria&quot;   NA    NA    NA     NA   
+## 363731  &quot;k__Bacteria&quot; &quot;p__Verrucomicrobia&quot; NA    NA    NA     NA   
+## 3528445 &quot;k__Archaea&quot;  &quot;p__Euryarchaeota&quot;   NA    NA    NA     NA   
+## 25453   &quot;k__Bacteria&quot; &quot;p__Deferribacteres&quot; NA    NA    NA     NA   
+## 401717  &quot;k__Bacteria&quot; &quot;p__TM7&quot;             NA    NA    NA     NA   
+##         Species
+## 1108599 NA     
+## 1107027 NA     
+## 277626  NA     
+## 581048  NA     
+## 828676  NA     
+## 2136916 NA     
+## 4432841 NA     
+## 997439  NA     
+## 381666  NA     
+## 363731  NA     
+## 3528445 NA     
+## 25453   NA     
+## 401717  NA</code></pre>
+<p>Note that Class through Species are <code>NA</code> values because we’ve aggregated to the Phylum level. Similar to the ‘prune_’ functions, there is no going back after you use <code>tax_glom</code>. Make sure you create a new phyloseq object.</p>
+<p>Now lets say we want to extract Firmicutes and Bacteroidetes data so we can eventually compute a ratio. Let’s try it!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Manually extract taxonomy table and coerce it into a data frame</span>
+PhylumTaxaTable &lt;-<span class="st"> </span><span class="kw">tax_table</span>(phylo_Phylum)<span class="op">@</span>.Data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()
+
+<span class="co"># Extract the OTU table using the abundances() function and coerce into data frame</span>
+<span class="co"># Need to be data frame to add unique identifier column for joining</span>
+PhylumOTUTable &lt;-<span class="st"> </span><span class="kw">abundances</span>(phylo_Phylum) <span class="op">%&gt;%</span><span class="st"> </span>data.frame
+
+<span class="co"># Extract the sample metadata using the meta() function</span>
+PhylumSampleTable &lt;-<span class="st"> </span><span class="kw">meta</span>(phylo_Phylum)
+
+<span class="co"># the row names are the unique OTU identifier</span>
+<span class="co"># Make it into a column so we can use to join both data frames </span>
+PhylumTaxaTable<span class="op">$</span>OTU &lt;-<span class="st"> </span><span class="kw">rownames</span>(PhylumTaxaTable)
+PhylumOTUTable<span class="op">$</span>OTU &lt;-<span class="st"> </span><span class="kw">rownames</span>(PhylumOTUTable)
+
+<span class="co"># Join data frames</span>
+Phylum_TaxaOTU &lt;-<span class="st"> </span><span class="kw">full_join</span>(PhylumTaxaTable, PhylumOTUTable, <span class="dt">by=</span><span class="st">&quot;OTU&quot;</span>)
+
+<span class="co"># Make Phylum column as rownames</span>
+<span class="kw">rownames</span>(Phylum_TaxaOTU) &lt;-<span class="st"> </span>Phylum_TaxaOTU<span class="op">$</span>Phylum
+
+<span class="co"># Remove all taxonomy columns using !()</span>
+Phylum_OTUdf &lt;-<span class="st"> </span>Phylum_TaxaOTU[, <span class="op">!</span>(<span class="kw">colnames</span>(Phylum_TaxaOTU) <span class="op">%in%</span><span class="st"> </span><span class="kw">colnames</span>(PhylumTaxaTable))]
+
+<span class="co"># Transpose data and add sample data</span>
+<span class="co"># the t() function coerces a data frame to a matrix, so you have to convert back.</span>
+tPhylum_OTUdf &lt;-<span class="st"> </span><span class="kw">t</span>(Phylum_OTUdf) <span class="op">%&gt;%</span><span class="st"> </span>as.data.frame
+
+<span class="co"># Remember, the count data column names had to match the sample data row names.</span>
+<span class="co"># Make a new column with a column name that mirrors the one in the metadata data frame</span>
+<span class="co"># You will need to make a similar column in the metadata if not done already.</span>
+tPhylum_OTUdf<span class="op">$</span>SampleID &lt;-<span class="st"> </span><span class="kw">rownames</span>(tPhylum_OTUdf)
+
+<span class="co"># Join data frames</span>
+Phylum_DF &lt;-<span class="st"> </span><span class="kw">full_join</span>(PhylumSampleTable, tPhylum_OTUdf, <span class="dt">by=</span><span class="st">&quot;SampleID&quot;</span>)
+
+<span class="co"># View final object</span>
+<span class="kw">head</span>(Phylum_DF)</code></pre></div>
+<pre><code>##   SampleID   Rat GroupAbbrev Collection p__Proteobacteria p__Firmicutes
+## 1 BP.K2491 K2491         D6M        Y14              4805         27860
+## 2  BP.H931  H931         LSD        Y14               795         15358
+## 3  BP.H933  H933         LSD        Y14              1077         17874
+## 4 BP.H1147 H1147         LSD        Y16              4147         17268
+## 5 BP.H1157 H1157         LSD        Y16              4662         15752
+## 6 BP.K2503 K2503         D6M        Y14              2256         24037
+##   p__Bacteroidetes p__Elusimicrobia p__Fusobacteria p__Lentisphaerae
+## 1            24402               58               0                1
+## 2            21377               90               0                0
+## 3            27066               44               0                2
+## 4            20690               13               0                4
+## 5            14143               76               0                4
+## 6            24489               11               0                3
+##   p__Tenericutes p__Actinobacteria p__Cyanobacteria p__Verrucomicrobia
+## 1            227                23               57                  0
+## 2             60                37              475                 71
+## 3             30                42              445               2937
+## 4            147                42              683               2380
+## 5            358                84              991              11735
+## 6            171              1139              230               4970
+##   p__Euryarchaeota p__Deferribacteres p__TM7
+## 1                0                 26      0
+## 2                0                290      5
+## 3                0                 87      0
+## 4                0                 52      0
+## 5                0                 56      4
+## 6                0                  0      0</code></pre>
+<p>We now have the data formatted in a way were we have all the necessary information to complete our analysis in the regular R environment (i.e., not phyloseq environment).</p>
+</div>
+</div>
+<div id="pre-processing" class="section level2">
+<h2><span class="header-section-number">4.3</span> Pre-processing</h2>
+<p>Pre-processing is arguably the most important step in your data analysis pipeline. We have already been exposed to some pre-processing examples in the last section - filtering low abundant reads and identifying samples with low read counts. These concepts will be detailed with more precision in this chapter, and we will cover how to perform a few normalizations procedures. One of which is commonly used to remove low abundant taxa. So it may feel we are jumping back and forth between sections, but the order is important. Some normalizations (e.g., proportions) are sensitive to differences in taxa, so we want to make that we’ve removed non-informative and potentially spurious taxa prior to normalization.</p>
+<div id="lowabundtaxa" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> Low abundance taxa</h3>
+<p>In section <a href="importing-and-pre-processing.html#taxafilter">4.2.3.3</a> we filtered low abundant taxa based on whether the sum of a taxa across all samples met a total count threshold. That is actually a very crude way to eliminate low abundant taxa. What if you had a taxa that had 5-10 counts consistently in 1 group but not in the other groups. You may lose this information with that filtering method. Another approach is to identify a minimum detection limit within a sample and then identify a whether a certain percentage of your samples meet that criteria. The phyloseq package has a function that does this, <code>filter_taxa</code>, but honestly, the <code>core</code> function from the microbiome package is much more straight-foward. We will examine the latter.</p>
+<p>The <code>core</code> function requires 3 arguments. The first is the phyloseq object, the second defines the ‘detection’ limit, and the third defines the ‘prevalence’ (i.e., proportion) that meets the defined limit.</p>
+<p>Let’s say we want to remove the LSD rat group and assess the microbiota on only UCD-T2DM rats. We now have 4 groups and want to ensure we can detect a taxa that is only abundant in a single group. That would be 25% of the samples, if the samples were evenly balanced. As there is still inter-individual variability between rats, we decide to settle on a certain taxa having counts in at least 20% of the total sample. Now, what should we define as the count limit? There is evidence that <a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-5-210">large effect sizes can be detected at sequences as low as 10 reads</a>. Thus, we will set our mimimum limit at 10 reads.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The function will fail if your criteria is too strong.</span>
+phyobj_d10p25 &lt;-<span class="st"> </span><span class="kw">core</span>(phylo_obj, <span class="dt">detection =</span> <span class="dv">10</span>, <span class="dt">prevalence =</span> <span class="fl">0.25</span>)
+
+<span class="co"># View object</span>
+phyobj_d10p25</code></pre></div>
+<pre><code>## phyloseq-class experiment-level object
+## otu_table()   OTU Table:         [ 400 taxa and 55 samples ]
+## sample_data() Sample Data:       [ 55 samples by 4 sample variables ]
+## tax_table()   Taxonomy Table:    [ 400 taxa by 7 taxonomic ranks ]</code></pre>
+<p>If you recall, the earlier filter resulted in 2333 taxa, but this filtering procedure resulted in 400 taxa. Both are a considerable drop from the original total of over 55,000. How much data did we actually lose? We can calculate it using the <code>sample_sums</code> function!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Sum the sample sums will give us the sum of all reads</span>
+Original_DepthSize &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">sample_sums</span>(phylo_obj))
+
+<span class="co"># Filtered summed sample depths</span>
+d10p25_DepthSize &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">sample_sums</span>(phyobj_d10p25))
+
+<span class="dv">100</span> <span class="op">*</span><span class="st"> </span>(d10p25_DepthSize<span class="op">/</span>Original_DepthSize)</code></pre></div>
+<pre><code>## [1] 75.81838</code></pre>
+<p>Reducing the taxa total by &gt; 99% only resulted in 25% data loss. This is a pretty glaring example of over-sequencing, but in general, microbial sequencing data tends to be skewed to low abundant taxa.</p>
+</div>
+<div id="proportional-abundance" class="section level3">
+<h3><span class="header-section-number">4.3.2</span> Proportional Abundance</h3>
+<p>Proportional abundance, also sometimes referred to relative abundance, can applied to a phyloseq object. Both phyloseq and microbiome packages contain functions that can transform the OTU table. The <code>transform_sample_counts</code> function from phyloseq provides a ‘function’ argument where you can provide a single-argument function or create your own function to pass to the phyloseq object. So it is very flexible. The <code>microbiome::transform</code> function has several transformations coded into it, including the transformation to proportional abundances. Please note the ‘microbiome::’ prefix to the <code>transform</code> function. Transform is a common used function name, so the ’microbiome::&quot; prefix denotes that this <code>transform</code> is specifically from the microbiome package. I advise using it in every use of <code>transform</code>.</p>
+<p>Now that we have filtered our data, let’s calculate the proportional abundances of our taxa.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Two arguments required, the phyloseq object and the transformation</span>
+<span class="co"># Please see the help page for the full list of transformations: ?microbiome::transform</span>
+phyobj_d10p25_prop &lt;-<span class="st"> </span>microbiome<span class="op">::</span><span class="kw">transform</span>(phyobj_d10p25, <span class="st">&quot;compositional&quot;</span>)
+
+<span class="co"># View a subset of the data</span>
+<span class="kw">head</span>(<span class="kw">abundances</span>(phyobj_d10p25_prop)[,<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</code></pre></div>
+<pre><code>##             BP.K2491      BP.H931      BP.H933     BP.H1147     BP.H1157
+## 4474844 7.787353e-05 0.000000e+00 0.0000000000 0.0078841512 9.672165e-04
+## 1106614 3.242135e-02 7.760190e-03 0.0060768994 0.0001340842 0.000000e+00
+## 354987  1.168103e-03 0.000000e+00 0.0000000000 0.0013944757 2.545306e-05
+## 266445  2.595784e-05 6.867424e-05 0.0000000000 0.0003754358 1.018123e-04
+## 97151   1.505555e-03 4.051780e-03 0.0061329077 0.0008581389 5.599674e-04
+## 443853  2.076628e-04 3.433712e-05 0.0001400207 0.0000000000 7.126858e-04
+##             BP.K2503     BP.P8163     BP.H1166     BP.P7611     BP.P7609
+## 4474844 0.0000000000 0.0000000000 0.0111216387 0.0000000000 0.000000e+00
+## 1106614 0.0051581018 0.0001416983 0.0006767731 0.0000000000 2.157364e-04
+## 354987  0.0000000000 0.0007084913 0.0032710702 0.0000000000 0.000000e+00
+## 266445  0.0009596468 0.0010273123 0.0002481502 0.0001290989 2.527198e-03
+## 97151   0.0008396910 0.0018775019 0.0006542140 0.0007487736 3.698339e-04
+## 443853  0.0000000000 0.0000000000 0.0000000000 0.0000000000 3.081949e-05</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Do the taxa sum to 1?</span>
+<span class="kw">sample_sums</span>(phyobj_d10p25_prop)</code></pre></div>
+<pre><code>## BP.K2491  BP.H931  BP.H933 BP.H1147 BP.H1157 BP.K2503 BP.P8163 BP.H1166 
+##        1        1        1        1        1        1        1        1 
+## BP.P7611 BP.P7609  BP.H937 BP.P7589 BP.P9227 BP.P9257 BP.P9259 BP.P9255 
+##        1        1        1        1        1        1        1        1 
+## BP.P9395 BP.P9303 BP.P8113 BP.P9295 BP.P9335 BP.P8287 BP.P9393 BP.P9223 
+##        1        1        1        1        1        1        1        1 
+## BP.P9263 BP.P9291 BP.H1156 BP.P9375 BP.K4153  BP.H935 BP.P9285 BP.P7603 
+##        1        1        1        1        1        1        1        1 
+## BP.P9387 BP.P7563 BP.H1167  BP.H939 BP.P7573 BP.P9261 BP.P9327 BP.K2513 
+##        1        1        1        1        1        1        1        1 
+## BP.P8153 BP.P8117 BP.P9251 BP.P9329 BP.P7561 BP.P7949 BP.P9225 BP.P9323 
+##        1        1        1        1        1        1        1        1 
+## BP.P8259 BP.K4206 BP.H1145 BP.H1138 BP.P9243 BP.K4164 BP.P9253 
+##        1        1        1        1        1        1        1</code></pre>
+<p>Perhaps we want to determine the median class proportional abundance? Let’s do it!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use tax_glom() function</span>
+phyobj_PA_Class &lt;-<span class="st"> </span><span class="kw">tax_glom</span>(phyobj_d10p25_prop, <span class="st">&quot;Class&quot;</span>)
+
+<span class="co"># Extract data</span>
+phyobj_PA_Class_OTU &lt;-<span class="st"> </span><span class="kw">abundances</span>(phyobj_PA_Class)
+
+<span class="co"># Use apply to determine median for each row</span>
+<span class="co"># Multiply by 100 to get percentage and round for readability.</span>
+phyobj_PA_Class_OTUmedian &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">apply</span>(phyobj_PA_Class_OTU, <span class="dv">1</span>, median) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)
+
+<span class="co"># Extract taxonomy table</span>
+phyobj_PA_ClassTaxa &lt;-<span class="st"> </span><span class="kw">tax_table</span>(phyobj_PA_Class)<span class="op">@</span>.Data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()
+
+<span class="co"># Check to make sure row names of taxa table matches phyobj_PA_Class_OTUmedian names</span>
+<span class="kw">setequal</span>(<span class="kw">names</span>(phyobj_PA_Class_OTUmedian) <span class="op">==</span><span class="st"> </span><span class="kw">rownames</span>(phyobj_PA_ClassTaxa), <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># If TRUE, add phyobj_PA_Class_OTUmedian to taxa table</span>
+phyobj_PA_ClassTaxa<span class="op">$</span>Median &lt;-<span class="st"> </span>phyobj_PA_Class_OTUmedian
+
+<span class="co"># Keep necessary colums</span>
+phyobj_PA_ClassTaxa_DF &lt;-<span class="st"> </span>phyobj_PA_ClassTaxa[,<span class="kw">colnames</span>(phyobj_PA_ClassTaxa) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Phylum&quot;</span>, <span class="st">&quot;Class&quot;</span>, <span class="st">&quot;Median&quot;</span>)]
+
+<span class="co"># View based on phylum order</span>
+phyobj_PA_ClassTaxa_DF[<span class="kw">order</span>(phyobj_PA_ClassTaxa_DF<span class="op">$</span>Phylum),]</code></pre></div>
+<pre><code>##                     Phylum                    Class Median
+## 997439   p__Actinobacteria        c__Actinobacteria   0.06
+## 277626    p__Bacteroidetes           c__Bacteroidia  49.27
+## 381666    p__Cyanobacteria                c__4C0d-2   0.16
+## 25453   p__Deferribacteres       c__Deferribacteres   0.06
+## 581048    p__Elusimicrobia         c__Elusimicrobia   0.03
+## 3528445   p__Euryarchaeota       c__Methanobacteria   0.00
+## 555945       p__Firmicutes            c__Clostridia  28.20
+## 1107027      p__Firmicutes               c__Bacilli   6.75
+## 386788       p__Firmicutes       c__Erysipelotrichi   0.02
+## 2564048  p__Proteobacteria c__Epsilonproteobacteria   0.41
+## 359809   p__Proteobacteria    c__Betaproteobacteria   0.06
+## 1108599  p__Proteobacteria   c__Deltaproteobacteria   8.68
+## 1111294  p__Proteobacteria   c__Gammaproteobacteria   0.12
+## 1113282     p__Tenericutes            c__Mollicutes   0.08
+## 363731  p__Verrucomicrobia      c__Verrucomicrobiae   0.01</code></pre>
+<p>Only 4 classes have a median proportional abundance greater than 1%. This is fairly common in rodent and human studies. At least 80-90% of taxa are within the Firmicutes and Bacteroidetes phyla.</p>
+<p>It is also common to filter taxa based on proportional abundances. Many times, a minimum average or median proportion must be met. Say, 1% on a scale of 0-100% (equivalent to 0.01 on a 0 to 1 scale). We will use the <code>prune_taxa</code> function to do this</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Transform counts to proportional abundances.</span>
+phylo_obj_PA &lt;-<span class="st"> </span>microbiome<span class="op">::</span><span class="kw">transform</span>(phylo_obj, <span class="st">&quot;compositional&quot;</span>)
+
+<span class="co"># Determine mean proportional abundances by taxa.</span>
+phylo_obj_PA_taxamean &lt;-<span class="st"> </span><span class="kw">rowMeans</span>(<span class="kw">abundances</span>(phylo_obj_PA))
+
+<span class="co"># Use logical statement in prune_taxa()Using prune_taxa() function.</span>
+phyobj_PA_p01 &lt;-<span class="st"> </span><span class="kw">prune_taxa</span>(phylo_obj_PA_taxamean <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.01</span>, phylo_obj_PA)
+
+<span class="co"># View phyloseq object</span>
+phyobj_PA_p01</code></pre></div>
+<pre><code>## phyloseq-class experiment-level object
+## otu_table()   OTU Table:         [ 14 taxa and 55 samples ]
+## sample_data() Sample Data:       [ 55 samples by 4 sample variables ]
+## tax_table()   Taxonomy Table:    [ 14 taxa by 7 taxonomic ranks ]</code></pre>
+<p>14 taxa! I guess we only want to see the most abundant taxa. How much data was lost?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Filtered summed sample depths</span>
+PA_p01_DepthSize &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">sample_sums</span>(phyobj_PA_p01))
+
+<span class="dv">100</span> <span class="op">*</span><span class="st"> </span>(PA_p01_DepthSize<span class="op">/</span>Original_DepthSize)</code></pre></div>
+<pre><code>## [1] 0.000812965</code></pre>
+<p>In this case, we lost the majority of our data. Likely due to the fact that the proportional abundances are spread across 55,000 taxa. Still, it shows how a single filtering criteria may not be advantageous.</p>
+</div>
+<div id="zeroimput" class="section level3">
+<h3><span class="header-section-number">4.3.3</span> Zeros</h3>
+<p>This is arguably the most difficult aspect of microbial sequence analysis. The zeros in the sequencing data do not necessarily mean that the bacteria is not present, it could also mean the sampling depth was not adequate. Thus, treatment of zeros can sometimes depend on how the zero is viewed. If there are all zeros for a particular taxa in 1 diet group and non-zero counts in another, then it may be good evidence that that particular taxa is not in the former diet group. However, a few zeros in a taxa with random low counts may be a result of low sampling depth. As there are so many zeros and many normalization methods require imputations to work, all zeros are generally considered equally.</p>
+<p>Many normalization methods apply logarithmic treatments, which makes it necessary to add a non-negative value to zeros. The easiest way is to shift the entire count table by a defined positive number. Typically this is with the number 1. The <code>microbiome::tranform</code> function can apply this to your OTU table</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The function will fail if your criteria is too strong.</span>
+phyobj_d10p25_shift &lt;-<span class="st"> </span>microbiome<span class="op">::</span><span class="kw">transform</span>(phyobj_d10p25, <span class="dt">transform=</span><span class="st">&quot;shift&quot;</span>, <span class="dt">shift=</span><span class="dv">1</span>)
+
+<span class="co"># Compare abbreviated taxa</span>
+<span class="kw">data.frame</span>(<span class="dt">Original=</span><span class="kw">abundances</span>(phyobj_d10p25)[<span class="dv">1</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>], <span class="dt">Shifted=</span><span class="kw">abundances</span>(phyobj_d10p25_shift)[<span class="dv">1</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>])</code></pre></div>
+<pre><code>##          Original Shifted
+## BP.K2491        3       4
+## BP.H931         0       1
+## BP.H933         0       1
+## BP.H1147      294     295
+## BP.H1157       38      39
+## BP.K2503        0       1
+## BP.P8163        0       1
+## BP.H1166      493     494
+## BP.P7611        0       1
+## BP.P7609        0       1
+## BP.H937         0       1
+## BP.P7589        0       1
+## BP.P9227        0       1
+## BP.P9257        0       1
+## BP.P9259        0       1</code></pre>
+<p>Note that all counts increased by 1. This actually has a profound effect on the data. The low abundant counts are affected much greater than the higher counts, and our data is skewed to low abundant counts!</p>
+<p>Another <a href="https://www.nrcresearchpress.com/doi/full/10.1139/cjm-2015-0821#.XYun6y5Kj9Q">proposed</a> approach, within a compositional framework, is a Bayesian-multiplicative treatment. In depth details of the method can be found <a href="https://journals.sagepub.com/doi/abs/10.1177/1471082X14535524">here</a>, but it essentially replaces the zero with an estimate of the likelhood of the 0 being an artifact relative to the remainder of the data. The estimate is not a count, so this procedure is not useful for statistical tools that only handle counts.</p>
+<p>In order to perform this zero-imputation method, we will need to use the <code>cmultRepl</code> function from the zCompositions package. The first argument of <code>cmultRepl</code> takes your data, then we will input “CZM” (count zero multiplicative) in the ‘method’ argument, and “p-counts” (pseudo-counts) in the ‘output’ argument. We have to do a bit of data wrangling to get the treated data back into the phyloseq object.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load library</span>
+<span class="kw">library</span>(zCompositions)
+
+<span class="co"># Extract OTU table</span>
+d10p25_OTU &lt;-<span class="st"> </span><span class="kw">abundances</span>(phyobj_d10p25)
+
+<span class="co"># Taxa needs be rows and samples need to be columns</span>
+d10p25_OTU_BMz &lt;-<span class="st"> </span><span class="kw">cmultRepl</span>(d10p25_OTU, <span class="dt">method=</span><span class="st">&quot;CZM&quot;</span>, <span class="dt">output=</span><span class="st">&quot;p-counts&quot;</span>)</code></pre></div>
+<pre><code>## No. corrected values:  3564</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make duplicate phyloseq object with new name</span>
+phyobj_d10p25_BMz &lt;-<span class="st"> </span>phyobj_d10p25
+
+<span class="co"># Replace OTU table data with zero imputed data</span>
+<span class="kw">otu_table</span>(phyobj_d10p25_BMz) &lt;-<span class="st"> </span><span class="kw">otu_table</span>(d10p25_OTU_BMz, <span class="dt">taxa_are_rows =</span> <span class="ot">TRUE</span>)
+
+<span class="co"># View abbreviated data</span>
+<span class="kw">head</span>(<span class="kw">abundances</span>(phyobj_d10p25_BMz)[,<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>])</code></pre></div>
+<pre><code>##         BP.K2491     BP.H931      BP.H933    BP.H1147  BP.H1157
+## 4474844        3   0.3253469 3.533513e-02 294.0000000 38.000000
+## 1106614     1249 226.0000000 2.170000e+02   5.0000000  0.325119
+## 354987        45   0.3254957 7.971551e-03  52.0000000  1.000000
+## 266445         1   2.0000000 9.620607e-03  14.0000000  4.000000
+## 97151         58 118.0000000 2.190000e+02  32.0000000 22.000000
+## 443853         8   1.0000000 5.000000e+00   0.1139959 28.000000
+##            BP.K2503   BP.P8163    BP.H1166   BP.P7611    BP.P7609
+## 4474844   0.3253469  0.3253469 493.0000000  0.3253469  0.32534691
+## 1106614 215.0000000  4.0000000  30.0000000  0.3251190  7.00000000
+## 354987    0.3254957 20.0000000 145.0000000  0.1113692  0.07958477
+## 266445   40.0000000 29.0000000  11.0000000  5.0000000 82.00000000
+## 97151    35.0000000 53.0000000  29.0000000 29.0000000 12.00000000
+## 443853    0.3253579  0.1226230   0.1139959  0.1139959  1.00000000
+##              BP.H937    BP.P7589    BP.P9227    BP.P9257     BP.P9259
+## 4474844   0.32534691   0.3253469   0.3253469   0.3253469   0.07060998
+## 1106614   6.00000000   2.0000000  17.0000000 544.0000000   8.00000000
+## 354987    0.06364503   0.3254957   3.0000000  42.0000000 149.00000000
+## 266445    6.00000000 163.0000000 112.0000000   6.0000000 103.00000000
+## 97151   132.00000000  88.0000000  44.0000000  67.0000000  36.00000000
+## 443853    1.00000000   8.0000000 183.0000000   7.0000000 174.00000000</code></pre>
+<p>Be careful with the phyloseq objects that have had zero treatments and/or transformations. Some of the functionalities may give incorrect or incosistent results, e.g., <code>tax_glom</code>. It is best to subset or aggregate prior to these treatments. If these treatments are required to make a subset/aggregation decision, then I advise making 2 separate phyloseq objects as we did in the above example.</p>
+</div>
+<div id="centered-log-ratios" class="section level3">
+<h3><span class="header-section-number">4.3.4</span> Centered log ratios</h3>
+<p>A centered-log ratio (CLR) transformation has been suggested to render compositional data compatible with standard multivariate techniques. However, the individual counts become ratios between all parts of the sample, so the interpretion is now altered.</p>
+<p>We will use the <code>clr</code> function from the rgr package to carry out this function. We will use the same coding workflow as in Section <a href="importing-and-pre-processing.html#zeroimput">4.3.3</a>. The CLR transformation requires a counts or proportions values &gt; 0. Therefore, we will use the <code>phyobj_d10p25_BMz</code> object in the analysis.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load library</span>
+<span class="kw">library</span>(rgr)
+
+<span class="co"># Extract OTU table from the zero imputed phyloseq object.</span>
+BMz_OTU &lt;-<span class="st"> </span><span class="kw">abundances</span>(phyobj_d10p25_BMz)
+
+<span class="co"># Taxa needs be rows and samples need to be columns</span>
+BMz_clr_OTU &lt;-<span class="st"> </span><span class="kw">clr</span>(BMz_OTU, <span class="dt">ifwarn=</span><span class="ot">FALSE</span>)
+
+<span class="co"># Make duplicate phyloseq object with new name</span>
+phyobj_BMz_clr &lt;-<span class="st"> </span>phyobj_d10p25_BMz
+
+<span class="co"># Replace OTU table data with zero imputed data</span>
+<span class="kw">otu_table</span>(phyobj_BMz_clr) &lt;-<span class="st"> </span><span class="kw">otu_table</span>(BMz_clr_OTU, <span class="dt">taxa_are_rows =</span> <span class="ot">TRUE</span>)
+
+<span class="co"># View abbreviated data</span>
+<span class="kw">head</span>(<span class="kw">abundances</span>(phyobj_BMz_clr)[,<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>])</code></pre></div>
+<pre><code>##           BP.K2491   BP.H931    BP.H933    BP.H1147    BP.H1157   BP.K2503
+## 4474844  0.3119017 -1.909574 -4.1295883  4.89686919  2.85087558 -1.9095738
+## 1106614  5.0102160  3.300652  3.2600149 -0.51044459 -3.24344662  3.2507555
+## 354987   2.7686400 -2.160429 -5.8698986  2.91322126 -1.03802246 -2.1604286
+## 266445  -2.6026610 -1.909514 -7.2465089  0.03639635 -1.21636662  1.0862185
+## 97151    1.0035820  1.713824  2.3322107  0.40887492  0.03418147  0.4984871
+## 443853   1.0720100 -1.007432  0.6020064 -3.17902407  2.32477300 -2.1302609
+##           BP.P8163   BP.H1166   BP.P7611   BP.P7609    BP.H937  BP.P7589
+## 4474844 -1.9095738  5.4137986 -1.9095738 -1.9095738 -1.9095738 -1.909574
+## 1106614 -0.7335881  1.2813149 -3.2434466 -0.1739724 -0.3281230 -1.426735
+## 354987   1.9577098  3.9387113 -3.2329266 -3.5689549 -3.7924565 -2.160429
+## 266445   0.7646348 -0.2047657 -0.9932231  1.8040583 -0.8109015  2.491089
+## 97151    0.9134309  0.3104348  0.3104348 -0.5719543  1.8259409  1.420476
+## 443853  -3.1060718 -3.1790241 -3.1790241 -1.0074315 -1.0074315  1.072010
+##            BP.P9227   BP.P9257    BP.P9259
+## 4474844 -1.90957383 -1.9095738 -3.43729436
+## 1106614  0.71333084  4.1790667 -0.04044096
+## 354987   0.06058983  2.6996472  3.96592385
+## 266445   2.11583789 -0.8109015  2.03206800
+## 97151    0.72732865  1.1478316  0.52665795
+## 443853   4.20205464  0.9384786  4.15162379</code></pre>
+<p>We now have positive and negative values due to the centering of the data. We will use this transformation in Chapter 6 when looking at beta-diversity.</p>
+</div>
+</div>
+<div id="conclusion" class="section level2">
+<h2><span class="header-section-number">4.4</span> Conclusion</h2>
+<p>We have been using the phyloseq object as a way to package all of the data associated with microbial sequencing in a convenient wrapper. It allows for a single object to be manipulated when filtering and aggregating, but you’ll realize in subsequent chapters that it can be claustrophic in certain data pipelines. For example, you may not want to package your data into a phyloseq object if you’re going to use the compositional approach to visualizing and analyzing (e.g., zero replacement and CLR transformation). However, maybe you want to run your analysis at Family level before the compositional approach. Packaging into a phyloseq package and pre-processing your data prior to the compositional approach would then be helpful.</p>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="microbial-sequencing-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapt3intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="alpha-diversity.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

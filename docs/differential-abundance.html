@@ -5,26 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Differential Abundance | Florida State University Microbiota Workshop 2019</title>
-  <meta name="description" content="FSU Workshop Oct. 2019: Introduction to R and 16S rRNA sequencing data analysis in R." />
+  <meta name="description" content="FSU Workshop Oct. 2019: Introduction to R and microbial sequencing data analysis in R." />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Differential Abundance | Florida State University Microbiota Workshop 2019" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://bdpiccolo.github.io/FSU-Microbial-Data-Analysis" />
   
-  <meta property="og:description" content="FSU Workshop Oct. 2019: Introduction to R and 16S rRNA sequencing data analysis in R." />
+  <meta property="og:description" content="FSU Workshop Oct. 2019: Introduction to R and microbial sequencing data analysis in R." />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 7 Differential Abundance | Florida State University Microbiota Workshop 2019" />
   
-  <meta name="twitter:description" content="FSU Workshop Oct. 2019: Introduction to R and 16S rRNA sequencing data analysis in R." />
+  <meta name="twitter:description" content="FSU Workshop Oct. 2019: Introduction to R and microbial sequencing data analysis in R." />
   
 
 <meta name="author" content="Brian Piccolo" />
 
 
-<meta name="date" content="2019-09-19" />
+<meta name="date" content="2019-10-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -104,7 +104,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">FSU 16S Data Analysis in R Workshop 10/2019</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction to Data Analysis of 16S rRNA Sequencing in R</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction to Data Analysis of Microbial Sequencing in R</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#types-of-microbiota-data"><i class="fa fa-check"></i><b>1.1</b> Types of microbiota data</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#s-rrna-amplicon-sequencing"><i class="fa fa-check"></i><b>1.1.1</b> 16S rRNA amplicon sequencing</a></li>
@@ -125,7 +125,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2.6" data-path="rbasics.html"><a href="rbasics.html#basic-operations-data-types-missing-values-and-functions"><i class="fa fa-check"></i><b>2.6</b> Basic operations, data types, missing values, and functions</a><ul>
 <li class="chapter" data-level="2.6.1" data-path="rbasics.html"><a href="rbasics.html#basic-operations"><i class="fa fa-check"></i><b>2.6.1</b> Basic operations</a></li>
-<li class="chapter" data-level="2.6.2" data-path="rbasics.html"><a href="rbasics.html#data-types"><i class="fa fa-check"></i><b>2.6.2</b> Data types</a></li>
+<li class="chapter" data-level="2.6.2" data-path="rbasics.html"><a href="rbasics.html#datatypes"><i class="fa fa-check"></i><b>2.6.2</b> Data types</a></li>
 <li class="chapter" data-level="2.6.3" data-path="rbasics.html"><a href="rbasics.html#data-structure"><i class="fa fa-check"></i><b>2.6.3</b> Data structure</a></li>
 <li class="chapter" data-level="2.6.4" data-path="rbasics.html"><a href="rbasics.html#missing-values"><i class="fa fa-check"></i><b>2.6.4</b> Missing values</a></li>
 <li class="chapter" data-level="2.6.5" data-path="rbasics.html"><a href="rbasics.html#functions"><i class="fa fa-check"></i><b>2.6.5</b> Functions</a></li>
@@ -139,24 +139,108 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.8.1" data-path="rbasics.html"><a href="rbasics.html#viewing-your-data"><i class="fa fa-check"></i><b>2.8.1</b> Viewing your data</a></li>
 <li class="chapter" data-level="2.8.2" data-path="rbasics.html"><a href="rbasics.html#extracting-elements"><i class="fa fa-check"></i><b>2.8.2</b> Extracting elements</a></li>
 <li class="chapter" data-level="2.8.3" data-path="rbasics.html"><a href="rbasics.html#subsetting"><i class="fa fa-check"></i><b>2.8.3</b> Subsetting</a></li>
-<li class="chapter" data-level="2.8.4" data-path="rbasics.html"><a href="rbasics.html#reshaping-data"><i class="fa fa-check"></i><b>2.8.4</b> Reshaping data</a></li>
+<li class="chapter" data-level="2.8.4" data-path="rbasics.html"><a href="rbasics.html#reshaping"><i class="fa fa-check"></i><b>2.8.4</b> Reshaping data</a></li>
 <li class="chapter" data-level="2.8.5" data-path="rbasics.html"><a href="rbasics.html#merging-data"><i class="fa fa-check"></i><b>2.8.5</b> Merging data</a></li>
-<li class="chapter" data-level="2.8.6" data-path="rbasics.html"><a href="rbasics.html#apply-family-of-functions"><i class="fa fa-check"></i><b>2.8.6</b> apply family of functions</a></li>
+<li class="chapter" data-level="2.8.6" data-path="rbasics.html"><a href="rbasics.html#applyfunctions"><i class="fa fa-check"></i><b>2.8.6</b> apply family of functions</a></li>
 <li class="chapter" data-level="2.8.7" data-path="rbasics.html"><a href="rbasics.html#sweep"><i class="fa fa-check"></i><b>2.8.7</b> Sweep</a></li>
 </ul></li>
 <li class="chapter" data-level="2.9" data-path="rbasics.html"><a href="rbasics.html#stats"><i class="fa fa-check"></i><b>2.9</b> Stats</a><ul>
 <li class="chapter" data-level="2.9.1" data-path="rbasics.html"><a href="rbasics.html#basic-summary-based-stats."><i class="fa fa-check"></i><b>2.9.1</b> Basic summary based stats.</a></li>
-<li class="chapter" data-level="2.9.2" data-path="rbasics.html"><a href="rbasics.html#t-test-and-mann-whitney-u-test"><i class="fa fa-check"></i><b>2.9.2</b> <em>t</em>-test and Mann Whitney U test</a></li>
+<li class="chapter" data-level="2.9.2" data-path="rbasics.html"><a href="rbasics.html#ttestexamp"><i class="fa fa-check"></i><b>2.9.2</b> <em>t</em>-test and Mann Whitney U test</a></li>
 <li class="chapter" data-level="2.9.3" data-path="rbasics.html"><a href="rbasics.html#anova"><i class="fa fa-check"></i><b>2.9.3</b> ANOVA</a></li>
 <li class="chapter" data-level="2.9.4" data-path="rbasics.html"><a href="rbasics.html#kruskal-wallis-test"><i class="fa fa-check"></i><b>2.9.4</b> Kruskal-Wallis Test</a></li>
-<li class="chapter" data-level="2.9.5" data-path="rbasics.html"><a href="rbasics.html#post-hoc-tests"><i class="fa fa-check"></i><b>2.9.5</b> Post-hoc Tests</a></li>
+<li class="chapter" data-level="2.9.5" data-path="rbasics.html"><a href="rbasics.html#post-hoc-tests"><i class="fa fa-check"></i><b>2.9.5</b> Post-hoc tests</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="microbial-sequencing-data.html"><a href="microbial-sequencing-data.html"><i class="fa fa-check"></i><b>3</b> Microbial Sequencing Data</a></li>
-<li class="chapter" data-level="4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html"><i class="fa fa-check"></i><b>4</b> Importing and Pre-Processing</a></li>
-<li class="chapter" data-level="5" data-path="alpha-diversity.html"><a href="alpha-diversity.html"><i class="fa fa-check"></i><b>5</b> Alpha-Diversity</a></li>
-<li class="chapter" data-level="6" data-path="beta-diversity.html"><a href="beta-diversity.html"><i class="fa fa-check"></i><b>6</b> Beta-Diversity</a></li>
-<li class="chapter" data-level="7" data-path="differential-abundance.html"><a href="differential-abundance.html"><i class="fa fa-check"></i><b>7</b> Differential Abundance</a></li>
+<li class="chapter" data-level="3" data-path="chapt3intro.html"><a href="chapt3intro.html"><i class="fa fa-check"></i><b>3</b> Microbial Sequencing Data</a><ul>
+<li class="chapter" data-level="3.1" data-path="chapt3intro.html"><a href="chapt3intro.html#chapt3structure"><i class="fa fa-check"></i><b>3.1</b> Structure</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="chapt3intro.html"><a href="chapt3intro.html#count-data"><i class="fa fa-check"></i><b>3.1.1</b> Count data</a></li>
+<li class="chapter" data-level="3.1.2" data-path="chapt3intro.html"><a href="chapt3intro.html#taxonomy-data"><i class="fa fa-check"></i><b>3.1.2</b> Taxonomy data</a></li>
+<li class="chapter" data-level="3.1.3" data-path="chapt3intro.html"><a href="chapt3intro.html#sample-metadata"><i class="fa fa-check"></i><b>3.1.3</b> Sample Metadata</a></li>
+<li class="chapter" data-level="3.1.4" data-path="chapt3intro.html"><a href="chapt3intro.html#phylogenetic-tree"><i class="fa fa-check"></i><b>3.1.4</b> Phylogenetic tree</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="chapt3intro.html"><a href="chapt3intro.html#microbefiles"><i class="fa fa-check"></i><b>3.2</b> Files</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="chapt3intro.html"><a href="chapt3intro.html#spreadsheets"><i class="fa fa-check"></i><b>3.2.1</b> Spreadsheets</a></li>
+<li class="chapter" data-level="3.2.2" data-path="chapt3intro.html"><a href="chapt3intro.html#biomfile"><i class="fa fa-check"></i><b>3.2.2</b> Biome</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="chapt3intro.html"><a href="chapt3intro.html#diversity"><i class="fa fa-check"></i><b>3.3</b> Diversity</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="chapt3intro.html"><a href="chapt3intro.html#adivconcept"><i class="fa fa-check"></i><b>3.3.1</b> Alpha-diversity</a></li>
+<li class="chapter" data-level="3.3.2" data-path="chapt3intro.html"><a href="chapt3intro.html#betadivconcept"><i class="fa fa-check"></i><b>3.3.2</b> Beta-diversity</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="chapt3intro.html"><a href="chapt3intro.html#challenges"><i class="fa fa-check"></i><b>3.4</b> Challenges</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="chapt3intro.html"><a href="chapt3intro.html#compdata"><i class="fa fa-check"></i><b>3.4.1</b> Compositional data</a></li>
+<li class="chapter" data-level="3.4.2" data-path="chapt3intro.html"><a href="chapt3intro.html#zero-inflation"><i class="fa fa-check"></i><b>3.4.2</b> Zero inflation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="chapt3intro.html"><a href="chapt3intro.html#normalization"><i class="fa fa-check"></i><b>3.5</b> Normalization</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="chapt3intro.html"><a href="chapt3intro.html#rarefying"><i class="fa fa-check"></i><b>3.5.1</b> Rarefying</a></li>
+<li class="chapter" data-level="3.5.2" data-path="chapt3intro.html"><a href="chapt3intro.html#logUQ"><i class="fa fa-check"></i><b>3.5.2</b> Log upper quartile</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="chapt3intro.html"><a href="chapt3intro.html#r-packages-1"><i class="fa fa-check"></i><b>3.6</b> R packages</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="chapt3intro.html"><a href="chapt3intro.html#vegan"><i class="fa fa-check"></i><b>3.6.1</b> vegan</a></li>
+<li class="chapter" data-level="3.6.2" data-path="chapt3intro.html"><a href="chapt3intro.html#phyloseq"><i class="fa fa-check"></i><b>3.6.2</b> phyloseq</a></li>
+<li class="chapter" data-level="3.6.3" data-path="chapt3intro.html"><a href="chapt3intro.html#microbiome"><i class="fa fa-check"></i><b>3.6.3</b> microbiome</a></li>
+<li class="chapter" data-level="3.6.4" data-path="chapt3intro.html"><a href="chapt3intro.html#ape"><i class="fa fa-check"></i><b>3.6.4</b> ape</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="chapt3intro.html"><a href="chapt3intro.html#additional-resources"><i class="fa fa-check"></i><b>3.7</b> Additional resources</a></li>
+<li class="chapter" data-level="3.8" data-path="chapt3intro.html"><a href="chapt3intro.html#final-thoughts"><i class="fa fa-check"></i><b>3.8</b> Final thoughts</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html"><i class="fa fa-check"></i><b>4</b> Importing and Pre-Processing</a><ul>
+<li class="chapter" data-level="4.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#importing-data-into-r"><i class="fa fa-check"></i><b>4.1</b> Importing Data into R</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#biomimport"><i class="fa fa-check"></i><b>4.1.1</b> Biom file</a></li>
+<li class="chapter" data-level="4.1.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#excelimport"><i class="fa fa-check"></i><b>4.1.2</b> Excel</a></li>
+<li class="chapter" data-level="4.1.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#importmetadata"><i class="fa fa-check"></i><b>4.1.3</b> Metadata</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#phyloseq-object"><i class="fa fa-check"></i><b>4.2</b> phyloseq object</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#setting-up-a-phyloseq-object"><i class="fa fa-check"></i><b>4.2.1</b> Setting up a phyloseq object</a></li>
+<li class="chapter" data-level="4.2.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#extracting-data"><i class="fa fa-check"></i><b>4.2.2</b> Extracting data</a></li>
+<li class="chapter" data-level="4.2.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#subsetting-1"><i class="fa fa-check"></i><b>4.2.3</b> Subsetting</a></li>
+<li class="chapter" data-level="4.2.4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#aggregating"><i class="fa fa-check"></i><b>4.2.4</b> Aggregating</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#pre-processing"><i class="fa fa-check"></i><b>4.3</b> Pre-processing</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#lowabundtaxa"><i class="fa fa-check"></i><b>4.3.1</b> Low abundance taxa</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#proportional-abundance"><i class="fa fa-check"></i><b>4.3.2</b> Proportional Abundance</a></li>
+<li class="chapter" data-level="4.3.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#zeroimput"><i class="fa fa-check"></i><b>4.3.3</b> Zeros</a></li>
+<li class="chapter" data-level="4.3.4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#centered-log-ratios"><i class="fa fa-check"></i><b>4.3.4</b> Centered log ratios</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#conclusion"><i class="fa fa-check"></i><b>4.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="alpha-diversity.html"><a href="alpha-diversity.html"><i class="fa fa-check"></i><b>5</b> Alpha-Diversity</a><ul>
+<li class="chapter" data-level="5.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#phyloseq-package"><i class="fa fa-check"></i><b>5.1</b> phyloseq package</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#estimate_richness"><i class="fa fa-check"></i><b>5.1.1</b> estimate_richness()</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="alpha-diversity.html"><a href="alpha-diversity.html#microbiome-package"><i class="fa fa-check"></i><b>5.2</b> microbiome package</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#richness"><i class="fa fa-check"></i><b>5.2.1</b> richness()</a></li>
+<li class="chapter" data-level="5.2.2" data-path="alpha-diversity.html"><a href="alpha-diversity.html#dominance"><i class="fa fa-check"></i><b>5.2.2</b> dominance()</a></li>
+<li class="chapter" data-level="5.2.3" data-path="alpha-diversity.html"><a href="alpha-diversity.html#evenness"><i class="fa fa-check"></i><b>5.2.3</b> evenness()</a></li>
+<li class="chapter" data-level="5.2.4" data-path="alpha-diversity.html"><a href="alpha-diversity.html#rarity"><i class="fa fa-check"></i><b>5.2.4</b> rarity()</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="alpha-diversity.html"><a href="alpha-diversity.html#data-analysis"><i class="fa fa-check"></i><b>5.3</b> Data analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="beta-diversity.html"><a href="beta-diversity.html"><i class="fa fa-check"></i><b>6</b> Beta-Diversity</a><ul>
+<li class="chapter" data-level="6.1" data-path="beta-diversity.html"><a href="beta-diversity.html#calculating-beta-diversity-in-r"><i class="fa fa-check"></i><b>6.1</b> Calculating beta-diversity in R</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="beta-diversity.html"><a href="beta-diversity.html#identifying-your-beta-diversity-indices"><i class="fa fa-check"></i><b>6.1.1</b> Identifying your beta diversity indices</a></li>
+<li class="chapter" data-level="6.1.2" data-path="beta-diversity.html"><a href="beta-diversity.html#phyloseq-1"><i class="fa fa-check"></i><b>6.1.2</b> phyloseq</a></li>
+<li class="chapter" data-level="6.1.3" data-path="beta-diversity.html"><a href="beta-diversity.html#vegan-1"><i class="fa fa-check"></i><b>6.1.3</b> vegan</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="beta-diversity.html"><a href="beta-diversity.html#ordinations-1"><i class="fa fa-check"></i><b>6.2</b> Ordinations</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="beta-diversity.html"><a href="beta-diversity.html#phyloseq-2"><i class="fa fa-check"></i><b>6.2.1</b> phyloseq</a></li>
+<li class="chapter" data-level="6.2.2" data-path="beta-diversity.html"><a href="beta-diversity.html#vegan-2"><i class="fa fa-check"></i><b>6.2.2</b> vegan</a></li>
+<li class="chapter" data-level="6.2.3" data-path="beta-diversity.html"><a href="beta-diversity.html#apecalculation"><i class="fa fa-check"></i><b>6.2.3</b> ape</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="beta-diversity.html"><a href="beta-diversity.html#visualizing-ordinations"><i class="fa fa-check"></i><b>6.3</b> Visualizing ordinations</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="beta-diversity.html"><a href="beta-diversity.html#phyloordination"><i class="fa fa-check"></i><b>6.3.1</b> phyloseq</a></li>
+<li class="chapter" data-level="6.3.2" data-path="beta-diversity.html"><a href="beta-diversity.html#baseRordinations"><i class="fa fa-check"></i><b>6.3.2</b> Base R</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="beta-diversity.html"><a href="beta-diversity.html#permanova"><i class="fa fa-check"></i><b>6.4</b> PERMANOVA</a></li>
+<li class="chapter" data-level="6.5" data-path="beta-diversity.html"><a href="beta-diversity.html#conclusion-1"><i class="fa fa-check"></i><b>6.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="differential-abundance.html"><a href="differential-abundance.html"><i class="fa fa-check"></i><b>7</b> Differential Abundance</a><ul>
+<li class="chapter" data-level="7.1" data-path="differential-abundance.html"><a href="differential-abundance.html#rank-analysis"><i class="fa fa-check"></i><b>7.1</b> Rank analysis</a></li>
+<li class="chapter" data-level="7.2" data-path="differential-abundance.html"><a href="differential-abundance.html#deseq2"><i class="fa fa-check"></i><b>7.2</b> DESeq2</a></li>
+<li class="chapter" data-level="7.3" data-path="differential-abundance.html"><a href="differential-abundance.html#metagenomeseq"><i class="fa fa-check"></i><b>7.3</b> metagenomeSeq</a></li>
+<li class="chapter" data-level="7.4" data-path="differential-abundance.html"><a href="differential-abundance.html#aldex2"><i class="fa fa-check"></i><b>7.4</b> ALDEx2</a></li>
+<li class="chapter" data-level="7.5" data-path="differential-abundance.html"><a href="differential-abundance.html#conclusion-2"><i class="fa fa-check"></i><b>7.5</b> Conclusion</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -179,8 +263,2496 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="differential-abundance" class="section level1">
 <h1><span class="header-section-number">Chapter 7</span> Differential Abundance</h1>
-<p><strong>UNDER CONSTRUCTION</strong></p>
+<p>The next step in assessing differences in microbial sequencing data is to determine which taxa differ between experimental groups. Be warned, this area is still under active research and debate. I would not be surprised if some of the approaches covered in this chapter will fall out of favor after several years.</p>
+<p>Similar to beta-diversity, results can be variable depending on the normalization and statistical approach. Some approaches are also more conservative than others. Recently, I’ve adopted a “survival analysis” approach and identify taxa that intersect among several different approaches.</p>
+<p>I would argue that the phyloseq environment makes alpha- and beta-diversity assessment fairly straight-forward in R. Unfortunately, differential abundance analysis occurs entirely outside of the phyloseq environment. There are also different packages that we’ll introduce in this chapter that require modification of the the data. Some are directly related to RNA-seq analysis and build an object similar to the phyloseq object, but these new objects are typically unrelated to microbial data. We will navigate these approaches with care, but in depth detail of these methods are beyond the scope of this class.</p>
+<p class="alert alert-info">
+Unfortunately, there is no way to avoid immediate and advance coding in this chapter. Some of the statistical approaches require running a single test on all taxa, so we will have to use functions that can loop similar code (e.g., the apply family of functions). Other approaches have methods embedded in functions that do not rely on loops, but have additional steps and complex functions. Please refer to Chapter <a href="rbasics.html#rbasics">2</a> to help with some of these concepts. Links to additional help will be provided throughout.
+</p>
+<div id="rank-analysis" class="section level2">
+<h2><span class="header-section-number">7.1</span> Rank analysis</h2>
+<p>Early studies of microbial sequencing data used non-parametric rank-order statistics for group comparisons, e.g., Mann-Whitney U Test and Kruskal-Wallis 1-way analysis of variance by rank. This approach was adopted due to the fact that count data and proportional abundances are rarely normally distributed. However, some have criticized this approach due to the fact that the underlying data is compositional and should be handled by compositional data analysis approaches. Furthermore, the high abundance of zeros in low abundant taxa inflate the number of ties in the rank and limit the power to detect differences in low abundant taxa.</p>
+<p>Still, it is widely used by many investigators and can be more conservative then other methods we’ll cover. We will use the Mann-Whitney U test to determine which taxa differ between LSD and pre-diabetic (PD) UCD-T2DM rats under various normalizations. Since this is 16S rRNA data and we have poor resolution at Species level, we will evaluate group differences at Genus level for the ease of interpretation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Aggregate to Genus level</span>
+phyobj_d10p25_G &lt;-<span class="st"> </span><span class="kw">tax_glom</span>(phyobj_d10p25, <span class="st">&quot;Genus&quot;</span>)
 
+<span class="co"># Subset phyloseq object</span>
+phyloG_LSDPD &lt;-<span class="st"> </span><span class="kw">prune_samples</span>(<span class="kw">meta</span>(phyobj_d10p25_G)<span class="op">$</span>GroupAbbrev <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;LSD&quot;</span>, <span class="st">&quot;PD&quot;</span>), phyobj_d10p25_G)
+
+<span class="co"># Extract Sample Meta Data and make new ID column with rownames</span>
+LSDPD_Gmeta &lt;-<span class="st"> </span><span class="kw">meta</span>(phyloG_LSDPD) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()
+LSDPD_Gmeta<span class="op">$</span>SampleID &lt;-<span class="st"> </span><span class="kw">rownames</span>(LSDPD_Gmeta)
+
+<span class="co"># Exract OTU table </span>
+LSDPD_Gcounts &lt;-<span class="st"> </span><span class="kw">abundances</span>(phyloG_LSDPD)
+
+<span class="co"># Need to join with meta data, so samples need to be rows.</span>
+<span class="co"># transpose data and make new ID column with rownames</span>
+tLSDPD_Gcounts &lt;-<span class="st"> </span><span class="kw">t</span>(LSDPD_Gcounts) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()
+tLSDPD_Gcounts<span class="op">$</span>SampleID &lt;-<span class="st"> </span><span class="kw">rownames</span>(tLSDPD_Gcounts)
+
+<span class="co"># Join count and meta data</span>
+LSDPD_Gcountmeta &lt;-<span class="st"> </span><span class="kw">full_join</span>(LSDPD_Gmeta, tLSDPD_Gcounts, <span class="dt">by=</span><span class="st">&quot;SampleID&quot;</span>)
+
+<span class="co"># Reshape data to tall format </span>
+<span class="co"># The &#39;-&#39; prefix denotes columns that should not have data reshaped into the new Taxa column</span>
+LSDPD_G_tall &lt;-<span class="st"> </span>LSDPD_Gcountmeta <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(Taxa, counts, <span class="op">-</span>SampleID, <span class="op">-</span>Rat, <span class="op">-</span>GroupAbbrev, <span class="op">-</span>Collection)
+
+<span class="co"># Identify the unique taxa now listed in the &quot;Taxa&quot; column</span>
+LSDPD_G_uniqueOTU &lt;-<span class="st"> </span><span class="kw">unique</span>(LSDPD_G_tall<span class="op">$</span>Taxa)
+
+<span class="co"># Use sapply() to loop the Mann-Whitney U test across all unique taxa</span>
+LSDPD_MW_P &lt;-<span class="st"> </span><span class="kw">sapply</span>(LSDPD_G_uniqueOTU, <span class="cf">function</span>(x) {
+    <span class="co"># Subset data within function</span>
+    DAT &lt;-<span class="st"> </span>LSDPD_G_tall[LSDPD_G_tall<span class="op">$</span>Taxa <span class="op">%in%</span><span class="st"> </span>x,]
+    
+    <span class="co"># Run Mann Whitney U on subsetted data</span>
+    MWU &lt;-<span class="st"> </span><span class="kw">wilcox.test</span>(counts <span class="op">~</span><span class="st"> </span>GroupAbbrev, <span class="dt">data=</span>DAT)
+    
+    <span class="co"># Extract P.value and return</span>
+    MWU<span class="op">$</span>p.value
+})
+
+<span class="co"># Make new data frame containing taxa identifier, p value, and FDR.</span>
+LSDPD_MW_P_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Taxa=</span><span class="kw">names</span>(LSDPD_MW_P), <span class="dt">P=</span><span class="kw">round</span>(LSDPD_MW_P, <span class="dv">5</span>), <span class="dt">FDR=</span><span class="kw">round</span>(<span class="kw">p.adjust</span>(LSDPD_MW_P, <span class="st">&quot;fdr&quot;</span>), <span class="dv">5</span>))
+
+<span class="co"># Exract Taxa table, no extractor function, so need to manually extract.</span>
+LSDPD_Gtaxa &lt;-<span class="st"> </span><span class="kw">tax_table</span>(phyloG_LSDPD)<span class="op">@</span>.Data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()
+
+<span class="co"># Make Taxa column of row names for unique identifier, to join with p value data frame</span>
+LSDPD_Gtaxa<span class="op">$</span>Taxa &lt;-<span class="st"> </span><span class="kw">rownames</span>(LSDPD_Gtaxa)
+
+<span class="co"># Join P value and taxa data frames</span>
+LSDPD_MW_results &lt;-<span class="st"> </span><span class="kw">full_join</span>(LSDPD_Gtaxa, LSDPD_MW_P_df, <span class="dt">by=</span><span class="st">&quot;Taxa&quot;</span>)
+
+<span class="co"># Subset significant results</span>
+LSDPD_MW_Sigresults &lt;-<span class="st"> </span>LSDPD_MW_results[LSDPD_MW_results<span class="op">$</span>FDR <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>,]
+
+<span class="co"># Dispaly with trimmed columns</span>
+LSDPD_MW_Sigresults[,<span class="kw">c</span>(<span class="st">&quot;Phylum&quot;</span>, <span class="st">&quot;Family&quot;</span>, <span class="st">&quot;Genus&quot;</span>, <span class="st">&quot;FDR&quot;</span>)]</code></pre></div>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Phylum
+</th>
+<th style="text-align:left;">
+Family
+</th>
+<th style="text-align:left;">
+Genus
+</th>
+<th style="text-align:right;">
+FDR
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+p__Firmicutes
+</td>
+<td style="text-align:left;">
+f__Streptococcaceae
+</td>
+<td style="text-align:left;">
+g__Streptococcus
+</td>
+<td style="text-align:right;">
+0.00125
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p__Proteobacteria
+</td>
+<td style="text-align:left;">
+f__Desulfovibrionaceae
+</td>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.02517
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p__Proteobacteria
+</td>
+<td style="text-align:left;">
+f__Pasteurellaceae
+</td>
+<td style="text-align:left;">
+g__Aggregatibacter
+</td>
+<td style="text-align:right;">
+0.00443
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p__Proteobacteria
+</td>
+<td style="text-align:left;">
+f__Desulfovibrionaceae
+</td>
+<td style="text-align:left;">
+g__Desulfovibrio
+</td>
+<td style="text-align:right;">
+0.00921
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p__Firmicutes
+</td>
+<td style="text-align:left;">
+f__Lactobacillaceae
+</td>
+<td style="text-align:left;">
+g__Lactobacillus
+</td>
+<td style="text-align:right;">
+0.00125
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p__Firmicutes
+</td>
+<td style="text-align:left;">
+f__Peptococcaceae
+</td>
+<td style="text-align:left;">
+g__rc4-4
+</td>
+<td style="text-align:right;">
+0.00313
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p__Elusimicrobia
+</td>
+<td style="text-align:left;">
+f__Elusimicrobiaceae
+</td>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.00608
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p__Firmicutes
+</td>
+<td style="text-align:left;">
+f__Lachnospiraceae
+</td>
+<td style="text-align:left;">
+g__Roseburia
+</td>
+<td style="text-align:right;">
+0.00022
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p__Proteobacteria
+</td>
+<td style="text-align:left;">
+f__Enterobacteriaceae
+</td>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.00022
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p__Firmicutes
+</td>
+<td style="text-align:left;">
+f__Veillonellaceae
+</td>
+<td style="text-align:left;">
+g__Phascolarctobacterium
+</td>
+<td style="text-align:right;">
+0.00035
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p__Firmicutes
+</td>
+<td style="text-align:left;">
+f__Ruminococcaceae
+</td>
+<td style="text-align:left;">
+g__Oscillospira
+</td>
+<td style="text-align:right;">
+0.01489
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p__Bacteroidetes
+</td>
+<td style="text-align:left;">
+f__S24-7
+</td>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.01489
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p__Actinobacteria
+</td>
+<td style="text-align:left;">
+f__Bifidobacteriaceae
+</td>
+<td style="text-align:left;">
+g__Bifidobacterium
+</td>
+<td style="text-align:right;">
+0.01553
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p__Cyanobacteria
+</td>
+<td style="text-align:left;">
+f__
+</td>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.00022
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p__Firmicutes
+</td>
+<td style="text-align:left;">
+f__Erysipelotrichaceae
+</td>
+<td style="text-align:left;">
+g__Allobaculum
+</td>
+<td style="text-align:right;">
+0.00125
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p__Firmicutes
+</td>
+<td style="text-align:left;">
+f__[Mogibacteriaceae]
+</td>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.01286
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p__Firmicutes
+</td>
+<td style="text-align:left;">
+f__Dehalobacteriaceae
+</td>
+<td style="text-align:left;">
+g__Dehalobacterium
+</td>
+<td style="text-align:right;">
+0.00117
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p__Verrucomicrobia
+</td>
+<td style="text-align:left;">
+f__Verrucomicrobiaceae
+</td>
+<td style="text-align:left;">
+g__Akkermansia
+</td>
+<td style="text-align:right;">
+0.00022
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p__Firmicutes
+</td>
+<td style="text-align:left;">
+f__Lachnospiraceae
+</td>
+<td style="text-align:left;">
+g__Dorea
+</td>
+<td style="text-align:right;">
+0.03324
+</td>
+</tr>
+</tbody>
+</table>
+<p>Almost 20 genera are altered between the LSD and PD rats. However, we do not have any information regarding the dispersion of the data. Let’s calculate the median and IQR since we used a non-parametric method.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Can calculate this from LSDPD_G_tall object using tidyverse</span>
+<span class="co"># Note the use of the pipe, %&gt;%, the function sequence will terminate after the last pipe.</span>
+LSDPD_G_MEDIAN &lt;-<span class="st"> </span>LSDPD_G_tall <span class="op">%&gt;%</span>
+
+<span class="st">    </span><span class="co"># Define columns to get groups.  </span>
+<span class="st">    </span><span class="co"># In our case, we want medians by Taxa and GroupAbbrev</span>
+<span class="st">    </span><span class="kw">group_by</span>(Taxa, GroupAbbrev) <span class="op">%&gt;%</span>
+<span class="st">    </span>
+<span class="st">    </span><span class="co"># Summarize defines the functions that we want to group by</span>
+<span class="st">    </span><span class="co"># Use the column name in which you want the function to run on</span>
+<span class="st">    </span><span class="kw">summarise</span>(<span class="dt">MEDIAN =</span> <span class="kw">median</span>(counts), <span class="dt">IQR =</span> <span class="kw">IQR</span>(counts)) 
+
+<span class="co"># View object </span>
+LSDPD_G_MEDIAN  </code></pre></div>
+<pre><code>## # A tibble: 76 x 4
+## # Groups:   Taxa [38]
+##    Taxa    GroupAbbrev MEDIAN     IQR
+##    &lt;chr&gt;   &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;
+##  1 1076587 LSD            10     7.25
+##  2 1076587 PD             17    12.5 
+##  3 1076969 LSD            11    13.2 
+##  4 1076969 PD             60    50.5 
+##  5 1107027 LSD           490   226.  
+##  6 1107027 PD           2498  2871   
+##  7 1108422 LSD          7046. 1594.  
+##  8 1108422 PD           5911  2291   
+##  9 1108599 LSD          2351  3064.  
+## 10 1108599 PD           4039  1948.  
+## # ... with 66 more rows</code></pre>
+<p>We could stop here, but it would be better to organize the Mann-Whitney results with the median/IQR data. With a bit of data wrangling, we can do it.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Will use tidyverse workflow to do this.</span>
+LSDPD_G_MEDIAN_wide &lt;-<span class="st"> </span>LSDPD_G_MEDIAN <span class="op">%&gt;%</span><span class="st"> </span>
+
+<span class="st">    </span><span class="co"># Use gather() to combine MEDIAN and IQR columns into a single column</span>
+<span class="st">    </span><span class="kw">gather</span>(STATS, value, <span class="op">-</span>Taxa, <span class="op">-</span>GroupAbbrev) <span class="op">%&gt;%</span>
+<span class="st">    </span>
+<span class="st">    </span><span class="co"># Use mutate() to make new columns that combines GroupAbbrev and STATS</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">GroupStat =</span> <span class="kw">paste</span>(GroupAbbrev, STATS, <span class="dt">sep=</span><span class="st">&quot;_&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span>
+<span class="st">    </span><span class="co"># Use dplyr::select() to remove GroupAbbrev and STATS columns</span>
+<span class="st">    </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>GroupAbbrev, <span class="op">-</span>STATS) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span>
+<span class="st">    </span><span class="co"># Use spread() to distribute value by GroupStat</span>
+<span class="st">    </span><span class="kw">spread</span>(GroupStat, value) 
+
+<span class="co"># Join with LSDPD_MW_results</span>
+LSDPD_MW_Final &lt;-<span class="st"> </span><span class="kw">full_join</span>(LSDPD_MW_results, LSDPD_G_MEDIAN_wide, <span class="dt">by=</span><span class="st">&quot;Taxa&quot;</span>)
+
+<span class="co"># Display significant taxa with trimmed columns</span>
+LSDPD_MW_Final[LSDPD_MW_Final<span class="op">$</span>FDR <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>, <span class="kw">c</span>(<span class="st">&quot;Genus&quot;</span>, <span class="st">&quot;FDR&quot;</span>,<span class="st">&quot;LSD_MEDIAN&quot;</span>,<span class="st">&quot;LSD_IQR&quot;</span>,<span class="st">&quot;PD_MEDIAN&quot;</span>,<span class="st">&quot;PD_IQR&quot;</span>)]</code></pre></div>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Genus
+</th>
+<th style="text-align:right;">
+FDR
+</th>
+<th style="text-align:right;">
+LSD_MEDIAN
+</th>
+<th style="text-align:right;">
+LSD_IQR
+</th>
+<th style="text-align:right;">
+PD_MEDIAN
+</th>
+<th style="text-align:right;">
+PD_IQR
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+g__Streptococcus
+</td>
+<td style="text-align:right;">
+0.00125
+</td>
+<td style="text-align:right;">
+11.0
+</td>
+<td style="text-align:right;">
+13.25
+</td>
+<td style="text-align:right;">
+60
+</td>
+<td style="text-align:right;">
+50.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.02517
+</td>
+<td style="text-align:right;">
+2351.0
+</td>
+<td style="text-align:right;">
+3063.75
+</td>
+<td style="text-align:right;">
+4039
+</td>
+<td style="text-align:right;">
+1947.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Aggregatibacter
+</td>
+<td style="text-align:right;">
+0.00443
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+1.25
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+18.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Desulfovibrio
+</td>
+<td style="text-align:right;">
+0.00921
+</td>
+<td style="text-align:right;">
+193.0
+</td>
+<td style="text-align:right;">
+183.00
+</td>
+<td style="text-align:right;">
+582
+</td>
+<td style="text-align:right;">
+455.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Lactobacillus
+</td>
+<td style="text-align:right;">
+0.00125
+</td>
+<td style="text-align:right;">
+490.0
+</td>
+<td style="text-align:right;">
+225.50
+</td>
+<td style="text-align:right;">
+2498
+</td>
+<td style="text-align:right;">
+2871.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__rc4-4
+</td>
+<td style="text-align:right;">
+0.00313
+</td>
+<td style="text-align:right;">
+6.0
+</td>
+<td style="text-align:right;">
+9.75
+</td>
+<td style="text-align:right;">
+49
+</td>
+<td style="text-align:right;">
+55.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.00608
+</td>
+<td style="text-align:right;">
+34.0
+</td>
+<td style="text-align:right;">
+41.25
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+13.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Roseburia
+</td>
+<td style="text-align:right;">
+0.00022
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+2.50
+</td>
+<td style="text-align:right;">
+57
+</td>
+<td style="text-align:right;">
+69.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.00022
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+1.25
+</td>
+<td style="text-align:right;">
+62
+</td>
+<td style="text-align:right;">
+97.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Phascolarctobacterium
+</td>
+<td style="text-align:right;">
+0.00035
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+153
+</td>
+<td style="text-align:right;">
+294.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Oscillospira
+</td>
+<td style="text-align:right;">
+0.01489
+</td>
+<td style="text-align:right;">
+1318.5
+</td>
+<td style="text-align:right;">
+275.50
+</td>
+<td style="text-align:right;">
+1898
+</td>
+<td style="text-align:right;">
+648.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.01489
+</td>
+<td style="text-align:right;">
+7045.5
+</td>
+<td style="text-align:right;">
+1593.75
+</td>
+<td style="text-align:right;">
+5911
+</td>
+<td style="text-align:right;">
+2291.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Bifidobacterium
+</td>
+<td style="text-align:right;">
+0.01553
+</td>
+<td style="text-align:right;">
+43.0
+</td>
+<td style="text-align:right;">
+60.00
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+19.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.00022
+</td>
+<td style="text-align:right;">
+520.5
+</td>
+<td style="text-align:right;">
+557.75
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+17.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Allobaculum
+</td>
+<td style="text-align:right;">
+0.00125
+</td>
+<td style="text-align:right;">
+376.0
+</td>
+<td style="text-align:right;">
+849.25
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.01286
+</td>
+<td style="text-align:right;">
+6.5
+</td>
+<td style="text-align:right;">
+5.25
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+11.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Dehalobacterium
+</td>
+<td style="text-align:right;">
+0.00117
+</td>
+<td style="text-align:right;">
+17.0
+</td>
+<td style="text-align:right;">
+12.75
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Akkermansia
+</td>
+<td style="text-align:right;">
+0.00022
+</td>
+<td style="text-align:right;">
+3645.0
+</td>
+<td style="text-align:right;">
+4157.75
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+29.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Dorea
+</td>
+<td style="text-align:right;">
+0.03324
+</td>
+<td style="text-align:right;">
+10.0
+</td>
+<td style="text-align:right;">
+7.25
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+12.5
+</td>
+</tr>
+</tbody>
+</table>
+<p>The table only shows the relevant columns for the sake of brevity in the web-book. There are several genera that are only identified by “g__“; these are undefined genera that likely were defined only at a higher taxonomy level. You will see the full taxonomy if you do not filter columns in <code>LSDPD_MW_Final</code>. Major results from this analysis suggest that LSD rats have lower abundances of <em>Lactobacillus</em> and greater abundances of <em>Akkermansia</em> relative to UCD-T2DM rats that have yet to develop diabetes.</p>
+<p>Let’s follow the same workflow, but with proportional abundances. We can start after we’ve extracted out of the phyloseq object.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Convert counts to relative abundance with sweep() function</span>
+<span class="co"># Samples must add to 1, so sum by column and sweep sums by columns</span>
+LSDPD_Gprop &lt;-<span class="st"> </span><span class="kw">sweep</span>(LSDPD_Gcounts, <span class="dv">2</span>, <span class="kw">colSums</span>(LSDPD_Gcounts), <span class="st">&quot;/&quot;</span>)
+
+<span class="co"># Need to join with meta data, so samples need to be rows.</span>
+<span class="co"># transpose data and make new ID column with rownames</span>
+tLSDPD_Gprop &lt;-<span class="st"> </span><span class="kw">t</span>(LSDPD_Gprop) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()
+tLSDPD_Gprop<span class="op">$</span>SampleID &lt;-<span class="st"> </span><span class="kw">rownames</span>(tLSDPD_Gprop)
+
+<span class="co"># Join count and meta data</span>
+LSDPD_Gpropmeta &lt;-<span class="st"> </span><span class="kw">full_join</span>(LSDPD_Gmeta, tLSDPD_Gprop, <span class="dt">by=</span><span class="st">&quot;SampleID&quot;</span>)
+
+<span class="co"># Reshape data to tall format </span>
+<span class="co"># The &#39;-&#39; prefix denotes columns that should not have data reshaped into the new Taxa column</span>
+LSDPD_Gprop_tall &lt;-<span class="st"> </span>LSDPD_Gpropmeta <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(Taxa, prop, <span class="op">-</span>SampleID, <span class="op">-</span>Rat, <span class="op">-</span>GroupAbbrev, <span class="op">-</span>Collection)
+
+<span class="co"># Turn to percentages for rounding and easier interpretation</span>
+LSDPD_Gprop_tall<span class="op">$</span>prop &lt;-<span class="st"> </span><span class="kw">round</span>(LSDPD_Gprop_tall<span class="op">$</span>prop <span class="op">*</span><span class="st"> </span><span class="dv">100</span>, <span class="dv">3</span>)
+
+<span class="co"># Identify the unique taxa now listed in the &quot;Taxa&quot; column</span>
+LSDPD_G_uniqueOTU &lt;-<span class="st"> </span><span class="kw">unique</span>(LSDPD_Gprop_tall<span class="op">$</span>Taxa)
+
+<span class="co"># Use sapply() to loop the Mann-Whitney U test across all unique taxa</span>
+LSDPD_propMW_P &lt;-<span class="st"> </span><span class="kw">sapply</span>(LSDPD_G_uniqueOTU, <span class="cf">function</span>(x) {
+    <span class="co"># Subset data within function</span>
+    DAT &lt;-<span class="st"> </span>LSDPD_Gprop_tall[LSDPD_Gprop_tall<span class="op">$</span>Taxa <span class="op">%in%</span><span class="st"> </span>x,]
+    
+    <span class="co"># Run Mann Whitney U on subsetted data</span>
+    MWU &lt;-<span class="st"> </span><span class="kw">wilcox.test</span>(prop <span class="op">~</span><span class="st"> </span>GroupAbbrev, <span class="dt">data=</span>DAT)
+    
+    <span class="co"># Extract P.value and return</span>
+    MWU<span class="op">$</span>p.value
+})
+
+<span class="co"># Make new data frame containing taxa identifier, p value, and FDR.</span>
+LSDPD_propMW_P_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Taxa=</span><span class="kw">names</span>(LSDPD_propMW_P), <span class="dt">P=</span><span class="kw">round</span>(LSDPD_propMW_P, <span class="dv">5</span>), <span class="dt">FDR=</span><span class="kw">round</span>(<span class="kw">p.adjust</span>(LSDPD_propMW_P, <span class="st">&quot;fdr&quot;</span>), <span class="dv">5</span>))
+
+<span class="co"># Join P value and taxa data frames</span>
+<span class="co"># Taxa table extracted from phyloseq object in coding above</span>
+LSDPD_propMW_results &lt;-<span class="st"> </span><span class="kw">full_join</span>(LSDPD_Gtaxa, LSDPD_propMW_P_df, <span class="dt">by=</span><span class="st">&quot;Taxa&quot;</span>)
+
+<span class="co"># Can calculate this from LSDPD_Gprop_tall object using tidyverse</span>
+<span class="co"># Note the use of the pipe, %&gt;%, the function sequence will terminate after the last pipe.</span>
+LSDPD_Gprop_MEDIANwide &lt;-<span class="st"> </span>LSDPD_Gprop_tall <span class="op">%&gt;%</span>
+
+<span class="st">    </span><span class="co"># Define columns to get groups.  </span>
+<span class="st">    </span><span class="co"># In our case, we want medians by Taxa and GroupAbbrev</span>
+<span class="st">    </span><span class="kw">group_by</span>(Taxa, GroupAbbrev) <span class="op">%&gt;%</span>
+<span class="st">    </span>
+<span class="st">    </span><span class="co"># Summarize defines the functions that we want to group by</span>
+<span class="st">    </span><span class="co"># Use the column name in which you want the function to run on</span>
+<span class="st">    </span><span class="kw">summarise</span>(<span class="dt">MEDIAN =</span> <span class="kw">median</span>(prop), <span class="dt">IQR =</span> <span class="kw">IQR</span>(prop)) <span class="op">%&gt;%</span>
+
+<span class="st">    </span><span class="co"># We can continue this pipe sequence</span>
+<span class="st">    </span><span class="co"># Use gather() to combine MEDIAN and IQR columns into a single column</span>
+<span class="st">    </span><span class="kw">gather</span>(STATS, value, <span class="op">-</span>Taxa, <span class="op">-</span>GroupAbbrev) <span class="op">%&gt;%</span>
+<span class="st">    </span>
+<span class="st">    </span><span class="co"># Use mutate() to make new columns that combines GroupAbbrev and STATS</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">GroupStat =</span> <span class="kw">paste</span>(GroupAbbrev, STATS, <span class="dt">sep=</span><span class="st">&quot;_&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span>
+<span class="st">    </span><span class="co"># Use dplyr::select() to remove GroupAbbrev and STATS columns</span>
+<span class="st">    </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>GroupAbbrev, <span class="op">-</span>STATS) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span>
+<span class="st">    </span><span class="co"># Use spread() to distribute value by GroupStat</span>
+<span class="st">    </span><span class="kw">spread</span>(GroupStat, value) 
+
+<span class="co"># Join with LSDPD_MW_results</span>
+LSDPD_propMW_Final &lt;-<span class="st"> </span><span class="kw">full_join</span>(LSDPD_propMW_results, LSDPD_Gprop_MEDIANwide, <span class="dt">by=</span><span class="st">&quot;Taxa&quot;</span>)
+
+<span class="co"># Display significant taxa with trimmed columns</span>
+LSDPD_propMW_Final[LSDPD_propMW_Final<span class="op">$</span>FDR <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>, <span class="kw">c</span>(<span class="st">&quot;Genus&quot;</span>, <span class="st">&quot;FDR&quot;</span>,<span class="st">&quot;LSD_MEDIAN&quot;</span>,<span class="st">&quot;LSD_IQR&quot;</span>,<span class="st">&quot;PD_MEDIAN&quot;</span>,<span class="st">&quot;PD_IQR&quot;</span>)]</code></pre></div>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Genus
+</th>
+<th style="text-align:right;">
+FDR
+</th>
+<th style="text-align:right;">
+LSD_MEDIAN
+</th>
+<th style="text-align:right;">
+LSD_IQR
+</th>
+<th style="text-align:right;">
+PD_MEDIAN
+</th>
+<th style="text-align:right;">
+PD_IQR
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+g__Streptococcus
+</td>
+<td style="text-align:right;">
+0.00124
+</td>
+<td style="text-align:right;">
+0.0325
+</td>
+<td style="text-align:right;">
+0.05100
+</td>
+<td style="text-align:right;">
+0.165
+</td>
+<td style="text-align:right;">
+0.1670
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.00750
+</td>
+<td style="text-align:right;">
+6.8890
+</td>
+<td style="text-align:right;">
+7.60725
+</td>
+<td style="text-align:right;">
+11.352
+</td>
+<td style="text-align:right;">
+6.1205
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Aggregatibacter
+</td>
+<td style="text-align:right;">
+0.00317
+</td>
+<td style="text-align:right;">
+0.0015
+</td>
+<td style="text-align:right;">
+0.00350
+</td>
+<td style="text-align:right;">
+0.034
+</td>
+<td style="text-align:right;">
+0.0535
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Desulfovibrio
+</td>
+<td style="text-align:right;">
+0.01055
+</td>
+<td style="text-align:right;">
+0.6730
+</td>
+<td style="text-align:right;">
+0.49175
+</td>
+<td style="text-align:right;">
+1.637
+</td>
+<td style="text-align:right;">
+1.5210
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Lactobacillus
+</td>
+<td style="text-align:right;">
+0.00124
+</td>
+<td style="text-align:right;">
+1.8015
+</td>
+<td style="text-align:right;">
+0.93000
+</td>
+<td style="text-align:right;">
+8.189
+</td>
+<td style="text-align:right;">
+7.0875
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__rc4-4
+</td>
+<td style="text-align:right;">
+0.00126
+</td>
+<td style="text-align:right;">
+0.0235
+</td>
+<td style="text-align:right;">
+0.02925
+</td>
+<td style="text-align:right;">
+0.122
+</td>
+<td style="text-align:right;">
+0.1565
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.00783
+</td>
+<td style="text-align:right;">
+0.1110
+</td>
+<td style="text-align:right;">
+0.11075
+</td>
+<td style="text-align:right;">
+0.014
+</td>
+<td style="text-align:right;">
+0.0420
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Roseburia
+</td>
+<td style="text-align:right;">
+0.00033
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:right;">
+0.00625
+</td>
+<td style="text-align:right;">
+0.168
+</td>
+<td style="text-align:right;">
+0.2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.00032
+</td>
+<td style="text-align:right;">
+0.0010
+</td>
+<td style="text-align:right;">
+0.00425
+</td>
+<td style="text-align:right;">
+0.154
+</td>
+<td style="text-align:right;">
+0.2555
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Phascolarctobacterium
+</td>
+<td style="text-align:right;">
+0.00043
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+<td style="text-align:right;">
+0.465
+</td>
+<td style="text-align:right;">
+0.6720
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Oscillospira
+</td>
+<td style="text-align:right;">
+0.01401
+</td>
+<td style="text-align:right;">
+3.8140
+</td>
+<td style="text-align:right;">
+1.09550
+</td>
+<td style="text-align:right;">
+5.337
+</td>
+<td style="text-align:right;">
+2.6060
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.00366
+</td>
+<td style="text-align:right;">
+21.1155
+</td>
+<td style="text-align:right;">
+4.72475
+</td>
+<td style="text-align:right;">
+16.309
+</td>
+<td style="text-align:right;">
+3.9465
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.03131
+</td>
+<td style="text-align:right;">
+0.0440
+</td>
+<td style="text-align:right;">
+0.03250
+</td>
+<td style="text-align:right;">
+0.073
+</td>
+<td style="text-align:right;">
+0.0495
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Bifidobacterium
+</td>
+<td style="text-align:right;">
+0.01055
+</td>
+<td style="text-align:right;">
+0.1135
+</td>
+<td style="text-align:right;">
+0.15025
+</td>
+<td style="text-align:right;">
+0.008
+</td>
+<td style="text-align:right;">
+0.0515
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.00043
+</td>
+<td style="text-align:right;">
+1.4385
+</td>
+<td style="text-align:right;">
+1.55475
+</td>
+<td style="text-align:right;">
+0.039
+</td>
+<td style="text-align:right;">
+0.0595
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Allobaculum
+</td>
+<td style="text-align:right;">
+0.00124
+</td>
+<td style="text-align:right;">
+1.4850
+</td>
+<td style="text-align:right;">
+2.11250
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.03042
+</td>
+<td style="text-align:right;">
+0.0205
+</td>
+<td style="text-align:right;">
+0.02000
+</td>
+<td style="text-align:right;">
+0.044
+</td>
+<td style="text-align:right;">
+0.0390
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Dehalobacterium
+</td>
+<td style="text-align:right;">
+0.00126
+</td>
+<td style="text-align:right;">
+0.0455
+</td>
+<td style="text-align:right;">
+0.04350
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.0035
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Akkermansia
+</td>
+<td style="text-align:right;">
+0.00032
+</td>
+<td style="text-align:right;">
+11.0660
+</td>
+<td style="text-align:right;">
+9.14775
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.0905
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Dorea
+</td>
+<td style="text-align:right;">
+0.04405
+</td>
+<td style="text-align:right;">
+0.0290
+</td>
+<td style="text-align:right;">
+0.02125
+</td>
+<td style="text-align:right;">
+0.052
+</td>
+<td style="text-align:right;">
+0.0440
+</td>
+</tr>
+</tbody>
+</table>
+<p>Good agreement with Mann-Whitney U between count and proportional data. 19 taxa were significant between both results. Lets try this workflow one more time, but with CLR normalized data, also referred to as ANCOM ( <strong>A</strong> nalysis of <strong>Co</strong> mposition of <strong>M</strong> icrobes).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load libraries if necessary</span>
+<span class="co"># library(zCompositions)</span>
+<span class="co"># library(rgr)</span>
+
+<span class="co"># Impute zeros with Bayesian-multiplicative treatment</span>
+LSDPD_Gcounts_BMz &lt;-<span class="st"> </span><span class="kw">cmultRepl</span>(LSDPD_Gcounts, <span class="dt">method=</span><span class="st">&quot;CZM&quot;</span>, <span class="dt">output=</span><span class="st">&quot;p-counts&quot;</span>)
+
+<span class="co"># Taxa needs be rows and samples need to be columns</span>
+LSDPD_G_BMz_clr &lt;-<span class="st"> </span><span class="kw">clr</span>(LSDPD_Gcounts_BMz, <span class="dt">ifwarn=</span><span class="ot">FALSE</span>)
+
+<span class="co"># Need to join with meta data, so samples need to be rows.</span>
+<span class="co"># transpose data and make new ID column with rownames</span>
+tLSDPD_Gclr &lt;-<span class="st"> </span><span class="kw">t</span>(LSDPD_G_BMz_clr) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()
+tLSDPD_Gclr<span class="op">$</span>SampleID &lt;-<span class="st"> </span><span class="kw">rownames</span>(tLSDPD_Gclr)
+
+<span class="co"># Join count and meta data</span>
+LSDPD_Gclrmeta &lt;-<span class="st"> </span><span class="kw">full_join</span>(LSDPD_Gmeta, tLSDPD_Gclr, <span class="dt">by=</span><span class="st">&quot;SampleID&quot;</span>)
+
+<span class="co"># Reshape data to tall format </span>
+<span class="co"># The &#39;-&#39; prefix denotes columns that should not have data reshaped into the new Taxa column</span>
+LSDPD_Gclr_tall &lt;-<span class="st"> </span>LSDPD_Gclrmeta <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(Taxa, clr, <span class="op">-</span>SampleID, <span class="op">-</span>Rat, <span class="op">-</span>GroupAbbrev, <span class="op">-</span>Collection)
+
+<span class="co"># Identify the unique taxa now listed in the &quot;Taxa&quot; column</span>
+LSDPD_G_uniqueOTU &lt;-<span class="st"> </span><span class="kw">unique</span>(LSDPD_Gclr_tall<span class="op">$</span>Taxa)
+
+<span class="co"># Use sapply() to loop the Mann-Whitney U test across all unique taxa</span>
+LSDPD_clrMW_P &lt;-<span class="st"> </span><span class="kw">sapply</span>(LSDPD_G_uniqueOTU, <span class="cf">function</span>(x) {
+    <span class="co"># Subset data within function</span>
+    DAT &lt;-<span class="st"> </span>LSDPD_Gclr_tall[LSDPD_Gclr_tall<span class="op">$</span>Taxa <span class="op">%in%</span><span class="st"> </span>x,]
+    
+    <span class="co"># Run Mann Whitney U on subsetted data</span>
+    MWU &lt;-<span class="st"> </span><span class="kw">wilcox.test</span>(clr <span class="op">~</span><span class="st"> </span>GroupAbbrev, <span class="dt">data=</span>DAT)
+    
+    <span class="co"># Extract P.value and return</span>
+    MWU<span class="op">$</span>p.value
+})
+
+<span class="co"># Make new data frame containing taxa identifier, p value, and FDR.</span>
+LSDPD_clrMW_P_DF &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Taxa=</span><span class="kw">names</span>(LSDPD_clrMW_P), <span class="dt">P=</span><span class="kw">round</span>(LSDPD_clrMW_P, <span class="dv">5</span>), <span class="dt">FDR=</span><span class="kw">round</span>(<span class="kw">p.adjust</span>(LSDPD_clrMW_P, <span class="st">&quot;fdr&quot;</span>), <span class="dv">5</span>))
+
+<span class="co"># Join P value and taxa data frames</span>
+<span class="co"># Taxa table extracted from phyloseq object in coding above</span>
+LSDPD_clrMW_results &lt;-<span class="st"> </span><span class="kw">full_join</span>(LSDPD_Gtaxa, LSDPD_clrMW_P_DF, <span class="dt">by=</span><span class="st">&quot;Taxa&quot;</span>)
+
+<span class="co"># Can calculate this from LSDPD_Gclr_tall object using tidyverse</span>
+<span class="co"># Note the use of the pipe, %&gt;%, the function sequence will terminate after the last pipe.</span>
+LSDPD_Gclr_MEDIANwide &lt;-<span class="st"> </span>LSDPD_Gclr_tall <span class="op">%&gt;%</span>
+
+<span class="st">    </span><span class="co"># Define columns to get groups.  </span>
+<span class="st">    </span><span class="co"># In our case, we want medians by Taxa and GroupAbbrev</span>
+<span class="st">    </span><span class="kw">group_by</span>(Taxa, GroupAbbrev) <span class="op">%&gt;%</span>
+<span class="st">    </span>
+<span class="st">    </span><span class="co"># Summarize defines the functions that we want to group by</span>
+<span class="st">    </span><span class="co"># Use the column name in which you want the function to run on</span>
+<span class="st">    </span><span class="kw">summarise</span>(<span class="dt">MEDIAN =</span> <span class="kw">median</span>(clr), <span class="dt">IQR =</span> <span class="kw">IQR</span>(clr)) <span class="op">%&gt;%</span>
+
+<span class="st">    </span><span class="co"># We can continue this pipe sequence</span>
+<span class="st">    </span><span class="co"># Use gather() to combine MEDIAN and IQR columns into a single column</span>
+<span class="st">    </span><span class="kw">gather</span>(STATS, value, <span class="op">-</span>Taxa, <span class="op">-</span>GroupAbbrev) <span class="op">%&gt;%</span>
+<span class="st">    </span>
+<span class="st">    </span><span class="co"># Use mutate() to make new columns that combines GroupAbbrev and STATS</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">GroupStat =</span> <span class="kw">paste</span>(GroupAbbrev, STATS, <span class="dt">sep=</span><span class="st">&quot;_&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span>
+<span class="st">    </span><span class="co"># Use dplyr::select() to remove GroupAbbrev and STATS columns</span>
+<span class="st">    </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>GroupAbbrev, <span class="op">-</span>STATS) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span>
+<span class="st">    </span><span class="co"># Use spread() to distribute value by GroupStat</span>
+<span class="st">    </span><span class="kw">spread</span>(GroupStat, value) 
+
+<span class="co"># Join with LSDPD_MW_results</span>
+LSDPD_clrMW_Final &lt;-<span class="st"> </span><span class="kw">full_join</span>(LSDPD_clrMW_results, LSDPD_Gclr_MEDIANwide, <span class="dt">by=</span><span class="st">&quot;Taxa&quot;</span>)
+
+<span class="co"># Display significant taxa with trimmed columns</span>
+LSDPD_clrMW_Final[LSDPD_clrMW_Final<span class="op">$</span>FDR <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>, <span class="kw">c</span>(<span class="st">&quot;Genus&quot;</span>, <span class="st">&quot;FDR&quot;</span>,<span class="st">&quot;LSD_MEDIAN&quot;</span>,<span class="st">&quot;LSD_IQR&quot;</span>,<span class="st">&quot;PD_MEDIAN&quot;</span>,<span class="st">&quot;PD_IQR&quot;</span>)]</code></pre></div>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Genus
+</th>
+<th style="text-align:right;">
+FDR
+</th>
+<th style="text-align:right;">
+LSD_MEDIAN
+</th>
+<th style="text-align:right;">
+LSD_IQR
+</th>
+<th style="text-align:right;">
+PD_MEDIAN
+</th>
+<th style="text-align:right;">
+PD_IQR
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+g__Streptococcus
+</td>
+<td style="text-align:right;">
+0.00125
+</td>
+<td style="text-align:right;">
+-0.7558356
+</td>
+<td style="text-align:right;">
+1.1081013
+</td>
+<td style="text-align:right;">
+0.9447631
+</td>
+<td style="text-align:right;">
+0.9102334
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.02517
+</td>
+<td style="text-align:right;">
+0.4499693
+</td>
+<td style="text-align:right;">
+4.0722199
+</td>
+<td style="text-align:right;">
+0.9927526
+</td>
+<td style="text-align:right;">
+0.5260083
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Aggregatibacter
+</td>
+<td style="text-align:right;">
+0.00978
+</td>
+<td style="text-align:right;">
+-1.1110675
+</td>
+<td style="text-align:right;">
+1.9363557
+</td>
+<td style="text-align:right;">
+1.8469538
+</td>
+<td style="text-align:right;">
+1.9459101
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Desulfovibrio
+</td>
+<td style="text-align:right;">
+0.00978
+</td>
+<td style="text-align:right;">
+-0.5589153
+</td>
+<td style="text-align:right;">
+0.7567401
+</td>
+<td style="text-align:right;">
+0.5487594
+</td>
+<td style="text-align:right;">
+0.9361988
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Lactobacillus
+</td>
+<td style="text-align:right;">
+0.00125
+</td>
+<td style="text-align:right;">
+-0.7599474
+</td>
+<td style="text-align:right;">
+0.4449609
+</td>
+<td style="text-align:right;">
+0.8689117
+</td>
+<td style="text-align:right;">
+1.2621105
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__rc4-4
+</td>
+<td style="text-align:right;">
+0.00313
+</td>
+<td style="text-align:right;">
+-0.8836745
+</td>
+<td style="text-align:right;">
+1.7650386
+</td>
+<td style="text-align:right;">
+1.2304717
+</td>
+<td style="text-align:right;">
+1.4045579
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.00664
+</td>
+<td style="text-align:right;">
+1.4055247
+</td>
+<td style="text-align:right;">
+1.1887166
+</td>
+<td style="text-align:right;">
+-0.5113979
+</td>
+<td style="text-align:right;">
+2.3614766
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Roseburia
+</td>
+<td style="text-align:right;">
+0.00025
+</td>
+<td style="text-align:right;">
+-2.8509159
+</td>
+<td style="text-align:right;">
+2.1183904
+</td>
+<td style="text-align:right;">
+2.3144205
+</td>
+<td style="text-align:right;">
+1.7659838
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.00025
+</td>
+<td style="text-align:right;">
+-2.5916857
+</td>
+<td style="text-align:right;">
+1.2960636
+</td>
+<td style="text-align:right;">
+2.0968371
+</td>
+<td style="text-align:right;">
+1.4137854
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Phascolarctobacterium
+</td>
+<td style="text-align:right;">
+0.00037
+</td>
+<td style="text-align:right;">
+-2.7583940
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+3.3945608
+</td>
+<td style="text-align:right;">
+2.0744459
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Oscillospira
+</td>
+<td style="text-align:right;">
+0.01489
+</td>
+<td style="text-align:right;">
+-0.1677343
+</td>
+<td style="text-align:right;">
+0.2113098
+</td>
+<td style="text-align:right;">
+0.1985330
+</td>
+<td style="text-align:right;">
+0.3642676
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.01489
+</td>
+<td style="text-align:right;">
+0.1279404
+</td>
+<td style="text-align:right;">
+0.2244325
+</td>
+<td style="text-align:right;">
+-0.0473339
+</td>
+<td style="text-align:right;">
+0.4109117
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Bifidobacterium
+</td>
+<td style="text-align:right;">
+0.01582
+</td>
+<td style="text-align:right;">
+1.4595001
+</td>
+<td style="text-align:right;">
+1.4359913
+</td>
+<td style="text-align:right;">
+-1.1987422
+</td>
+<td style="text-align:right;">
+4.0928271
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.00025
+</td>
+<td style="text-align:right;">
+2.1205849
+</td>
+<td style="text-align:right;">
+0.8884355
+</td>
+<td style="text-align:right;">
+-1.6452917
+</td>
+<td style="text-align:right;">
+1.4540357
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Allobaculum
+</td>
+<td style="text-align:right;">
+0.00125
+</td>
+<td style="text-align:right;">
+3.5006451
+</td>
+<td style="text-align:right;">
+2.3172681
+</td>
+<td style="text-align:right;">
+-3.5496547
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.01286
+</td>
+<td style="text-align:right;">
+-0.4941540
+</td>
+<td style="text-align:right;">
+0.7169747
+</td>
+<td style="text-align:right;">
+0.3004636
+</td>
+<td style="text-align:right;">
+0.7419373
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Dehalobacterium
+</td>
+<td style="text-align:right;">
+0.00125
+</td>
+<td style="text-align:right;">
+2.2705771
+</td>
+<td style="text-align:right;">
+0.8381018
+</td>
+<td style="text-align:right;">
+-1.6704695
+</td>
+<td style="text-align:right;">
+1.9721102
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Akkermansia
+</td>
+<td style="text-align:right;">
+0.00025
+</td>
+<td style="text-align:right;">
+4.2872392
+</td>
+<td style="text-align:right;">
+1.0519912
+</td>
+<td style="text-align:right;">
+-5.0103960
+</td>
+<td style="text-align:right;">
+3.8115149
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Dorea
+</td>
+<td style="text-align:right;">
+0.03324
+</td>
+<td style="text-align:right;">
+-0.2509362
+</td>
+<td style="text-align:right;">
+0.6619915
+</td>
+<td style="text-align:right;">
+0.2847172
+</td>
+<td style="text-align:right;">
+0.6718674
+</td>
+</tr>
+</tbody>
+</table>
+<p>Again, excellent agreement between the raw count data and CLR normalized data when using the Mann-Whitney U test. However, the CLR normalization is difficult to interpret in a table. Remember, each measurement in a CLR normalization is a log ratio between the measurement and the mean taxa.</p>
+</div>
+<div id="deseq2" class="section level2">
+<h2><span class="header-section-number">7.2</span> DESeq2</h2>
+<p>DESeq2 is a Bioconductor based R package that was developed for <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8">RNA-seq count data analysis</a> that uses a Negative Binomial Wald Test to compare dichtonomous outcomes. This workflow has been <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531">championed by the authors of phyloseq</a> and they have demonstrated how to <a href="http://joey711.github.io/phyloseq-extensions/DESeq2.html">transfer a phyloseq object into a DESeq2 object for differential abundance testing</a>.</p>
+<p>Unlike the non-parametric tests, DESeq2 can integrate covariates into the fitted model it uses. So that is a big plus, especially for those working with human clinical samples. I will refer you to the <a href="https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#how-can-i-include-a-continuous-covariate-in-the-design-formula">DESeq2 references manual</a> for those needing this functionality.</p>
+<p>As DESeq2 requires dichtonomous outcomes, we will use the LSD vs PD data from above.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load library</span>
+<span class="kw">library</span>(DESeq2)
+
+<span class="co"># phyloseq authors made a function that does all of the heavy lifting to get a phyloseq object into a DESeqDataSet object.</span>
+<span class="co"># Must be in DESeqDataSet for DESeq2 to work</span>
+<span class="co"># The phyloseq_to_deseq2() requires you to identify the column in the Sample Metadata that is to be compared.</span>
+LSDPD_G_deseq2 =<span class="st"> </span><span class="kw">phyloseq_to_deseq2</span>(phyloG_LSDPD, <span class="op">~</span><span class="st"> </span>GroupAbbrev)
+
+<span class="co"># Run the Wald test as implemented in DESeq2</span>
+LSDPD_G_deseq2Wald =<span class="st"> </span><span class="kw">DESeq</span>(LSDPD_G_deseq2, <span class="dt">test=</span><span class="st">&quot;Wald&quot;</span>, <span class="dt">fitType=</span><span class="st">&quot;parametric&quot;</span>)
+
+<span class="co"># The results() function creates a DESeq2 table of the results that we can coerce into a data frame</span>
+LSDPD_G_deseq2Waldres =<span class="st"> </span><span class="kw">results</span>(LSDPD_G_deseq2Wald, <span class="dt">cooksCutoff =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()
+
+<span class="co"># Make a Taxa column to match the column we made in the taxa table data frame</span>
+LSDPD_G_deseq2Waldres<span class="op">$</span>Taxa &lt;-<span class="st"> </span><span class="kw">rownames</span>(LSDPD_G_deseq2Waldres)
+
+<span class="co"># Join DESeq2 results and taxa data frames</span>
+<span class="co"># Taxa table extracted from phyloseq object in coding above</span>
+LSDPD_DESeq2_results &lt;-<span class="st"> </span><span class="kw">full_join</span>(LSDPD_Gtaxa, LSDPD_G_deseq2Waldres, <span class="dt">by=</span><span class="st">&quot;Taxa&quot;</span>)
+
+<span class="co"># View abbreviated table</span>
+LSDPD_DESeq2_results[LSDPD_DESeq2_results<span class="op">$</span>padj <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>,<span class="kw">c</span>(<span class="st">&quot;Genus&quot;</span>,<span class="st">&quot;baseMean&quot;</span>,<span class="st">&quot;log2FoldChange&quot;</span>,<span class="st">&quot;padj&quot;</span>)]</code></pre></div>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Genus
+</th>
+<th style="text-align:right;">
+baseMean
+</th>
+<th style="text-align:right;">
+log2FoldChange
+</th>
+<th style="text-align:right;">
+padj
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+g__Streptococcus
+</td>
+<td style="text-align:right;">
+41.12756
+</td>
+<td style="text-align:right;">
+1.8675796
+</td>
+<td style="text-align:right;">
+0.0002830
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Aggregatibacter
+</td>
+<td style="text-align:right;">
+11.34275
+</td>
+<td style="text-align:right;">
+4.3260630
+</td>
+<td style="text-align:right;">
+0.0000109
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Desulfovibrio
+</td>
+<td style="text-align:right;">
+417.33716
+</td>
+<td style="text-align:right;">
+0.8751891
+</td>
+<td style="text-align:right;">
+0.0204434
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Lactobacillus
+</td>
+<td style="text-align:right;">
+1672.30019
+</td>
+<td style="text-align:right;">
+2.0444127
+</td>
+<td style="text-align:right;">
+0.0000011
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__rc4-4
+</td>
+<td style="text-align:right;">
+31.01152
+</td>
+<td style="text-align:right;">
+2.1681175
+</td>
+<td style="text-align:right;">
+0.0004158
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+30.20378
+</td>
+<td style="text-align:right;">
+-2.7793369
+</td>
+<td style="text-align:right;">
+0.0000939
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Roseburia
+</td>
+<td style="text-align:right;">
+31.27082
+</td>
+<td style="text-align:right;">
+4.8934834
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+50.77997
+</td>
+<td style="text-align:right;">
+6.0008067
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Phascolarctobacterium
+</td>
+<td style="text-align:right;">
+89.75957
+</td>
+<td style="text-align:right;">
+9.5404025
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+6713.40232
+</td>
+<td style="text-align:right;">
+-0.7788920
+</td>
+<td style="text-align:right;">
+0.0000011
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Bifidobacterium
+</td>
+<td style="text-align:right;">
+32.01014
+</td>
+<td style="text-align:right;">
+-2.4745211
+</td>
+<td style="text-align:right;">
+0.0034136
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+412.12676
+</td>
+<td style="text-align:right;">
+-4.1402375
+</td>
+<td style="text-align:right;">
+0.0000001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Dehalobacterium
+</td>
+<td style="text-align:right;">
+10.34479
+</td>
+<td style="text-align:right;">
+-2.6138157
+</td>
+<td style="text-align:right;">
+0.0187999
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Akkermansia
+</td>
+<td style="text-align:right;">
+2390.90621
+</td>
+<td style="text-align:right;">
+-7.7503791
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Bacteroides
+</td>
+<td style="text-align:right;">
+695.71336
+</td>
+<td style="text-align:right;">
+-1.4301040
+</td>
+<td style="text-align:right;">
+0.0002003
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Parabacteroides
+</td>
+<td style="text-align:right;">
+178.03731
+</td>
+<td style="text-align:right;">
+-1.0518262
+</td>
+<td style="text-align:right;">
+0.0134140
+</td>
+</tr>
+</tbody>
+</table>
+<p>Again, this is an abbreviated output to maintain the formating in the webbook. The DESeq2 output provides a baseMean and log2FoldChange columns that require a little explaining because they are not as straight-forward as they seem. The results for these columns are actually normalized baseMeans and log2foldchanges, so they will not sync with similar calculations on the raw count. There are instances were the direction of the log2 fold change has been reversed between DESeq2’s log fold change calculations and the log2 fold change using raw count data. Typically this will only occur in low abundant taxa.</p>
+<p>Overall, 14 of the taxa match between this analysis and the Mann-Whitney U test on raw counts. So, actually fairly close. Surprisingly more conservative. My experience with DESeq2 is that it tends to be much more liberal.</p>
+</div>
+<div id="metagenomeseq" class="section level2">
+<h2><span class="header-section-number">7.3</span> metagenomeSeq</h2>
+<p>metagenomeSeq is another Bioconductor based R package, but it was developed specifically for 16S rRNA sequencing data. It can also be extended to shotgun metagenomics sequencing as the properties of 16S and shotgun metagonomics are similar. metagenomeSeq uses a cumulative sum scaling approach to normalize its data followed by either a Zero-inflated Log-Normal or Gaussian mixture model. Further details of the statistical approach is detailed <a href="https://www.nature.com/articles/nmeth.2658">here</a>.</p>
+<p>Like DESeq2, metagenomeSeq allows for the addition of covariates, so it is more amendable to clinical studies as opposed to the non-parametric approach. Still, metagenomeSeq is sensitive to low abundant taxa. In fact, the authors recommend <a href="https://bioconductor.org/packages/release/bioc/vignettes/metagenomeSeq/inst/doc/metagenomeSeq.pdf">restricting the analysis to those with a minimum number of positive samples (page 15 of metagenomeSeq’s manual)</a>. Most metagenomeSeq tutorials cover pairwise comparisons, but comparisons of &gt; 2 groups can be conducted. However, it uses a workflow from another Bioconductor package, <a href="https://bioconductor.org/packages/release/bioc/html/limma.html">limma</a>. I will refer you <a href="https://bioconductor.org/packages/release/bioc/vignettes/metagenomeSeq/inst/doc/metagenomeSeq.pdf">metagenomeSeq’s manual for further information</a>.</p>
+<p>Let’s use metagenomeSeq to see which taxa are differential regulated between LSD and PD rats. Like phyloseq and DESeq2, metagenomeSeq requires its own object that packages all of the data together. For this workflow, we need the count, Sample Metadata, and taxonomy data. While phyloseq has a convenience function, <code>phyloseq_to_metagenomeSeq</code>, that will transition a phyloseq object to a metagenomeSeq object, it currently has a <a href="https://github.com/joey711/phyloseq/issues/1118">bug</a> that will not allow us to use it with our current phyloseq object. Therefore, we will create it manually.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load library</span>
+<span class="kw">library</span>(metagenomeSeq)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We will start with the data already extracted from the phyloseq object</span>
+<span class="co"># Need to convert Sample Metadata and Taxonomy data into objects required for metagenomeSeq</span>
+LSDPD_G_MGSmeta =<span class="st"> </span><span class="kw">AnnotatedDataFrame</span>(LSDPD_Gmeta)
+LSDPD_G_MGStaxa =<span class="st"> </span><span class="kw">AnnotatedDataFrame</span>(LSDPD_Gtaxa)
+
+<span class="co"># Create metagenomeSeq object with count data, metadata, and taxonomy data</span>
+LSDPD_G_MGobj =<span class="st"> </span><span class="kw">newMRexperiment</span>(LSDPD_Gcounts, <span class="dt">phenoData=</span>LSDPD_G_MGSmeta,<span class="dt">featureData=</span>LSDPD_G_MGStaxa)
+
+## Zero-inflated Log-Normal mixture model
+<span class="co"># Normalize data with cumulative sum scaling</span>
+LSDPD_G_MGobj &lt;-<span class="st"> </span><span class="kw">cumNorm</span>(LSDPD_G_MGobj, <span class="dt">p =</span> <span class="kw">cumNormStatFast</span>(<span class="dt">obj=</span>LSDPD_G_MGobj))</code></pre></div>
+<pre><code>## Default value being used.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Designate model.  Only need to set the right side of the tilde (~). </span>
+<span class="co"># Setting 1 prior to the variables sets the slope.</span>
+<span class="co"># Needs metadata from metagenomeSeq object. pData() is extractor function for metagenomeSeq object</span>
+LSDPD_G_MGobj_mod &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>GroupAbbrev, <span class="dt">data =</span> <span class="kw">pData</span>(LSDPD_G_MGobj))
+
+<span class="co"># Run the zero-inflated log-normal model.</span>
+LSDPD_G_MGobj_res =<span class="st"> </span><span class="kw">fitFeatureModel</span>(LSDPD_G_MGobj, LSDPD_G_MGobj_mod)</code></pre></div>
+<pre><code>## Warning: Partial NA coefficients for 2 probe(s)</code></pre>
+<pre><code>## Warning: glm.fit: algorithm did not converge</code></pre>
+<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Extract results</span>
+LSDPD_G_MGobj_resDF &lt;-<span class="st"> </span><span class="kw">MRcoefs</span>(LSDPD_G_MGobj_res, <span class="dt">number=</span><span class="kw">nrow</span>(LSDPD_G_MGobj))
+
+<span class="co"># Set column to bind with taxonomy data</span>
+LSDPD_G_MGobj_resDF<span class="op">$</span>Taxa &lt;-<span class="st"> </span><span class="kw">rownames</span>(LSDPD_G_MGobj_resDF)
+
+<span class="co"># Coerce Taxa column in taxonomy data to match labels in metagenomeSeq output table.</span>
+LSDPD_Gtaxa<span class="op">$</span>Taxa &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="kw">make.names</span>(LSDPD_Gtaxa<span class="op">$</span>Taxa))
+
+<span class="co"># Join taxomony data and metagenomeSeq output</span>
+LSDPD_G_MGobj_Final &lt;-<span class="st"> </span><span class="kw">inner_join</span>(LSDPD_Gtaxa, LSDPD_G_MGobj_resDF, <span class="dt">by=</span><span class="st">&quot;Taxa&quot;</span>)
+
+<span class="co"># Remove taxa that did not compute</span>
+LSDPD_G_MGobj_Final_noNA &lt;-<span class="st"> </span>LSDPD_G_MGobj_Final[<span class="op">!</span>(LSDPD_G_MGobj_Final<span class="op">$</span>pvalues <span class="op">%in%</span><span class="st"> </span><span class="ot">NA</span>),]
+
+<span class="co"># View abbreviated table</span>
+LSDPD_G_MGobj_Final_noNA[LSDPD_G_MGobj_Final_noNA<span class="op">$</span>adjPvalues <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>,<span class="kw">c</span>(<span class="st">&quot;Genus&quot;</span>,<span class="st">&quot;logFC&quot;</span>, <span class="st">&quot;adjPvalues&quot;</span>)]</code></pre></div>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Genus
+</th>
+<th style="text-align:right;">
+logFC
+</th>
+<th style="text-align:right;">
+adjPvalues
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+g__Aggregatibacter
+</td>
+<td style="text-align:right;">
+2.340147
+</td>
+<td style="text-align:right;">
+0.0001672
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Roseburia
+</td>
+<td style="text-align:right;">
+3.354060
+</td>
+<td style="text-align:right;">
+0.0000034
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+3.984866
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Phascolarctobacterium
+</td>
+<td style="text-align:right;">
+4.147489
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+-3.600788
+</td>
+<td style="text-align:right;">
+0.0101187
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Turicibacter
+</td>
+<td style="text-align:right;">
+-1.677393
+</td>
+<td style="text-align:right;">
+0.0486975
+</td>
+</tr>
+</tbody>
+</table>
+<p>Much different output. Only 6 taxa were found to be differential altered between LSD and pre-diabetic UCD-T2DM rats. <em>Lactobacillus</em> and <em>Akkermansia</em> are also no longer statistically significant. Let’s look at the raw counts.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Have to identify by unique numerical ID (OTU); Lactobacillus: 1107027 and and Akkermansia: 363731</span>
+<span class="co"># Arrange by GroupAbbrev</span>
+LSDPD_Gcountmeta[,<span class="kw">c</span>(<span class="st">&quot;GroupAbbrev&quot;</span>, <span class="st">&quot;1107027&quot;</span>, <span class="st">&quot;363731&quot;</span>)] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(GroupAbbrev)</code></pre></div>
+<pre><code>##    GroupAbbrev 1107027 363731
+## 1          LSD     691     69
+## 2          LSD     453   2804
+## 3          LSD     628   2281
+## 4          LSD     196  11396
+## 5          LSD     309   5434
+## 6          LSD     487   2252
+## 7          LSD     470   8036
+## 8          LSD     493   2124
+## 9          LSD     180   6054
+## 10         LSD     918   1073
+## 11         LSD     662   7349
+## 12         LSD     636   4486
+## 13          PD    8071     54
+## 14          PD    4818    171
+## 15          PD     317      4
+## 16          PD    3005      1
+## 17          PD    1701    104
+## 18          PD    4146      0
+## 19          PD     430      0
+## 20          PD    4803      0
+## 21          PD    1864      0
+## 22          PD    1495      0
+## 23          PD    3974    107
+## 24          PD    3512      0
+## 25          PD    2498      0
+## 26          PD     813      0
+## 27          PD     883      0</code></pre>
+<p>Looks pretty clear that these raw counts differ by group. Let’s see the normalized counts that metagenomeSeq used in it’s model.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Extract counts</span>
+LSDPD_G_MGnormcounts &lt;-<span class="st"> </span><span class="kw">MRcounts</span>(LSDPD_G_MGobj, <span class="dt">norm =</span> T)
+
+<span class="co"># transpose and coerce into data frame</span>
+tLSDPD_G_MGnormcounts &lt;-<span class="st"> </span><span class="kw">t</span>(LSDPD_G_MGnormcounts) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()
+
+<span class="co"># Make SampleID column to join with Sample Metadata</span>
+tLSDPD_G_MGnormcounts<span class="op">$</span>SampleID &lt;-<span class="st"> </span><span class="kw">rownames</span>(tLSDPD_G_MGnormcounts)
+
+<span class="co"># Join with Sample Metadata</span>
+tLSDPD_G_MGnormcountsmeta &lt;-<span class="st"> </span><span class="kw">inner_join</span>(LSDPD_Gmeta, tLSDPD_G_MGnormcounts, <span class="dt">by=</span><span class="st">&quot;SampleID&quot;</span>)
+
+<span class="co"># View with arrangement by GroupAbbrev</span>
+tLSDPD_G_MGnormcountsmeta[,<span class="kw">c</span>(<span class="st">&quot;GroupAbbrev&quot;</span>, <span class="st">&quot;1107027&quot;</span>, <span class="st">&quot;363731&quot;</span>)] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(GroupAbbrev)</code></pre></div>
+<pre><code>##    GroupAbbrev    1107027       363731
+## 1          LSD  1997.1098   199.421965
+## 2          LSD   955.6962  5915.611814
+## 3          LSD  1897.2810  6891.238671
+## 4          LSD   203.5306 11833.852544
+## 5          LSD   248.7923  4375.201288
+## 6          LSD   571.5962  2643.192488
+## 7          LSD   586.0349 10019.950125
+## 8          LSD  1229.4264  5296.758105
+## 9          LSD   184.6154  6209.230769
+## 10         LSD  2165.0943  2530.660377
+## 11         LSD  1287.9377 14297.665370
+## 12         LSD  1115.7895  7870.175439
+## 13          PD 12670.3297    84.772370
+## 14          PD  3476.1905   123.376623
+## 15          PD   557.1178     7.029877
+## 16          PD  3607.4430     1.200480
+## 17          PD  2308.0054   141.112619
+## 18          PD  5914.4080     0.000000
+## 19          PD   578.7349     0.000000
+## 20          PD  8829.0441     0.000000
+## 21          PD  3153.9763     0.000000
+## 22          PD  5436.3636     0.000000
+## 23          PD  5384.8238   144.986450
+## 24          PD  5337.3860     0.000000
+## 25          PD  3558.4046     0.000000
+## 26          PD  2079.2839     0.000000
+## 27          PD  2574.3440     0.000000</code></pre>
+<p>Still visually looks like there could be differences between LSD and PD groups in these two taxa. I do not have an explanation as to why metagenomeSeq did not find <em>Lactobacillus</em> significant. <em>Akkermansia</em> was not computed, likely due to the high abundance of zeros in the PD group. This really highlights why there is still so much work being done in this area, i.e., differential abundance analysis.</p>
+</div>
+<div id="aldex2" class="section level2">
+<h2><span class="header-section-number">7.4</span> ALDEx2</h2>
+<p>ALDEx stands for <a href="https://bioconductor.org/packages/release/bioc/html/ALDEx2.html">“<strong>A</strong> NOVA- <strong>L</strong> ike <strong>D</strong> ifferential <strong>Ex</strong> pression Analysis”</a>. It uses a <a href="https://bioconductor.org/packages/release/bioc/html/ALDEx2.html">Dirichlet-multinomial model to infer abundances from counts data and then calculates sample variation using standard statistical tools</a>. Unlike most of the methods we have looked at, ALDEx2 takes into consideration the compositional nature of the microbial sequencing count data. My understanding of ALDEx2 is that it handles the zero counts in a unique way. Essentially it estimates many possible imputations for zeros and then tests each of these permutations for significance, and then takes the average value for each significance test as the final determination. So, very similar to the CLR-Mann Whitney U example, but instead of doing this a single time, it runs the test many times with different combinations of the zero-imputations.</p>
+<p>As the CLR transformation is supposed to tranform the data into an Euclidean space, more traditional statistical approaches, e.g., <em>t</em>-test, Mann Whitney U test, Kruskal Wallis test, and general linear models can be conducted with this approach. Therefore, covariates can be included as well.</p>
+<p>Let’s look at ALDEx2 approach in our data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load library</span>
+<span class="kw">library</span>(ALDEx2)
+
+<span class="co"># Calculate Monte Carlo samples of the Dirichlet distribution for each sample.</span>
+<span class="co"># Each calculation uses CLR transformation</span>
+LSDPD_GaldexMCcalc &lt;-<span class="st"> </span><span class="kw">aldex.clr</span>(LSDPD_Gcounts, LSDPD_Gmeta<span class="op">$</span>GroupAbbrev, <span class="dt">mc.samples=</span><span class="dv">130</span>, <span class="dt">denom=</span><span class="st">&quot;all&quot;</span>, <span class="dt">verbose=</span><span class="ot">FALSE</span>)
+
+<span class="co"># Assess t-test among all Monte Carlo samples and then make Taxa column to merge with Taxonomy table</span>
+LSDPD_Galdex_ttest &lt;-<span class="st"> </span><span class="kw">aldex.ttest</span>(LSDPD_GaldexMCcalc, LSDPD_Gmeta<span class="op">$</span>GroupAbbrev, <span class="dt">paired.test=</span><span class="ot">FALSE</span>)
+LSDPD_Galdex_ttest<span class="op">$</span>Taxa &lt;-<span class="st"> </span><span class="kw">rownames</span>(LSDPD_Galdex_ttest)
+
+<span class="co"># Merge with taxonomy table</span>
+LSDPD_Galdex_Final &lt;-<span class="st"> </span><span class="kw">full_join</span>(LSDPD_Gtaxa, LSDPD_Galdex_ttest, <span class="dt">by=</span><span class="st">&quot;Taxa&quot;</span>)
+
+<span class="co"># Assess effect sizes for all Monte Carlo samples and then make Taxa column to merge with Taxonomy table</span>
+LSDPD_Galdex_esize &lt;-<span class="st"> </span><span class="kw">aldex.effect</span>(LSDPD_GaldexMCcalc, LSDPD_Gmeta<span class="op">$</span>GroupAbbrev, <span class="dt">verbose=</span><span class="ot">FALSE</span>)
+LSDPD_Galdex_esize<span class="op">$</span>Taxa &lt;-<span class="st"> </span><span class="kw">rownames</span>(LSDPD_Galdex_esize)
+
+<span class="co"># Merge with LSDPD_Galdex_Final object</span>
+LSDPD_Galdex_Final &lt;-<span class="st"> </span><span class="kw">full_join</span>(LSDPD_Galdex_Final, LSDPD_Galdex_esize, <span class="dt">by=</span><span class="st">&quot;Taxa&quot;</span>)
+
+<span class="co"># View abbreviated table. &quot;BH&quot; refers to Benjamini and Hochberg FDR correction.</span>
+LSDPD_Galdex_Final[LSDPD_Galdex_Final<span class="op">$</span>we.eBH <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>,<span class="kw">c</span>(<span class="st">&quot;Genus&quot;</span>, <span class="st">&quot;we.eBH&quot;</span>, <span class="st">&quot;effect&quot;</span>)]</code></pre></div>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Genus
+</th>
+<th style="text-align:right;">
+we.eBH
+</th>
+<th style="text-align:right;">
+effect
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+g__Streptococcus
+</td>
+<td style="text-align:right;">
+0.0294584
+</td>
+<td style="text-align:right;">
+0.8288661
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.0354442
+</td>
+<td style="text-align:right;">
+0.6195333
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Aggregatibacter
+</td>
+<td style="text-align:right;">
+0.0342545
+</td>
+<td style="text-align:right;">
+0.8019802
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Lactobacillus
+</td>
+<td style="text-align:right;">
+0.0039331
+</td>
+<td style="text-align:right;">
+0.9621998
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__rc4-4
+</td>
+<td style="text-align:right;">
+0.0164894
+</td>
+<td style="text-align:right;">
+0.8242482
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.0066873
+</td>
+<td style="text-align:right;">
+-0.9180533
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Roseburia
+</td>
+<td style="text-align:right;">
+0.0006821
+</td>
+<td style="text-align:right;">
+1.5346999
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.0001580
+</td>
+<td style="text-align:right;">
+1.8077430
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Phascolarctobacterium
+</td>
+<td style="text-align:right;">
+0.0023025
+</td>
+<td style="text-align:right;">
+1.5754577
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.0187273
+</td>
+<td style="text-align:right;">
+-0.8020735
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Bifidobacterium
+</td>
+<td style="text-align:right;">
+0.0119089
+</td>
+<td style="text-align:right;">
+-0.7928918
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__
+</td>
+<td style="text-align:right;">
+0.0000111
+</td>
+<td style="text-align:right;">
+-2.1068590
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Allobaculum
+</td>
+<td style="text-align:right;">
+0.0000717
+</td>
+<td style="text-align:right;">
+-1.5501139
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Dehalobacterium
+</td>
+<td style="text-align:right;">
+0.0014370
+</td>
+<td style="text-align:right;">
+-1.1355466
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+g__Akkermansia
+</td>
+<td style="text-align:right;">
+0.0000032
+</td>
+<td style="text-align:right;">
+-2.3143187
+</td>
+</tr>
+</tbody>
+</table>
+<p>Overall, 15 taxa were significant in the ALDEx2 workflow and Mann-Whitney U test on non-normalized data. So, still consistent results from all tests except metagenomeSeq (although the authors of ALDEx2 would probably suggest that the compositional nature of the data make all other approaches inadmissible). The authors of ALDEx2 suggest that differences with an absolute effect size &gt; 1 have stronger evidence for true differences. Based on this criteria, only 7 genera are significant. <em>Lactobacillus</em> just misses the cutoff while <em>Akkermansia</em> is highly significant.</p>
+</div>
+<div id="conclusion-2" class="section level2">
+<h2><span class="header-section-number">7.5</span> Conclusion</h2>
+<p>As you can see, there are many ways to determine differential abundances. There are several other approaches that we did not cover, e.g., <a href="https://galaxyproject.org/learn/visualization/custom/lefse/">LEfSe</a>, <a href="https://msystems.asm.org/content/3/4/e00053-18">Balances</a>, etc. As I stated in the intro to this chapter, this field is still under constant evolution and results between each method may differ based on the underlying statistical principles, normalizations, and multiple comparison corrections. Our example showed fairly consistent results among most approaches; however, this is not always the case.</p>
+
+</div>
 </div>
             </section>
 

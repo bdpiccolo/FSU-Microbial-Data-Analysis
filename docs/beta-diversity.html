@@ -5,26 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Beta-Diversity | Florida State University Microbiota Workshop 2019</title>
-  <meta name="description" content="FSU Workshop Oct. 2019: Introduction to R and 16S rRNA sequencing data analysis in R." />
+  <meta name="description" content="FSU Workshop Oct. 2019: Introduction to R and microbial sequencing data analysis in R." />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 Beta-Diversity | Florida State University Microbiota Workshop 2019" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://bdpiccolo.github.io/FSU-Microbial-Data-Analysis" />
   
-  <meta property="og:description" content="FSU Workshop Oct. 2019: Introduction to R and 16S rRNA sequencing data analysis in R." />
+  <meta property="og:description" content="FSU Workshop Oct. 2019: Introduction to R and microbial sequencing data analysis in R." />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 6 Beta-Diversity | Florida State University Microbiota Workshop 2019" />
   
-  <meta name="twitter:description" content="FSU Workshop Oct. 2019: Introduction to R and 16S rRNA sequencing data analysis in R." />
+  <meta name="twitter:description" content="FSU Workshop Oct. 2019: Introduction to R and microbial sequencing data analysis in R." />
   
 
 <meta name="author" content="Brian Piccolo" />
 
 
-<meta name="date" content="2019-09-19" />
+<meta name="date" content="2019-10-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -104,7 +104,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">FSU 16S Data Analysis in R Workshop 10/2019</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction to Data Analysis of 16S rRNA Sequencing in R</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction to Data Analysis of Microbial Sequencing in R</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#types-of-microbiota-data"><i class="fa fa-check"></i><b>1.1</b> Types of microbiota data</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#s-rrna-amplicon-sequencing"><i class="fa fa-check"></i><b>1.1.1</b> 16S rRNA amplicon sequencing</a></li>
@@ -125,7 +125,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2.6" data-path="rbasics.html"><a href="rbasics.html#basic-operations-data-types-missing-values-and-functions"><i class="fa fa-check"></i><b>2.6</b> Basic operations, data types, missing values, and functions</a><ul>
 <li class="chapter" data-level="2.6.1" data-path="rbasics.html"><a href="rbasics.html#basic-operations"><i class="fa fa-check"></i><b>2.6.1</b> Basic operations</a></li>
-<li class="chapter" data-level="2.6.2" data-path="rbasics.html"><a href="rbasics.html#data-types"><i class="fa fa-check"></i><b>2.6.2</b> Data types</a></li>
+<li class="chapter" data-level="2.6.2" data-path="rbasics.html"><a href="rbasics.html#datatypes"><i class="fa fa-check"></i><b>2.6.2</b> Data types</a></li>
 <li class="chapter" data-level="2.6.3" data-path="rbasics.html"><a href="rbasics.html#data-structure"><i class="fa fa-check"></i><b>2.6.3</b> Data structure</a></li>
 <li class="chapter" data-level="2.6.4" data-path="rbasics.html"><a href="rbasics.html#missing-values"><i class="fa fa-check"></i><b>2.6.4</b> Missing values</a></li>
 <li class="chapter" data-level="2.6.5" data-path="rbasics.html"><a href="rbasics.html#functions"><i class="fa fa-check"></i><b>2.6.5</b> Functions</a></li>
@@ -139,24 +139,108 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.8.1" data-path="rbasics.html"><a href="rbasics.html#viewing-your-data"><i class="fa fa-check"></i><b>2.8.1</b> Viewing your data</a></li>
 <li class="chapter" data-level="2.8.2" data-path="rbasics.html"><a href="rbasics.html#extracting-elements"><i class="fa fa-check"></i><b>2.8.2</b> Extracting elements</a></li>
 <li class="chapter" data-level="2.8.3" data-path="rbasics.html"><a href="rbasics.html#subsetting"><i class="fa fa-check"></i><b>2.8.3</b> Subsetting</a></li>
-<li class="chapter" data-level="2.8.4" data-path="rbasics.html"><a href="rbasics.html#reshaping-data"><i class="fa fa-check"></i><b>2.8.4</b> Reshaping data</a></li>
+<li class="chapter" data-level="2.8.4" data-path="rbasics.html"><a href="rbasics.html#reshaping"><i class="fa fa-check"></i><b>2.8.4</b> Reshaping data</a></li>
 <li class="chapter" data-level="2.8.5" data-path="rbasics.html"><a href="rbasics.html#merging-data"><i class="fa fa-check"></i><b>2.8.5</b> Merging data</a></li>
-<li class="chapter" data-level="2.8.6" data-path="rbasics.html"><a href="rbasics.html#apply-family-of-functions"><i class="fa fa-check"></i><b>2.8.6</b> apply family of functions</a></li>
+<li class="chapter" data-level="2.8.6" data-path="rbasics.html"><a href="rbasics.html#applyfunctions"><i class="fa fa-check"></i><b>2.8.6</b> apply family of functions</a></li>
 <li class="chapter" data-level="2.8.7" data-path="rbasics.html"><a href="rbasics.html#sweep"><i class="fa fa-check"></i><b>2.8.7</b> Sweep</a></li>
 </ul></li>
 <li class="chapter" data-level="2.9" data-path="rbasics.html"><a href="rbasics.html#stats"><i class="fa fa-check"></i><b>2.9</b> Stats</a><ul>
 <li class="chapter" data-level="2.9.1" data-path="rbasics.html"><a href="rbasics.html#basic-summary-based-stats."><i class="fa fa-check"></i><b>2.9.1</b> Basic summary based stats.</a></li>
-<li class="chapter" data-level="2.9.2" data-path="rbasics.html"><a href="rbasics.html#t-test-and-mann-whitney-u-test"><i class="fa fa-check"></i><b>2.9.2</b> <em>t</em>-test and Mann Whitney U test</a></li>
+<li class="chapter" data-level="2.9.2" data-path="rbasics.html"><a href="rbasics.html#ttestexamp"><i class="fa fa-check"></i><b>2.9.2</b> <em>t</em>-test and Mann Whitney U test</a></li>
 <li class="chapter" data-level="2.9.3" data-path="rbasics.html"><a href="rbasics.html#anova"><i class="fa fa-check"></i><b>2.9.3</b> ANOVA</a></li>
 <li class="chapter" data-level="2.9.4" data-path="rbasics.html"><a href="rbasics.html#kruskal-wallis-test"><i class="fa fa-check"></i><b>2.9.4</b> Kruskal-Wallis Test</a></li>
-<li class="chapter" data-level="2.9.5" data-path="rbasics.html"><a href="rbasics.html#post-hoc-tests"><i class="fa fa-check"></i><b>2.9.5</b> Post-hoc Tests</a></li>
+<li class="chapter" data-level="2.9.5" data-path="rbasics.html"><a href="rbasics.html#post-hoc-tests"><i class="fa fa-check"></i><b>2.9.5</b> Post-hoc tests</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="microbial-sequencing-data.html"><a href="microbial-sequencing-data.html"><i class="fa fa-check"></i><b>3</b> Microbial Sequencing Data</a></li>
-<li class="chapter" data-level="4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html"><i class="fa fa-check"></i><b>4</b> Importing and Pre-Processing</a></li>
-<li class="chapter" data-level="5" data-path="alpha-diversity.html"><a href="alpha-diversity.html"><i class="fa fa-check"></i><b>5</b> Alpha-Diversity</a></li>
-<li class="chapter" data-level="6" data-path="beta-diversity.html"><a href="beta-diversity.html"><i class="fa fa-check"></i><b>6</b> Beta-Diversity</a></li>
-<li class="chapter" data-level="7" data-path="differential-abundance.html"><a href="differential-abundance.html"><i class="fa fa-check"></i><b>7</b> Differential Abundance</a></li>
+<li class="chapter" data-level="3" data-path="chapt3intro.html"><a href="chapt3intro.html"><i class="fa fa-check"></i><b>3</b> Microbial Sequencing Data</a><ul>
+<li class="chapter" data-level="3.1" data-path="chapt3intro.html"><a href="chapt3intro.html#chapt3structure"><i class="fa fa-check"></i><b>3.1</b> Structure</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="chapt3intro.html"><a href="chapt3intro.html#count-data"><i class="fa fa-check"></i><b>3.1.1</b> Count data</a></li>
+<li class="chapter" data-level="3.1.2" data-path="chapt3intro.html"><a href="chapt3intro.html#taxonomy-data"><i class="fa fa-check"></i><b>3.1.2</b> Taxonomy data</a></li>
+<li class="chapter" data-level="3.1.3" data-path="chapt3intro.html"><a href="chapt3intro.html#sample-metadata"><i class="fa fa-check"></i><b>3.1.3</b> Sample Metadata</a></li>
+<li class="chapter" data-level="3.1.4" data-path="chapt3intro.html"><a href="chapt3intro.html#phylogenetic-tree"><i class="fa fa-check"></i><b>3.1.4</b> Phylogenetic tree</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="chapt3intro.html"><a href="chapt3intro.html#microbefiles"><i class="fa fa-check"></i><b>3.2</b> Files</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="chapt3intro.html"><a href="chapt3intro.html#spreadsheets"><i class="fa fa-check"></i><b>3.2.1</b> Spreadsheets</a></li>
+<li class="chapter" data-level="3.2.2" data-path="chapt3intro.html"><a href="chapt3intro.html#biomfile"><i class="fa fa-check"></i><b>3.2.2</b> Biome</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="chapt3intro.html"><a href="chapt3intro.html#diversity"><i class="fa fa-check"></i><b>3.3</b> Diversity</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="chapt3intro.html"><a href="chapt3intro.html#adivconcept"><i class="fa fa-check"></i><b>3.3.1</b> Alpha-diversity</a></li>
+<li class="chapter" data-level="3.3.2" data-path="chapt3intro.html"><a href="chapt3intro.html#betadivconcept"><i class="fa fa-check"></i><b>3.3.2</b> Beta-diversity</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="chapt3intro.html"><a href="chapt3intro.html#challenges"><i class="fa fa-check"></i><b>3.4</b> Challenges</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="chapt3intro.html"><a href="chapt3intro.html#compdata"><i class="fa fa-check"></i><b>3.4.1</b> Compositional data</a></li>
+<li class="chapter" data-level="3.4.2" data-path="chapt3intro.html"><a href="chapt3intro.html#zero-inflation"><i class="fa fa-check"></i><b>3.4.2</b> Zero inflation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="chapt3intro.html"><a href="chapt3intro.html#normalization"><i class="fa fa-check"></i><b>3.5</b> Normalization</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="chapt3intro.html"><a href="chapt3intro.html#rarefying"><i class="fa fa-check"></i><b>3.5.1</b> Rarefying</a></li>
+<li class="chapter" data-level="3.5.2" data-path="chapt3intro.html"><a href="chapt3intro.html#logUQ"><i class="fa fa-check"></i><b>3.5.2</b> Log upper quartile</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="chapt3intro.html"><a href="chapt3intro.html#r-packages-1"><i class="fa fa-check"></i><b>3.6</b> R packages</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="chapt3intro.html"><a href="chapt3intro.html#vegan"><i class="fa fa-check"></i><b>3.6.1</b> vegan</a></li>
+<li class="chapter" data-level="3.6.2" data-path="chapt3intro.html"><a href="chapt3intro.html#phyloseq"><i class="fa fa-check"></i><b>3.6.2</b> phyloseq</a></li>
+<li class="chapter" data-level="3.6.3" data-path="chapt3intro.html"><a href="chapt3intro.html#microbiome"><i class="fa fa-check"></i><b>3.6.3</b> microbiome</a></li>
+<li class="chapter" data-level="3.6.4" data-path="chapt3intro.html"><a href="chapt3intro.html#ape"><i class="fa fa-check"></i><b>3.6.4</b> ape</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="chapt3intro.html"><a href="chapt3intro.html#additional-resources"><i class="fa fa-check"></i><b>3.7</b> Additional resources</a></li>
+<li class="chapter" data-level="3.8" data-path="chapt3intro.html"><a href="chapt3intro.html#final-thoughts"><i class="fa fa-check"></i><b>3.8</b> Final thoughts</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html"><i class="fa fa-check"></i><b>4</b> Importing and Pre-Processing</a><ul>
+<li class="chapter" data-level="4.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#importing-data-into-r"><i class="fa fa-check"></i><b>4.1</b> Importing Data into R</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#biomimport"><i class="fa fa-check"></i><b>4.1.1</b> Biom file</a></li>
+<li class="chapter" data-level="4.1.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#excelimport"><i class="fa fa-check"></i><b>4.1.2</b> Excel</a></li>
+<li class="chapter" data-level="4.1.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#importmetadata"><i class="fa fa-check"></i><b>4.1.3</b> Metadata</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#phyloseq-object"><i class="fa fa-check"></i><b>4.2</b> phyloseq object</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#setting-up-a-phyloseq-object"><i class="fa fa-check"></i><b>4.2.1</b> Setting up a phyloseq object</a></li>
+<li class="chapter" data-level="4.2.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#extracting-data"><i class="fa fa-check"></i><b>4.2.2</b> Extracting data</a></li>
+<li class="chapter" data-level="4.2.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#subsetting-1"><i class="fa fa-check"></i><b>4.2.3</b> Subsetting</a></li>
+<li class="chapter" data-level="4.2.4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#aggregating"><i class="fa fa-check"></i><b>4.2.4</b> Aggregating</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#pre-processing"><i class="fa fa-check"></i><b>4.3</b> Pre-processing</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#lowabundtaxa"><i class="fa fa-check"></i><b>4.3.1</b> Low abundance taxa</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#proportional-abundance"><i class="fa fa-check"></i><b>4.3.2</b> Proportional Abundance</a></li>
+<li class="chapter" data-level="4.3.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#zeroimput"><i class="fa fa-check"></i><b>4.3.3</b> Zeros</a></li>
+<li class="chapter" data-level="4.3.4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#centered-log-ratios"><i class="fa fa-check"></i><b>4.3.4</b> Centered log ratios</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#conclusion"><i class="fa fa-check"></i><b>4.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="alpha-diversity.html"><a href="alpha-diversity.html"><i class="fa fa-check"></i><b>5</b> Alpha-Diversity</a><ul>
+<li class="chapter" data-level="5.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#phyloseq-package"><i class="fa fa-check"></i><b>5.1</b> phyloseq package</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#estimate_richness"><i class="fa fa-check"></i><b>5.1.1</b> estimate_richness()</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="alpha-diversity.html"><a href="alpha-diversity.html#microbiome-package"><i class="fa fa-check"></i><b>5.2</b> microbiome package</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#richness"><i class="fa fa-check"></i><b>5.2.1</b> richness()</a></li>
+<li class="chapter" data-level="5.2.2" data-path="alpha-diversity.html"><a href="alpha-diversity.html#dominance"><i class="fa fa-check"></i><b>5.2.2</b> dominance()</a></li>
+<li class="chapter" data-level="5.2.3" data-path="alpha-diversity.html"><a href="alpha-diversity.html#evenness"><i class="fa fa-check"></i><b>5.2.3</b> evenness()</a></li>
+<li class="chapter" data-level="5.2.4" data-path="alpha-diversity.html"><a href="alpha-diversity.html#rarity"><i class="fa fa-check"></i><b>5.2.4</b> rarity()</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="alpha-diversity.html"><a href="alpha-diversity.html#data-analysis"><i class="fa fa-check"></i><b>5.3</b> Data analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="beta-diversity.html"><a href="beta-diversity.html"><i class="fa fa-check"></i><b>6</b> Beta-Diversity</a><ul>
+<li class="chapter" data-level="6.1" data-path="beta-diversity.html"><a href="beta-diversity.html#calculating-beta-diversity-in-r"><i class="fa fa-check"></i><b>6.1</b> Calculating beta-diversity in R</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="beta-diversity.html"><a href="beta-diversity.html#identifying-your-beta-diversity-indices"><i class="fa fa-check"></i><b>6.1.1</b> Identifying your beta diversity indices</a></li>
+<li class="chapter" data-level="6.1.2" data-path="beta-diversity.html"><a href="beta-diversity.html#phyloseq-1"><i class="fa fa-check"></i><b>6.1.2</b> phyloseq</a></li>
+<li class="chapter" data-level="6.1.3" data-path="beta-diversity.html"><a href="beta-diversity.html#vegan-1"><i class="fa fa-check"></i><b>6.1.3</b> vegan</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="beta-diversity.html"><a href="beta-diversity.html#ordinations-1"><i class="fa fa-check"></i><b>6.2</b> Ordinations</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="beta-diversity.html"><a href="beta-diversity.html#phyloseq-2"><i class="fa fa-check"></i><b>6.2.1</b> phyloseq</a></li>
+<li class="chapter" data-level="6.2.2" data-path="beta-diversity.html"><a href="beta-diversity.html#vegan-2"><i class="fa fa-check"></i><b>6.2.2</b> vegan</a></li>
+<li class="chapter" data-level="6.2.3" data-path="beta-diversity.html"><a href="beta-diversity.html#apecalculation"><i class="fa fa-check"></i><b>6.2.3</b> ape</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="beta-diversity.html"><a href="beta-diversity.html#visualizing-ordinations"><i class="fa fa-check"></i><b>6.3</b> Visualizing ordinations</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="beta-diversity.html"><a href="beta-diversity.html#phyloordination"><i class="fa fa-check"></i><b>6.3.1</b> phyloseq</a></li>
+<li class="chapter" data-level="6.3.2" data-path="beta-diversity.html"><a href="beta-diversity.html#baseRordinations"><i class="fa fa-check"></i><b>6.3.2</b> Base R</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="beta-diversity.html"><a href="beta-diversity.html#permanova"><i class="fa fa-check"></i><b>6.4</b> PERMANOVA</a></li>
+<li class="chapter" data-level="6.5" data-path="beta-diversity.html"><a href="beta-diversity.html#conclusion-1"><i class="fa fa-check"></i><b>6.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="differential-abundance.html"><a href="differential-abundance.html"><i class="fa fa-check"></i><b>7</b> Differential Abundance</a><ul>
+<li class="chapter" data-level="7.1" data-path="differential-abundance.html"><a href="differential-abundance.html#rank-analysis"><i class="fa fa-check"></i><b>7.1</b> Rank analysis</a></li>
+<li class="chapter" data-level="7.2" data-path="differential-abundance.html"><a href="differential-abundance.html#deseq2"><i class="fa fa-check"></i><b>7.2</b> DESeq2</a></li>
+<li class="chapter" data-level="7.3" data-path="differential-abundance.html"><a href="differential-abundance.html#metagenomeseq"><i class="fa fa-check"></i><b>7.3</b> metagenomeSeq</a></li>
+<li class="chapter" data-level="7.4" data-path="differential-abundance.html"><a href="differential-abundance.html#aldex2"><i class="fa fa-check"></i><b>7.4</b> ALDEx2</a></li>
+<li class="chapter" data-level="7.5" data-path="differential-abundance.html"><a href="differential-abundance.html#conclusion-2"><i class="fa fa-check"></i><b>7.5</b> Conclusion</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -179,8 +263,621 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="beta-diversity" class="section level1">
 <h1><span class="header-section-number">Chapter 6</span> Beta-Diversity</h1>
-<p><strong>UNDER CONSTRUCTION</strong></p>
+<p>There have only been a few plotting examples so far in this workbook. This chapter will change this. The best way to understand the concept of beta-diversity is to actually see the differences between samples. In this chapter will learn how to calculate beta-diversity, ordinate the results, visualize beta diversity, and determine if there are statistical differences in beta diversity.</p>
+<div id="calculating-beta-diversity-in-r" class="section level2">
+<h2><span class="header-section-number">6.1</span> Calculating beta-diversity in R</h2>
+<p>We discussed the various ways to calculate beta-diversity in Chapter <a href="chapt3intro.html#betadivconcept">3.3.2</a>. There are distance-, dissimilarity-, and covariance-, and phylogenetic-based estimations of beta-diversity, all of which may uncover different aspects of your data. On top of that, normalization procedures will also influence the results. So, the first step is to calculate a matrix of your beta-diversity index. We will first cover where to find available indices, followed by the the functions that will calculate your chosen beta-diversity index.</p>
+<div id="identifying-your-beta-diversity-indices" class="section level3">
+<h3><span class="header-section-number">6.1.1</span> Identifying your beta diversity indices</h3>
+<p>The most comphrehensive resources is the <code>distanceMethodList</code> function from the phyloseq package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">distanceMethodList</code></pre></div>
+<pre><code>## $UniFrac
+## [1] &quot;unifrac&quot;  &quot;wunifrac&quot;
+## 
+## $DPCoA
+## [1] &quot;dpcoa&quot;
+## 
+## $JSD
+## [1] &quot;jsd&quot;
+## 
+## $vegdist
+##  [1] &quot;manhattan&quot;  &quot;euclidean&quot;  &quot;canberra&quot;   &quot;bray&quot;       &quot;kulczynski&quot;
+##  [6] &quot;jaccard&quot;    &quot;gower&quot;      &quot;altGower&quot;   &quot;morisita&quot;   &quot;horn&quot;      
+## [11] &quot;mountford&quot;  &quot;raup&quot;       &quot;binomial&quot;   &quot;chao&quot;       &quot;cao&quot;       
+## 
+## $betadiver
+##  [1] &quot;w&quot;   &quot;-1&quot;  &quot;c&quot;   &quot;wb&quot;  &quot;r&quot;   &quot;I&quot;   &quot;e&quot;   &quot;t&quot;   &quot;me&quot;  &quot;j&quot;   &quot;sor&quot;
+## [12] &quot;m&quot;   &quot;-2&quot;  &quot;co&quot;  &quot;cc&quot;  &quot;g&quot;   &quot;-3&quot;  &quot;l&quot;   &quot;19&quot;  &quot;hk&quot;  &quot;rlb&quot; &quot;sim&quot;
+## [23] &quot;gl&quot;  &quot;z&quot;  
+## 
+## $dist
+## [1] &quot;maximum&quot;   &quot;binary&quot;    &quot;minkowski&quot;
+## 
+## $designdist
+## [1] &quot;ANY&quot;</code></pre>
+<p>Many options here. The ‘Unifrac’, ‘dpcoa’, and ‘JSD’ require a phylogenetic tree and are computationally more expensive than the others. The options under ‘vegdist’ and ‘betadiver’ are derived from ecology sciences and implemented in the <code>vegdist</code> function from the vegan package. The most common diversity indices in microbial based studies tend to be the Unifrac distances, Bray-Curtis Dissimilarities, and the Jaccard index. We will focus on Bray-Curtis and Jaccard for example purposes.</p>
+</div>
+<div id="phyloseq-1" class="section level3">
+<h3><span class="header-section-number">6.1.2</span> phyloseq</h3>
+<p>All of beta-diversity options listed above can be calculated by the <code>phyloseq::distance</code> function from the phyloseq package. Requires 2 arguments, the phyloseq object and the name of the index. The index name has to exactly match one of those listed above. Let’s try it.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Returns a matrix, which won&#39;t be shown for the sake of brevity.</span>
+phylo_BrayDis &lt;-<span class="st"> </span>phyloseq<span class="op">::</span><span class="kw">distance</span>(phyobj_d10p25, <span class="st">&quot;bray&quot;</span>)
 
+<span class="co"># Jaccard index.</span>
+phylo_Jaccard &lt;-<span class="st"> </span>phyloseq<span class="op">::</span><span class="kw">distance</span>(phyobj_d10p25, <span class="st">&quot;jaccard&quot;</span>)</code></pre></div>
+</div>
+<div id="vegan-1" class="section level3">
+<h3><span class="header-section-number">6.1.3</span> vegan</h3>
+<p>Calculating beta-diversity indices in vegan is also straight forward. The <code>vegdist</code> function is similar to the <code>phyloseq::distance</code> function in that it requires a matrix in the first argument (not a phyloseq object), followed by the name of the index. Thus, we need to extract the OTU table from the phyloseq object. Although there is an extra step here, there could be instances where you are not using phyloseq.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load package</span>
+<span class="kw">library</span>(vegan)
+
+<span class="co"># Extract OTU table.</span>
+UCDcounts &lt;-<span class="st"> </span><span class="kw">abundances</span>(phyobj_d10p25)
+
+<span class="co"># Samples need to be rows for vegdist() to calculate between sample distances/dissimilarities.</span>
+tUCDcounts &lt;-<span class="st"> </span><span class="kw">t</span>(UCDcounts)
+
+<span class="co"># Bray index.</span>
+vegan_BrayDis &lt;-<span class="st"> </span><span class="kw">vegdist</span>(tUCDcounts, <span class="st">&quot;bray&quot;</span>)</code></pre></div>
+<p>Are the two distance matrices equal? They should be, the <code>phyloseq::distance</code> uses <code>vegdist</code> underneath it’s hood.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use setequal() to test whether all elements are TRUE</span>
+<span class="kw">setequal</span>(phylo_BrayDis <span class="op">==</span><span class="st"> </span>vegan_BrayDis, <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+</div>
+<div id="ordinations-1" class="section level2">
+<h2><span class="header-section-number">6.2</span> Ordinations</h2>
+<p>Ordinations are used to reduce the dimension of a high-dimensional dataset into a new set of components. Hopefully, just a few of these new components can summarise the variance in the data and then project it onto a 2- or 3-dimensional plot. Those of you who are familiar with Principal Component Analysis should have no problem understanding these methods. We actually will be using PCA later in this chapter!</p>
+<p>In this section, we will learn how to take our dissimilarity/distance matrix and apply it to Principal Co-ordinate Analysis (PCoA) and non-multi dimensional scaling (NMDS). We will do this in outside of the phyloseq environment for the sake of completeness.</p>
+<div id="phyloseq-2" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> phyloseq</h3>
+<p>The phyloseq package uses the <code>ordinate</code> function to calculate ordinations. The <code>ordinate</code> function is a wrapper for ordinations in other packages, which means it does not contain the coding itself to perform the ordination. It has to call functions from other packages to conduct the ordination. However, it is very convenient because the <code>ordination</code> function preps the data based on the required syntax of the called ordination function. Thus, there is no need for additional coding. Let’s take a look at an example.</p>
+<p>The <code>ordinate</code> runs Detrended Correspondence Analysis as the default ordination using Bray-Curtis dissilarities. We will update this to ensure we run PCoA.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ordinate() calls the pcoa() function from the ape package.</span>
+UCD_bray_PCoA &lt;-<span class="st"> </span><span class="kw">ordinate</span>(phyobj_d10p25, <span class="dt">method=</span><span class="st">&quot;PCoA&quot;</span>, <span class="dt">distance=</span><span class="st">&quot;bray&quot;</span>)</code></pre></div>
+<p>Since <code>ordinate</code> is a wrapper for the <code>ape::pcoa</code> function, the output is what <code>ape::pcoa</code> would show. It is not shown because it is a very verbose output. But as you can see, very straight forward function. Just change the ordination and distance and <code>ordinate</code> will return the output from the supplied ordination. Let’s see one more example.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ordinate() calls the metaMDS() function from the vegan package.</span>
+UCD_jac_NMDS &lt;-<span class="st"> </span><span class="kw">ordinate</span>(phyobj_d10p25, <span class="dt">method=</span><span class="st">&quot;NMDS&quot;</span>, <span class="dt">distance=</span><span class="st">&quot;jaccard&quot;</span>)</code></pre></div>
+<pre><code>## Square root transformation
+## Wisconsin double standardization
+## Run 0 stress 0.1207804 
+## Run 1 stress 0.1207855 
+## ... Procrustes: rmse 0.00220263  max resid 0.01280263 
+## Run 2 stress 0.1237745 
+## Run 3 stress 0.1141577 
+## ... New best solution
+## ... Procrustes: rmse 0.1020114  max resid 0.2443601 
+## Run 4 stress 0.1141591 
+## ... Procrustes: rmse 0.0002147099  max resid 0.001120825 
+## ... Similar to previous best
+## Run 5 stress 0.1141406 
+## ... New best solution
+## ... Procrustes: rmse 0.004400784  max resid 0.02251077 
+## Run 6 stress 0.1141336 
+## ... New best solution
+## ... Procrustes: rmse 0.003149087  max resid 0.01686469 
+## Run 7 stress 0.114135 
+## ... Procrustes: rmse 0.0002331117  max resid 0.001254342 
+## ... Similar to previous best
+## Run 8 stress 0.1143997 
+## ... Procrustes: rmse 0.0146326  max resid 0.1022156 
+## Run 9 stress 0.1141317 
+## ... New best solution
+## ... Procrustes: rmse 0.0004295849  max resid 0.002347916 
+## ... Similar to previous best
+## Run 10 stress 0.1141439 
+## ... Procrustes: rmse 0.00164618  max resid 0.008906703 
+## ... Similar to previous best
+## Run 11 stress 0.1141308 
+## ... New best solution
+## ... Procrustes: rmse 0.0004978797  max resid 0.002536617 
+## ... Similar to previous best
+## Run 12 stress 0.4043389 
+## Run 13 stress 0.1143973 
+## ... Procrustes: rmse 0.01470755  max resid 0.1021652 
+## Run 14 stress 0.1141322 
+## ... Procrustes: rmse 0.0006315912  max resid 0.003383372 
+## ... Similar to previous best
+## Run 15 stress 0.1245594 
+## Run 16 stress 0.1141397 
+## ... Procrustes: rmse 0.002163083  max resid 0.01154892 
+## Run 17 stress 0.1141384 
+## ... Procrustes: rmse 0.001575663  max resid 0.008491128 
+## ... Similar to previous best
+## Run 18 stress 0.1141651 
+## ... Procrustes: rmse 0.002874055  max resid 0.01361668 
+## Run 19 stress 0.1234054 
+## Run 20 stress 0.114133 
+## ... Procrustes: rmse 0.0008075138  max resid 0.004342552 
+## ... Similar to previous best
+## *** Solution reached</code></pre>
+<p>If you recall from Chapter <a href="chapt3intro.html#ordinations">3.3.2.3</a>, NMDS iteratively computes a best fit model and stops when it reaches a stop criteria. The output here shows the NMDS algorithm searching for the best fit. Let’s look at the final output.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># View output</span>
+UCD_jac_NMDS</code></pre></div>
+<pre><code>## 
+## Call:
+## metaMDS(comm = veganifyOTU(physeq), distance = distance) 
+## 
+## global Multidimensional Scaling using monoMDS
+## 
+## Data:     wisconsin(sqrt(veganifyOTU(physeq))) 
+## Distance: jaccard 
+## 
+## Dimensions: 2 
+## Stress:     0.1141308 
+## Stress type 1, weak ties
+## Two convergent solutions found after 20 tries
+## Scaling: centring, PC rotation, halfchange scaling 
+## Species: expanded scores based on &#39;wisconsin(sqrt(veganifyOTU(physeq)))&#39;</code></pre>
+<p>The output provides some details regarding the NMDS ordination. Firstly, the NMDS is configured for 2-dimensions and the scores (sample variance) was centered and rotated similar to PCA. The NMDS did not reach a best fit; it stopped after 20 tries and used the ‘best’ configuration out of the 20 iterations.</p>
+</div>
+<div id="vegan-2" class="section level3">
+<h3><span class="header-section-number">6.2.2</span> vegan</h3>
+<p>Lets look at the <code>metaMDS</code> function in the vegan package a little closer. It has several arguments that allow extensive customization of the ordination. We are going to review a handful of the arguments within <code>metaMDS</code> and how they can be used to configure the NMDS. Please refer to the help page, <code>?metaMDS</code>, for further details.</p>
+<p>The first argument, ‘comm’, can either take your actual data (Counts, proportional abundance, transformed counts, etc.) or a symmetric square distance/dissimilarity matrix. The second argument identifies the distance/dissimilarity index if data is loaded instead of a distance/dissimilarity matrix. I recommend inputting a distance/dissimilarity matrix because you have finer control over the input. The next argument, ‘k’, sets the number of dimensions. It is generally recommended to use the minimum number of dimensions, unless you are not finding convergence solutions. The help page recommmends increaseing k by 1 to help find convergence solutions. The next arguments, ‘try’ and ‘trymax’ set the minimum and maximum number of iterations. The ‘engine’ argument defines the MDS variant to run. Leave this alone unless you have a good reason to alter. Lastly, the ‘autotransform’ arguments defaults to TRUE and this allows <code>metaMDS</code> to use detect whether a tranformation is required in the supplied data. It uses a commonly used standardization in ecological sciences, the Wisconsin Double Standardization, after taking the square root of the data. The autotranform argument can be set to <code>FALSE</code> if you’ve already normalized your data (e.g., CLR normalized).</p>
+<p>The phyloseq NMDS was run with the Jaccard index and stated that a convergence was not found, so we will also use the Jaccard index here and alter the dimensions and max trys. Data is not normalized, so we will keep the ‘autotranform’ argument at it’s default setting.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We will use the transposed count data to ensure Samples are rows.</span>
+vegan_JaccDis &lt;-<span class="st"> </span><span class="kw">vegdist</span>(tUCDcounts, <span class="st">&quot;jaccard&quot;</span>)
+
+<span class="co"># Displaying the function on multiple lines to emphasize the multiple arguments.</span>
+UCD_jac_veganNMDS &lt;-<span class="st"> </span><span class="kw">metaMDS</span>(
+    <span class="dt">comm =</span> vegan_JaccDis,
+    <span class="dt">k =</span> <span class="dv">3</span>,
+    <span class="dt">try=</span><span class="dv">10</span>,
+    <span class="dt">trymax=</span><span class="dv">50</span>
+)</code></pre></div>
+<pre><code>## Run 0 stress 0.1264836 
+## Run 1 stress 0.1266075 
+## ... Procrustes: rmse 0.006092033  max resid 0.03708389 
+## Run 2 stress 0.1264853 
+## ... Procrustes: rmse 0.0006757276  max resid 0.002130777 
+## ... Similar to previous best
+## Run 3 stress 0.1264785 
+## ... New best solution
+## ... Procrustes: rmse 0.00216278  max resid 0.0108295 
+## Run 4 stress 0.1264755 
+## ... New best solution
+## ... Procrustes: rmse 0.0009350028  max resid 0.003242791 
+## ... Similar to previous best
+## Run 5 stress 0.1264815 
+## ... Procrustes: rmse 0.00118572  max resid 0.004663852 
+## ... Similar to previous best
+## Run 6 stress 0.1265959 
+## ... Procrustes: rmse 0.005236279  max resid 0.03320815 
+## Run 7 stress 0.1264837 
+## ... Procrustes: rmse 0.001924231  max resid 0.009461896 
+## ... Similar to previous best
+## Run 8 stress 0.1264779 
+## ... Procrustes: rmse 0.0007789873  max resid 0.003198285 
+## ... Similar to previous best
+## Run 9 stress 0.1357964 
+## Run 10 stress 0.1393982 
+## *** Solution reached</code></pre>
+<p>Using 3 dimensions allows us to reach the best solution with less iterations. Let’s see the output.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># View output</span>
+UCD_jac_veganNMDS</code></pre></div>
+<pre><code>## 
+## Call:
+## metaMDS(comm = vegan_JaccDis, k = 3, try = 10, trymax = 50) 
+## 
+## global Multidimensional Scaling using monoMDS
+## 
+## Data:     vegan_JaccDis 
+## Distance: jaccard 
+## 
+## Dimensions: 3 
+## Stress:     0.1264755 
+## Stress type 1, weak ties
+## Two convergent solutions found after 10 tries
+## Scaling: centring, PC rotation 
+## Species: scores missing</code></pre>
+<p>Turns out the ‘Stress’ statistic is lower in the previous NMDS. This is likely due to the normalization that <code>metaMDS</code> applied to the count data prior to determining the Jaccard Indices. Still, we have good/fair stress level at &lt;0.2 (&gt; 0.3 is considered poor). I would expect some subtle differences in the plots.</p>
+</div>
+<div id="apecalculation" class="section level3">
+<h3><span class="header-section-number">6.2.3</span> ape</h3>
+<p>The <code>pcoa</code> funtion is straight forward to run; all you have to input is the symmetric square distance/dissimilarity matrix. Note, the help page, <code>?pcoa</code> does not recommend using proportionally scaled data in PCoA and suggests PCA for that data.</p>
+<p>We will use Bray-Curtis Dissimilarities on non-normalized counts for this example. Recall from above that the output from <code>pcoa</code> is extremely verbose, therefore, we will not print the output here.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load library if necessary</span>
+<span class="kw">library</span>(ape)
+
+<span class="co"># We will use the Bray Dissimilarities object that we calculated earlier.</span>
+UCD_bray_apePCoA &lt;-<span class="st"> </span><span class="kw">pcoa</span>(vegan_BrayDis)</code></pre></div>
+</div>
+</div>
+<div id="visualizing-ordinations" class="section level2">
+<h2><span class="header-section-number">6.3</span> Visualizing ordinations</h2>
+<p>We use ordinations to summarize high-dimensional data into a set of new components. These components can be broken down to show the variance associated with samples, often referred to as “scores”. Plotting the “score” values can sometimes show which samples are more similar to each other and dissimilar from others. More similar scores will have smaller distances between them and cluster closer together, whereas dissimilar scores will have large distances between them and cluster farther away from each other. As with most things in R, there are several ways to plot this data. We will first describe the phyloseq workflow and then provide examples in base R.</p>
+<div id="phyloordination" class="section level3">
+<h3><span class="header-section-number">6.3.1</span> phyloseq</h3>
+<p>The <code>plot_ordination</code> function from phyloseq is probably the most user-friendly option for plotting. It integrates the Sample Metadata in the phyloseq object to aid in the visualization of sample differences, so everything is streamlined. The output of <code>plot_ordination</code> uses the popular plotting packge, “ggplot2”, as the graphical output, thus additional graphical options (e.g., point sizing, colors, etc) are customizeable using the ggplot2 syntax. I happen to be more versed in graphical options using base R functions, so I will refer you to <a href="https://ggplot2.tidyverse.org/reference/index.html">ggplot2’s reference page</a>. In addition, the phyloseq website has a tutorial page dedicated to <a href="http://joey711.github.io/phyloseq/plot_ordination-examples">plotting ordinations</a>.</p>
+<p><code>plot_ordination</code> requires 2 arguments at minimum: 1) a phyloseq object that created an 2) ordination from <code>ordinate</code>. A third argument specifies whether you want to plot ‘samples’, ‘taxa’, or a ‘biplot’. The latter of these combines samples and taxa information on the same plotting space. This works well with a small set of samples and taxa, but not with the large amount of taxa in our plot. That option may work will at the phylum or class level, but not at the more granular taxonomic levels. Let’s plot the PCoA that we created with <code>ordinate</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Minimal example</span>
+<span class="kw">plot_ordination</span>(phyobj_d10p25, UCD_bray_PCoA)</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/phylopcoaplot-1.png" width="672" /></p>
+<p>There is no discriminant information on the plot. Ordinations are considered an un-supervised multivariate technique, meaning that these techniques display the inherent variation within the data and are not directed to maximize the variation based on a modeling construct. We can define colors for samples based on our categorical metadata. If variance is inherently explained by our categorization within these components, then we should see similar and dissimilar clusters of samples.</p>
+<p>Let’s see if there is any variation by diabetic group. We can do this by changing the ‘color’ argument to a column name from the Sample Metadata. We can obtain these names using the <code>sample_variables</code> function if we need the exact cases.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Sample column names</span>
+<span class="kw">sample_variables</span>(phyobj_d10p25)</code></pre></div>
+<pre><code>## [1] &quot;SampleID&quot;    &quot;Rat&quot;         &quot;GroupAbbrev&quot; &quot;Collection&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Will use the &quot;GroupAbbrev&quot; column</span>
+<span class="kw">plot_ordination</span>(phyobj_d10p25, UCD_bray_PCoA, <span class="dt">color=</span><span class="st">&quot;GroupAbbrev&quot;</span>)</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/phylopcoaplotcolor-1.png" width="672" /></p>
+<p>Okay, good and bad things about this plot. The default size of the points are very small and discriminating with 5 colors can be challenging. This is all customizable by adding on additional ggplot2 functions; however, we will not cover this in this workshop. The good part of this plot is you can see discrimination of experimental groups! The PD and RD groups cluster together at the top of the graph, the D3M and D6M groups drift out toward the positive values on the first axis, while the LSD group clusters together on the negative values of the first axis.</p>
+<p>Let’s talk a little bit more about how we would interpret this output. Note that each axis has a percentage associated with it, 18.8% for the Axis-1 (the x-axis) and 14% for Axis-2 (y-axis). This is the proportion of the overall variance explained by this component. Thus, the information presented here, e.g., discrimination of group clusters, on 2 components explains 32.8% (18.8% + 14%) of the overall variation in the data.</p>
+<p>We are also looking at how a particular component contains discriminant information, i.e., clusters of data that are separate from each along a particular component. For example, LSD rats are discriminated from UCD-T2DM Rat groups along the first component (Axis-1). An argument could be made that the RD and PD groups have a bit of distance from the D3M and D6M group on component 1, but overall, the distance between LSD rats and UCD-T2DM rats is much greater. Thus, we would assume that the variance associated with component 1 (18.8%) is mainly attributed to the LSD and UCD-T2DM rat discrimination.</p>
+<p>Variation associated with the cluster of PD and RD rats relative to the remaining rats is also apparent on component 2. While the distance is not as large as the LSD - UCD-T2DM discrimination on component 1, it is still quite apparent. When you consider the score values (i.e., samples) only on Axis-2, the LSD, D3M, and D6M do not differ from each other (unlike on component 1). However, you could almost run a line through component 2, just above zero, that will discriminate the PD and RD rats from the LSD, D3M and D6M rats. Thus, we can make the statement that component 2 contains variation discriminating the cluster of PD &amp; RD rats from the other groups.</p>
+<p>Now let’s see what a NMDS ordination looks like using Bray-Curtis Dissimilarities using the phyloseq workflow.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We fit NMDS with Jaccard index in the previous example</span>
+<span class="co"># Turned the iteration messages off for the sake of brevity.</span>
+UCD_bray_NMDS &lt;-<span class="st"> </span><span class="kw">ordinate</span>(phyobj_d10p25, <span class="dt">method=</span><span class="st">&quot;NMDS&quot;</span>, <span class="dt">distance=</span><span class="st">&quot;bray&quot;</span>)
+
+<span class="co"># Will use the &quot;GroupAbbrev&quot; column to layer colors on scores.</span>
+<span class="kw">plot_ordination</span>(phyobj_d10p25, UCD_bray_NMDS, <span class="dt">color=</span><span class="st">&quot;GroupAbbrev&quot;</span>)</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/phylobraynmdsplotcolor-1.png" width="672" /></p>
+<p>Very different than the PCoA. As these techniques are un-supervised and summarise the overall variance, they are subject to capture variance explained by outlying samples. This is also why PCA is sometime used to identify outliers in multivariate data. In this graph, you can see some semblance of the PCoA; for example, the LSD rats cluster together and away from the UCD-T2DM rats, and the PD/RD rats cluster indistinguishable from each other and are more dissimilar than LSD and D3M/D6M rats. However, none of this is strongly interpretable on this ordination because of the presence of outliers.</p>
+<p>Also, note that the % explained variance is not added to the axis label. This is because the NMDS algorithm iteratively fits the points until the samples most closely matches the dissimilarities in the original matrix. Thus, NMDS does not partition overall variance similar to PCA and PCoA. The score units are arbitrary and only define where the orientation of the scores.</p>
+<p>Why do we have clear outliers in the NMDS ordination and not in the PCoA ordination? Could be various reasons, but likely due to the ordinations themselves, but could also be the default normalization in the <code>metaMDS</code> function. Fortunately, you can pass arguments from <code>metaMDS</code> to <code>ordinate</code> as though they are the same functions. Let’s try without the transformation, 3 components, and alter the min/max iterations.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make another NMDS</span>
+UCD_bray_NMDSconfig &lt;-<span class="st"> </span><span class="kw">ordinate</span>(phyobj_d10p25, <span class="dt">method=</span><span class="st">&quot;NMDS&quot;</span>, <span class="dt">distance=</span><span class="st">&quot;bray&quot;</span>, <span class="dt">autotransform=</span><span class="ot">FALSE</span>, <span class="dt">try=</span><span class="dv">10</span>, <span class="dt">trymax=</span><span class="dv">50</span>, <span class="dt">k=</span><span class="dv">3</span>)
+
+<span class="kw">plot_ordination</span>(phyobj_d10p25, UCD_bray_NMDSconfig, <span class="dt">color=</span><span class="st">&quot;GroupAbbrev&quot;</span>)</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/phylobraynmdsplotcolor2-1.png" width="672" /></p>
+<p>An outlier still is present along component 2, however we now have a little better resolution among the LSD and UCD-T2DM samples along component 1.</p>
+</div>
+<div id="baseRordinations" class="section level3">
+<h3><span class="header-section-number">6.3.2</span> Base R</h3>
+<p>There may be beta-diversity workflows that are not compatible with phyloseq. For example, it is recommended to use <a href="https://www.nrcresearchpress.com/doi/10.1139/cjm-2015-0821#.XYUolC5Kj9Q">PCA after using a CLR transformation</a>, and PCA is not an ordination option in <code>plot_ordination</code>. We will use this section to describe the non-phyloseq plotting workflow.</p>
+<p>Let’s see how different normalizations influence the ordinations. We’ve already seen an example of a PCoA using Bray-Curtis Dissimilarities on untransformed data. Let’s apply various normalizations and see if the clusters are presented different.</p>
+<p class="alert alert-info">
+These examples includes immediate and advance coding. Examples of this workflow were shown in Chapters <a href="rbasics.html#reshaping">2.8.4</a> and <a href="rbasics.html#applyfunctions">2.8.6</a>.
+</p>
+<p>As a reference, we will redo the PCoA using Bray-Curtis dissimilarities on non-normalized data. We have already calculated the PCoA in Section <a href="beta-diversity.html#apecalculation">6.2.3</a>, so we just need to extract the scores from this object.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Most functions contain their data outputs in lists. So many times you can use $ to extract the output.</span>
+<span class="co"># Use the str() function on the object can help identify the named element to extract.</span>
+UCD_bray_pcoa_scores &lt;-<span class="st"> </span>UCD_bray_apePCoA<span class="op">$</span>vectors <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()
+UCD_bray_pcoa_scores<span class="op">$</span>SampleID &lt;-<span class="st"> </span><span class="kw">rownames</span>(UCD_bray_pcoa_scores)
+
+<span class="co"># Extract Sample Metadata</span>
+UCDrats_MetaData &lt;-<span class="st"> </span><span class="kw">meta</span>(phyobj_d10p25)
+
+<span class="co"># Join data frames</span>
+UCD_bray_pcoa_scsDF &lt;-<span class="st"> </span><span class="kw">inner_join</span>(UCDrats_MetaData, UCD_bray_pcoa_scores, <span class="dt">by=</span><span class="st">&quot;SampleID&quot;</span>)
+
+<span class="co"># See the help page, ?plot, for more options</span>
+<span class="kw">plot</span>(
+    <span class="co"># Input data in x and y arguments</span>
+    <span class="dt">x =</span> UCD_bray_pcoa_scsDF[,<span class="st">&quot;Axis.1&quot;</span>], 
+    <span class="dt">y =</span> UCD_bray_pcoa_scsDF[,<span class="st">&quot;Axis.2&quot;</span>], 
+    <span class="co"># pch determines the shape of the point</span>
+    <span class="dt">pch =</span> <span class="dv">21</span>, 
+    <span class="co"># bg denotes the point background color - assiging the colors based on the factor levels.</span>
+    <span class="dt">bg =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;brown&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;pink&quot;</span>)[<span class="kw">factor</span>(UCD_bray_pcoa_scsDF<span class="op">$</span>GroupAbbrev)],
+    <span class="co"># ces denotes the size of the points</span>
+    <span class="dt">cex =</span> <span class="fl">1.5</span>,
+    <span class="co"># xlab and ylab provides the axis labels</span>
+    <span class="dt">xlab =</span> <span class="st">&quot;PCoA Component 1&quot;</span>,
+    <span class="dt">ylab =</span> <span class="st">&quot;PCoA Component 2&quot;</span>
+)
+
+<span class="co"># Add figure legend</span>
+<span class="kw">legend</span>(<span class="dt">x=</span><span class="st">&quot;topright&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;D3M&quot;</span>, <span class="st">&quot;D6M&quot;</span>, <span class="st">&quot;LSD&quot;</span>, <span class="st">&quot;PD&quot;</span>, <span class="st">&quot;RD&quot;</span>), <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">pt.bg=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;brown&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;pink&quot;</span>))</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/baseRpcoaNonnorm-1.png" width="672" /></p>
+<p>Note, that we have to calculate the % variance for each component, unlike <code>plot_ordination</code>. Now lets see what happens when we normalize the data prior to analysis. We will first try the log upper quartile normalization that we referenced in Chapter <a href="chapt3intro.html#logUQ">3.5.2</a>. However, we run into a couple problems, 1) Conventionally, Bray-Curtis distances are run on counts and 2) that means the negative values in the normalization are incompatible with Bray-Curtis. Instead, we will use Principal Component Analysis as suggested by the <code>pcoa</code> help page.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Impute zeros by shifting values + 1</span>
+UCDcounts_plus1 &lt;-<span class="st"> </span>UCDcounts <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+
+<span class="co"># Identify the 75 quartile based on only the count distribution.</span>
+<span class="co"># Values &gt; 1</span>
+counts75distribution &lt;-<span class="st"> </span><span class="kw">apply</span>(UCDcounts_plus1, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="kw">quantile</span>((x[x <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>] <span class="op">-</span><span class="st"> </span><span class="dv">1</span>), <span class="fl">0.75</span>))
+
+<span class="co"># Equally these values across all rows</span>
+UCD_UQadj &lt;-<span class="st"> </span><span class="kw">sweep</span>(UCDcounts_plus1, <span class="dv">2</span>, counts75distribution, <span class="st">&quot;/&quot;</span>)
+
+<span class="co"># Apply a log transformation</span>
+UCD_logUQnorm &lt;-<span class="st"> </span><span class="kw">log</span>(UCD_UQadj)
+
+<span class="co"># Transpose so rows are Samples</span>
+tUCD_logUQnorm &lt;-<span class="st"> </span><span class="kw">t</span>(UCD_logUQnorm)
+
+<span class="co"># Will use the prcomp() function to perform PCA</span>
+tUCD_logUQnorm_pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(tUCD_logUQnorm)
+
+<span class="co"># Extract scores and make new column to join with metadata</span>
+tUCD_logUQnorm_pca_scores &lt;-<span class="st"> </span>tUCD_logUQnorm_pca<span class="op">$</span>x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()
+tUCD_logUQnorm_pca_scores<span class="op">$</span>SampleID &lt;-<span class="st"> </span><span class="kw">rownames</span>(tUCD_logUQnorm_pca_scores)
+
+<span class="co"># Join data frames</span>
+UCD_logUQnorm_pca_scsDF &lt;-<span class="st"> </span><span class="kw">inner_join</span>(UCDrats_MetaData, tUCD_logUQnorm_pca_scores, <span class="dt">by=</span><span class="st">&quot;SampleID&quot;</span>)
+
+<span class="co"># Plot the data </span>
+<span class="kw">plot</span>(
+    <span class="dt">x =</span> UCD_logUQnorm_pca_scsDF[,<span class="st">&quot;PC1&quot;</span>], 
+    <span class="dt">y =</span> UCD_logUQnorm_pca_scsDF[,<span class="st">&quot;PC2&quot;</span>], 
+    <span class="dt">pch =</span> <span class="dv">21</span>, 
+    <span class="dt">bg =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;brown&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;pink&quot;</span>)[<span class="kw">factor</span>(UCD_logUQnorm_pca_scsDF<span class="op">$</span>GroupAbbrev)],
+    <span class="dt">cex =</span> <span class="fl">1.5</span>,
+    <span class="dt">xlab =</span> <span class="st">&quot;PCA Component 1&quot;</span>,
+    <span class="dt">ylab =</span> <span class="st">&quot;PCA Component 2&quot;</span>
+)
+<span class="kw">legend</span>(<span class="dt">x=</span><span class="st">&quot;bottomleft&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;D3M&quot;</span>, <span class="st">&quot;D6M&quot;</span>, <span class="st">&quot;LSD&quot;</span>, <span class="st">&quot;PD&quot;</span>, <span class="st">&quot;RD&quot;</span>), <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">pt.bg=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;brown&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;pink&quot;</span>))</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/baseRpcoalogUQ-1.png" width="672" /></p>
+<p>We see that there is now a clear separation between two clusters of LSD rats, but overall, the LSD rats are separated from the UCD-T2DM animals. There is also a set of PD rats more aligned with the D3M and D6M rats, which was not as well apparent in the non-normalized data. Where could this be from? Let’s show the same plot, but overlay with the Collection Year.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
+    <span class="dt">x =</span> UCD_logUQnorm_pca_scsDF[,<span class="st">&quot;PC1&quot;</span>], 
+    <span class="dt">y =</span> UCD_logUQnorm_pca_scsDF[,<span class="st">&quot;PC2&quot;</span>], 
+    <span class="dt">pch =</span> <span class="dv">21</span>, 
+    <span class="dt">bg =</span> <span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;orange&quot;</span>)[<span class="kw">factor</span>(UCD_logUQnorm_pca_scsDF<span class="op">$</span>Collection)],
+    <span class="dt">cex =</span> <span class="fl">1.5</span>,
+    <span class="dt">xlab =</span> <span class="st">&quot;PCA Component 1&quot;</span>,
+    <span class="dt">ylab =</span> <span class="st">&quot;PCA Component 2&quot;</span>
+)
+<span class="kw">legend</span>(<span class="dt">x=</span><span class="st">&quot;bottomleft&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;Y14&quot;</span>, <span class="st">&quot;Y16&quot;</span>), <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">pt.bg=</span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;orange&quot;</span>))</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/baseRpcoalogUQcollection-1.png" width="672" /></p>
+<p>It is clear in this ordination that there is variance associated with a batch effect in the data. Let’s try this again, but with the CLR transformation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load libraries if necessary</span>
+<span class="co"># library(zCompositions)</span>
+<span class="co"># library(rgr)</span>
+
+<span class="co"># Impute zeros with Bayesian-multiplicative treatment</span>
+UCDcounts_BMz &lt;-<span class="st"> </span><span class="kw">cmultRepl</span>(UCDcounts, <span class="dt">method=</span><span class="st">&quot;CZM&quot;</span>, <span class="dt">output=</span><span class="st">&quot;p-counts&quot;</span>)
+
+<span class="co"># Taxa needs be rows and samples need to be columns</span>
+UCD_BMz_clr &lt;-<span class="st"> </span><span class="kw">clr</span>(UCDcounts_BMz, <span class="dt">ifwarn=</span><span class="ot">FALSE</span>)
+
+<span class="co"># PCA needs samples as columns </span>
+tUCD_BMz_clr &lt;-<span class="st"> </span><span class="kw">t</span>(UCD_BMz_clr)
+<span class="co"># tUCD_BMz_clr &lt;- t(UCDcounts_BMz)</span>
+
+<span class="co"># Will use the prcomp() function to perform PCA</span>
+UCD_BMz_clr_pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(tUCD_BMz_clr)
+<span class="co"># UCD_BMz_clr_pca &lt;- prcomp(scale(tUCD_BMz_clr), center=FALSE)</span>
+
+<span class="co"># Extract scores and make new column to join with metadata</span>
+UCD_BMz_clr_pca_scores &lt;-<span class="st"> </span>UCD_BMz_clr_pca<span class="op">$</span>x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()
+UCD_BMz_clr_pca_scores<span class="op">$</span>SampleID &lt;-<span class="st"> </span><span class="kw">rownames</span>(UCD_BMz_clr_pca_scores)
+
+<span class="co"># Join data frames</span>
+UCD_BMz_clr_pca_scsDF &lt;-<span class="st"> </span><span class="kw">inner_join</span>(UCDrats_MetaData, UCD_BMz_clr_pca_scores, <span class="dt">by=</span><span class="st">&quot;SampleID&quot;</span>)
+
+<span class="co"># Plot the data </span>
+<span class="kw">plot</span>(
+    <span class="dt">x =</span> UCD_BMz_clr_pca_scsDF[,<span class="st">&quot;PC1&quot;</span>], 
+    <span class="dt">y =</span> UCD_BMz_clr_pca_scsDF[,<span class="st">&quot;PC2&quot;</span>], 
+    <span class="dt">pch =</span> <span class="dv">21</span>, 
+    <span class="dt">bg =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;brown&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;pink&quot;</span>)[<span class="kw">factor</span>(UCD_BMz_clr_pca_scsDF<span class="op">$</span>GroupAbbrev)],
+    <span class="dt">cex =</span> <span class="fl">1.5</span>,
+    <span class="dt">xlab =</span> <span class="st">&quot;PCA Component 1&quot;</span>,
+    <span class="dt">ylab =</span> <span class="st">&quot;PCA Component 2&quot;</span>
+)
+<span class="kw">legend</span>(<span class="dt">x=</span><span class="st">&quot;topleft&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;D3M&quot;</span>, <span class="st">&quot;D6M&quot;</span>, <span class="st">&quot;LSD&quot;</span>, <span class="st">&quot;PD&quot;</span>, <span class="st">&quot;RD&quot;</span>), <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">pt.bg=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;brown&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;pink&quot;</span>))</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/baseRpcoaCLR-1.png" width="672" /></p>
+<p>Not too different from the PCoA ordination using Bray-Curtis Dissimilarities on non-normalized data. The results are just rotated to the right. Here, we are using the covariance-matrix on CLR normalized data. Although the collection year plot is not provided for the CLR PCA, the 5 green LSD samples projecting away from the tight green LSD cluster are separated by collection year.</p>
+<p>Overall, the various ordinations we’ve assessed on the UCD-T2DM data described variation associated with the experimental design, and unfortunately, variation associated with the sub-optimal collection periods (i.e., batch effect). There is also the suggestion of outliers in the data. Further analysis may be required without these outlier samples.</p>
+</div>
+</div>
+<div id="permanova" class="section level2">
+<h2><span class="header-section-number">6.4</span> PERMANOVA</h2>
+<p>We’ve visualized beta-diversity, but we still need to determine whether the discrimination observed in the ordinations are statistically significant. Since the ordinations are un-supervised analyses, there are no hypothesis testing within their algorithms. Generally, the accepted method to determine whether there is a statistical difference in beta-diversity is through <strong>Permutational Multivariate Analysis of Variance (PERMANOVA)</strong>.</p>
+<p>Let’s break down the components of PERMANOVA. It is related to an ANOVA in that it partitions variation in response to provided factor(s), but it occurs in <a href="https://onlinelibrary.wiley.com/doi/full/10.1002/9781118445112.stat07841">multivariate data cloud relating to a dissimilarity or distance matrix</a>. The statistical inferences (i.e., p-value) is determined via a <a href="https://onlinelibrary.wiley.com/doi/full/10.1002/9781118445112.stat07841">distribution-free permutational technique</a>. So, “PER” refers to the permutational statistical inference, “M”, refers to the fact it is Multivariate, and “ANOVA” because it is an extension of ANOVA.</p>
+<p>Since PERMANOVA is based on the ANOVA framework, study designs that require ANOVA testing can be adapted for PERMANOVA. For example, 3-way ANOVA design with main effects and all interactions can be utilized with PERMANOVA. In addition, covariate factors can also be utilized with PERMANOVA.</p>
+<p>It should be noted again, that PERMANOVA is routinely used to demonstrate whether discriminant clusters in an ordinations are statistically significant, they do not always sync together. Remember, we can only view up to 3 dimensions of an ordinations like PCoA and PCA. Sometimes 3 components only represent a small to medium amount of the variance in the data. The PERMANOVA interprets all of the variation, not just what we see in the first few components.</p>
+<p>To my knowledge, there has not been a way to run a PERMANOVA through phyloseq. If you use phyloseq you have to 1) calculate dissimilarity/distance matrix and 2) extract the Sample Metadata. The actual function we’ll use is the <code>adonis</code> and <code>adonis2</code> function from the vegan package. Both functions use the formula syntax, but it is a little different than the formula for <code>aov</code>. The left side of the <code>~</code> (tilde) is the dissimilarity/distance matrix, and the right side are the factors that you want to measure. The factor(s) link to your metadata file that you supply to the ‘data’ argument.</p>
+<p>We will demonstrate a 2-way PERMANOVA using the UCD-T2DM rat data. Main effects of Group and Collection will be assessed with an interaction term. We will also start from the phyloseq object.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Calculate dissimilarity matrix</span>
+phylo_BrayDis &lt;-<span class="st"> </span>phyloseq<span class="op">::</span><span class="kw">distance</span>(phyobj_d10p25, <span class="st">&quot;bray&quot;</span>)
+
+<span class="co"># Extract sample Metadata</span>
+UCDrats_MetaData &lt;-<span class="st"> </span><span class="kw">meta</span>(phyobj_d10p25)
+
+<span class="co"># Assess PERMANOVA</span>
+<span class="kw">adonis</span>(phylo_BrayDis <span class="op">~</span><span class="st"> </span>GroupAbbrev <span class="op">+</span><span class="st"> </span>Collection <span class="op">+</span><span class="st"> </span>GroupAbbrev<span class="op">:</span>Collection, <span class="dt">data=</span>UCDrats_MetaData, <span class="dt">permutations=</span><span class="dv">500</span>)</code></pre></div>
+<pre><code>## 
+## Call:
+## adonis(formula = phylo_BrayDis ~ GroupAbbrev + Collection + GroupAbbrev:Collection,      data = UCDrats_MetaData, permutations = 500) 
+## 
+## Permutation: free
+## Number of permutations: 500
+## 
+## Terms added sequentially (first to last)
+## 
+##                        Df SumsOfSqs MeanSqs F.Model      R2   Pr(&gt;F)   
+## GroupAbbrev             4    2.4174 0.60435  5.2189 0.26701 0.001996 **
+## Collection              1    0.3546 0.35465  3.0626 0.03917 0.001996 **
+## GroupAbbrev:Collection  3    0.9548 0.31826  2.7484 0.10546 0.001996 **
+## Residuals              46    5.3268 0.11580         0.58836            
+## Total                  54    9.0537                 1.00000            
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The output provides an ANOVA table. We see similar statistics that we would see from a regular ANOVA, e.g., degrees of freedom, sum of squares, F-statistic, and a P-value. Note, the F-statistic is technically a “psuedo F statistic”. These statistics can be intepreted similar to a regular ANOVA. Hence, the presence of a significant interaction terms suggest we should be assessing Group differences within Collection years. Let’s do it.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We extracted the metadata in the above chapter.</span>
+d10p25CollectionYear &lt;-<span class="st"> </span><span class="kw">meta</span>(phyobj_d10p25)<span class="op">$</span>Collection
+
+<span class="co"># Make the logical statement using the %in% (match) operator</span>
+CollectionYear14Logic &lt;-<span class="st"> </span>d10p25CollectionYear <span class="op">%in%</span><span class="st"> &quot;Y14&quot;</span>
+CollectionYear16Logic &lt;-<span class="st"> </span>d10p25CollectionYear <span class="op">%in%</span><span class="st"> &quot;Y16&quot;</span>
+
+<span class="co"># Use the prune_samples() function</span>
+<span class="co"># First argument is the logical statement, the second is the phyloseq object</span>
+phylo_year2014 &lt;-<span class="st"> </span><span class="kw">prune_samples</span>(CollectionYear14Logic, phyobj_d10p25)
+phylo_year2016 &lt;-<span class="st"> </span><span class="kw">prune_samples</span>(CollectionYear16Logic, phyobj_d10p25)
+
+<span class="co"># n of 2 in D6M group.  Will drop these samples from analysis.</span>
+phylo_year2016 &lt;-<span class="st"> </span><span class="kw">prune_samples</span>(<span class="kw">meta</span>(phylo_year2016)<span class="op">$</span>GroupAbbrev <span class="op">!=</span><span class="st"> &quot;D6M&quot;</span>, phylo_year2016)
+
+<span class="co"># Calculate dissimilarity matrix</span>
+phylo_BrayDis2014 &lt;-<span class="st"> </span>phyloseq<span class="op">::</span><span class="kw">distance</span>(phylo_year2014, <span class="st">&quot;bray&quot;</span>)
+phylo_BrayDis2016 &lt;-<span class="st"> </span>phyloseq<span class="op">::</span><span class="kw">distance</span>(phylo_year2016, <span class="st">&quot;bray&quot;</span>)
+
+<span class="co"># Extract sample Metadata</span>
+UCDrats2014_MetaData &lt;-<span class="st"> </span><span class="kw">meta</span>(phylo_year2014)
+UCDrats2016_MetaData &lt;-<span class="st"> </span><span class="kw">meta</span>(phylo_year2016)
+
+<span class="co"># Assess PERMANOVA year 2014</span>
+<span class="kw">adonis</span>(phylo_BrayDis2014 <span class="op">~</span><span class="st"> </span>GroupAbbrev, <span class="dt">data=</span>UCDrats2014_MetaData, <span class="dt">permutations=</span><span class="dv">500</span>)</code></pre></div>
+<pre><code>## 
+## Call:
+## adonis(formula = phylo_BrayDis2014 ~ GroupAbbrev, data = UCDrats2014_MetaData,      permutations = 500) 
+## 
+## Permutation: free
+## Number of permutations: 500
+## 
+## Terms added sequentially (first to last)
+## 
+##             Df SumsOfSqs MeanSqs F.Model      R2   Pr(&gt;F)   
+## GroupAbbrev  3    1.4137 0.47123  3.4071 0.36218 0.001996 **
+## Residuals   18    2.4895 0.13831         0.63782            
+## Total       21    3.9032                 1.00000            
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">adonis</span>(phylo_BrayDis2016 <span class="op">~</span><span class="st"> </span>GroupAbbrev, <span class="dt">data=</span>UCDrats2016_MetaData, <span class="dt">permutations=</span><span class="dv">500</span>)</code></pre></div>
+<pre><code>## 
+## Call:
+## adonis(formula = phylo_BrayDis2016 ~ GroupAbbrev, data = UCDrats2016_MetaData,      permutations = 500) 
+## 
+## Permutation: free
+## Number of permutations: 500
+## 
+## Terms added sequentially (first to last)
+## 
+##             Df SumsOfSqs MeanSqs F.Model      R2   Pr(&gt;F)   
+## GroupAbbrev  3    1.3506 0.45020  4.6813 0.34217 0.001996 **
+## Residuals   27    2.5966 0.09617         0.65783            
+## Total       30    3.9472                 1.00000            
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The group effect is significant in both years. But what groups differ from each other. We saw that the PD and RD groups were very similar in the ordinations, so it those groups should not differ between each other. The coding to assess pairwise differences becomes more advanced, but can be done. First, we need to determine all the pairwise combinations and then use those in a <code>sapply</code> function.</p>
+<p class="alert alert-info">
+This examples includes immediate and advance coding. Examples of this workflow were shown in Chapters <a href="rbasics.html#reshaping">2.8.4</a> and <a href="rbasics.html#applyfunctions">2.8.6</a>.
+</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Identify pairwise comparisons</span>
+year2016_combinations &lt;-<span class="st"> </span><span class="kw">combn</span>(<span class="kw">unique</span>(<span class="kw">meta</span>(phylo_year2016)<span class="op">$</span>GroupAbbrev),<span class="dv">2</span>)
+
+<span class="co"># Use sapply() to extract data from phyloseq object and then run PERMANOVA</span>
+year2016_permanovaPvals &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(year2016_combinations), <span class="cf">function</span>(x) {
+    <span class="co"># Extract combinations</span>
+    combo &lt;-<span class="st"> </span>year2016_combinations[,x]
+    
+    <span class="co"># Extract metadata</span>
+    Year16group &lt;-<span class="st"> </span><span class="kw">meta</span>(phylo_year2016)<span class="op">$</span>GroupAbbrev
+    
+    <span class="co"># Make logical statement based on pairwise combinations</span>
+    Year16subset &lt;-<span class="st"> </span>Year16group <span class="op">%in%</span><span class="st"> </span>combo
+    
+    <span class="co"># Subset phyloseq object</span>
+    phylo_subset &lt;-<span class="st"> </span><span class="kw">prune_samples</span>(Year16subset, phylo_year2016)
+    
+    <span class="co"># Calculate dissimilarity matrix</span>
+    BrayDis_subset &lt;-<span class="st"> </span>phyloseq<span class="op">::</span><span class="kw">distance</span>(phylo_subset, <span class="st">&quot;bray&quot;</span>)
+    
+    <span class="co"># Extract sample metadata</span>
+    subsetMetaData &lt;-<span class="st"> </span><span class="kw">meta</span>(phylo_subset)
+    
+    <span class="co"># Run PERMANOVA</span>
+    permanova &lt;-<span class="st"> </span><span class="kw">adonis</span>(BrayDis_subset <span class="op">~</span><span class="st"> </span>GroupAbbrev, <span class="dt">data=</span>subsetMetaData, <span class="dt">permutations=</span><span class="dv">500</span>)
+    
+    <span class="co"># Isolate p-value from permanova object, round to the 5th digit, and return.</span>
+    <span class="kw">round</span>(permanova<span class="op">$</span>aov.tab[<span class="dv">1</span>,<span class="dv">6</span>], <span class="dv">5</span>)
+})
+
+<span class="co"># Make vector of pairwise combinations</span>
+paircomp &lt;-<span class="st"> </span><span class="kw">apply</span>(year2016_combinations, <span class="dv">2</span>, paste, <span class="dt">collapse=</span><span class="st">&quot; - &quot;</span>)
+
+<span class="co"># Make data frame with pairwise comparison, p-value, and FDR correction.</span>
+paircompDF &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Comparison =</span> paircomp, <span class="dt">Pvalue =</span> year2016_permanovaPvals, <span class="dt">FDR =</span> <span class="kw">p.adjust</span>(year2016_permanovaPvals, <span class="st">&quot;fdr&quot;</span>))
+
+<span class="co"># Printing data frame as a table in the text...</span></code></pre></div>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Comparison
+</th>
+<th style="text-align:right;">
+Pvalue
+</th>
+<th style="text-align:right;">
+FDR
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+LSD - RD
+</td>
+<td style="text-align:right;">
+0.00200
+</td>
+<td style="text-align:right;">
+0.004000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LSD - PD
+</td>
+<td style="text-align:right;">
+0.00200
+</td>
+<td style="text-align:right;">
+0.004000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LSD - D3M
+</td>
+<td style="text-align:right;">
+0.00399
+</td>
+<td style="text-align:right;">
+0.005985
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RD - PD
+</td>
+<td style="text-align:right;">
+0.32535
+</td>
+<td style="text-align:right;">
+0.325350
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RD - D3M
+</td>
+<td style="text-align:right;">
+0.00200
+</td>
+<td style="text-align:right;">
+0.004000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PD - D3M
+</td>
+<td style="text-align:right;">
+0.00599
+</td>
+<td style="text-align:right;">
+0.007188
+</td>
+</tr>
+</tbody>
+</table>
+<p>Note, the comparison between PD and RD rats was not significant. All other comparisons were significant, which sync with the visualizations from the PCoA ordination in Section <a href="beta-diversity.html#phyloordination">6.3.1</a>.</p>
+</div>
+<div id="conclusion-1" class="section level2">
+<h2><span class="header-section-number">6.5</span> Conclusion</h2>
+<p>We did not cover how to identify which taxa are driving the sample discrimination in the ordinations in this chapter. There are ways to visualize this, but it does no good to plot 400 taxa along with your samples. These analyses describe the global microbial differences between samples. The next chapter will describe how to identify differences in individual taxa, which puts these global changes in context.</p>
+<p>Also, feel good here! The tools used to visualize and analyze beta-diversity are typically thought of as advanced statistics. Anytime you’re dealing with hundreds to thousands of variable, you will have to use some more advanced tools. It shouldn’t make complete sense over a single reading, especially if this is your first introduction to microbial sequencing analysis and R. So keep at it and know that you’ve made it pretty far already!</p>
+
+</div>
 </div>
             </section>
 

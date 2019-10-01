@@ -5,26 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Alpha-Diversity | Florida State University Microbiota Workshop 2019</title>
-  <meta name="description" content="FSU Workshop Oct. 2019: Introduction to R and 16S rRNA sequencing data analysis in R." />
+  <meta name="description" content="FSU Workshop Oct. 2019: Introduction to R and microbial sequencing data analysis in R." />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Alpha-Diversity | Florida State University Microbiota Workshop 2019" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://bdpiccolo.github.io/FSU-Microbial-Data-Analysis" />
   
-  <meta property="og:description" content="FSU Workshop Oct. 2019: Introduction to R and 16S rRNA sequencing data analysis in R." />
+  <meta property="og:description" content="FSU Workshop Oct. 2019: Introduction to R and microbial sequencing data analysis in R." />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 5 Alpha-Diversity | Florida State University Microbiota Workshop 2019" />
   
-  <meta name="twitter:description" content="FSU Workshop Oct. 2019: Introduction to R and 16S rRNA sequencing data analysis in R." />
+  <meta name="twitter:description" content="FSU Workshop Oct. 2019: Introduction to R and microbial sequencing data analysis in R." />
   
 
 <meta name="author" content="Brian Piccolo" />
 
 
-<meta name="date" content="2019-09-19" />
+<meta name="date" content="2019-10-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -104,7 +104,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">FSU 16S Data Analysis in R Workshop 10/2019</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction to Data Analysis of 16S rRNA Sequencing in R</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction to Data Analysis of Microbial Sequencing in R</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#types-of-microbiota-data"><i class="fa fa-check"></i><b>1.1</b> Types of microbiota data</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#s-rrna-amplicon-sequencing"><i class="fa fa-check"></i><b>1.1.1</b> 16S rRNA amplicon sequencing</a></li>
@@ -125,7 +125,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2.6" data-path="rbasics.html"><a href="rbasics.html#basic-operations-data-types-missing-values-and-functions"><i class="fa fa-check"></i><b>2.6</b> Basic operations, data types, missing values, and functions</a><ul>
 <li class="chapter" data-level="2.6.1" data-path="rbasics.html"><a href="rbasics.html#basic-operations"><i class="fa fa-check"></i><b>2.6.1</b> Basic operations</a></li>
-<li class="chapter" data-level="2.6.2" data-path="rbasics.html"><a href="rbasics.html#data-types"><i class="fa fa-check"></i><b>2.6.2</b> Data types</a></li>
+<li class="chapter" data-level="2.6.2" data-path="rbasics.html"><a href="rbasics.html#datatypes"><i class="fa fa-check"></i><b>2.6.2</b> Data types</a></li>
 <li class="chapter" data-level="2.6.3" data-path="rbasics.html"><a href="rbasics.html#data-structure"><i class="fa fa-check"></i><b>2.6.3</b> Data structure</a></li>
 <li class="chapter" data-level="2.6.4" data-path="rbasics.html"><a href="rbasics.html#missing-values"><i class="fa fa-check"></i><b>2.6.4</b> Missing values</a></li>
 <li class="chapter" data-level="2.6.5" data-path="rbasics.html"><a href="rbasics.html#functions"><i class="fa fa-check"></i><b>2.6.5</b> Functions</a></li>
@@ -139,24 +139,108 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.8.1" data-path="rbasics.html"><a href="rbasics.html#viewing-your-data"><i class="fa fa-check"></i><b>2.8.1</b> Viewing your data</a></li>
 <li class="chapter" data-level="2.8.2" data-path="rbasics.html"><a href="rbasics.html#extracting-elements"><i class="fa fa-check"></i><b>2.8.2</b> Extracting elements</a></li>
 <li class="chapter" data-level="2.8.3" data-path="rbasics.html"><a href="rbasics.html#subsetting"><i class="fa fa-check"></i><b>2.8.3</b> Subsetting</a></li>
-<li class="chapter" data-level="2.8.4" data-path="rbasics.html"><a href="rbasics.html#reshaping-data"><i class="fa fa-check"></i><b>2.8.4</b> Reshaping data</a></li>
+<li class="chapter" data-level="2.8.4" data-path="rbasics.html"><a href="rbasics.html#reshaping"><i class="fa fa-check"></i><b>2.8.4</b> Reshaping data</a></li>
 <li class="chapter" data-level="2.8.5" data-path="rbasics.html"><a href="rbasics.html#merging-data"><i class="fa fa-check"></i><b>2.8.5</b> Merging data</a></li>
-<li class="chapter" data-level="2.8.6" data-path="rbasics.html"><a href="rbasics.html#apply-family-of-functions"><i class="fa fa-check"></i><b>2.8.6</b> apply family of functions</a></li>
+<li class="chapter" data-level="2.8.6" data-path="rbasics.html"><a href="rbasics.html#applyfunctions"><i class="fa fa-check"></i><b>2.8.6</b> apply family of functions</a></li>
 <li class="chapter" data-level="2.8.7" data-path="rbasics.html"><a href="rbasics.html#sweep"><i class="fa fa-check"></i><b>2.8.7</b> Sweep</a></li>
 </ul></li>
 <li class="chapter" data-level="2.9" data-path="rbasics.html"><a href="rbasics.html#stats"><i class="fa fa-check"></i><b>2.9</b> Stats</a><ul>
 <li class="chapter" data-level="2.9.1" data-path="rbasics.html"><a href="rbasics.html#basic-summary-based-stats."><i class="fa fa-check"></i><b>2.9.1</b> Basic summary based stats.</a></li>
-<li class="chapter" data-level="2.9.2" data-path="rbasics.html"><a href="rbasics.html#t-test-and-mann-whitney-u-test"><i class="fa fa-check"></i><b>2.9.2</b> <em>t</em>-test and Mann Whitney U test</a></li>
+<li class="chapter" data-level="2.9.2" data-path="rbasics.html"><a href="rbasics.html#ttestexamp"><i class="fa fa-check"></i><b>2.9.2</b> <em>t</em>-test and Mann Whitney U test</a></li>
 <li class="chapter" data-level="2.9.3" data-path="rbasics.html"><a href="rbasics.html#anova"><i class="fa fa-check"></i><b>2.9.3</b> ANOVA</a></li>
 <li class="chapter" data-level="2.9.4" data-path="rbasics.html"><a href="rbasics.html#kruskal-wallis-test"><i class="fa fa-check"></i><b>2.9.4</b> Kruskal-Wallis Test</a></li>
-<li class="chapter" data-level="2.9.5" data-path="rbasics.html"><a href="rbasics.html#post-hoc-tests"><i class="fa fa-check"></i><b>2.9.5</b> Post-hoc Tests</a></li>
+<li class="chapter" data-level="2.9.5" data-path="rbasics.html"><a href="rbasics.html#post-hoc-tests"><i class="fa fa-check"></i><b>2.9.5</b> Post-hoc tests</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="microbial-sequencing-data.html"><a href="microbial-sequencing-data.html"><i class="fa fa-check"></i><b>3</b> Microbial Sequencing Data</a></li>
-<li class="chapter" data-level="4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html"><i class="fa fa-check"></i><b>4</b> Importing and Pre-Processing</a></li>
-<li class="chapter" data-level="5" data-path="alpha-diversity.html"><a href="alpha-diversity.html"><i class="fa fa-check"></i><b>5</b> Alpha-Diversity</a></li>
-<li class="chapter" data-level="6" data-path="beta-diversity.html"><a href="beta-diversity.html"><i class="fa fa-check"></i><b>6</b> Beta-Diversity</a></li>
-<li class="chapter" data-level="7" data-path="differential-abundance.html"><a href="differential-abundance.html"><i class="fa fa-check"></i><b>7</b> Differential Abundance</a></li>
+<li class="chapter" data-level="3" data-path="chapt3intro.html"><a href="chapt3intro.html"><i class="fa fa-check"></i><b>3</b> Microbial Sequencing Data</a><ul>
+<li class="chapter" data-level="3.1" data-path="chapt3intro.html"><a href="chapt3intro.html#chapt3structure"><i class="fa fa-check"></i><b>3.1</b> Structure</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="chapt3intro.html"><a href="chapt3intro.html#count-data"><i class="fa fa-check"></i><b>3.1.1</b> Count data</a></li>
+<li class="chapter" data-level="3.1.2" data-path="chapt3intro.html"><a href="chapt3intro.html#taxonomy-data"><i class="fa fa-check"></i><b>3.1.2</b> Taxonomy data</a></li>
+<li class="chapter" data-level="3.1.3" data-path="chapt3intro.html"><a href="chapt3intro.html#sample-metadata"><i class="fa fa-check"></i><b>3.1.3</b> Sample Metadata</a></li>
+<li class="chapter" data-level="3.1.4" data-path="chapt3intro.html"><a href="chapt3intro.html#phylogenetic-tree"><i class="fa fa-check"></i><b>3.1.4</b> Phylogenetic tree</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="chapt3intro.html"><a href="chapt3intro.html#microbefiles"><i class="fa fa-check"></i><b>3.2</b> Files</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="chapt3intro.html"><a href="chapt3intro.html#spreadsheets"><i class="fa fa-check"></i><b>3.2.1</b> Spreadsheets</a></li>
+<li class="chapter" data-level="3.2.2" data-path="chapt3intro.html"><a href="chapt3intro.html#biomfile"><i class="fa fa-check"></i><b>3.2.2</b> Biome</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="chapt3intro.html"><a href="chapt3intro.html#diversity"><i class="fa fa-check"></i><b>3.3</b> Diversity</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="chapt3intro.html"><a href="chapt3intro.html#adivconcept"><i class="fa fa-check"></i><b>3.3.1</b> Alpha-diversity</a></li>
+<li class="chapter" data-level="3.3.2" data-path="chapt3intro.html"><a href="chapt3intro.html#betadivconcept"><i class="fa fa-check"></i><b>3.3.2</b> Beta-diversity</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="chapt3intro.html"><a href="chapt3intro.html#challenges"><i class="fa fa-check"></i><b>3.4</b> Challenges</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="chapt3intro.html"><a href="chapt3intro.html#compdata"><i class="fa fa-check"></i><b>3.4.1</b> Compositional data</a></li>
+<li class="chapter" data-level="3.4.2" data-path="chapt3intro.html"><a href="chapt3intro.html#zero-inflation"><i class="fa fa-check"></i><b>3.4.2</b> Zero inflation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="chapt3intro.html"><a href="chapt3intro.html#normalization"><i class="fa fa-check"></i><b>3.5</b> Normalization</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="chapt3intro.html"><a href="chapt3intro.html#rarefying"><i class="fa fa-check"></i><b>3.5.1</b> Rarefying</a></li>
+<li class="chapter" data-level="3.5.2" data-path="chapt3intro.html"><a href="chapt3intro.html#logUQ"><i class="fa fa-check"></i><b>3.5.2</b> Log upper quartile</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="chapt3intro.html"><a href="chapt3intro.html#r-packages-1"><i class="fa fa-check"></i><b>3.6</b> R packages</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="chapt3intro.html"><a href="chapt3intro.html#vegan"><i class="fa fa-check"></i><b>3.6.1</b> vegan</a></li>
+<li class="chapter" data-level="3.6.2" data-path="chapt3intro.html"><a href="chapt3intro.html#phyloseq"><i class="fa fa-check"></i><b>3.6.2</b> phyloseq</a></li>
+<li class="chapter" data-level="3.6.3" data-path="chapt3intro.html"><a href="chapt3intro.html#microbiome"><i class="fa fa-check"></i><b>3.6.3</b> microbiome</a></li>
+<li class="chapter" data-level="3.6.4" data-path="chapt3intro.html"><a href="chapt3intro.html#ape"><i class="fa fa-check"></i><b>3.6.4</b> ape</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="chapt3intro.html"><a href="chapt3intro.html#additional-resources"><i class="fa fa-check"></i><b>3.7</b> Additional resources</a></li>
+<li class="chapter" data-level="3.8" data-path="chapt3intro.html"><a href="chapt3intro.html#final-thoughts"><i class="fa fa-check"></i><b>3.8</b> Final thoughts</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html"><i class="fa fa-check"></i><b>4</b> Importing and Pre-Processing</a><ul>
+<li class="chapter" data-level="4.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#importing-data-into-r"><i class="fa fa-check"></i><b>4.1</b> Importing Data into R</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#biomimport"><i class="fa fa-check"></i><b>4.1.1</b> Biom file</a></li>
+<li class="chapter" data-level="4.1.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#excelimport"><i class="fa fa-check"></i><b>4.1.2</b> Excel</a></li>
+<li class="chapter" data-level="4.1.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#importmetadata"><i class="fa fa-check"></i><b>4.1.3</b> Metadata</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#phyloseq-object"><i class="fa fa-check"></i><b>4.2</b> phyloseq object</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#setting-up-a-phyloseq-object"><i class="fa fa-check"></i><b>4.2.1</b> Setting up a phyloseq object</a></li>
+<li class="chapter" data-level="4.2.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#extracting-data"><i class="fa fa-check"></i><b>4.2.2</b> Extracting data</a></li>
+<li class="chapter" data-level="4.2.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#subsetting-1"><i class="fa fa-check"></i><b>4.2.3</b> Subsetting</a></li>
+<li class="chapter" data-level="4.2.4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#aggregating"><i class="fa fa-check"></i><b>4.2.4</b> Aggregating</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#pre-processing"><i class="fa fa-check"></i><b>4.3</b> Pre-processing</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#lowabundtaxa"><i class="fa fa-check"></i><b>4.3.1</b> Low abundance taxa</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#proportional-abundance"><i class="fa fa-check"></i><b>4.3.2</b> Proportional Abundance</a></li>
+<li class="chapter" data-level="4.3.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#zeroimput"><i class="fa fa-check"></i><b>4.3.3</b> Zeros</a></li>
+<li class="chapter" data-level="4.3.4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#centered-log-ratios"><i class="fa fa-check"></i><b>4.3.4</b> Centered log ratios</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#conclusion"><i class="fa fa-check"></i><b>4.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="alpha-diversity.html"><a href="alpha-diversity.html"><i class="fa fa-check"></i><b>5</b> Alpha-Diversity</a><ul>
+<li class="chapter" data-level="5.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#phyloseq-package"><i class="fa fa-check"></i><b>5.1</b> phyloseq package</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#estimate_richness"><i class="fa fa-check"></i><b>5.1.1</b> estimate_richness()</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="alpha-diversity.html"><a href="alpha-diversity.html#microbiome-package"><i class="fa fa-check"></i><b>5.2</b> microbiome package</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#richness"><i class="fa fa-check"></i><b>5.2.1</b> richness()</a></li>
+<li class="chapter" data-level="5.2.2" data-path="alpha-diversity.html"><a href="alpha-diversity.html#dominance"><i class="fa fa-check"></i><b>5.2.2</b> dominance()</a></li>
+<li class="chapter" data-level="5.2.3" data-path="alpha-diversity.html"><a href="alpha-diversity.html#evenness"><i class="fa fa-check"></i><b>5.2.3</b> evenness()</a></li>
+<li class="chapter" data-level="5.2.4" data-path="alpha-diversity.html"><a href="alpha-diversity.html#rarity"><i class="fa fa-check"></i><b>5.2.4</b> rarity()</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="alpha-diversity.html"><a href="alpha-diversity.html#data-analysis"><i class="fa fa-check"></i><b>5.3</b> Data analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="beta-diversity.html"><a href="beta-diversity.html"><i class="fa fa-check"></i><b>6</b> Beta-Diversity</a><ul>
+<li class="chapter" data-level="6.1" data-path="beta-diversity.html"><a href="beta-diversity.html#calculating-beta-diversity-in-r"><i class="fa fa-check"></i><b>6.1</b> Calculating beta-diversity in R</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="beta-diversity.html"><a href="beta-diversity.html#identifying-your-beta-diversity-indices"><i class="fa fa-check"></i><b>6.1.1</b> Identifying your beta diversity indices</a></li>
+<li class="chapter" data-level="6.1.2" data-path="beta-diversity.html"><a href="beta-diversity.html#phyloseq-1"><i class="fa fa-check"></i><b>6.1.2</b> phyloseq</a></li>
+<li class="chapter" data-level="6.1.3" data-path="beta-diversity.html"><a href="beta-diversity.html#vegan-1"><i class="fa fa-check"></i><b>6.1.3</b> vegan</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="beta-diversity.html"><a href="beta-diversity.html#ordinations-1"><i class="fa fa-check"></i><b>6.2</b> Ordinations</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="beta-diversity.html"><a href="beta-diversity.html#phyloseq-2"><i class="fa fa-check"></i><b>6.2.1</b> phyloseq</a></li>
+<li class="chapter" data-level="6.2.2" data-path="beta-diversity.html"><a href="beta-diversity.html#vegan-2"><i class="fa fa-check"></i><b>6.2.2</b> vegan</a></li>
+<li class="chapter" data-level="6.2.3" data-path="beta-diversity.html"><a href="beta-diversity.html#apecalculation"><i class="fa fa-check"></i><b>6.2.3</b> ape</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="beta-diversity.html"><a href="beta-diversity.html#visualizing-ordinations"><i class="fa fa-check"></i><b>6.3</b> Visualizing ordinations</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="beta-diversity.html"><a href="beta-diversity.html#phyloordination"><i class="fa fa-check"></i><b>6.3.1</b> phyloseq</a></li>
+<li class="chapter" data-level="6.3.2" data-path="beta-diversity.html"><a href="beta-diversity.html#baseRordinations"><i class="fa fa-check"></i><b>6.3.2</b> Base R</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="beta-diversity.html"><a href="beta-diversity.html#permanova"><i class="fa fa-check"></i><b>6.4</b> PERMANOVA</a></li>
+<li class="chapter" data-level="6.5" data-path="beta-diversity.html"><a href="beta-diversity.html#conclusion-1"><i class="fa fa-check"></i><b>6.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="differential-abundance.html"><a href="differential-abundance.html"><i class="fa fa-check"></i><b>7</b> Differential Abundance</a><ul>
+<li class="chapter" data-level="7.1" data-path="differential-abundance.html"><a href="differential-abundance.html#rank-analysis"><i class="fa fa-check"></i><b>7.1</b> Rank analysis</a></li>
+<li class="chapter" data-level="7.2" data-path="differential-abundance.html"><a href="differential-abundance.html#deseq2"><i class="fa fa-check"></i><b>7.2</b> DESeq2</a></li>
+<li class="chapter" data-level="7.3" data-path="differential-abundance.html"><a href="differential-abundance.html#metagenomeseq"><i class="fa fa-check"></i><b>7.3</b> metagenomeSeq</a></li>
+<li class="chapter" data-level="7.4" data-path="differential-abundance.html"><a href="differential-abundance.html#aldex2"><i class="fa fa-check"></i><b>7.4</b> ALDEx2</a></li>
+<li class="chapter" data-level="7.5" data-path="differential-abundance.html"><a href="differential-abundance.html#conclusion-2"><i class="fa fa-check"></i><b>7.5</b> Conclusion</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -179,8 +263,261 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="alpha-diversity" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> Alpha-Diversity</h1>
-<p><strong>UNDER CONSTRUCTION</strong></p>
+<p>We went over the concept of alpha-diversity in Chapter <a href="chapt3intro.html#adivconcept">3.3.1</a> and now we get to actually estimate these indices in R. Fortunately, producing these indices is straight forward using the phyloseq environment. We will explore the functions that calculate various alpha-diversity indices and how to analyze them by groups. If you recall, some of the richness measurements adjust for the number of taxa found as singletons and doubletons. Therefore, some would argue that using filtered data is not appropriate, but I tend to believe it is a balance between removing spurious taxa in 16S data while maintaining true low abundant taxa. Your filtering criteria should not be so strong to remove ALL low abundant taxa. That would defeat the purpose of maximizing your sampling depth to discover true low abundant taxa. Some of these functions will give a warning if they sense strong filters.</p>
+<div id="phyloseq-package" class="section level2">
+<h2><span class="header-section-number">5.1</span> phyloseq package</h2>
+<p>Let’s use the <code>estimate_richness</code> function to calculate alpha-diversity indices in the UCD-T2DM Rat data. We will use the phyloseq object that we pre-processed in Chapter <a href="importing-and-pre-processing.html#lowabundtaxa">4.3.1</a>.</p>
+<div id="estimate_richness" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> estimate_richness()</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># You can specify specific indices to calculate by using the &#39;measures&#39; argument, see help page, ?estimate_richness</span>
+UCDrats_Adiv &lt;-<span class="st"> </span><span class="kw">estimate_richness</span>(phyobj_d10p25)
 
+<span class="co"># View object</span>
+<span class="kw">head</span>(UCDrats_Adiv)</code></pre></div>
+<pre><code>##          Observed    Chao1  se.chao1      ACE   se.ACE  Shannon   Simpson
+## BP.K2491      322 332.9286  6.853401 329.8674 8.288581 4.164139 0.9649630
+## BP.H931       264 267.4737  2.910417 268.9841 7.687761 3.674326 0.9164394
+## BP.H933       279 282.9286  3.337384 283.7086 7.368780 3.743879 0.9155674
+## BP.H1147      345 357.3636  7.952144 350.6429 8.879509 4.004695 0.9548076
+## BP.H1157      336 356.3125 10.512706 348.4945 8.949091 3.542787 0.8986565
+## BP.K2503      327 342.4000  8.680170 336.2866 8.703965 3.702618 0.9287288
+##          InvSimpson   Fisher
+## BP.K2491  28.541288 48.16245
+## BP.H931   11.967365 40.05883
+## BP.H933   11.843766 41.24267
+## BP.H1147  22.127608 52.54106
+## BP.H1157   9.867431 50.45967
+## BP.K2503  14.030907 48.37238</code></pre>
+<p>The output provides all indices that we covered, “Observed”, “Chao1”, “ACE”, and “Shannon”, plus a few extras. It is not attached to the phyloseq object, so we will need to extract the Sample Metadata and attach it to these data. This will be demonstrated soon.</p>
+</div>
+</div>
+<div id="microbiome-package" class="section level2">
+<h2><span class="header-section-number">5.2</span> microbiome package</h2>
+<p>There are several functions in the microbiome that measure alpha-diversity. They are named based on what is measured, e.g., dominance, richness, rarity, etc.</p>
+<div id="richness" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> richness()</h3>
+<p>Returns ‘observed’ and ‘chao1’ estimates. The chao1 estimate varies slightly from the <code>estimate_richness</code> version. The former is calculated based on <a href="https://www.jstor.org/stable/4615964?seq=1#page_scan_tab_contents">Chao (Scand J Stat, 1984)</a>, while the latter uses the <code>estimateR</code> function from the vegan package. Details can be found at the help page, <code>?vegan::estimateR</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># You can specify specific index/indices to calculate by using the &#39;index&#39; argument</span>
+UCDrats_Adiv_rich &lt;-<span class="st"> </span><span class="kw">richness</span>(phyobj_d10p25)
+
+<span class="co"># View abbreviated object</span>
+<span class="kw">head</span>(UCDrats_Adiv_rich)</code></pre></div>
+<pre><code>##          observed    chao1
+## BP.K2491      322 334.4615
+## BP.H931       264 268.0000
+## BP.H933       279 283.6538
+## BP.H1147      345 359.4500
+## BP.H1157      336 358.5333
+## BP.K2503      327 344.2857</code></pre>
+</div>
+<div id="dominance" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> dominance()</h3>
+<p>Returns 7 estimates of dominance. Note, that the Simpson’s index from <code>dominance</code> is in a different unit then the Simpson’s index from <code>estimate_richness</code>, but they are the same. We will demonstrate this by plotting both.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># You can specify specific index/indices to calculate by using the &#39;index&#39; argument</span>
+UCDrats_Adiv_dom &lt;-<span class="st"> </span><span class="kw">dominance</span>(phyobj_d10p25)
+
+<span class="co"># View abbreviated object</span>
+<span class="kw">head</span>(UCDrats_Adiv_dom)</code></pre></div>
+<pre><code>##                dbp       dmn absolute  relative    simpson core_abundance
+## BP.K2491 0.1089710 0.1721524     4198 0.1089710 0.03503696      0.9879296
+## BP.H931  0.2545411 0.3236617     7413 0.2545411 0.08356058      0.9845826
+## BP.H933  0.2595144 0.3357977     9267 0.2595144 0.08443260      0.9764485
+## BP.H1147 0.1345937 0.2221775     5019 0.1345937 0.04519241      0.9657549
+## BP.H1157 0.2855834 0.3723020    11220 0.2855834 0.10134351      0.9618713
+## BP.K2503 0.2095389 0.3214817     8734 0.2095389 0.07127123      0.8773811
+##               gini
+## BP.K2491 0.8493294
+## BP.H931  0.8888539
+## BP.H933  0.8759507
+## BP.H1147 0.8586950
+## BP.H1157 0.8892545
+## BP.K2503 0.8867204</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Comparing Simpson&#39;s index from estimate_richness() output</span>
+<span class="kw">plot</span>(UCDrats_Adiv<span class="op">$</span>Simpson, UCDrats_Adiv_dom<span class="op">$</span>simpson, <span class="dt">xlab=</span><span class="st">&quot;estimate_richness()&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;dominance()&quot;</span>)</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/dominance-1.png" width="672" /></p>
+<p>It is a perfect linear relationship.</p>
+</div>
+<div id="evenness" class="section level3">
+<h3><span class="header-section-number">5.2.3</span> evenness()</h3>
+<p>Returns 5 estimates of evenness. Note, there are several variants to the Simpson’s index. <code>evenness</code> returns Simpson’s evenness, which is different than Simpson’s dominance from <code>estimate_richness</code> and <code>dominance</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># You can specify specific index/indices to calculate by using the &#39;index&#39; argument</span>
+UCDrats_Adiv_even &lt;-<span class="st"> </span><span class="kw">evenness</span>(phyobj_d10p25)
+
+<span class="co"># View abbreviated object</span>
+<span class="kw">head</span>(UCDrats_Adiv_even)</code></pre></div>
+<pre><code>##            camargo    pielou    simpson      evar     bulla
+## BP.K2491 0.1862695 0.7211190 0.08863754 0.2147279 0.3376624
+## BP.H931  0.1896463 0.6589597 0.04533093 0.2227112 0.3188006
+## BP.H933  0.2077114 0.6648444 0.04245078 0.2310484 0.3286754
+## BP.H1147 0.1625825 0.6853195 0.06413799 0.2325972 0.3106326
+## BP.H1157 0.1303117 0.6090286 0.02936735 0.2133367 0.2670447
+## BP.K2503 0.1385092 0.6394894 0.04290797 0.2091379 0.2774727</code></pre>
+</div>
+<div id="rarity" class="section level3">
+<h3><span class="header-section-number">5.2.4</span> rarity()</h3>
+<p>Returns 4 estimates of rarity.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># You can specify specific index/indices to calculate by using the &#39;index&#39; argument</span>
+UCDrats_Adiv_rar &lt;-<span class="st"> </span><span class="kw">rarity</span>(phyobj_d10p25)
+
+<span class="co"># View abbreviated object</span>
+<span class="kw">head</span>(UCDrats_Adiv_rar)</code></pre></div>
+<pre><code>##          log_modulo_skewness low_abundance noncore_abundance
+## BP.K2491            2.059103     0.1453380                 0
+## BP.H931             2.058384     0.1106342                 0
+## BP.H933             2.056569     0.1204178                 0
+## BP.H1147            2.059638     0.1330383                 0
+## BP.H1157            2.059311     0.1345194                 0
+## BP.K2503            2.059966     0.1159013                 0
+##          rare_abundance
+## BP.K2491              0
+## BP.H931               0
+## BP.H933               0
+## BP.H1147              0
+## BP.H1157              0
+## BP.K2503              0</code></pre>
+</div>
+</div>
+<div id="data-analysis" class="section level2">
+<h2><span class="header-section-number">5.3</span> Data analysis</h2>
+<p>Now that we know how to estimate a wide range of alpha-diversity measurements, we now want to know whether the indices are altered by our experimental treatments. We will continue to work with the UCD-T2DM rat dataset. Remember, there are 5 groups, but also 2 collection periods. We will use a 1-way ANOVA for the rat groups and block by collection year.</p>
+<p>We will cover how to measure a single measurement first, and then go through the workflow of assessing all indices at the same time.</p>
+<p>Let’s see if there is a difference in Chao1. First, we need to combine the diversity measurements with our Sample Metadata.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Extract Sample Metadata</span>
+UCDrats_MetaData &lt;-<span class="st"> </span><span class="kw">meta</span>(phyobj_d10p25)
+
+<span class="co"># Make matching columns for both Alpha-diversity and metadata data frames using the row names</span>
+<span class="co"># Sample Metadata already has matching column, but will need to create if not in data frame.</span>
+UCDrats_Adiv<span class="op">$</span>SampleID &lt;-<span class="st"> </span><span class="kw">rownames</span>(UCDrats_Adiv)
+
+<span class="co"># Join alpha-diversity and metadata</span>
+UCDrats_Adiv_DF &lt;-<span class="st"> </span><span class="kw">full_join</span>(UCDrats_MetaData, UCDrats_Adiv)</code></pre></div>
+<pre><code>## Joining, by = &quot;SampleID&quot;</code></pre>
+<p>Now, let’s plot Chao1 by group. We can quickly do this with the boxplot() function using the formula notation described in Chapter <a href="rbasics.html#ttestexamp">2.9.2</a>. It is a base plotting function, so probably not publication quality. We just want to visually see if there are difference in the distribution of samples by group.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Boxplot by Groups</span>
+UCDrats_MetaData &lt;-<span class="st"> </span><span class="kw">boxplot</span>(Chao1 <span class="op">~</span><span class="st"> </span>GroupAbbrev, <span class="dt">data=</span>UCDrats_Adiv_DF)</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/adivanalysisboxplot-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Boxplot by collection year</span>
+UCDrats_MetaData &lt;-<span class="st"> </span><span class="kw">boxplot</span>(Chao1 <span class="op">~</span><span class="st"> </span>Collection, <span class="dt">data=</span>UCDrats_Adiv_DF)</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/adivanalysisboxplot-2.png" width="672" /></p>
+<p>Looks like the pre-diabetics (PD) and recent-diabetics (RD) rats may have higher diversity compared to the rats with more advanced diabetes (D3M and D6M). Also appears that rats collected in 2016 may have higher diversity compared to those collected in 2014. Let’s see if these differences are statistically significant.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Assess ANOVA on Chao1</span>
+Chao1ANOVA &lt;-<span class="st"> </span><span class="kw">aov</span>(Chao1 <span class="op">~</span><span class="st"> </span>GroupAbbrev <span class="op">+</span><span class="st"> </span>Collection, <span class="dt">data=</span>UCDrats_Adiv_DF)
+
+<span class="co"># View ANOVA table</span>
+<span class="kw">summary</span>(Chao1ANOVA)</code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## GroupAbbrev  4  40082   10021   6.205 0.000403 ***
+## Collection   1   7480    7480   4.631 0.036347 *  
+## Residuals   49  79137    1615                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Both ‘GroupAbbev’ and ‘Collection’ effects are significant. Now, which groups differ from each other.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Using the tukey HSD test.</span>
+<span class="kw">TukeyHSD</span>(Chao1ANOVA, <span class="st">&quot;GroupAbbrev&quot;</span>)</code></pre></div>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = Chao1 ~ GroupAbbrev + Collection, data = UCDrats_Adiv_DF)
+## 
+## $GroupAbbrev
+##              diff        lwr       upr     p adj
+## D6M-D3M  8.563722 -46.462146  63.58959 0.9919255
+## LSD-D3M 15.997278 -31.509215  63.50377 0.8742124
+## PD-D3M  58.227646  13.050300 103.40499 0.0054965
+## RD-D3M  66.050235  16.323572 115.77690 0.0039501
+## LSD-D6M  7.433555 -46.693346  61.56046 0.9949982
+## PD-D6M  49.663924  -2.430676 101.75852 0.0684687
+## RD-D6M  57.486513   1.400902 113.57212 0.0420272
+## PD-LSD  42.230368  -1.847607  86.30834 0.0663569
+## RD-LSD  50.052957   1.322922  98.78299 0.0413906
+## RD-PD    7.822589 -38.639677  54.28485 0.9891199</code></pre>
+<p>Looks like the Chao1 index in RD rats is greater than in both the D3M and D6M rats, while the Chao1 index in PD is higher than D3M and approaches significance relative to D6M.</p>
+<p>This is not a stats course, so we cannot go over every statistical approach that R offers. However, these indices can be treated like any other data. For example you could correlate it to other continuous data, e.g., blood glucose, dietary intake data, etc.</p>
+<p>Now, let’s say we wanted to analyze the rest. We could copy and paste this workflow, and then change Chao1 to Shannon in every object. But, that may lead to errors that we may not notice. For example, you may think you have an output for the Shannon index, but oops, you still have Chao1 in your formula. It would be much better if R did it all of the heavy work for us. Let’s see how this can be done.</p>
+<p class="alert alert-info">
+This next example includes immediate and advance coding. Examples of this workflow were shown in Chapters <a href="rbasics.html#reshaping">2.8.4</a> and <a href="rbasics.html#applyfunctions">2.8.6</a>.
+</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Start with the combined data frame, UCDrats_Adiv_DF, and rearrange it into a tall format.</span>
+UCDrats_Adiv_DF_Tall &lt;-<span class="st"> </span>UCDrats_Adiv_DF <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(AlphaDiv, value, <span class="op">-</span>(SampleID<span class="op">:</span>Collection))
+
+<span class="co"># Calculate means and sd</span>
+AdivMeans &lt;-<span class="st"> </span>UCDrats_Adiv_DF_Tall <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(AlphaDiv, GroupAbbrev, Collection) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">summarise</span>(<span class="dt">MEAN =</span> <span class="kw">mean</span>(value))
+
+<span class="co"># Make new column combining effect columns, and then arrange to wide format</span>
+AdivMeans &lt;-<span class="st"> </span>AdivMeans <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">GroupYear =</span> <span class="kw">paste</span>(GroupAbbrev, Collection, <span class="dt">sep=</span><span class="st">&quot;_&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>GroupAbbrev, <span class="op">-</span>Collection) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">spread</span>(GroupYear, MEAN)
+
+<span class="co"># Extract the string labels of all indices</span>
+AdivIndices &lt;-<span class="st"> </span><span class="kw">unique</span>(UCDrats_Adiv_DF_Tall<span class="op">$</span>AlphaDiv)
+
+<span class="co"># Use sapply() to get p-values from the ANOVAs</span>
+AdivANOVA_P &lt;-<span class="st"> </span><span class="kw">sapply</span>(AdivIndices, <span class="cf">function</span>(x) {
+    <span class="co"># Subset by Alpha diversity index</span>
+    DAT &lt;-<span class="st"> </span>UCDrats_Adiv_DF_Tall[UCDrats_Adiv_DF_Tall<span class="op">$</span>AlphaDiv <span class="op">%in%</span><span class="st"> </span>x,]
+    <span class="co"># Use subsetted data in ANOVA</span>
+    AOV &lt;-<span class="st"> </span><span class="kw">aov</span>(value <span class="op">~</span><span class="st"> </span>GroupAbbrev <span class="op">+</span><span class="st"> </span>Collection, <span class="dt">data=</span>DAT)
+    <span class="co"># Extract p-value</span>
+    AOV_P &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">summary</span>(AOV)[[<span class="dv">1</span>]][<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,<span class="st">&quot;Pr(&gt;F)&quot;</span>], <span class="dv">5</span>)
+    <span class="co"># Name vector elements if &gt; 2 effects.  </span>
+    <span class="co"># The order should follow the order in which they were coded into the ANOVA.</span>
+    <span class="kw">names</span>(AOV_P) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;GroupAbbrev&quot;</span>, <span class="st">&quot;Collection&quot;</span>)
+    <span class="co"># return final object</span>
+    AOV_P
+})
+
+<span class="co"># Transpose AdivANOVA_P and coerce to data frame</span>
+tAdivANOVA_P &lt;-<span class="st"> </span><span class="kw">t</span>(AdivANOVA_P) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()
+
+<span class="co"># Calculate FDR (really should apply across all tests, not by effect...)</span>
+tAdivANOVA_P<span class="op">$</span>GroupAbbrev_FDR &lt;-<span class="st"> </span><span class="kw">p.adjust</span>(tAdivANOVA_P<span class="op">$</span>GroupAbbrev, <span class="dt">method=</span><span class="st">&quot;fdr&quot;</span>)
+tAdivANOVA_P<span class="op">$</span>Collection_FDR &lt;-<span class="st"> </span><span class="kw">p.adjust</span>(tAdivANOVA_P<span class="op">$</span>Collection, <span class="dt">method=</span><span class="st">&quot;fdr&quot;</span>)
+
+<span class="co"># Add AlphaDiv column with row names to match AdivMeans object</span>
+tAdivANOVA_P<span class="op">$</span>AlphaDiv &lt;-<span class="st"> </span><span class="kw">rownames</span>(tAdivANOVA_P)
+
+<span class="co"># Join tAdivANOVA_P and AdivMeans</span>
+AdivMeansAOVresults &lt;-<span class="st"> </span><span class="kw">full_join</span>(AdivMeans, tAdivANOVA_P, <span class="dt">by=</span><span class="st">&quot;AlphaDiv&quot;</span>)
+
+<span class="co"># View results</span>
+AdivMeansAOVresults</code></pre></div>
+<pre><code>##     AlphaDiv     D3M_Y14     D3M_Y16     D6M_Y14     D6M_Y16    LSD_Y14
+## 1        ACE 281.8517222 312.3514805 324.5529581 254.2882149 261.800819
+## 2      Chao1 280.3871580 313.8759079 326.1230037 249.2981283 261.193784
+## 3     Fisher  41.9759331  45.1747667  48.0912433  37.1303328  38.644968
+## 4 InvSimpson  20.3555362  19.2820119  18.7224463  13.5182113  18.852212
+## 5   Observed 273.6666667 306.0000000 317.4000000 242.5000000 256.200000
+## 6     se.ACE   8.0136821   8.1249692   8.6005251   7.7482355   7.327363
+## 7   se.chao1   4.2440218   4.7121530   5.5009447   4.2026271   3.908604
+## 8    Shannon   3.7481400   3.8612767   3.8611519   3.5647088   3.858031
+## 9    Simpson   0.9430829   0.9409606   0.9429804   0.9259768   0.939014
+##       LSD_Y16      PD_Y14      PD_Y16      RD_Y16 GroupAbbrev Collection
+## 1 344.9607688 344.4031812 357.7353626 361.3101107     0.00030    0.03666
+## 2 347.6157449 345.6883266 359.2693875 361.6595519     0.00040    0.03635
+## 3  51.0866685  51.9029751  55.6493218  55.2750479     0.00003    0.04327
+## 4  17.5565617  18.3841252  26.9384674  22.3568960     0.30941    0.52910
+## 5 338.4285714 340.5000000 353.1111111 357.7000000     0.00010    0.03960
+## 6   8.8176946   8.4503873   8.6271711   8.6868210     0.14873    0.05744
+## 7   5.6763162   3.9463138   4.3373940   3.0864254     0.38306    0.45193
+## 8   3.8543452   4.0414242   4.2396395   4.0990683     0.00125    0.49366
+## 9   0.9392268   0.9417145   0.9564142   0.9490509     0.47243    0.72189
+##   GroupAbbrev_FDR Collection_FDR
+## 1       0.0009000      0.0973575
+## 2       0.0009000      0.0973575
+## 3       0.0002700      0.0973575
+## 4       0.3978129      0.5952375
+## 5       0.0004500      0.0973575
+## 6       0.2230950      0.1033920
+## 7       0.4309425      0.5952375
+## 8       0.0022500      0.5952375
+## 9       0.4724300      0.7218900</code></pre>
+<p>Now we have means, P-values, and FDR for all indices. Note, the “se.ACE” and “se.Chao1” can be removed as they are standard error calculations of ACE and Chao1 indices.</p>
+
+</div>
 </div>
             </section>
 

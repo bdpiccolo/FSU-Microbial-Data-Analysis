@@ -5,26 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Basics of R | Florida State University Microbiota Workshop 2019</title>
-  <meta name="description" content="FSU Workshop Oct. 2019: Introduction to R and 16S rRNA sequencing data analysis in R." />
+  <meta name="description" content="FSU Workshop Oct. 2019: Introduction to R and microbial sequencing data analysis in R." />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Basics of R | Florida State University Microbiota Workshop 2019" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://bdpiccolo.github.io/FSU-Microbial-Data-Analysis" />
   
-  <meta property="og:description" content="FSU Workshop Oct. 2019: Introduction to R and 16S rRNA sequencing data analysis in R." />
+  <meta property="og:description" content="FSU Workshop Oct. 2019: Introduction to R and microbial sequencing data analysis in R." />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 2 Basics of R | Florida State University Microbiota Workshop 2019" />
   
-  <meta name="twitter:description" content="FSU Workshop Oct. 2019: Introduction to R and 16S rRNA sequencing data analysis in R." />
+  <meta name="twitter:description" content="FSU Workshop Oct. 2019: Introduction to R and microbial sequencing data analysis in R." />
   
 
 <meta name="author" content="Brian Piccolo" />
 
 
-<meta name="date" content="2019-09-19" />
+<meta name="date" content="2019-10-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="intro.html"/>
-<link rel="next" href="microbial-sequencing-data.html"/>
+<link rel="next" href="chapt3intro.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -104,7 +104,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">FSU 16S Data Analysis in R Workshop 10/2019</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction to Data Analysis of 16S rRNA Sequencing in R</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction to Data Analysis of Microbial Sequencing in R</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#types-of-microbiota-data"><i class="fa fa-check"></i><b>1.1</b> Types of microbiota data</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#s-rrna-amplicon-sequencing"><i class="fa fa-check"></i><b>1.1.1</b> 16S rRNA amplicon sequencing</a></li>
@@ -125,7 +125,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2.6" data-path="rbasics.html"><a href="rbasics.html#basic-operations-data-types-missing-values-and-functions"><i class="fa fa-check"></i><b>2.6</b> Basic operations, data types, missing values, and functions</a><ul>
 <li class="chapter" data-level="2.6.1" data-path="rbasics.html"><a href="rbasics.html#basic-operations"><i class="fa fa-check"></i><b>2.6.1</b> Basic operations</a></li>
-<li class="chapter" data-level="2.6.2" data-path="rbasics.html"><a href="rbasics.html#data-types"><i class="fa fa-check"></i><b>2.6.2</b> Data types</a></li>
+<li class="chapter" data-level="2.6.2" data-path="rbasics.html"><a href="rbasics.html#datatypes"><i class="fa fa-check"></i><b>2.6.2</b> Data types</a></li>
 <li class="chapter" data-level="2.6.3" data-path="rbasics.html"><a href="rbasics.html#data-structure"><i class="fa fa-check"></i><b>2.6.3</b> Data structure</a></li>
 <li class="chapter" data-level="2.6.4" data-path="rbasics.html"><a href="rbasics.html#missing-values"><i class="fa fa-check"></i><b>2.6.4</b> Missing values</a></li>
 <li class="chapter" data-level="2.6.5" data-path="rbasics.html"><a href="rbasics.html#functions"><i class="fa fa-check"></i><b>2.6.5</b> Functions</a></li>
@@ -139,24 +139,108 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.8.1" data-path="rbasics.html"><a href="rbasics.html#viewing-your-data"><i class="fa fa-check"></i><b>2.8.1</b> Viewing your data</a></li>
 <li class="chapter" data-level="2.8.2" data-path="rbasics.html"><a href="rbasics.html#extracting-elements"><i class="fa fa-check"></i><b>2.8.2</b> Extracting elements</a></li>
 <li class="chapter" data-level="2.8.3" data-path="rbasics.html"><a href="rbasics.html#subsetting"><i class="fa fa-check"></i><b>2.8.3</b> Subsetting</a></li>
-<li class="chapter" data-level="2.8.4" data-path="rbasics.html"><a href="rbasics.html#reshaping-data"><i class="fa fa-check"></i><b>2.8.4</b> Reshaping data</a></li>
+<li class="chapter" data-level="2.8.4" data-path="rbasics.html"><a href="rbasics.html#reshaping"><i class="fa fa-check"></i><b>2.8.4</b> Reshaping data</a></li>
 <li class="chapter" data-level="2.8.5" data-path="rbasics.html"><a href="rbasics.html#merging-data"><i class="fa fa-check"></i><b>2.8.5</b> Merging data</a></li>
-<li class="chapter" data-level="2.8.6" data-path="rbasics.html"><a href="rbasics.html#apply-family-of-functions"><i class="fa fa-check"></i><b>2.8.6</b> apply family of functions</a></li>
+<li class="chapter" data-level="2.8.6" data-path="rbasics.html"><a href="rbasics.html#applyfunctions"><i class="fa fa-check"></i><b>2.8.6</b> apply family of functions</a></li>
 <li class="chapter" data-level="2.8.7" data-path="rbasics.html"><a href="rbasics.html#sweep"><i class="fa fa-check"></i><b>2.8.7</b> Sweep</a></li>
 </ul></li>
 <li class="chapter" data-level="2.9" data-path="rbasics.html"><a href="rbasics.html#stats"><i class="fa fa-check"></i><b>2.9</b> Stats</a><ul>
 <li class="chapter" data-level="2.9.1" data-path="rbasics.html"><a href="rbasics.html#basic-summary-based-stats."><i class="fa fa-check"></i><b>2.9.1</b> Basic summary based stats.</a></li>
-<li class="chapter" data-level="2.9.2" data-path="rbasics.html"><a href="rbasics.html#t-test-and-mann-whitney-u-test"><i class="fa fa-check"></i><b>2.9.2</b> <em>t</em>-test and Mann Whitney U test</a></li>
+<li class="chapter" data-level="2.9.2" data-path="rbasics.html"><a href="rbasics.html#ttestexamp"><i class="fa fa-check"></i><b>2.9.2</b> <em>t</em>-test and Mann Whitney U test</a></li>
 <li class="chapter" data-level="2.9.3" data-path="rbasics.html"><a href="rbasics.html#anova"><i class="fa fa-check"></i><b>2.9.3</b> ANOVA</a></li>
 <li class="chapter" data-level="2.9.4" data-path="rbasics.html"><a href="rbasics.html#kruskal-wallis-test"><i class="fa fa-check"></i><b>2.9.4</b> Kruskal-Wallis Test</a></li>
-<li class="chapter" data-level="2.9.5" data-path="rbasics.html"><a href="rbasics.html#post-hoc-tests"><i class="fa fa-check"></i><b>2.9.5</b> Post-hoc Tests</a></li>
+<li class="chapter" data-level="2.9.5" data-path="rbasics.html"><a href="rbasics.html#post-hoc-tests"><i class="fa fa-check"></i><b>2.9.5</b> Post-hoc tests</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="microbial-sequencing-data.html"><a href="microbial-sequencing-data.html"><i class="fa fa-check"></i><b>3</b> Microbial Sequencing Data</a></li>
-<li class="chapter" data-level="4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html"><i class="fa fa-check"></i><b>4</b> Importing and Pre-Processing</a></li>
-<li class="chapter" data-level="5" data-path="alpha-diversity.html"><a href="alpha-diversity.html"><i class="fa fa-check"></i><b>5</b> Alpha-Diversity</a></li>
-<li class="chapter" data-level="6" data-path="beta-diversity.html"><a href="beta-diversity.html"><i class="fa fa-check"></i><b>6</b> Beta-Diversity</a></li>
-<li class="chapter" data-level="7" data-path="differential-abundance.html"><a href="differential-abundance.html"><i class="fa fa-check"></i><b>7</b> Differential Abundance</a></li>
+<li class="chapter" data-level="3" data-path="chapt3intro.html"><a href="chapt3intro.html"><i class="fa fa-check"></i><b>3</b> Microbial Sequencing Data</a><ul>
+<li class="chapter" data-level="3.1" data-path="chapt3intro.html"><a href="chapt3intro.html#chapt3structure"><i class="fa fa-check"></i><b>3.1</b> Structure</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="chapt3intro.html"><a href="chapt3intro.html#count-data"><i class="fa fa-check"></i><b>3.1.1</b> Count data</a></li>
+<li class="chapter" data-level="3.1.2" data-path="chapt3intro.html"><a href="chapt3intro.html#taxonomy-data"><i class="fa fa-check"></i><b>3.1.2</b> Taxonomy data</a></li>
+<li class="chapter" data-level="3.1.3" data-path="chapt3intro.html"><a href="chapt3intro.html#sample-metadata"><i class="fa fa-check"></i><b>3.1.3</b> Sample Metadata</a></li>
+<li class="chapter" data-level="3.1.4" data-path="chapt3intro.html"><a href="chapt3intro.html#phylogenetic-tree"><i class="fa fa-check"></i><b>3.1.4</b> Phylogenetic tree</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="chapt3intro.html"><a href="chapt3intro.html#microbefiles"><i class="fa fa-check"></i><b>3.2</b> Files</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="chapt3intro.html"><a href="chapt3intro.html#spreadsheets"><i class="fa fa-check"></i><b>3.2.1</b> Spreadsheets</a></li>
+<li class="chapter" data-level="3.2.2" data-path="chapt3intro.html"><a href="chapt3intro.html#biomfile"><i class="fa fa-check"></i><b>3.2.2</b> Biome</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="chapt3intro.html"><a href="chapt3intro.html#diversity"><i class="fa fa-check"></i><b>3.3</b> Diversity</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="chapt3intro.html"><a href="chapt3intro.html#adivconcept"><i class="fa fa-check"></i><b>3.3.1</b> Alpha-diversity</a></li>
+<li class="chapter" data-level="3.3.2" data-path="chapt3intro.html"><a href="chapt3intro.html#betadivconcept"><i class="fa fa-check"></i><b>3.3.2</b> Beta-diversity</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="chapt3intro.html"><a href="chapt3intro.html#challenges"><i class="fa fa-check"></i><b>3.4</b> Challenges</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="chapt3intro.html"><a href="chapt3intro.html#compdata"><i class="fa fa-check"></i><b>3.4.1</b> Compositional data</a></li>
+<li class="chapter" data-level="3.4.2" data-path="chapt3intro.html"><a href="chapt3intro.html#zero-inflation"><i class="fa fa-check"></i><b>3.4.2</b> Zero inflation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="chapt3intro.html"><a href="chapt3intro.html#normalization"><i class="fa fa-check"></i><b>3.5</b> Normalization</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="chapt3intro.html"><a href="chapt3intro.html#rarefying"><i class="fa fa-check"></i><b>3.5.1</b> Rarefying</a></li>
+<li class="chapter" data-level="3.5.2" data-path="chapt3intro.html"><a href="chapt3intro.html#logUQ"><i class="fa fa-check"></i><b>3.5.2</b> Log upper quartile</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="chapt3intro.html"><a href="chapt3intro.html#r-packages-1"><i class="fa fa-check"></i><b>3.6</b> R packages</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="chapt3intro.html"><a href="chapt3intro.html#vegan"><i class="fa fa-check"></i><b>3.6.1</b> vegan</a></li>
+<li class="chapter" data-level="3.6.2" data-path="chapt3intro.html"><a href="chapt3intro.html#phyloseq"><i class="fa fa-check"></i><b>3.6.2</b> phyloseq</a></li>
+<li class="chapter" data-level="3.6.3" data-path="chapt3intro.html"><a href="chapt3intro.html#microbiome"><i class="fa fa-check"></i><b>3.6.3</b> microbiome</a></li>
+<li class="chapter" data-level="3.6.4" data-path="chapt3intro.html"><a href="chapt3intro.html#ape"><i class="fa fa-check"></i><b>3.6.4</b> ape</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="chapt3intro.html"><a href="chapt3intro.html#additional-resources"><i class="fa fa-check"></i><b>3.7</b> Additional resources</a></li>
+<li class="chapter" data-level="3.8" data-path="chapt3intro.html"><a href="chapt3intro.html#final-thoughts"><i class="fa fa-check"></i><b>3.8</b> Final thoughts</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html"><i class="fa fa-check"></i><b>4</b> Importing and Pre-Processing</a><ul>
+<li class="chapter" data-level="4.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#importing-data-into-r"><i class="fa fa-check"></i><b>4.1</b> Importing Data into R</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#biomimport"><i class="fa fa-check"></i><b>4.1.1</b> Biom file</a></li>
+<li class="chapter" data-level="4.1.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#excelimport"><i class="fa fa-check"></i><b>4.1.2</b> Excel</a></li>
+<li class="chapter" data-level="4.1.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#importmetadata"><i class="fa fa-check"></i><b>4.1.3</b> Metadata</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#phyloseq-object"><i class="fa fa-check"></i><b>4.2</b> phyloseq object</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#setting-up-a-phyloseq-object"><i class="fa fa-check"></i><b>4.2.1</b> Setting up a phyloseq object</a></li>
+<li class="chapter" data-level="4.2.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#extracting-data"><i class="fa fa-check"></i><b>4.2.2</b> Extracting data</a></li>
+<li class="chapter" data-level="4.2.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#subsetting-1"><i class="fa fa-check"></i><b>4.2.3</b> Subsetting</a></li>
+<li class="chapter" data-level="4.2.4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#aggregating"><i class="fa fa-check"></i><b>4.2.4</b> Aggregating</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#pre-processing"><i class="fa fa-check"></i><b>4.3</b> Pre-processing</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#lowabundtaxa"><i class="fa fa-check"></i><b>4.3.1</b> Low abundance taxa</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#proportional-abundance"><i class="fa fa-check"></i><b>4.3.2</b> Proportional Abundance</a></li>
+<li class="chapter" data-level="4.3.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#zeroimput"><i class="fa fa-check"></i><b>4.3.3</b> Zeros</a></li>
+<li class="chapter" data-level="4.3.4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#centered-log-ratios"><i class="fa fa-check"></i><b>4.3.4</b> Centered log ratios</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#conclusion"><i class="fa fa-check"></i><b>4.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="alpha-diversity.html"><a href="alpha-diversity.html"><i class="fa fa-check"></i><b>5</b> Alpha-Diversity</a><ul>
+<li class="chapter" data-level="5.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#phyloseq-package"><i class="fa fa-check"></i><b>5.1</b> phyloseq package</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#estimate_richness"><i class="fa fa-check"></i><b>5.1.1</b> estimate_richness()</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="alpha-diversity.html"><a href="alpha-diversity.html#microbiome-package"><i class="fa fa-check"></i><b>5.2</b> microbiome package</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#richness"><i class="fa fa-check"></i><b>5.2.1</b> richness()</a></li>
+<li class="chapter" data-level="5.2.2" data-path="alpha-diversity.html"><a href="alpha-diversity.html#dominance"><i class="fa fa-check"></i><b>5.2.2</b> dominance()</a></li>
+<li class="chapter" data-level="5.2.3" data-path="alpha-diversity.html"><a href="alpha-diversity.html#evenness"><i class="fa fa-check"></i><b>5.2.3</b> evenness()</a></li>
+<li class="chapter" data-level="5.2.4" data-path="alpha-diversity.html"><a href="alpha-diversity.html#rarity"><i class="fa fa-check"></i><b>5.2.4</b> rarity()</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="alpha-diversity.html"><a href="alpha-diversity.html#data-analysis"><i class="fa fa-check"></i><b>5.3</b> Data analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="beta-diversity.html"><a href="beta-diversity.html"><i class="fa fa-check"></i><b>6</b> Beta-Diversity</a><ul>
+<li class="chapter" data-level="6.1" data-path="beta-diversity.html"><a href="beta-diversity.html#calculating-beta-diversity-in-r"><i class="fa fa-check"></i><b>6.1</b> Calculating beta-diversity in R</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="beta-diversity.html"><a href="beta-diversity.html#identifying-your-beta-diversity-indices"><i class="fa fa-check"></i><b>6.1.1</b> Identifying your beta diversity indices</a></li>
+<li class="chapter" data-level="6.1.2" data-path="beta-diversity.html"><a href="beta-diversity.html#phyloseq-1"><i class="fa fa-check"></i><b>6.1.2</b> phyloseq</a></li>
+<li class="chapter" data-level="6.1.3" data-path="beta-diversity.html"><a href="beta-diversity.html#vegan-1"><i class="fa fa-check"></i><b>6.1.3</b> vegan</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="beta-diversity.html"><a href="beta-diversity.html#ordinations-1"><i class="fa fa-check"></i><b>6.2</b> Ordinations</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="beta-diversity.html"><a href="beta-diversity.html#phyloseq-2"><i class="fa fa-check"></i><b>6.2.1</b> phyloseq</a></li>
+<li class="chapter" data-level="6.2.2" data-path="beta-diversity.html"><a href="beta-diversity.html#vegan-2"><i class="fa fa-check"></i><b>6.2.2</b> vegan</a></li>
+<li class="chapter" data-level="6.2.3" data-path="beta-diversity.html"><a href="beta-diversity.html#apecalculation"><i class="fa fa-check"></i><b>6.2.3</b> ape</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="beta-diversity.html"><a href="beta-diversity.html#visualizing-ordinations"><i class="fa fa-check"></i><b>6.3</b> Visualizing ordinations</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="beta-diversity.html"><a href="beta-diversity.html#phyloordination"><i class="fa fa-check"></i><b>6.3.1</b> phyloseq</a></li>
+<li class="chapter" data-level="6.3.2" data-path="beta-diversity.html"><a href="beta-diversity.html#baseRordinations"><i class="fa fa-check"></i><b>6.3.2</b> Base R</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="beta-diversity.html"><a href="beta-diversity.html#permanova"><i class="fa fa-check"></i><b>6.4</b> PERMANOVA</a></li>
+<li class="chapter" data-level="6.5" data-path="beta-diversity.html"><a href="beta-diversity.html#conclusion-1"><i class="fa fa-check"></i><b>6.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="differential-abundance.html"><a href="differential-abundance.html"><i class="fa fa-check"></i><b>7</b> Differential Abundance</a><ul>
+<li class="chapter" data-level="7.1" data-path="differential-abundance.html"><a href="differential-abundance.html#rank-analysis"><i class="fa fa-check"></i><b>7.1</b> Rank analysis</a></li>
+<li class="chapter" data-level="7.2" data-path="differential-abundance.html"><a href="differential-abundance.html#deseq2"><i class="fa fa-check"></i><b>7.2</b> DESeq2</a></li>
+<li class="chapter" data-level="7.3" data-path="differential-abundance.html"><a href="differential-abundance.html#metagenomeseq"><i class="fa fa-check"></i><b>7.3</b> metagenomeSeq</a></li>
+<li class="chapter" data-level="7.4" data-path="differential-abundance.html"><a href="differential-abundance.html#aldex2"><i class="fa fa-check"></i><b>7.4</b> ALDEx2</a></li>
+<li class="chapter" data-level="7.5" data-path="differential-abundance.html"><a href="differential-abundance.html#conclusion-2"><i class="fa fa-check"></i><b>7.5</b> Conclusion</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -184,7 +268,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>R is an <strong>object-oriented</strong> programming language that was developed for statistical computing and visualization. It is freely available under the <a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU General Public License</a> and has a large and active user community. Figure 2.1 describes the most visited languages comparable to the R user base at <a href="https://stackoverflow.com/">Stack Overflow</a> the largest question and answer programming site. Note the sustained linear growth since 2012.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:SOFdr"></span>
-<img src="plot_tags_time-1-768x768.png" alt="From stackoverflow blog: The Impressive Growth of R. By David Robinson, 10/10/2017." width="80%" />
+<img src="images/plot_tags_time-1-768x768.png" alt="From stackoverflow blog: The Impressive Growth of R. By David Robinson, 10/10/2017." width="80%" />
 <p class="caption">
 Figure 2.1: From stackoverflow blog: <a href="https://stackoverflow.blog/2017/10/10/impressive-growth-r/"><em>The Impressive Growth of R</em></a>. By David Robinson, 10/10/2017.
 </p>
@@ -204,7 +288,7 @@ Figure 2.1: From stackoverflow blog: <a href="https://stackoverflow.blog/2017/10
 <p>First step is to downloading R. R is available at the <a href="https://cran.r-project.org/">The Comprehensive R Archive Network</a> (CRAN) website. Figure 2.2 shows the website and note the links needed for different systems are in a box at the top of the website. The default downloading prompts will result in aquiring 32 and 64 bit version for Windows users. You will likely be running a 64-bit Windows, but please refer <a href="https://support.microsoft.com/en-hk/help/15056/windows-32-64-bit-faq">here</a> if you want to check your Windows version.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:Rwebsite"></span>
-<img src="cran.png" alt="CRAN website" width="80%" />
+<img src="images/cran.png" alt="CRAN website" width="80%" />
 <p class="caption">
 Figure 2.2: CRAN website
 </p>
@@ -215,7 +299,7 @@ Figure 2.2: CRAN website
 <p>Figure 2.3 shows the R console after opening. Our color scheme differ because I customized my colors, but the information should be very similar. This is the R console and it is where you will type in code or pass code to run, causing R to work.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:Rconsole"></span>
-<img src="rconsole.png" alt="R console" width="80%" />
+<img src="images/rconsole.png" alt="R console" width="80%" />
 <p class="caption">
 Figure 2.3: R console
 </p>
@@ -282,7 +366,7 @@ obj3 <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</s
 <p>It is fairly straight forward to download packages from the Bioconductor website. Each package on Bioconductor has a dedicated website with installation instructions. We will use the <a href="https://bioconductor.org/packages/release/bioc/html/phyloseq.html">phyloseq package</a> as an example (Figure 2.4). The phyloseq package was developed by <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0061217">Paul McMurdie and Susan Holmes</a> and is a very important package for handling microbial sequencing data in R. We will be utilizing this package in subsequent chapters.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:phyloseq"></span>
-<img src="phyloseq.png" alt="phyloseq website at Bioconductor" width="80%" />
+<img src="images/phyloseq.png" alt="phyloseq website at Bioconductor" width="80%" />
 <p class="caption">
 Figure 2.4: phyloseq website at Bioconductor
 </p>
@@ -302,60 +386,34 @@ Figure 2.4: phyloseq website at Bioconductor
 <h3><span class="header-section-number">2.6.1</span> Basic operations</h3>
 <p>Although these operators may seem fairly low level, they are extremely important for coding.</p>
 <p>Here is a table containing basic arithmetic operators.</p>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<caption>
-<span id="tab:arithop">Table 2.1: </span>Arithmetic Operators
-</caption>
+<table>
+<caption><span id="tab:arithop">Table 2.1: </span>Arithmetic Operators</caption>
 <thead>
-<tr>
-<th style="text-align:left;">
-Operator
-</th>
-<th style="text-align:left;">
-Use
-</th>
+<tr class="header">
+<th align="left">Operator</th>
+<th align="left">Use</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-+
-</td>
-<td style="text-align:left;">
-addition
-</td>
+<tr class="odd">
+<td align="left">+</td>
+<td align="left">addition</td>
 </tr>
-<tr>
-<td style="text-align:left;">
--
-</td>
-<td style="text-align:left;">
-subtract
-</td>
+<tr class="even">
+<td align="left">-</td>
+<td align="left">subtract</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-*
-</td>
-<td style="text-align:left;">
-multiply
-</td>
+<tr class="odd">
+<td align="left">*</td>
+<td align="left">multiply</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-/
-</td>
-<td style="text-align:left;">
-division
-</td>
+<tr class="even">
+<td align="left">/</td>
+<td align="left">division</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-^
-</td>
-<td style="text-align:left;">
-exponential
-</td>
+<tr class="odd">
+<td align="left">^</td>
+<td align="left">exponential</td>
 </tr>
 </tbody>
 </table>
@@ -433,13 +491,13 @@ equalAssign =<span class="st"> </span><span class="dv">100</span><span class="op
 arrowAssign <span class="op">==</span><span class="st"> </span>equalAssign</code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </div>
-<div id="data-types" class="section level3">
+<div id="datatypes" class="section level3">
 <h3><span class="header-section-number">2.6.2</span> Data types</h3>
 <p>It is important to understand how R handles different data types. For example, how R handles categorical data that could be character strings (e.g., Obese or Lean), numerical data (e.g., 5, 8, 10567156.2, -400), etc.</p>
 <p>Most of this should be fairly straight forward, but there are some nuances to be aware of.</p>
 <p><strong>numeric</strong>: Can get very technical, but generally any real number including decimals.</p>
 <p><strong>integer</strong>: Will appear if all data are whole numbers. R will automatically determine this designation, primarily when importing data. Operations on numeric and integer data are similar.</p>
-<p><strong>character</strong>: Generally, any non-numeric or non-logical values (programmers call these, “string values”). Default setting for data that R cannot determine as numbers/logic. Can almost force anything to be a character. character values will always be surrounded by quotations.</p>
+<p><strong>character</strong>: Generally, any non-numeric or non-logical values (programmers call these, “string values”). Default setting for data that R cannot determine as numbers/logic. Can almost force anything to be a character. Character values will always be surrounded by quotations.</p>
 <p><strong>factor</strong>: This type of data looks like a character, but is technically a special type of integer. It has a special attribute that assigns integers to a corresponding set of characters. The underlying integer assignment allows R to order the characters in plots, in addition to some other special features. Widely used in R, but can be confusing and lead to some odd outputs if not aware of their presence.</p>
 <p><strong>logic</strong>: Either TRUE or FALSE. Very, very important. Many of the most basic functionality of R is based on logical operators.</p>
 </div>
@@ -622,14 +680,14 @@ normalDATA &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span cla
 <span class="co"># Output</span>
 <span class="kw">list</span>(normalDATA, <span class="kw">residualFUN</span>(normalDATA))</code></pre></div>
 <pre><code>## [[1]]
-##  [1] 101.11782 104.99439  86.87537 105.25791  92.36359 112.61402  99.33465
-##  [8]  78.26926  82.60414 107.86052  87.17150  95.20491 105.63857 100.26269
-## [15] 115.48234 101.52710  87.64541 111.39811  93.61227 116.74186
+##  [1]  97.95646  99.95371  86.05863  97.69517  82.13705 102.89153  92.13194
+##  [8] 108.92194  97.49098  82.52124 103.62964 101.11511 117.37319 111.94054
+## [15] 113.46530  82.76537  96.41698  96.53338  98.78454  97.14970
 ## 
 ## [[2]]
-##  [1] 1.0369724 1.1180057 0.7654294 1.1236247 0.8651939 1.2861651 1.0007218
-##  [8] 0.6212898 0.6920149 1.1798773 0.7706565 0.9192434 1.1317665 1.0195077
-## [15] 1.3525178 1.0453838 0.7790587 1.2585413 0.8887454 1.3821813</code></pre>
+##  [1] 0.9920813 1.0329492 0.7657199 0.9867958 0.6975244 1.0945620 0.8776100
+##  [8] 1.2266252 0.9826752 0.7040647 1.1103223 1.0570930 1.4243572 1.2955552
+## [15] 1.3310896 0.7082368 0.9611434 0.9634654 1.0089255 0.9758072</code></pre>
 <p>The first element of the list is the output of rnorm and the second element in the list is the output of residualFUN function. Look how flexible a list is! It allowed a function to define its second element!</p>
 </div>
 </div>
@@ -646,8 +704,11 @@ normalDATA &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span cla
 <div id="comma-delimited-text-file-csv" class="section level3">
 <h3><span class="header-section-number">2.7.2</span> Comma delimited text file (csv)</h3>
 <p>For our purposes, the <code>read.csv</code> function will suffice. There are other functions that can</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The head() function will show the first 6 rows of a data frame.</span>
-CSVimport &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;CSVexample.csv&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Data is in a subfolder, so can use &#39;.\\Dir\\&#39; to reach.</span>
+<span class="co"># The &#39;.&#39; denotes the working directory</span>
+CSVimport &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;.</span><span class="ch">\\</span><span class="st">Data</span><span class="ch">\\</span><span class="st">CSVexample.csv&quot;</span>)
+
+<span class="co"># The head() function will show the first 6 rows of a data frame.</span>
 <span class="kw">head</span>(CSVimport)</code></pre></div>
 <pre><code>##   Subject Treatment Gender Age Height     Wt  BMI Glucose
 ## 1     579   Control      F  38  63.00  82.27 32.1      99
@@ -663,7 +724,9 @@ CSVimport &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span c
 <p>There are now several packages that provide functions to import Excel files. We will use the <code>read_xlsx</code> function from the <a href="https://readxl.tidyverse.org/">readxl</a> package. There are many arguments that can be inputted in this function, but we will focus on the first two. The ‘path’ argument defines the file and the ‘sheet’ argument defines the the sheet name to be read. If the ‘sheet’ argument is not defined, then the function will read the first sheet.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Need to load the package.</span>
 <span class="kw">library</span>(readxl)
-XLSXimport &lt;-<span class="st"> </span><span class="kw">read_xlsx</span>(<span class="st">&quot;XLSXexample.xlsx&quot;</span>)
+
+<span class="co"># Import Excel file from subfolder</span>
+XLSXimport &lt;-<span class="st"> </span><span class="kw">read_xlsx</span>(<span class="st">&quot;.</span><span class="ch">\\</span><span class="st">Data</span><span class="ch">\\</span><span class="st">XLSXexample.xlsx&quot;</span>)
 XLSXimport</code></pre></div>
 <pre><code>## # A tibble: 22 x 8
 ##    Subject Treatment Gender   Age Height    Wt   BMI Glucose
@@ -683,6 +746,8 @@ XLSXimport</code></pre></div>
 <p>We can coerce the tibble into a regular data frame, similar to the csv import.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># You can also coerce data types into different data types.</span>
 XLSXimport_df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(XLSXimport)
+
+<span class="co"># View abbreviated data</span>
 <span class="kw">head</span>(XLSXimport_df)</code></pre></div>
 <pre><code>##   Subject Treatment Gender Age Height     Wt  BMI Glucose
 ## 1     579   Control      F  38  63.00  82.27 32.1      99
@@ -866,7 +931,7 @@ CSV_exp40_filter</code></pre></div>
 ## 22  31 109.82 38.4      99</code></pre>
 <p>There are many other ways to filter and subset your data. There is actually a <code>subset</code> function that does the same things we covered here, but within a function. tidyverse has a more linear approach to filtering, which has become extremely popular. Some workflows are better if you have millions of data points, but this way minimizes the need for add on functions.</p>
 </div>
-<div id="reshaping-data" class="section level3">
+<div id="reshaping" class="section level3">
 <h3><span class="header-section-number">2.8.4</span> Reshaping data</h3>
 <p class="alert alert-info">
 This can be considered a more intermediate to advanced topic.
@@ -876,25 +941,26 @@ This can be considered a more intermediate to advanced topic.
 randomDATA &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">18</span>, <span class="dt">mean =</span> <span class="dv">10</span>, <span class="dt">sd =</span> <span class="dv">2</span>)
 Matrix_example2 &lt;-<span class="st"> </span><span class="kw">matrix</span>(randomDATA, <span class="dt">ncol=</span><span class="dv">6</span>, <span class="dt">nrow=</span><span class="dv">3</span>)
 Matrix_example2</code></pre></div>
-<pre><code>##           [,1]      [,2]      [,3]      [,4]     [,5]     [,6]
-## [1,] 10.239237 10.642725 14.385870 10.850136 10.25674 7.522684
-## [2,]  6.288064 13.752195  7.179185  6.479865 12.49722 9.241212
-## [3,]  9.408997  9.618498 12.573494 11.054001 10.92030 9.823768</code></pre>
+<pre><code>##           [,1]      [,2]     [,3]      [,4]      [,5]      [,6]
+## [1,]  8.942020  9.887677 11.44960 12.070519  9.944745  8.147628
+## [2,] 11.967007 11.958866 12.03037  8.524405 10.160582 10.422952
+## [3,]  8.293849  7.835140 13.85544 10.710589 10.431478  9.933755</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Transpose</span>
 <span class="kw">t</span>(Matrix_example2)</code></pre></div>
 <pre><code>##           [,1]      [,2]      [,3]
-## [1,] 10.239237  6.288064  9.408997
-## [2,] 10.642725 13.752195  9.618498
-## [3,] 14.385870  7.179185 12.573494
-## [4,] 10.850136  6.479865 11.054001
-## [5,] 10.256743 12.497221 10.920304
-## [6,]  7.522684  9.241212  9.823768</code></pre>
+## [1,]  8.942020 11.967007  8.293849
+## [2,]  9.887677 11.958866  7.835140
+## [3,] 11.449603 12.030368 13.855445
+## [4,] 12.070519  8.524405 10.710589
+## [5,]  9.944745 10.160582 10.431478
+## [6,]  8.147628 10.422952  9.933755</code></pre>
 <p>Now, a couple things to know about the tidyverse. It is a cluster of packages built primarily by <a href="http://hadley.nz/">Hadley Wickham</a>, who is arguably the closest you can get to rock star status in the R programming world. The primary reason for <strong>tidyverse</strong> was to make the coding grammar uniform and linear in structure, as opposed to the nesting structure that R was originally developed in. One way to do this was to use an operator, <code>%&gt;%</code> (referred to as a <strong>pipe</strong>), that forwards a value into the next function or expression. Let me provide an example first:</p>
 <p>Let’s say we want to import our data, subset subjects &lt; 50, and then calculate mean and standard deviation across Control and Experimental groups for all continuous variables. Let’s see how this would like</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Remember to load package</span>
-<span class="kw">library</span>(tidyverse)
-
-<span class="co"># Note that this syntax no longer requires quotation marks for characters.</span>
+<span class="kw">library</span>(tidyverse)</code></pre></div>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 3.6.1</code></pre>
+<pre><code>## Warning: package &#39;readr&#39; was built under R version 3.6.1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Note that this syntax no longer requires quotation marks for characters.</span>
 CSVfilter &lt;-<span class="st"> </span><span class="kw">filter</span>(CSVimport, Age <span class="op">&lt;</span><span class="st"> </span><span class="dv">50</span>)
 CSVfilter_byTxt &lt;-<span class="st"> </span><span class="kw">group_by</span>(CSVfilter, Treatment)
 <span class="kw">summarise</span>(CSVfilter_byTxt, <span class="dt">Avg_Age =</span> <span class="kw">mean</span>(Age), <span class="dt">sd_Age =</span> <span class="kw">sd</span>(Age))</code></pre></div>
@@ -956,10 +1022,10 @@ CSVimport <span class="op">%&gt;%</span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Let&#39;s make the same matrix that we did at the beginning of this section (2.9.3)</span>
 randomDATA <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">matrix</span>(<span class="dt">ncol=</span><span class="dv">6</span>, <span class="dt">nrow=</span><span class="dv">3</span>)</code></pre></div>
-<pre><code>##           [,1]      [,2]      [,3]      [,4]     [,5]     [,6]
-## [1,] 10.239237 10.642725 14.385870 10.850136 10.25674 7.522684
-## [2,]  6.288064 13.752195  7.179185  6.479865 12.49722 9.241212
-## [3,]  9.408997  9.618498 12.573494 11.054001 10.92030 9.823768</code></pre>
+<pre><code>##           [,1]      [,2]     [,3]      [,4]      [,5]      [,6]
+## [1,]  8.942020  9.887677 11.44960 12.070519  9.944745  8.147628
+## [2,] 11.967007 11.958866 12.03037  8.524405 10.160582 10.422952
+## [3,]  8.293849  7.835140 13.85544 10.710589 10.431478  9.933755</code></pre>
 <p>See how the pipe operator can be used in other ways. Here the pipe deposited the numeric vector into the first argument and we supplied the rest of the arguments to match the prior output.</p>
 <p>Now let’s look talk about <code>gather</code>. <code>gather</code> reshapes your column names and data points into a two new columns. One that we defined as ‘Variables’ and the other as ‘Measurement’. Then, it takes the rest of the data and repeats it evenly along each column name. Now can use the ‘Measurement’ column as a grouping variable. Let’s see the output.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Do not have to load the library unless not previously loaded.</span>
@@ -1071,7 +1137,7 @@ DF2</code></pre></div>
 ## 5 S5   NA    NA 46.1       No</code></pre>
 <p>Note the <code>NA</code> values within the rows for “S4” and “S5”.</p>
 </div>
-<div id="apply-family-of-functions" class="section level3">
+<div id="applyfunctions" class="section level3">
 <h3><span class="header-section-number">2.8.6</span> apply family of functions</h3>
 <p class="alert alert-info">
 This is <strong>definitely</strong> an intermediate to advanced topic. But it is unavoidable for high-throughput data analysis. These functions are also what really sets R apart from more traditional statistical software.
@@ -1302,7 +1368,7 @@ SEM &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span clas
 <span class="kw">SEM</span>(CSVimport<span class="op">$</span>BMI)</code></pre></div>
 <pre><code>## [1] 0.838415</code></pre>
 </div>
-<div id="t-test-and-mann-whitney-u-test" class="section level3">
+<div id="ttestexamp" class="section level3">
 <h3><span class="header-section-number">2.9.2</span> <em>t</em>-test and Mann Whitney U test</h3>
 <p>The functions are going to get a little more complicated with comparative tasks, like <code>t.test</code> and <code>wilcox.test</code> (functions for <em>t</em>-test and Mann Whitney U test, respectively). They need to be able to determine which data is being compared and what the comparison groups are. This also applies for ANOVA and regression based function as well. We will look at a couple ways to provide this information, but be aware that not all user defined functions follow these examples. It is entirely up to the author of the function to define their arguments.</p>
 <p>Both of these function need to be flexible to handle the various ways that a <em>t</em>-test and/or Mann Whitney U test can be deployed, e.g., one-sample or two-sample tests. Let’s look at the help page (Figure 2.5). You can access the help page as follows</p>
@@ -1311,7 +1377,7 @@ SEM &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span clas
 ?t.test</code></pre></div>
 
 <div class="figure" style="text-align: center"><span id="fig:ttesthelp"></span>
-<img src="ttesthelp.png" alt="t-test help page from the ‘stats’ package." width="80%" />
+<img src="images/ttesthelp.png" alt="t-test help page from the ‘stats’ package." width="80%" />
 <p class="caption">
 Figure 2.5: <em>t</em>-test help page from the ‘stats’ package.
 </p>
@@ -1429,9 +1495,17 @@ linearMOD &lt;-<span class="st"> </span><span class="kw">lm</span>(BMI <span cla
 <p>If you Google ANOVA analysis in R, you may come across some articles describing discordant results between either SAS or SPSS and R. This is for 2 reasons, 1) Each software calculates their underlying contrast structure slightly different, and 2) R defaults to sum of squares type I, vs sum or squares type III in SAS and SPSS. It does NOT mean that any of the results provided by these tools are incorrect by any means. It is up to us as users of these tools to understand the underlying principles and use them accordingly. Unfortunately, the ANOVA functions in the core packages do not provide alternative ways to calculate sum of squares. However, a mechanism does exist using the car package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Install the package if needed and load the library</span>
 <span class="co"># install.packages(&quot;car&quot;)</span>
-<span class="kw">library</span>(car)
-
-<span class="co"># Need to update the contrasts for type III sum of squares</span>
+<span class="kw">library</span>(car)</code></pre></div>
+<pre><code>## Loading required package: carData</code></pre>
+<pre><code>## 
+## Attaching package: &#39;car&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     some</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     recode</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Need to update the contrasts for type III sum of squares</span>
 <span class="kw">options</span>(<span class="dt">contrasts =</span> <span class="kw">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))
 
 <span class="co"># Now we can use the lm model from above in Anova in the car package and specify the sum of squares type</span>
@@ -1464,7 +1538,7 @@ linearMOD &lt;-<span class="st"> </span><span class="kw">lm</span>(BMI <span cla
 ## Kruskal-Wallis chi-squared = 0.13043, df = 1, p-value = 0.718</code></pre>
 </div>
 <div id="post-hoc-tests" class="section level3">
-<h3><span class="header-section-number">2.9.5</span> Post-hoc Tests</h3>
+<h3><span class="header-section-number">2.9.5</span> Post-hoc tests</h3>
 <p>The <code>TukeyHSD</code> function is available without an add-on package and requires the output from the <code>aov</code> function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We will fit the ANOVA first and set it into an object.</span>
 TXTanova &lt;-<span class="st"> </span><span class="kw">aov</span>(<span class="dt">formula =</span> BMI <span class="op">~</span><span class="st"> </span>Treatment <span class="op">+</span><span class="st"> </span>Gender, <span class="dt">data =</span> CSVimport)
@@ -1489,7 +1563,7 @@ TXTanova &lt;-<span class="st"> </span><span class="kw">aov</span>(<span class="
         </div>
       </div>
 <a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="microbial-sequencing-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="chapt3intro.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

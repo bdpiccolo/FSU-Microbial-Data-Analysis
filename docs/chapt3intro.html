@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Microbial Sequencing Data | Florida State University Microbiota Workshop 2019</title>
+  <meta name="description" content="FSU Workshop Oct. 2019: Introduction to R and microbial sequencing data analysis in R." />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Microbial Sequencing Data | Florida State University Microbiota Workshop 2019" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://bdpiccolo.github.io/FSU-Microbial-Data-Analysis" />
+  
+  <meta property="og:description" content="FSU Workshop Oct. 2019: Introduction to R and microbial sequencing data analysis in R." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Microbial Sequencing Data | Florida State University Microbiota Workshop 2019" />
+  
+  <meta name="twitter:description" content="FSU Workshop Oct. 2019: Introduction to R and microbial sequencing data analysis in R." />
+  
+
+<meta name="author" content="Brian Piccolo" />
+
+
+<meta name="date" content="2019-10-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="rbasics.html"/>
+<link rel="next" href="importing-and-pre-processing.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">FSU 16S Data Analysis in R Workshop 10/2019</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction to Data Analysis of Microbial Sequencing in R</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#types-of-microbiota-data"><i class="fa fa-check"></i><b>1.1</b> Types of microbiota data</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#s-rrna-amplicon-sequencing"><i class="fa fa-check"></i><b>1.1.1</b> 16S rRNA amplicon sequencing</a></li>
+<li class="chapter" data-level="1.1.2" data-path="intro.html"><a href="intro.html#shotgun-metagenomic-sequencing"><i class="fa fa-check"></i><b>1.1.2</b> Shotgun metagenomic sequencing</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#structure"><i class="fa fa-check"></i><b>1.2</b> Microbial composition data from sequencing technologies</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#statistical-analysis-of-microbial-composition-data"><i class="fa fa-check"></i><b>1.3</b> Statistical analysis of microbial composition data</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="rbasics.html"><a href="rbasics.html"><i class="fa fa-check"></i><b>2</b> Basics of R</a><ul>
+<li class="chapter" data-level="2.1" data-path="rbasics.html"><a href="rbasics.html#r"><i class="fa fa-check"></i><b>2.1</b> R</a></li>
+<li class="chapter" data-level="2.2" data-path="rbasics.html"><a href="rbasics.html#downloading-r"><i class="fa fa-check"></i><b>2.2</b> Downloading R</a></li>
+<li class="chapter" data-level="2.3" data-path="rbasics.html"><a href="rbasics.html#the-r-console"><i class="fa fa-check"></i><b>2.3</b> The R console</a></li>
+<li class="chapter" data-level="2.4" data-path="rbasics.html"><a href="rbasics.html#the-r-script"><i class="fa fa-check"></i><b>2.4</b> The R script</a></li>
+<li class="chapter" data-level="2.5" data-path="rbasics.html"><a href="rbasics.html#r-packages"><i class="fa fa-check"></i><b>2.5</b> R packages</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="rbasics.html"><a href="rbasics.html#cran"><i class="fa fa-check"></i><b>2.5.1</b> CRAN</a></li>
+<li class="chapter" data-level="2.5.2" data-path="rbasics.html"><a href="rbasics.html#bioconductor"><i class="fa fa-check"></i><b>2.5.2</b> Bioconductor</a></li>
+<li class="chapter" data-level="2.5.3" data-path="rbasics.html"><a href="rbasics.html#github"><i class="fa fa-check"></i><b>2.5.3</b> Github</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="rbasics.html"><a href="rbasics.html#basic-operations-data-types-missing-values-and-functions"><i class="fa fa-check"></i><b>2.6</b> Basic operations, data types, missing values, and functions</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="rbasics.html"><a href="rbasics.html#basic-operations"><i class="fa fa-check"></i><b>2.6.1</b> Basic operations</a></li>
+<li class="chapter" data-level="2.6.2" data-path="rbasics.html"><a href="rbasics.html#datatypes"><i class="fa fa-check"></i><b>2.6.2</b> Data types</a></li>
+<li class="chapter" data-level="2.6.3" data-path="rbasics.html"><a href="rbasics.html#data-structure"><i class="fa fa-check"></i><b>2.6.3</b> Data structure</a></li>
+<li class="chapter" data-level="2.6.4" data-path="rbasics.html"><a href="rbasics.html#missing-values"><i class="fa fa-check"></i><b>2.6.4</b> Missing values</a></li>
+<li class="chapter" data-level="2.6.5" data-path="rbasics.html"><a href="rbasics.html#functions"><i class="fa fa-check"></i><b>2.6.5</b> Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="rbasics.html"><a href="rbasics.html#importing-data"><i class="fa fa-check"></i><b>2.7</b> Importing data</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="rbasics.html"><a href="rbasics.html#working-directory"><i class="fa fa-check"></i><b>2.7.1</b> Working directory</a></li>
+<li class="chapter" data-level="2.7.2" data-path="rbasics.html"><a href="rbasics.html#comma-delimited-text-file-csv"><i class="fa fa-check"></i><b>2.7.2</b> Comma delimited text file (csv)</a></li>
+<li class="chapter" data-level="2.7.3" data-path="rbasics.html"><a href="rbasics.html#excel-file"><i class="fa fa-check"></i><b>2.7.3</b> Excel file</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="rbasics.html"><a href="rbasics.html#working-with-your-data"><i class="fa fa-check"></i><b>2.8</b> Working with your data</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="rbasics.html"><a href="rbasics.html#viewing-your-data"><i class="fa fa-check"></i><b>2.8.1</b> Viewing your data</a></li>
+<li class="chapter" data-level="2.8.2" data-path="rbasics.html"><a href="rbasics.html#extracting-elements"><i class="fa fa-check"></i><b>2.8.2</b> Extracting elements</a></li>
+<li class="chapter" data-level="2.8.3" data-path="rbasics.html"><a href="rbasics.html#subsetting"><i class="fa fa-check"></i><b>2.8.3</b> Subsetting</a></li>
+<li class="chapter" data-level="2.8.4" data-path="rbasics.html"><a href="rbasics.html#reshaping"><i class="fa fa-check"></i><b>2.8.4</b> Reshaping data</a></li>
+<li class="chapter" data-level="2.8.5" data-path="rbasics.html"><a href="rbasics.html#merging-data"><i class="fa fa-check"></i><b>2.8.5</b> Merging data</a></li>
+<li class="chapter" data-level="2.8.6" data-path="rbasics.html"><a href="rbasics.html#applyfunctions"><i class="fa fa-check"></i><b>2.8.6</b> apply family of functions</a></li>
+<li class="chapter" data-level="2.8.7" data-path="rbasics.html"><a href="rbasics.html#sweep"><i class="fa fa-check"></i><b>2.8.7</b> Sweep</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="rbasics.html"><a href="rbasics.html#stats"><i class="fa fa-check"></i><b>2.9</b> Stats</a><ul>
+<li class="chapter" data-level="2.9.1" data-path="rbasics.html"><a href="rbasics.html#basic-summary-based-stats."><i class="fa fa-check"></i><b>2.9.1</b> Basic summary based stats.</a></li>
+<li class="chapter" data-level="2.9.2" data-path="rbasics.html"><a href="rbasics.html#ttestexamp"><i class="fa fa-check"></i><b>2.9.2</b> <em>t</em>-test and Mann Whitney U test</a></li>
+<li class="chapter" data-level="2.9.3" data-path="rbasics.html"><a href="rbasics.html#anova"><i class="fa fa-check"></i><b>2.9.3</b> ANOVA</a></li>
+<li class="chapter" data-level="2.9.4" data-path="rbasics.html"><a href="rbasics.html#kruskal-wallis-test"><i class="fa fa-check"></i><b>2.9.4</b> Kruskal-Wallis Test</a></li>
+<li class="chapter" data-level="2.9.5" data-path="rbasics.html"><a href="rbasics.html#post-hoc-tests"><i class="fa fa-check"></i><b>2.9.5</b> Post-hoc tests</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chapt3intro.html"><a href="chapt3intro.html"><i class="fa fa-check"></i><b>3</b> Microbial Sequencing Data</a><ul>
+<li class="chapter" data-level="3.1" data-path="chapt3intro.html"><a href="chapt3intro.html#chapt3structure"><i class="fa fa-check"></i><b>3.1</b> Structure</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="chapt3intro.html"><a href="chapt3intro.html#count-data"><i class="fa fa-check"></i><b>3.1.1</b> Count data</a></li>
+<li class="chapter" data-level="3.1.2" data-path="chapt3intro.html"><a href="chapt3intro.html#taxonomy-data"><i class="fa fa-check"></i><b>3.1.2</b> Taxonomy data</a></li>
+<li class="chapter" data-level="3.1.3" data-path="chapt3intro.html"><a href="chapt3intro.html#sample-metadata"><i class="fa fa-check"></i><b>3.1.3</b> Sample Metadata</a></li>
+<li class="chapter" data-level="3.1.4" data-path="chapt3intro.html"><a href="chapt3intro.html#phylogenetic-tree"><i class="fa fa-check"></i><b>3.1.4</b> Phylogenetic tree</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="chapt3intro.html"><a href="chapt3intro.html#microbefiles"><i class="fa fa-check"></i><b>3.2</b> Files</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="chapt3intro.html"><a href="chapt3intro.html#spreadsheets"><i class="fa fa-check"></i><b>3.2.1</b> Spreadsheets</a></li>
+<li class="chapter" data-level="3.2.2" data-path="chapt3intro.html"><a href="chapt3intro.html#biomfile"><i class="fa fa-check"></i><b>3.2.2</b> Biome</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="chapt3intro.html"><a href="chapt3intro.html#diversity"><i class="fa fa-check"></i><b>3.3</b> Diversity</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="chapt3intro.html"><a href="chapt3intro.html#adivconcept"><i class="fa fa-check"></i><b>3.3.1</b> Alpha-diversity</a></li>
+<li class="chapter" data-level="3.3.2" data-path="chapt3intro.html"><a href="chapt3intro.html#betadivconcept"><i class="fa fa-check"></i><b>3.3.2</b> Beta-diversity</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="chapt3intro.html"><a href="chapt3intro.html#challenges"><i class="fa fa-check"></i><b>3.4</b> Challenges</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="chapt3intro.html"><a href="chapt3intro.html#compdata"><i class="fa fa-check"></i><b>3.4.1</b> Compositional data</a></li>
+<li class="chapter" data-level="3.4.2" data-path="chapt3intro.html"><a href="chapt3intro.html#zero-inflation"><i class="fa fa-check"></i><b>3.4.2</b> Zero inflation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="chapt3intro.html"><a href="chapt3intro.html#normalization"><i class="fa fa-check"></i><b>3.5</b> Normalization</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="chapt3intro.html"><a href="chapt3intro.html#rarefying"><i class="fa fa-check"></i><b>3.5.1</b> Rarefying</a></li>
+<li class="chapter" data-level="3.5.2" data-path="chapt3intro.html"><a href="chapt3intro.html#logUQ"><i class="fa fa-check"></i><b>3.5.2</b> Log upper quartile</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="chapt3intro.html"><a href="chapt3intro.html#r-packages-1"><i class="fa fa-check"></i><b>3.6</b> R packages</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="chapt3intro.html"><a href="chapt3intro.html#vegan"><i class="fa fa-check"></i><b>3.6.1</b> vegan</a></li>
+<li class="chapter" data-level="3.6.2" data-path="chapt3intro.html"><a href="chapt3intro.html#phyloseq"><i class="fa fa-check"></i><b>3.6.2</b> phyloseq</a></li>
+<li class="chapter" data-level="3.6.3" data-path="chapt3intro.html"><a href="chapt3intro.html#microbiome"><i class="fa fa-check"></i><b>3.6.3</b> microbiome</a></li>
+<li class="chapter" data-level="3.6.4" data-path="chapt3intro.html"><a href="chapt3intro.html#ape"><i class="fa fa-check"></i><b>3.6.4</b> ape</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="chapt3intro.html"><a href="chapt3intro.html#additional-resources"><i class="fa fa-check"></i><b>3.7</b> Additional resources</a></li>
+<li class="chapter" data-level="3.8" data-path="chapt3intro.html"><a href="chapt3intro.html#final-thoughts"><i class="fa fa-check"></i><b>3.8</b> Final thoughts</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html"><i class="fa fa-check"></i><b>4</b> Importing and Pre-Processing</a><ul>
+<li class="chapter" data-level="4.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#importing-data-into-r"><i class="fa fa-check"></i><b>4.1</b> Importing Data into R</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#biomimport"><i class="fa fa-check"></i><b>4.1.1</b> Biom file</a></li>
+<li class="chapter" data-level="4.1.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#excelimport"><i class="fa fa-check"></i><b>4.1.2</b> Excel</a></li>
+<li class="chapter" data-level="4.1.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#importmetadata"><i class="fa fa-check"></i><b>4.1.3</b> Metadata</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#phyloseq-object"><i class="fa fa-check"></i><b>4.2</b> phyloseq object</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#setting-up-a-phyloseq-object"><i class="fa fa-check"></i><b>4.2.1</b> Setting up a phyloseq object</a></li>
+<li class="chapter" data-level="4.2.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#extracting-data"><i class="fa fa-check"></i><b>4.2.2</b> Extracting data</a></li>
+<li class="chapter" data-level="4.2.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#subsetting-1"><i class="fa fa-check"></i><b>4.2.3</b> Subsetting</a></li>
+<li class="chapter" data-level="4.2.4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#aggregating"><i class="fa fa-check"></i><b>4.2.4</b> Aggregating</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#pre-processing"><i class="fa fa-check"></i><b>4.3</b> Pre-processing</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#lowabundtaxa"><i class="fa fa-check"></i><b>4.3.1</b> Low abundance taxa</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#proportional-abundance"><i class="fa fa-check"></i><b>4.3.2</b> Proportional Abundance</a></li>
+<li class="chapter" data-level="4.3.3" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#zeroimput"><i class="fa fa-check"></i><b>4.3.3</b> Zeros</a></li>
+<li class="chapter" data-level="4.3.4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#centered-log-ratios"><i class="fa fa-check"></i><b>4.3.4</b> Centered log ratios</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="importing-and-pre-processing.html"><a href="importing-and-pre-processing.html#conclusion"><i class="fa fa-check"></i><b>4.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="alpha-diversity.html"><a href="alpha-diversity.html"><i class="fa fa-check"></i><b>5</b> Alpha-Diversity</a><ul>
+<li class="chapter" data-level="5.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#phyloseq-package"><i class="fa fa-check"></i><b>5.1</b> phyloseq package</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#estimate_richness"><i class="fa fa-check"></i><b>5.1.1</b> estimate_richness()</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="alpha-diversity.html"><a href="alpha-diversity.html#microbiome-package"><i class="fa fa-check"></i><b>5.2</b> microbiome package</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#richness"><i class="fa fa-check"></i><b>5.2.1</b> richness()</a></li>
+<li class="chapter" data-level="5.2.2" data-path="alpha-diversity.html"><a href="alpha-diversity.html#dominance"><i class="fa fa-check"></i><b>5.2.2</b> dominance()</a></li>
+<li class="chapter" data-level="5.2.3" data-path="alpha-diversity.html"><a href="alpha-diversity.html#evenness"><i class="fa fa-check"></i><b>5.2.3</b> evenness()</a></li>
+<li class="chapter" data-level="5.2.4" data-path="alpha-diversity.html"><a href="alpha-diversity.html#rarity"><i class="fa fa-check"></i><b>5.2.4</b> rarity()</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="alpha-diversity.html"><a href="alpha-diversity.html#data-analysis"><i class="fa fa-check"></i><b>5.3</b> Data analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="beta-diversity.html"><a href="beta-diversity.html"><i class="fa fa-check"></i><b>6</b> Beta-Diversity</a><ul>
+<li class="chapter" data-level="6.1" data-path="beta-diversity.html"><a href="beta-diversity.html#calculating-beta-diversity-in-r"><i class="fa fa-check"></i><b>6.1</b> Calculating beta-diversity in R</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="beta-diversity.html"><a href="beta-diversity.html#identifying-your-beta-diversity-indices"><i class="fa fa-check"></i><b>6.1.1</b> Identifying your beta diversity indices</a></li>
+<li class="chapter" data-level="6.1.2" data-path="beta-diversity.html"><a href="beta-diversity.html#phyloseq-1"><i class="fa fa-check"></i><b>6.1.2</b> phyloseq</a></li>
+<li class="chapter" data-level="6.1.3" data-path="beta-diversity.html"><a href="beta-diversity.html#vegan-1"><i class="fa fa-check"></i><b>6.1.3</b> vegan</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="beta-diversity.html"><a href="beta-diversity.html#ordinations-1"><i class="fa fa-check"></i><b>6.2</b> Ordinations</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="beta-diversity.html"><a href="beta-diversity.html#phyloseq-2"><i class="fa fa-check"></i><b>6.2.1</b> phyloseq</a></li>
+<li class="chapter" data-level="6.2.2" data-path="beta-diversity.html"><a href="beta-diversity.html#vegan-2"><i class="fa fa-check"></i><b>6.2.2</b> vegan</a></li>
+<li class="chapter" data-level="6.2.3" data-path="beta-diversity.html"><a href="beta-diversity.html#apecalculation"><i class="fa fa-check"></i><b>6.2.3</b> ape</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="beta-diversity.html"><a href="beta-diversity.html#visualizing-ordinations"><i class="fa fa-check"></i><b>6.3</b> Visualizing ordinations</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="beta-diversity.html"><a href="beta-diversity.html#phyloordination"><i class="fa fa-check"></i><b>6.3.1</b> phyloseq</a></li>
+<li class="chapter" data-level="6.3.2" data-path="beta-diversity.html"><a href="beta-diversity.html#baseRordinations"><i class="fa fa-check"></i><b>6.3.2</b> Base R</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="beta-diversity.html"><a href="beta-diversity.html#permanova"><i class="fa fa-check"></i><b>6.4</b> PERMANOVA</a></li>
+<li class="chapter" data-level="6.5" data-path="beta-diversity.html"><a href="beta-diversity.html#conclusion-1"><i class="fa fa-check"></i><b>6.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="differential-abundance.html"><a href="differential-abundance.html"><i class="fa fa-check"></i><b>7</b> Differential Abundance</a><ul>
+<li class="chapter" data-level="7.1" data-path="differential-abundance.html"><a href="differential-abundance.html#rank-analysis"><i class="fa fa-check"></i><b>7.1</b> Rank analysis</a></li>
+<li class="chapter" data-level="7.2" data-path="differential-abundance.html"><a href="differential-abundance.html#deseq2"><i class="fa fa-check"></i><b>7.2</b> DESeq2</a></li>
+<li class="chapter" data-level="7.3" data-path="differential-abundance.html"><a href="differential-abundance.html#metagenomeseq"><i class="fa fa-check"></i><b>7.3</b> metagenomeSeq</a></li>
+<li class="chapter" data-level="7.4" data-path="differential-abundance.html"><a href="differential-abundance.html#aldex2"><i class="fa fa-check"></i><b>7.4</b> ALDEx2</a></li>
+<li class="chapter" data-level="7.5" data-path="differential-abundance.html"><a href="differential-abundance.html#conclusion-2"><i class="fa fa-check"></i><b>7.5</b> Conclusion</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Florida State University Microbiota Workshop 2019</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapt3intro" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Microbial Sequencing Data</h1>
+<p>We were introduced to basic concepts of microbial sequencing data in Chapter <a href="intro.html#intro">1</a>, but let’s take a deeper dive into what kind of data we’re dealing with. Not going to lie, microbial sequencing data has several characteristics that are problematic for many statistical tools. Let’s use this chapter to discuss the characteristics of microbial sequencing data and the basic measurements that we can derive from it.</p>
+<p>We will be data from a rat model of diabetes that was recently published at the American Journal of Physiology (<a href="https://www.physiology.org/doi/full/10.1152/ajpendo.00203.2018">Piccolo et al., 2018, Am J Physiol Endocrinol Metab</a>). This was a study investigating whether diabetes progression would alter the cecal content microbiota in UC-Davis Type 2 Diabetes Mellitus Rats, which spontaneously develop diabetes and maintain fully functional leptin signaling. Cecal content microbes from age-matched rats who either had not developed diabetes (PD), recently developed diabetes (RD), 3-months post onset of diabetes, and 6-months post onset of diabetes were assessed using 16S rRNA and shotgun metagenomics sequencing. Additionally, cecal contents from lean Sprague Dawley (LSD) rats were also analyzed. Rats were studied in either 2014 or 2016. For this chapter, Excel spreadsheets will be displayed to assist visualizations and we will use this data in future chapters.</p>
+<div id="chapt3structure" class="section level2">
+<h2><span class="header-section-number">3.1</span> Structure</h2>
+<p>We discussed in Chapter <a href="intro.html#structure">1.2</a> that microbial sequencing data from 16S rRNA amplicon and shotgun metagenomic sequencing are counts of sequencing reads. These sequencing reads could assigned to a unique identifier (e.g., 16S rRNA OTU number) or a bacterial species itself (shotgun metagenomics). Microbial sequencing data could be provided in a spreadsheet formula, where the rows are taxa and columns are samples. Typically, the first several columns will contain the taxonomy levels of each taxa (Figure 3.1). It is possible that you may receive the data as proportions (i.e., relative abundance) rather than raw counts. Although proportions are commonly used for data analysis, it means that the data has already been processed and limits several downstream analyses. Let’s cover what the minimum types of data you should receive when obtaining microbial sequencing data.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:count"></span>
+<img src="images/count.png" alt="Example of rRNA amplicon sequencing data." width="80%" />
+<p class="caption">
+Figure 3.1: Example of rRNA amplicon sequencing data.
+</p>
+</div>
+<div id="count-data" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> Count data</h3>
+<p>As described above, this is an example of your actual counts of sequencing reads. The sequence counts begin on column ‘I’ in Figure 3.1. Notice that all the counts are equal or above 0 and are whole numbers. The raw data should be provided at the lowest taxonomic level that the technology allows. For 16S rRNA sequencing data, this could be either Operational Taxonomic Units (OTU) or Sequence Variants. Note in Figure 3.1, that there is a column for Species and OTU. This is because 16S rRNA cannot provide species resolution. Shotgun metagenomics analysis should provide species level data.</p>
+</div>
+<div id="taxonomy-data" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> Taxonomy data</h3>
+<p>I like to think of microbial sequencing data as multi-leveled, because it can be assessed at various taxonomy levels (Figure 3.2). Generally, the most granular level is going to give you the best biological representation of the bacterial community structure, but higher taxonomy levels have been known to differ in certain conditions. For example, it has been well established that the phylum level Firmicutes are enriched at the expense of Bacteroidetes in obese rodents compared to their lean counterparts. Sometimes, the higher level analyses can provide different insights into your microbial data that may not be apparent in granular level assessments. Therefore, sequence counts in a particular taxonomy level can be summed up to higher levels. I also refer to any taxon unit within a particular phylogenetic level globally as a “taxa”, but these “taxa” will have a name within (i.e., circle or rectangle on Figure 3.2) as “taxa”.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:taxa"></span>
+<img src="images/Taxa.png" alt="Example of Phylogenetic Tree from Phylum through Species. Plurals of each levels are in paranthesis." width="80%" />
+<p class="caption">
+Figure 3.2: Example of Phylogenetic Tree from Phylum through Species. Plurals of each levels are in paranthesis.
+</p>
+</div>
+</div>
+<div id="sample-metadata" class="section level3">
+<h3><span class="header-section-number">3.1.3</span> Sample Metadata</h3>
+<p>This is your experimental data. Must include sample IDs that match the sequencing count data labels.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:metadata"></span>
+<img src="images/Metadata.png" alt="Example of rRNA amplicon sequencing data." width="80%" />
+<p class="caption">
+Figure 3.3: Example of rRNA amplicon sequencing data.
+</p>
+</div>
+</div>
+<div id="phylogenetic-tree" class="section level3">
+<h3><span class="header-section-number">3.1.4</span> Phylogenetic tree</h3>
+<p>Phylogenic data is not absolutely required, but encouraged. There are a couple well-used beta-diversity estimates (Unifrac) that require a phylogenic tree to calculate. We will not cover phylogenetic methods in this course, but additional resources are <a href="http://ape-package.ird.fr/">available</a>.</p>
+</div>
+</div>
+<div id="microbefiles" class="section level2">
+<h2><span class="header-section-number">3.2</span> Files</h2>
+<div id="spreadsheets" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Spreadsheets</h3>
+<p>It is actually more practical to import three separate spreadsheet-based files for Count, Taxonomy, and Sample Meta data into R. After these files are imported in R, they will be packaged together as an individual object; thus, keeping them as a separate files is helpful, but not necessary. Still, it is advised not to input a single Excel file formatted to containing all of these pieces in a single spreadsheet. As covered in Chapter <a href="rbasics.html#datatypes">2.6.2</a>, R will automatically import a vector as a character if it contains any non-numerical values. Best way would be to create 3 separate files, with a single header row.</p>
+</div>
+<div id="biomfile" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Biome</h3>
+<p>A Biome file is a Biological Observation Matrix (BIOM) file that contains both Count and Taxonomy data. It is a popular output file for <a href="http://qiime.org/">QIIME1</a>, and also can be produced by <a href="https://qiime2.org/">QIIME2</a>. I highly recommend using this format because it is generated directly from the sequencing informatics pipeline and has little-to-no opportunity for random errors associated with spreadsheet handling and formatting. The biomformat R package was specifically designed to import biom files into R, so it is rather easy to import this file type.</p>
+</div>
+</div>
+<div id="diversity" class="section level2">
+<h2><span class="header-section-number">3.3</span> Diversity</h2>
+<p>You should always remember that microbial sequencing data is an estimate of a <strong>microbiota</strong>. Broadly defined, a microbiota is an ecological community of bacteria, archaea, viruses, fungi, and other micro-organisms. This microbial biodiveristy is dynamic and community members are working with or competing against other members for the limited available resources. Perturbations or alterations in the environment, e.g., changes in host health or alterations in energy substrates, can lead to major shifts in community biodiversity. Thus, it is important to understand diversity measurements, as these ecological measures provide estimates of biodiversity and how it varies between environments or as a response to pertubations.</p>
+<div id="adivconcept" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> Alpha-diversity</h3>
+<p>Alpha-diversity is the biodiversity within a specified site (Figure 3.4). In terms of microbial sequencing data, this would be the microbial diversity within a sample. So, how many microbes were identified in a single fecal sample derived from a participant in your study, and what is the distribution of all microbes within this sample. Are all sequencing count totals similar between all microbes within a sample, or are there only a few microbes with much greater counts relative to the rest? These are some of the questions we can ask by estimating alpha-diversity. Generally, the estimates provide a measure of richness and evenness within a sample. There are MANY estimates of alpha-diversity, but we will go over a few of the most commonly used estimates in microbial studies.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:adivexamp"></span>
+<img src="images/adivexamp.png" alt="Example of ecological diversity; each letter represents an indivual site or sample. (A) rich and even, (B) rich, but not even, (c) not rich, but even, and (D) not rich and not even." width="80%" />
+<p class="caption">
+Figure 3.4: Example of ecological diversity; each letter represents an indivual site or sample. (A) rich and even, (B) rich, but not even, (c) not rich, but even, and (D) not rich and not even.
+</p>
+</div>
+<div id="total-amount" class="section level4">
+<h4><span class="header-section-number">3.3.1.1</span> Total amount</h4>
+<p>This is self explanatory. It is the number of observed taxa within a particular sample. Estimate of richness can be biased in microbial studies due to the high prevalence of low abundant taxa.</p>
+</div>
+<div id="chao1" class="section level4">
+<h4><span class="header-section-number">3.3.1.2</span> Chao1</h4>
+<p>Estimates total richness, but makes a corrective factor based on the presence of singletons and doubletons. In this context, singletons and doubletons refer to a species that was detected once or twice, respectively, within a sample. Thought to underestimate total richness if sample size is low.</p>
+</div>
+<div id="abundance-based-coverage-ace" class="section level4">
+<h4><span class="header-section-number">3.3.1.3</span> Abundance-Based Coverage (ACE)</h4>
+<p>Similar to Chao1, but correction factor is based on taxa with less than 10 counts. Like, Chao1, will underestimate richness with small sample sizes.</p>
+</div>
+<div id="shannons-diversity-index" class="section level4">
+<h4><span class="header-section-number">3.3.1.4</span> Shannon’s Diversity Index</h4>
+<p>The Shannon index incorporates both species richness and evenness. It will increase as both richness and evenness increases.</p>
+</div>
+<div id="simpsons-diversity-index" class="section level4">
+<h4><span class="header-section-number">3.3.1.5</span> Simpson’s Diversity Index</h4>
+<p>Similar to the Shannon index, but incorporates species richness as a proporation and dominance. If there is a dominant taxa, e.g., very high reads relative to others, then evenness is decreased. If dominance is present, then the Simpson Index will be lower.</p>
+</div>
+</div>
+<div id="betadivconcept" class="section level3">
+<h3><span class="header-section-number">3.3.2</span> Beta-diversity</h3>
+<p>Beta-diversity refers to the variation between sites. For example, how does the community of microbes in a fecal sample in one person differ from communites within all other fecal samples collected from other people. How does the microbial diversity in a sample collected from your armpit differ then the biodiveristy in sample collected from between your toes? Thus, beta-diversity measures the between sample variation in your samples. Estimates of bio-diversity consist of distance-, dissimilarity-, or phylogentic-based calculations. These calculations are based on the comparison of 2 samples, then calculated across all pairs of samples. This results in a symmetrical matrix with a diagonal containing zeros or ones (Figure 3.5). Like alpha-diversity, there are many, many ways to estimate beta-diversity. We will focus on a few here.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:brayexample"></span>
+<img src="images/brayexample.png" alt="Example of Bray-Curtis Dissimilarity matrix output." width="80%" />
+<p class="caption">
+Figure 3.5: Example of Bray-Curtis Dissimilarity matrix output.
+</p>
+</div>
+<div id="bray-curtis-dissimilarity" class="section level4">
+<h4><span class="header-section-number">3.3.2.1</span> Bray-Curtis Dissimilarity</h4>
+<p>One of the most popular diversity indices. Calculated by summing the absolute differences between counts and then dividing by the abundances between the two samples. Sometimes incorrectly referred to as a distance, but it violates a certain property of distances. Thus, it should always be referenced as a “dissimilarity” measure.</p>
+</div>
+<div id="jaccard-index" class="section level4">
+<h4><span class="header-section-number">3.3.2.2</span> Jaccard Index</h4>
+<p>Measures diversity based on presence/absence. More specifically, the Jaccard index is based on the co-presence of a taxa relative to the number of taxa present in at least one of the two comparative samples. Think of a Venn Diagram. The Jaccard index is essentially measuring the amount within the overlapping circles relative to the amount outside of the overlap.</p>
+</div>
+<div id="ordinations" class="section level4">
+<h4><span class="header-section-number">3.3.2.3</span> Ordinations</h4>
+<p>This is not a measure of beta-diversity, but are multivariate statistical procedures that summarise a high-dimensional dataset into a new set of variables that can be visualized in a 2- or 3-dimensional plot. Principal components analysis (PCA) is an example of an ordination. PCA uses a covariance- or correlation-matrix, but a Principle Co-ordinante Analysis (PCoA) is a PCA that uses a distance or dissimilarity matrix instead. Another type of ordination is multi-dimensional scaling (MDS): MDS tries to orient samples within a specified lower dimensional space that bests replicates the observed distances between samples. There is a best-fit algorithm that measures how congruent (or not) the distance fit is and will stop at a specified criteria. There are others, but we will only cover PCA, PCoA and non-multi dimensional scaling (NMDS) in this workshop.</p>
+</div>
+</div>
+</div>
+<div id="challenges" class="section level2">
+<h2><span class="header-section-number">3.4</span> Challenges</h2>
+<p>I alluded to some difficult properties associated with microbial sequencing data earlier in this chapter (<a href="chapt3intro.html#chapt3intro">3</a>). Let’s take some time to understand these properties.</p>
+<div id="compdata" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> Compositional data</h3>
+<p>It is becoming more appreciated that microbial sequencing data is compositional data, which <a href="https://www.nrcresearchpress.com/doi/10.1139/cjm-2015-0821#.XYUolC5Kj9Q">invalidates covariance- or correlation-based statistical techniques</a>. Compositional data refers to data which the total amount is arbitrary (meaningless) or each individual component sums to an arbitrary or equal amount. How does microbial sequencing data fall into this space? Let’s consider what the data actually are: They are <strong>counts</strong> of sequencing reads. Thus, it does not exactly fit to what we are trying to measure (a microbial organism). Additionally, the counts are finite based on the flow cell. Thus, counts will sum to whatever the limit of the flow cell was to produce the data. Furthermore, since there is a finite amount of reads, removing a taxa from a sample would mean that some other taxa would have to have a higher count.</p>
+<p>The good thing about sequencing data is that if you increase a certain bacteria, you are also going to increase the genetic material. So sequencing does track changes in abundance; however, it does not provide an accurate measurement of the total number of taxa. And that is the inherent limitations of the technology, that it will always be proportional based on the amount of reads available for sequencing. A recent paper by Morton et al (<a href="https://www.nature.com/articles/s41467-019-10656-5">Nature Communications, 2019</a>) provided an excellent example of the drawback to abundance data (Figure 3.6). Briefly, Morton et al describes the fact that proportional differences may show the same differences even in cases where there are severe differences in the total microbial load between experimental groups.</p>
+<p>It has also been recognized for quite sometime that microbial sequencing data does not contain any information regarding the actual microbial load, thus, it is common to transform microbial sequencing data into a proportions where data is fixed between 0 and 1 within a sample. Multiplying by 100 will give relative percentages. We are now clearly in a compositional space, where all samples have fixed and arbitrary sum. Luckily, there are several transformations, e.g., the centered log-ratio and additive log ratio transformations, that can convert compositional data back to an euclidian space that makes the data more amendable for traditional statistical approaches. However, there is still one more challenge to overcome that must be dealt with before you can transform your data with these procedures…</p>
+</div>
+<div id="zero-inflation" class="section level3">
+<h3><span class="header-section-number">3.4.2</span> Zero inflation</h3>
+<p>If you refer back to Figure 3.1, you’ll notice there is one number that is more frequent than the others. Zeros! Microbial abundance is full of low abundant taxa and zeros are extremely prevalent. It is a huge statistical hurdle, and unfortunately, I do not have a good answer for this limitation. Generally, we will use a filtering criteria to remove low abundant taxa. This normally takes some form of either removing taxa that have a certain percentage of counts at a defined level, say 10 counts in less than 50% of all samples will be removed. Or, determine the proportional abundance and then remove taxa that have an average abundance &lt; 0.1%. By no means is there a consistent or agreed upon criteria to do this. You may have to consider you group as well. What if you’re assessing the gut microbiota in infants fed breastmilk vs 2 different formulas with different sources. You may have several microbes that are found in one diet but not in the others. So, would you say you needs reads to appear in 33% of your samples because you have 3 groups? But not all infants may seed a particular bacteria, so then do you make your cutoff at 50% of your lowest sample size? Now you’re adding taxa that may only be identified in 16-17% of your total sample size. What if you have 5 diets? As you can see, there is no good answer and it may depend on your study.</p>
+<p>How do we deal with zeros? A common technique is to add a small small constant to all samples to ensure there are no zeros, and then apply the transformations. It also has been suggested to <a href="https://microbiomejournal.biomedcentral.com/articles/10.1186/2049-2618-2-15">impute zeros using a Bayesian-multiplicative replacement method</a>. We will cover these transformations in the next chapter.</p>
+</div>
+</div>
+<div id="normalization" class="section level2">
+<h2><span class="header-section-number">3.5</span> Normalization</h2>
+<p>Variation due technical aspects of the analysis (e.g., sample collection, differences in bacterial load, and uneven sampling depth) is common in microbial sequencing data. We have already discussed one normalization technique to combat these effects (proportional transformation), but there are several others that are used. We will focus on some of the more straight foward normalization techniques. Please refer to Weiss et al <a href="https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-017-0237-y">Microbiome, 2017</a> for a more in depth description of these and others.</p>
+<div id="rarefying" class="section level3">
+<h3><span class="header-section-number">3.5.1</span> Rarefying</h3>
+<p>This is the process of randomly removing counts from samples until all sample depths are even. Remember, sampling depth refers to the total number of counts across all taxa within a particular sample. So, rarefying equalizes the sample depth among all samples, but the drawback is you lose quite a bit of sensitivity due to the significant amount of data. It also does not combat the compositional structure of the data and it may contibute to zero inflation in some cases. Rarefy has been suggested for comparisons among samples with known and large differences between samples, e.g., colon vs duodenumn samples. Some have <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003531">strongly advised against rarefying</a>, but others suggest it is <a href="https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-017-0237-y">suitable for beta-analysis and does not increase false discoveries associated with differential analyses</a>.</p>
+</div>
+<div id="logUQ" class="section level3">
+<h3><span class="header-section-number">3.5.2</span> Log upper quartile</h3>
+<p>Similar to a proportional abundance, but each sample is divide by its 75th percentile of its count distribution rather than the sample sum. The scaled data is then log transformed. Like proportional scaling, ignores differences in sampling depth. Log transformation means that special handling of zeros needs to be considered.</p>
+</div>
+</div>
+<div id="r-packages-1" class="section level2">
+<h2><span class="header-section-number">3.6</span> R packages</h2>
+<p>We will mainly use ecology/microbiota based R packages for this workshop, <a href="https://cran.r-project.org/web/packages/vegan/index.html">vegan</a>, <a href="https://bioconductor.org/packages/release/bioc/html/phyloseq.html">phyloseq</a>, <a href="https://cran.r-project.org/web/packages/ape/index.html">ape</a>, and <a href="https://bioconductor.org/packages/release/bioc/html/microbiome.html">microbiome</a>.</p>
+<div id="vegan" class="section level3">
+<h3><span class="header-section-number">3.6.1</span> vegan</h3>
+<p>The vegan package contains is the major community ecology package in R and is maintained by several <a href="http://r-forge.r-project.org/projects/vegan">ecologists</a>. While there are others ecology R packags that may have more specialized functions, vegan has the widest array of ecology based functions. In fact, some of the other packages we’ll use heavily rely on functions from this packages.</p>
+</div>
+<div id="phyloseq" class="section level3">
+<h3><span class="header-section-number">3.6.2</span> phyloseq</h3>
+<p>Developed in Susan Holmes’ lab at Stanford by Paul McMurdie. phyloseq is the most well-developed R package for complete handling of microbial sequencing data. This group also maintains a <a href="https://joey711.github.io/phyloseq/index.html">very nice website for phyloseq</a> and host several additional tutorials that contain <a href="https://joey711.github.io/phyloseq/tutorials-index.html">topics not covered in this workshop</a>.</p>
+</div>
+<div id="microbiome" class="section level3">
+<h3><span class="header-section-number">3.6.3</span> microbiome</h3>
+<p>Written by Leo Lahti and Sudarshan Shetty. Contains functions that extends phyloseq’s functionalities.</p>
+</div>
+<div id="ape" class="section level3">
+<h3><span class="header-section-number">3.6.4</span> ape</h3>
+<p>The ape package is major package for phylogenetic based analyses. It is maintained by a large number of authors and has a wide range of functions for data analysis in a phylogentic framework. We will only be using this package for Principle Co-ordinate Analysis (PCoA).</p>
+</div>
+</div>
+<div id="additional-resources" class="section level2">
+<h2><span class="header-section-number">3.7</span> Additional resources</h2>
+<p>There are several online resources that provide data visualization and analyses for microbial sequencing data. I am more familiar with some, but not all. The goal here is to provide alternative workflows for your convenience, especially for those that are more comfortable with graphical user interfaces (i.e., not coding based interfaces like R). While many of these resources are very good at what they do, most will not integrate non-microbial data in your analysis and most do not produce scripts to track your analysis steps.</p>
+<p><a href="https://qiime2.org/">QIIME2</a> has now integrated analysis specific plug-ins to their informatics environment to become a 1-stop tool for all 16S rRNA informatics needs. If you’re already using QIIME2, then most of the topics we cover here will be available in QIIME2. It is built in the Linux environment, so Windows users may not be able to access without a virtual box. Bottom line, you need to be familiar with the Linux environment.</p>
+<p>I have <a href="https://academic.oup.com/bioinformatics/article/34/6/1050/4566177">authored</a> a free <a href="https://shiny.rstudio.com/">Shiny</a> app called <a href="https://github.com/bdpiccolo/ACNC-DAME">DAME</a> that allows you to upload a Biom file and dynamically assess alpha- and beta-diversity measurements, and differential abundance between individual taxa. It is only compatible with Biom files derived from QIIME1.</p>
+<p>The authors of phyloseq have also developed a Shiny app that is freely available, called <a href="https://academic.oup.com/bioinformatics/article/31/2/282/2365643">Shiny-phyloseq</a>.</p>
+<p><a href="http://cgenome.net/wiki/index.php/Calypso">Calypso</a> is another web-based software that is freely available. Files derived from QIIME and MOTHUR pipelines can be uploaded into Calypso for visualization and data analyses.</p>
+<p><a href="http://cgenome.net/wiki/index.php/Calypso">MicrobiomeAnalyst</a> is another freely available web-based resources, developed by the same authors of the popular metabolomics web resource, <a href="https://www.metaboanalyst.ca/home.xhtml">MetaboAnalyst</a>.</p>
+</div>
+<div id="final-thoughts" class="section level2">
+<h2><span class="header-section-number">3.8</span> Final thoughts</h2>
+<p>We will cover the minimum analyses needed to publish microbial taxonomy data in this workshop. Chapter 4 will detail importing microbial sequencing data into R and preparing the data for statistical analysis. Chapters 5, 6, and 7 will cover alpha-diversity, beta-diversity, and differential analysis, respectively. By no means does this cover all of the potential analyses available for microbial sequencing data, but will cover the minimum analyses needed to publish data derived from comparitive studies.</p>
+<p>I will provide examples in the subsequent chapters that I think you will encounter if using R. It may seem too detailed for a relatively short workshop, but I’d like to make sure that you have sufficient information for some troubleshooting.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="rbasics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="importing-and-pre-processing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "sepla",
+"family": "serif",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"search": true
+});
+});
+</script>
+
+</body>
+
+</html>
