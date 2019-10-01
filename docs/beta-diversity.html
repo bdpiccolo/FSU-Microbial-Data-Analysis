@@ -342,54 +342,44 @@ UCD_jac_NMDS &lt;-<span class="st"> </span><span class="kw">ordinate</span>(phyo
 <pre><code>## Square root transformation
 ## Wisconsin double standardization
 ## Run 0 stress 0.1207804 
-## Run 1 stress 0.1207855 
-## ... Procrustes: rmse 0.00220263  max resid 0.01280263 
-## Run 2 stress 0.1237745 
-## Run 3 stress 0.1141577 
+## Run 1 stress 0.1141575 
 ## ... New best solution
-## ... Procrustes: rmse 0.1020114  max resid 0.2443601 
-## Run 4 stress 0.1141591 
-## ... Procrustes: rmse 0.0002147099  max resid 0.001120825 
-## ... Similar to previous best
-## Run 5 stress 0.1141406 
+## ... Procrustes: rmse 0.1020446  max resid 0.2444723 
+## Run 2 stress 0.1222251 
+## Run 3 stress 0.1143936 
+## ... Procrustes: rmse 0.01434763  max resid 0.1020377 
+## Run 4 stress 0.1141483 
 ## ... New best solution
-## ... Procrustes: rmse 0.004400784  max resid 0.02251077 
-## Run 6 stress 0.1141336 
+## ... Procrustes: rmse 0.004822621  max resid 0.02458983 
+## Run 5 stress 0.1153942 
+## Run 6 stress 0.1141398 
 ## ... New best solution
-## ... Procrustes: rmse 0.003149087  max resid 0.01686469 
-## Run 7 stress 0.114135 
-## ... Procrustes: rmse 0.0002331117  max resid 0.001254342 
+## ... Procrustes: rmse 0.0006177432  max resid 0.003258855 
 ## ... Similar to previous best
-## Run 8 stress 0.1143997 
-## ... Procrustes: rmse 0.0146326  max resid 0.1022156 
-## Run 9 stress 0.1141317 
+## Run 7 stress 0.123752 
+## Run 8 stress 0.1367476 
+## Run 9 stress 0.1216078 
+## Run 10 stress 0.121454 
+## Run 11 stress 0.1141551 
+## ... Procrustes: rmse 0.004039674  max resid 0.02056987 
+## Run 12 stress 0.1141555 
+## ... Procrustes: rmse 0.004000501  max resid 0.02013667 
+## Run 13 stress 0.1207815 
+## Run 14 stress 0.1141386 
 ## ... New best solution
-## ... Procrustes: rmse 0.0004295849  max resid 0.002347916 
+## ... Procrustes: rmse 0.0001256695  max resid 0.0006621397 
 ## ... Similar to previous best
-## Run 10 stress 0.1141439 
-## ... Procrustes: rmse 0.00164618  max resid 0.008906703 
-## ... Similar to previous best
-## Run 11 stress 0.1141308 
+## Run 15 stress 0.1141362 
 ## ... New best solution
-## ... Procrustes: rmse 0.0004978797  max resid 0.002536617 
+## ... Procrustes: rmse 0.003339379  max resid 0.01789021 
+## Run 16 stress 0.1141616 
+## ... Procrustes: rmse 0.001595656  max resid 0.006803577 
 ## ... Similar to previous best
-## Run 12 stress 0.4043389 
-## Run 13 stress 0.1143973 
-## ... Procrustes: rmse 0.01470755  max resid 0.1021652 
-## Run 14 stress 0.1141322 
-## ... Procrustes: rmse 0.0006315912  max resid 0.003383372 
-## ... Similar to previous best
-## Run 15 stress 0.1245594 
-## Run 16 stress 0.1141397 
-## ... Procrustes: rmse 0.002163083  max resid 0.01154892 
-## Run 17 stress 0.1141384 
-## ... Procrustes: rmse 0.001575663  max resid 0.008491128 
-## ... Similar to previous best
-## Run 18 stress 0.1141651 
-## ... Procrustes: rmse 0.002874055  max resid 0.01361668 
-## Run 19 stress 0.1234054 
-## Run 20 stress 0.114133 
-## ... Procrustes: rmse 0.0008075138  max resid 0.004342552 
+## Run 17 stress 0.1214457 
+## Run 18 stress 0.1252462 
+## Run 19 stress 0.1248623 
+## Run 20 stress 0.1141574 
+## ... Procrustes: rmse 0.001425965  max resid 0.007114213 
 ## ... Similar to previous best
 ## *** Solution reached</code></pre>
 <p>If you recall from Chapter <a href="chapt3intro.html#ordinations">3.3.2.3</a>, NMDS iteratively computes a best fit model and stops when it reaches a stop criteria. The output here shows the NMDS algorithm searching for the best fit. Let’s look at the final output.</p>
@@ -405,7 +395,7 @@ UCD_jac_NMDS</code></pre></div>
 ## Distance: jaccard 
 ## 
 ## Dimensions: 2 
-## Stress:     0.1141308 
+## Stress:     0.1141362 
 ## Stress type 1, weak ties
 ## Two convergent solutions found after 20 tries
 ## Scaling: centring, PC rotation, halfchange scaling 
@@ -428,31 +418,27 @@ UCD_jac_veganNMDS &lt;-<span class="st"> </span><span class="kw">metaMDS</span>(
     <span class="dt">trymax=</span><span class="dv">50</span>
 )</code></pre></div>
 <pre><code>## Run 0 stress 0.1264836 
-## Run 1 stress 0.1266075 
-## ... Procrustes: rmse 0.006092033  max resid 0.03708389 
-## Run 2 stress 0.1264853 
-## ... Procrustes: rmse 0.0006757276  max resid 0.002130777 
-## ... Similar to previous best
-## Run 3 stress 0.1264785 
+## Run 1 stress 0.1309699 
+## Run 2 stress 0.1264886 
+## ... Procrustes: rmse 0.004601996  max resid 0.02765274 
+## Run 3 stress 0.1266123 
+## ... Procrustes: rmse 0.005950322  max resid 0.03641511 
+## Run 4 stress 0.1381905 
+## Run 5 stress 0.1264811 
 ## ... New best solution
-## ... Procrustes: rmse 0.00216278  max resid 0.0108295 
-## Run 4 stress 0.1264755 
+## ... Procrustes: rmse 0.002720171  max resid 0.01372446 
+## Run 6 stress 0.1367116 
+## Run 7 stress 0.1366409 
+## Run 8 stress 0.1264788 
 ## ... New best solution
-## ... Procrustes: rmse 0.0009350028  max resid 0.003242791 
+## ... Procrustes: rmse 0.00148402  max resid 0.008328372 
 ## ... Similar to previous best
-## Run 5 stress 0.1264815 
-## ... Procrustes: rmse 0.00118572  max resid 0.004663852 
+## Run 9 stress 0.1264786 
+## ... New best solution
+## ... Procrustes: rmse 0.001497247  max resid 0.008779221 
 ## ... Similar to previous best
-## Run 6 stress 0.1265959 
-## ... Procrustes: rmse 0.005236279  max resid 0.03320815 
-## Run 7 stress 0.1264837 
-## ... Procrustes: rmse 0.001924231  max resid 0.009461896 
-## ... Similar to previous best
-## Run 8 stress 0.1264779 
-## ... Procrustes: rmse 0.0007789873  max resid 0.003198285 
-## ... Similar to previous best
-## Run 9 stress 0.1357964 
-## Run 10 stress 0.1393982 
+## Run 10 stress 0.1264828 
+## ... Procrustes: rmse 0.002560594  max resid 0.01245502 
 ## *** Solution reached</code></pre>
 <p>Using 3 dimensions allows us to reach the best solution with less iterations. Let’s see the output.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># View output</span>
@@ -467,7 +453,7 @@ UCD_jac_veganNMDS</code></pre></div>
 ## Distance: jaccard 
 ## 
 ## Dimensions: 3 
-## Stress:     0.1264755 
+## Stress:     0.1264786 
 ## Stress type 1, weak ties
 ## Two convergent solutions found after 10 tries
 ## Scaling: centring, PC rotation 
@@ -810,7 +796,7 @@ LSD - RD
 0.00200
 </td>
 <td style="text-align:right;">
-0.004000
+0.00240
 </td>
 </tr>
 <tr>
@@ -821,7 +807,7 @@ LSD - PD
 0.00200
 </td>
 <td style="text-align:right;">
-0.004000
+0.00240
 </td>
 </tr>
 <tr>
@@ -829,10 +815,10 @@ LSD - PD
 LSD - D3M
 </td>
 <td style="text-align:right;">
-0.00399
+0.00200
 </td>
 <td style="text-align:right;">
-0.005985
+0.00240
 </td>
 </tr>
 <tr>
@@ -840,10 +826,10 @@ LSD - D3M
 RD - PD
 </td>
 <td style="text-align:right;">
-0.32535
+0.32735
 </td>
 <td style="text-align:right;">
-0.325350
+0.32735
 </td>
 </tr>
 <tr>
@@ -854,7 +840,7 @@ RD - D3M
 0.00200
 </td>
 <td style="text-align:right;">
-0.004000
+0.00240
 </td>
 </tr>
 <tr>
@@ -862,10 +848,10 @@ RD - D3M
 PD - D3M
 </td>
 <td style="text-align:right;">
-0.00599
+0.00200
 </td>
 <td style="text-align:right;">
-0.007188
+0.00240
 </td>
 </tr>
 </tbody>

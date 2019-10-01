@@ -386,34 +386,60 @@ Figure 2.4: phyloseq website at Bioconductor
 <h3><span class="header-section-number">2.6.1</span> Basic operations</h3>
 <p>Although these operators may seem fairly low level, they are extremely important for coding.</p>
 <p>Here is a table containing basic arithmetic operators.</p>
-<table>
-<caption><span id="tab:arithop">Table 2.1: </span>Arithmetic Operators</caption>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:arithop">Table 2.1: </span>Arithmetic Operators
+</caption>
 <thead>
-<tr class="header">
-<th align="left">Operator</th>
-<th align="left">Use</th>
+<tr>
+<th style="text-align:left;">
+Operator
+</th>
+<th style="text-align:left;">
+Use
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">+</td>
-<td align="left">addition</td>
+<tr>
+<td style="text-align:left;">
++
+</td>
+<td style="text-align:left;">
+addition
+</td>
 </tr>
-<tr class="even">
-<td align="left">-</td>
-<td align="left">subtract</td>
+<tr>
+<td style="text-align:left;">
+-
+</td>
+<td style="text-align:left;">
+subtract
+</td>
 </tr>
-<tr class="odd">
-<td align="left">*</td>
-<td align="left">multiply</td>
+<tr>
+<td style="text-align:left;">
+*
+</td>
+<td style="text-align:left;">
+multiply
+</td>
 </tr>
-<tr class="even">
-<td align="left">/</td>
-<td align="left">division</td>
+<tr>
+<td style="text-align:left;">
+/
+</td>
+<td style="text-align:left;">
+division
+</td>
 </tr>
-<tr class="odd">
-<td align="left">^</td>
-<td align="left">exponential</td>
+<tr>
+<td style="text-align:left;">
+^
+</td>
+<td style="text-align:left;">
+exponential
+</td>
 </tr>
 </tbody>
 </table>
@@ -680,14 +706,14 @@ normalDATA &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span cla
 <span class="co"># Output</span>
 <span class="kw">list</span>(normalDATA, <span class="kw">residualFUN</span>(normalDATA))</code></pre></div>
 <pre><code>## [[1]]
-##  [1]  97.95646  99.95371  86.05863  97.69517  82.13705 102.89153  92.13194
-##  [8] 108.92194  97.49098  82.52124 103.62964 101.11511 117.37319 111.94054
-## [15] 113.46530  82.76537  96.41698  96.53338  98.78454  97.14970
+##  [1]  83.25995 100.77769  85.94185  96.01866  94.92189  79.37993 116.26693
+##  [8] 111.64128  89.40742 106.27548  96.66379 109.27250  96.15990  88.63538
+## [15] 107.77926 111.37173  97.29485  96.61800  97.05311  96.01135
 ## 
 ## [[2]]
-##  [1] 0.9920813 1.0329492 0.7657199 0.9867958 0.6975244 1.0945620 0.8776100
-##  [8] 1.2266252 0.9826752 0.7040647 1.1103223 1.0570930 1.4243572 1.2955552
-## [15] 1.3310896 0.7082368 0.9611434 0.9634654 1.0089255 0.9758072</code></pre>
+##  [1] 0.7212526 1.0566811 0.7684658 0.9592381 0.9374495 0.6555964 1.4064606
+##  [8] 1.2967754 0.8316914 1.1751173 0.9721712 1.2423298 0.9620622 0.8173901
+## [15] 1.2086081 1.2905209 0.9849061 0.9712504 0.9800180 0.9590919</code></pre>
 <p>The first element of the list is the output of rnorm and the second element in the list is the output of residualFUN function. Look how flexible a list is! It allowed a function to define its second element!</p>
 </div>
 </div>
@@ -941,26 +967,25 @@ This can be considered a more intermediate to advanced topic.
 randomDATA &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">18</span>, <span class="dt">mean =</span> <span class="dv">10</span>, <span class="dt">sd =</span> <span class="dv">2</span>)
 Matrix_example2 &lt;-<span class="st"> </span><span class="kw">matrix</span>(randomDATA, <span class="dt">ncol=</span><span class="dv">6</span>, <span class="dt">nrow=</span><span class="dv">3</span>)
 Matrix_example2</code></pre></div>
-<pre><code>##           [,1]      [,2]     [,3]      [,4]      [,5]      [,6]
-## [1,]  8.942020  9.887677 11.44960 12.070519  9.944745  8.147628
-## [2,] 11.967007 11.958866 12.03037  8.524405 10.160582 10.422952
-## [3,]  8.293849  7.835140 13.85544 10.710589 10.431478  9.933755</code></pre>
+<pre><code>##          [,1]     [,2]      [,3]      [,4]      [,5]     [,6]
+## [1,] 5.250573 10.88166  9.736176  6.256595 10.556603 12.08314
+## [2,] 8.092577 12.16271  4.550562 11.049800 13.482256 10.84638
+## [3,] 9.569129  9.09300 10.503786  9.845546  9.398225 10.03932</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Transpose</span>
 <span class="kw">t</span>(Matrix_example2)</code></pre></div>
 <pre><code>##           [,1]      [,2]      [,3]
-## [1,]  8.942020 11.967007  8.293849
-## [2,]  9.887677 11.958866  7.835140
-## [3,] 11.449603 12.030368 13.855445
-## [4,] 12.070519  8.524405 10.710589
-## [5,]  9.944745 10.160582 10.431478
-## [6,]  8.147628 10.422952  9.933755</code></pre>
+## [1,]  5.250573  8.092577  9.569129
+## [2,] 10.881661 12.162712  9.093000
+## [3,]  9.736176  4.550562 10.503786
+## [4,]  6.256595 11.049800  9.845546
+## [5,] 10.556603 13.482256  9.398225
+## [6,] 12.083143 10.846380 10.039321</code></pre>
 <p>Now, a couple things to know about the tidyverse. It is a cluster of packages built primarily by <a href="http://hadley.nz/">Hadley Wickham</a>, who is arguably the closest you can get to rock star status in the R programming world. The primary reason for <strong>tidyverse</strong> was to make the coding grammar uniform and linear in structure, as opposed to the nesting structure that R was originally developed in. One way to do this was to use an operator, <code>%&gt;%</code> (referred to as a <strong>pipe</strong>), that forwards a value into the next function or expression. Let me provide an example first:</p>
 <p>Let’s say we want to import our data, subset subjects &lt; 50, and then calculate mean and standard deviation across Control and Experimental groups for all continuous variables. Let’s see how this would like</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Remember to load package</span>
-<span class="kw">library</span>(tidyverse)</code></pre></div>
-<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 3.6.1</code></pre>
-<pre><code>## Warning: package &#39;readr&#39; was built under R version 3.6.1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Note that this syntax no longer requires quotation marks for characters.</span>
+<span class="kw">library</span>(tidyverse)
+
+<span class="co"># Note that this syntax no longer requires quotation marks for characters.</span>
 CSVfilter &lt;-<span class="st"> </span><span class="kw">filter</span>(CSVimport, Age <span class="op">&lt;</span><span class="st"> </span><span class="dv">50</span>)
 CSVfilter_byTxt &lt;-<span class="st"> </span><span class="kw">group_by</span>(CSVfilter, Treatment)
 <span class="kw">summarise</span>(CSVfilter_byTxt, <span class="dt">Avg_Age =</span> <span class="kw">mean</span>(Age), <span class="dt">sd_Age =</span> <span class="kw">sd</span>(Age))</code></pre></div>
@@ -1022,10 +1047,10 @@ CSVimport <span class="op">%&gt;%</span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Let&#39;s make the same matrix that we did at the beginning of this section (2.9.3)</span>
 randomDATA <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">matrix</span>(<span class="dt">ncol=</span><span class="dv">6</span>, <span class="dt">nrow=</span><span class="dv">3</span>)</code></pre></div>
-<pre><code>##           [,1]      [,2]     [,3]      [,4]      [,5]      [,6]
-## [1,]  8.942020  9.887677 11.44960 12.070519  9.944745  8.147628
-## [2,] 11.967007 11.958866 12.03037  8.524405 10.160582 10.422952
-## [3,]  8.293849  7.835140 13.85544 10.710589 10.431478  9.933755</code></pre>
+<pre><code>##          [,1]     [,2]      [,3]      [,4]      [,5]     [,6]
+## [1,] 5.250573 10.88166  9.736176  6.256595 10.556603 12.08314
+## [2,] 8.092577 12.16271  4.550562 11.049800 13.482256 10.84638
+## [3,] 9.569129  9.09300 10.503786  9.845546  9.398225 10.03932</code></pre>
 <p>See how the pipe operator can be used in other ways. Here the pipe deposited the numeric vector into the first argument and we supplied the rest of the arguments to match the prior output.</p>
 <p>Now let’s look talk about <code>gather</code>. <code>gather</code> reshapes your column names and data points into a two new columns. One that we defined as ‘Variables’ and the other as ‘Measurement’. Then, it takes the rest of the data and repeats it evenly along each column name. Now can use the ‘Measurement’ column as a grouping variable. Let’s see the output.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Do not have to load the library unless not previously loaded.</span>
@@ -1495,17 +1520,9 @@ linearMOD &lt;-<span class="st"> </span><span class="kw">lm</span>(BMI <span cla
 <p>If you Google ANOVA analysis in R, you may come across some articles describing discordant results between either SAS or SPSS and R. This is for 2 reasons, 1) Each software calculates their underlying contrast structure slightly different, and 2) R defaults to sum of squares type I, vs sum or squares type III in SAS and SPSS. It does NOT mean that any of the results provided by these tools are incorrect by any means. It is up to us as users of these tools to understand the underlying principles and use them accordingly. Unfortunately, the ANOVA functions in the core packages do not provide alternative ways to calculate sum of squares. However, a mechanism does exist using the car package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Install the package if needed and load the library</span>
 <span class="co"># install.packages(&quot;car&quot;)</span>
-<span class="kw">library</span>(car)</code></pre></div>
-<pre><code>## Loading required package: carData</code></pre>
-<pre><code>## 
-## Attaching package: &#39;car&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:purrr&#39;:
-## 
-##     some</code></pre>
-<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
-## 
-##     recode</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Need to update the contrasts for type III sum of squares</span>
+<span class="kw">library</span>(car)
+
+<span class="co"># Need to update the contrasts for type III sum of squares</span>
 <span class="kw">options</span>(<span class="dt">contrasts =</span> <span class="kw">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))
 
 <span class="co"># Now we can use the lm model from above in Anova in the car package and specify the sum of squares type</span>
