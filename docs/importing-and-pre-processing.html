@@ -266,7 +266,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>This chapter will focus on the importing microbial sequencing data in R, setting up a phyloseq object, and preparing the data for statistical analysis.</p>
 <div id="importing-data-into-r" class="section level2">
 <h2><span class="header-section-number">4.1</span> Importing Data into R</h2>
-<p>As detailed in Chapter <a href="chapt3intro.html#microbefiles">3.2</a>, you may receive your sequencing data as a biom file or in a text-delimited/spreadsheet format. Let’s detail how each can be imported into R</p>
+<p>As detailed in Chapter <a href="chapt3intro.html#microbefiles">3.2</a>, you may receive your sequencing data as a biom file or in a text-delimited/spreadsheet format. Data files used in this chapter and the following chapters are available <a href="https://github.com/bdpiccolo/FSU-Microbial-Data-Analysis/tree/master/Data">here</a>. The following files will be requires:</p>
+<ol style="list-style-type: decimal">
+<li><p>UCDT2DM16S.biom</p></li>
+<li><p>UCDT2DM16SExcel.xlsx</p></li>
+<li><p>UCDT2DMmetadata.xlsx</p></li>
+</ol>
+<p>You can download these files by click on the file link and then pressing the ‘download’ button.</p>
 <div id="biomimport" class="section level3">
 <h3><span class="header-section-number">4.1.1</span> Biom file</h3>
 <p>If you recall from Chapter <a href="chapt3intro.html#biomfile">3.2.2</a>, this file format will contain the count data and taxonomy data in a single file. We will use the <code>read_biom</code> function from the biomformat package. The <a href="https://www.bioconductor.org/packages/release/bioc/html/biomformat.html">biomformat package is located at Bioconductor</a> and can be installed using the following code</p>
@@ -523,23 +529,9 @@ phylo_obj</code></pre></div>
 <h3><span class="header-section-number">4.2.2</span> Extracting data</h3>
 <p>phyloseq objects are built in a special coding system called S4. It is slightly different then standard R, but I have found it cumbersome to extract data from these objects. So we will try to avoid the extractor functions provided in the phyloseq output when necessary. Fortunately, the ‘microbiome’ package has functions that make this extraction very easy.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load library</span>
-<span class="kw">library</span>(microbiome)</code></pre></div>
-<pre><code>## 
-## microbiome R package (microbiome.github.com)
-##     
-## 
-## 
-##  Copyright (C) 2011-2019 Leo Lahti, 
-##     Sudarshan Shetty et al. &lt;microbiome.github.io&gt;</code></pre>
-<pre><code>## 
-## Attaching package: &#39;microbiome&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
-## 
-##     alpha</code></pre>
-<pre><code>## The following object is masked from &#39;package:base&#39;:
-## 
-##     transform</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Extract OTU table from </span>
+<span class="kw">library</span>(microbiome)
+
+<span class="co"># Extract OTU table from </span>
 OTUdata &lt;-<span class="st"> </span><span class="kw">abundances</span>(phylo_obj)
 
 <span class="co"># Will show an abbreviated output</span>
